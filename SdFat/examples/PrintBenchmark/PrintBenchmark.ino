@@ -53,7 +53,7 @@ void loop() {
   cout << pstr("Starting print test.  Please wait.\n\n");
 
   // do write test
-  for (int test = 0; test < 5; test++) {
+  for (int test = 0; test < 6; test++) {
     char fileName[13] = "BENCH0.TXT";
     fileName[5] = '0' + test;
     // open or create file - truncate existing file.
@@ -80,9 +80,12 @@ void loop() {
       cout << pstr("Test of printField(uint32_t, char)\n");
       break;      
     case 4:
-      cout << pstr("Test of println(double)\n");
+      cout << pstr("Test of println(float)\n");
       break;     
-      
+    
+    case 5:
+      cout << pstr("Test of printField(float, char)\n");
+      break;         
     }
     
     uint32_t t = millis();
@@ -107,10 +110,13 @@ void loop() {
         break;        
         
       case 4:
-        file.println((double)0.01*i);
+        file.println((float)0.01*i);
+        break;
+      
+      case 5:
+        file.printField((float)0.01*i, '\n');
         break;
       }
-
       if (file.writeError) {
         error("write failed");
       }
@@ -132,4 +138,3 @@ void loop() {
   }
   cout << pstr("Done!\n\n");
 }
-

@@ -214,12 +214,31 @@ static int printFieldT(SdBaseFile* file, char sign, Type value, char term) {
     *--str = '0' + m - 10*value;
   } while (value);
 #else  // OLD_FMT
- str = fmtDec(value, str);
+  str = fmtDec(value, str);
 #endif  // OLD_FMT
   if (sign) {
     *--str = sign;
   }
   return file->write(str, &buf[sizeof(buf)] - str);
+}
+//------------------------------------------------------------------------------
+/** Print a number followed by a field terminator.
+ * \param[in] value The number to be printed.
+ * \param[in] term The field terminator.  Use '\\n' for CR LF.
+ * \param[in] prec Number of digits after decimal point.
+ * \return The number of bytes written or -1 if an error occurs.
+ */
+int SdBaseFile::printField(float value, char term, uint8_t prec) {
+  char buf[24];
+  char* str = &buf[sizeof(buf)];
+  if (term) {
+    *--str = term;
+    if (term == '\n') {
+      *--str = '\r';
+    }
+  }
+  str = fmtFloat(value, str, prec);
+  return write(str, buf + sizeof(buf) - str);
 }
 //------------------------------------------------------------------------------
 /** Print a number followed by a field terminator.

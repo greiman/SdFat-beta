@@ -253,6 +253,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a996abee868ce928d04d9d0ad9305c915"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe2fd8314f3a6c0e06ff178f730efe07"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#afe2fd8314f3a6c0e06ff178f730efe07">printCreateDateTime</a> (Print *pr)</td></tr>
 <tr class="separator:afe2fd8314f3a6c0e06ff178f730efe07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb099d29e90975736f79fe54a31936b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#aeb099d29e90975736f79fe54a31936b9">printField</a> (float value, char term, uint8_t prec=2)</td></tr>
+<tr class="separator:aeb099d29e90975736f79fe54a31936b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fcc3db8e05121c739d8d43ee40fec72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a8fcc3db8e05121c739d8d43ee40fec72">printField</a> (int16_t value, char term)</td></tr>
 <tr class="separator:a8fcc3db8e05121c739d8d43ee40fec72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71050abe5bed8e44f48ae75627b54c63"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a71050abe5bed8e44f48ae75627b54c63">printField</a> (uint16_t value, char term)</td></tr>
@@ -2170,6 +2172,56 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aeb099d29e90975736f79fe54a31936b9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SdBaseFile::printField </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>term</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>prec</em> = <code>2</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Print a number followed by a field terminator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The number to be printed. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">term</td><td>The field terminator. Use '\n' for CR LF. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">prec</td><td>Number of digits after decimal point. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes written or -1 if an error occurs. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a8fcc3db8e05121c739d8d43ee40fec72"></a>
 <div class="memitem">
 <div class="memproto">
@@ -3898,7 +3950,7 @@ Modify and access timestamps may be overwritten if a date time callback function
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 24 2014 09:37:38 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 5 2014 13:07:46 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

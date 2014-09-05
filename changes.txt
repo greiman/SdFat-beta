@@ -2,6 +2,8 @@
 
 Faster SdBaseFile::printField();
 
+Added SdBaseFile::printField(float value, char term, uint8_t prec);
+
 24 Aug 2014
 
 Added support for Software SPI on Due and Teensy 3.1

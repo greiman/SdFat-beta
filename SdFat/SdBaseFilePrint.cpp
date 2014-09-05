@@ -207,11 +207,15 @@ static int printFieldT(SdBaseFile* file, char sign, Type value, char term) {
       *--str = '\r';
     }
   }
+#ifdef OLD_FMT
   do {
     Type m = value;
     value /= 10;
     *--str = '0' + m - 10*value;
   } while (value);
+#else  // OLD_FMT
+ str = fmtDec(value, str);
+#endif  // OLD_FMT
   if (sign) {
     *--str = sign;
   }

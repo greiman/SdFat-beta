@@ -1,3 +1,7 @@
+05 Sep 2014
+
+Faster SdBaseFile::printField();
+
 24 Aug 2014
 
 Added support for Software SPI on Due and Teensy 3.1

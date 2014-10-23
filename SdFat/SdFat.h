@@ -28,7 +28,7 @@
 #define DBG_FAIL_MACRO  // Serial.print(__FILE__);Serial.println(__LINE__)
 //------------------------------------------------------------------------------
 /** SdFat version YYYYMMDD */
-#define SD_FAT_VERSION 20140824
+#define SD_FAT_VERSION 20141023
 //------------------------------------------------------------------------------
 /** error if old IDE */
 #if !defined(ARDUINO) || ARDUINO < 100

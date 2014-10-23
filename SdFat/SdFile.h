@@ -21,21 +21,42 @@
  * \file
  * \brief SdFile class
  */
-#include <SdBaseFile.h>
 #ifndef SdFile_h
 #define SdFile_h
+#include <limits.h>
+#include <SdBaseFile.h>
 //------------------------------------------------------------------------------
 /**
  * \class SdFile
  * \brief SdBaseFile with Print.
  */
-class SdFile : public SdBaseFile, public Print {
+class SdFile : public SdBaseFile, public Stream {
  public:
   SdFile() {}
   SdFile(const char* name, uint8_t oflag);
 #if DESTRUCTOR_CLOSES_FILE
   ~SdFile() {}
 #endif  // DESTRUCTOR_CLOSES_FILE
+  /** \return number of bytes available from the current position to EOF
+   *   or INT_MAX if more than INT_MAX bytes are available.
+   */
+  int available() {
+    uint32_t n = SdBaseFile::available();
+    return n > INT_MAX ? INT_MAX : n;
+  }
+  /** Ensure that any bytes written to the file are saved to the SD card. */
+  void flush() {SdBaseFile::sync();} 
+  /** Return the next available byte without consuming it.
+   *
+   * \return The byte if no error and not at eof else -1;
+   */  
+  int peek() {return SdBaseFile::peek();}
+  /** Read the next byte from a file.
+   *
+   * \return For success read returns the next byte in the file as an int.
+   * If an error occurs or end of file is reached -1 is returned.
+   */  
+  int read() {return SdBaseFile::read();}
   /** \return value of writeError */
   bool getWriteError() {return SdBaseFile::getWriteError();}
   /** Set writeError to zero */

@@ -444,6 +444,27 @@ bool Sd2Card::readData(uint8_t* dst, size_t count) {
   return false;
 }
 //------------------------------------------------------------------------------
+/** Read OCR register.
+ *
+ * \param[out] ocr Value of OCR register.
+ * \return true for success else false.
+ */
+bool Sd2Card::readOCR(uint32_t* ocr) {
+  uint8_t *p = (uint8_t*)ocr;
+  if (cardCommand(CMD58, 0)) {
+    error(SD_CARD_ERROR_CMD58);
+    goto fail;
+  }
+  for (uint8_t i = 0; i < 4; i++) p[3-i] = m_spi.receive();
+
+  chipSelectHigh();
+  return true;
+
+ fail:
+  chipSelectHigh();
+  return false;
+}
+//------------------------------------------------------------------------------
 /** read CID or CSR register */
 bool Sd2Card::readRegister(uint8_t cmd, void* buf) {
   uint8_t* dst = reinterpret_cast<uint8_t*>(buf);

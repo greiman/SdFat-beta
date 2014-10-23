@@ -44,9 +44,9 @@
  */
 #if defined(RAMEND) && RAMEND < 3000
 #define USE_MULTI_BLOCK_SD_IO 0
-#else
+#else  // RAMEND
 #define USE_MULTI_BLOCK_SD_IO 1
-#endif
+#endif // RAMEND
 
 //------------------------------------------------------------------------------
 /**

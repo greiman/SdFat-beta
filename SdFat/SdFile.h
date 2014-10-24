@@ -57,6 +57,20 @@ class SdFile : public SdBaseFile, public Stream {
    * If an error occurs or end of file is reached return -1.
    */  
   int read() {return SdBaseFile::read();}
+  /** Read data from a file starting at the current position.
+   *
+   * \param[out] buf Pointer to the location that will receive the data.
+   *
+   * \param[in] nbyte Maximum number of bytes to read.
+   *
+   * \return For success read() returns the number of bytes read.
+   * A value less than \a nbyte, including zero, will be returned
+   * if end of file is reached.
+   * If an error occurs, read() returns -1.  Possible errors include
+   * read() called before a file has been opened, corrupt file system
+   * or an I/O error occurred.
+   */  
+  int read(void* buf, size_t nbyte) {return SdBaseFile::read(buf, nbyte);}  
   /** \return value of writeError */
   bool getWriteError() {return SdBaseFile::getWriteError();}
   /** Set writeError to zero */

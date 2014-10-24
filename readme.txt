@@ -176,6 +176,10 @@ SdFormatter - This sketch will format an SD or SDHC card.
 
 SdInfo - Initialize an SD card and analyze its structure for trouble shooting.
 
+StdioBench - Demo and test of stdio style stream.
+
+StreamParseInt - Simple demo of parseInt() Stream member function.
+
 StressTest - Create and write files until the SD is full.
 
 Timestamp - Sets file create, modify, and access timestamps.
@@ -189,4 +193,4 @@ Compile, upload to your Arduino and click on Serial Monitor to run
 the example.
 
 
-Updated 06 Aug 2014
+Updated 24 Oct 2014

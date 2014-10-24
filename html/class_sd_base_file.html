@@ -54,7 +54,7 @@
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for <a class="el" href="class_sd_file.html" title="SdBaseFile with Print. ">SdFile</a> with Print and C++ streams.  
+<p>Base class for <a class="el" href="class_sd_file.html" title="SdBaseFile with Arduino Stream. ">SdFile</a> with Print and C++ streams.  
  <a href="class_sd_base_file.html#details">More...</a></p>
 
 <p><code>#include &lt;SdBaseFile.h&gt;</code></p>
@@ -63,7 +63,7 @@ Inheritance diagram for SdBaseFile:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_sd_base_file__inherit__graph.png" border="0" usemap="#_sd_base_file_inherit__map" alt="Inheritance graph"/></div>
 <map name="_sd_base_file_inherit__map" id="_sd_base_file_inherit__map">
-<area shape="rect" id="node3" href="class_sd_file.html" title="SdBaseFile with Print. " alt="" coords="5,80,64,107"/><area shape="rect" id="node5" href="class_sd_stream_base.html" title="Base class for SD streams. " alt="" coords="89,80,199,107"/><area shape="rect" id="node13" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. " alt="" coords="223,80,317,107"/><area shape="rect" id="node7" href="classfstream.html" title="SD file input/output stream. " alt="" coords="21,155,85,181"/><area shape="rect" id="node9" href="classifstream.html" title="SD file input stream. " alt="" coords="110,155,177,181"/><area shape="rect" id="node11" href="classofstream.html" title="SD card output stream. " alt="" coords="203,155,275,181"/></map>
+<area shape="rect" id="node3" href="class_sd_file.html" title="SdBaseFile with Arduino Stream. " alt="" coords="5,80,64,107"/><area shape="rect" id="node5" href="class_sd_stream_base.html" title="Base class for SD streams. " alt="" coords="89,80,199,107"/><area shape="rect" id="node13" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. " alt="" coords="223,80,317,107"/><area shape="rect" id="node7" href="classfstream.html" title="SD file input/output stream. " alt="" coords="21,155,85,181"/><area shape="rect" id="node9" href="classifstream.html" title="SD file input stream. " alt="" coords="110,155,177,181"/><area shape="rect" id="node11" href="classofstream.html" title="SD card output stream. " alt="" coords="203,155,275,181"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -221,7 +221,7 @@ Friends</h2></td></tr>
 <tr class="separator:ac838f1e6beb01ec57bd4b52e57df85e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Base class for <a class="el" href="class_sd_file.html" title="SdBaseFile with Print. ">SdFile</a> with Print and C++ streams. </p>
+<div class="textblock"><p>Base class for <a class="el" href="class_sd_file.html" title="SdBaseFile with Arduino Stream. ">SdFile</a> with Print and C++ streams. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2806f9763006e9191678b4e33097b47d"></a>
 <div class="memitem">
@@ -1150,7 +1150,7 @@ Friends</h2></td></tr>
 <p>O_EXCL - If O_CREAT and O_EXCL are set, <a class="el" href="class_sd_base_file.html#a6ff5b48f672515ec20831583de74407f">open()</a> shall fail if the file exists.</p>
 <p>O_SYNC - Call <a class="el" href="class_sd_base_file.html#a292247972772be832f2c6ea166f4049a">sync()</a> after each write. This flag should not be used with write(uint8_t), write_P(PGM_P), writeln_P(PGM_P), or the Arduino Print class. These functions do character at a time writes so <a class="el" href="class_sd_base_file.html#a292247972772be832f2c6ea166f4049a">sync()</a> will be called after each byte.</p>
 <p>O_TRUNC - If the file exists and is a regular file, and the file is successfully opened and is not read only, its length shall be truncated to 0.</p>
-<p>WARNING: A given file must not be opened by more than one <a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> object of file corruption may occur.</p>
+<p>WARNING: A given file must not be opened by more than one <a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> object or file corruption may occur.</p>
 <dl class="section note"><dt>Note</dt><dd>Directory files must be opened read only. Write and truncation is not allowed for directory files.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include this file is already open, <em>dirFile</em> is not a directory, <em>path</em> is invalid, the file does not exist or can't be opened in the access mode specified by oflag. </dd></dl>
 
@@ -2329,7 +2329,7 @@ Modify and access timestamps may be overwritten if a date time callback function
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 5 2014 13:07:46 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 24 2014 05:45:13 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

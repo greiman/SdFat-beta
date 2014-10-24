@@ -45,9 +45,9 @@ Introduction</h1>
 <p>The Arduino SdFat Library is a minimal implementation of FAT16 and FAT32 file systems on SD flash memory cards. Standard SD and high capacity SDHC cards are supported.</p>
 <p>Experimental support for FAT12 can be enabled by setting FAT12_SUPPORT nonzero in <a class="el" href="_sd_fat_config_8h.html" title="configuration definitions ">SdFatConfig.h</a>.</p>
 <p>The SdFat library only supports short 8.3 names.</p>
-<p>The main classes in SdFat are <a class="el" href="class_sd_fat.html" title="Integration class for the SdFat library. ">SdFat</a>, <a class="el" href="class_sd_file.html" title="SdBaseFile with Print. ">SdFile</a>, <a class="el" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. ">StdioStream</a>, <a class="el" href="classfstream.html">fstream</a>, <a class="el" href="classifstream.html">ifstream</a>, and <a class="el" href="classofstream.html">ofstream</a>.</p>
+<p>The main classes in SdFat are <a class="el" href="class_sd_fat.html" title="Integration class for the SdFat library. ">SdFat</a>, <a class="el" href="class_sd_file.html" title="SdBaseFile with Arduino Stream. ">SdFile</a>, <a class="el" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. ">StdioStream</a>, <a class="el" href="classfstream.html">fstream</a>, <a class="el" href="classifstream.html">ifstream</a>, and <a class="el" href="classofstream.html">ofstream</a>.</p>
 <p>The <a class="el" href="class_sd_fat.html" title="Integration class for the SdFat library. ">SdFat</a> class maintains a volume working directories, a current working directory, and simplifies initialization of other classes.</p>
-<p>The <a class="el" href="class_sd_file.html" title="SdBaseFile with Print. ">SdFile</a> class provides binary file access functions such as open(), read(), remove(), write(), close() and sync(). This class supports access to the root directory and subdirectories.</p>
+<p>The <a class="el" href="class_sd_file.html" title="SdBaseFile with Arduino Stream. ">SdFile</a> class provides binary file access functions such as open(), read(), remove(), write(), close() and sync(). This class supports access to the root directory and subdirectories.</p>
 <p>The <a class="el" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. ">StdioStream</a> class implements functions similar to Linux/Unix standard buffered input/output.</p>
 <p>The <a class="el" href="classfstream.html">fstream</a> class implements C++ iostreams for both reading and writing text files.</p>
 <p>The <a class="el" href="classifstream.html">ifstream</a> class implements the C++ iostreams for reading text files.</p>
@@ -80,7 +80,7 @@ SdFat Usage</h1>
 <p>Short names are always converted to upper case and their original case value is lost.</p>
 <dl class="section user"><dt></dt><dd>An application which writes to a file using print(), println() or <a class="el" href="class_sd_file.html#a67267a4b63d03a16e099195935613006">write() </a> must call <a class="el" href="class_sd_base_file.html#a292247972772be832f2c6ea166f4049a">sync() </a> at the appropriate time to force data and directory information to be written to the SD Card. Data and directory information are also written to the SD card when <a class="el" href="class_sd_base_file.html#a17f7e949aa0f80d89782d8e31f5edc15">close() </a> is called.</dd></dl>
 <dl class="section user"><dt></dt><dd>Applications must use care calling <a class="el" href="class_sd_base_file.html#a292247972772be832f2c6ea166f4049a">sync() </a> since 2048 bytes of I/O is required to update file and directory information. This includes writing the current data block, reading the block that contains the directory entry for update, writing the directory block back and reading back the current data block.</dd></dl>
-<p>It is possible to open a file with two or more instances of <a class="el" href="class_sd_file.html" title="SdBaseFile with Print. ">SdFile</a>. A file may be corrupted if data is written to the file by more than one instance of <a class="el" href="class_sd_file.html" title="SdBaseFile with Print. ">SdFile</a>.</p>
+<p>It is possible to open a file with two or more instances of <a class="el" href="class_sd_file.html" title="SdBaseFile with Arduino Stream. ">SdFile</a>. A file may be corrupted if data is written to the file by more than one instance of <a class="el" href="class_sd_file.html" title="SdBaseFile with Arduino Stream. ">SdFile</a>.</p>
 <h1><a class="anchor" id="HowTo"></a>
 How to format SD Cards as FAT Volumes</h1>
 <p>You should use a freshly formatted SD card for best performance. FAT file systems become slower if many files have been created and deleted. This is because the directory entry for a deleted file is marked as deleted, but is not deleted. When a new file is created, these entries must be scanned before creating the file, a flaw in the FAT design. Also files can become fragmented which causes reads and writes to be slower.</p>
@@ -110,7 +110,7 @@ References</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 5 2014 13:07:46 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 24 2014 05:45:13 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

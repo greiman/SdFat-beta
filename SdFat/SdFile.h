@@ -28,7 +28,7 @@
 //------------------------------------------------------------------------------
 /**
  * \class SdFile
- * \brief SdBaseFile with Print.
+ * \brief SdBaseFile with Arduino Stream.
  */
 class SdFile : public SdBaseFile, public Stream {
  public:
@@ -53,8 +53,8 @@ class SdFile : public SdBaseFile, public Stream {
   int peek() {return SdBaseFile::peek();}
   /** Read the next byte from a file.
    *
-   * \return For success read returns the next byte in the file as an int.
-   * If an error occurs or end of file is reached -1 is returned.
+   * \return For success return the next byte in the file as an int.
+   * If an error occurs or end of file is reached return -1.
    */  
   int read() {return SdBaseFile::read();}
   /** \return value of writeError */

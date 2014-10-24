@@ -53,7 +53,7 @@
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> with Print.  
+<p><a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> with Arduino Stream.  
  <a href="class_sd_file.html#details">More...</a></p>
 
 <p><code>#include &lt;SdFile.h&gt;</code></p>
@@ -74,8 +74,8 @@ Collaboration diagram for SdFile:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac4381fe633716069f2161d9e9fef5d16"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#ac4381fe633716069f2161d9e9fef5d16">available</a> ()</td></tr>
-<tr class="separator:ac4381fe633716069f2161d9e9fef5d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbb16ccfa24386ea381835778577626a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#abbb16ccfa24386ea381835778577626a">available</a> ()</td></tr>
+<tr class="separator:abbb16ccfa24386ea381835778577626a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9898f5e004588267d8a31762ac47e60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#ac9898f5e004588267d8a31762ac47e60">clearWriteError</a> ()</td></tr>
 <tr class="separator:ac9898f5e004588267d8a31762ac47e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17f7e949aa0f80d89782d8e31f5edc15"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a17f7e949aa0f80d89782d8e31f5edc15">close</a> ()</td></tr>
@@ -98,6 +98,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a32ac452756fdf80aae75fb1ab093a421"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adca5f8fce7851f9b7abc92cb73e49e35"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#adca5f8fce7851f9b7abc92cb73e49e35">firstCluster</a> () const </td></tr>
 <tr class="separator:adca5f8fce7851f9b7abc92cb73e49e35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a2221cc545cddb5996df4e1905ab987"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#a3a2221cc545cddb5996df4e1905ab987">flush</a> ()</td></tr>
+<tr class="separator:a3a2221cc545cddb5996df4e1905ab987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e84ccce858fd7e4d88e26b23d19a822"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a2e84ccce858fd7e4d88e26b23d19a822">getFilename</a> (char *name)</td></tr>
 <tr class="separator:a2e84ccce858fd7e4d88e26b23d19a822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1af089e5cf0a4c86e9b6bae1595f59b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#ad1af089e5cf0a4c86e9b6bae1595f59b">getpos</a> (<a class="el" href="struct_fat_pos__t.html">FatPos_t</a> *pos)</td></tr>
@@ -130,8 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aee4c736345e96aa5ddb7e5768ce88f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac67ffdfb84263bcd425886c09a15e287"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#ac67ffdfb84263bcd425886c09a15e287">openRoot</a> (<a class="el" href="class_sd_volume.html">SdVolume</a> *vol)</td></tr>
 <tr class="separator:ac67ffdfb84263bcd425886c09a15e287"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a996abee868ce928d04d9d0ad9305c915"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a996abee868ce928d04d9d0ad9305c915">peek</a> ()</td></tr>
-<tr class="separator:a996abee868ce928d04d9d0ad9305c915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8c0d875083803413f0160b3f75f70b7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#ab8c0d875083803413f0160b3f75f70b7">peek</a> ()</td></tr>
+<tr class="separator:ab8c0d875083803413f0160b3f75f70b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe2fd8314f3a6c0e06ff178f730efe07"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#afe2fd8314f3a6c0e06ff178f730efe07">printCreateDateTime</a> (Print *pr)</td></tr>
 <tr class="separator:afe2fd8314f3a6c0e06ff178f730efe07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb099d29e90975736f79fe54a31936b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#aeb099d29e90975736f79fe54a31936b9">printField</a> (float value, char term, uint8_t prec=2)</td></tr>
@@ -152,8 +154,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:add1a682e60aa3d8c030805122d5aa4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a942e26db2e764fccaeefea0fb371864d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a942e26db2e764fccaeefea0fb371864d">printName</a> (Print *pr)</td></tr>
 <tr class="separator:a942e26db2e764fccaeefea0fb371864d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a145595e55db1629fa126ffa2628fe9eb"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a145595e55db1629fa126ffa2628fe9eb">read</a> ()</td></tr>
-<tr class="separator:a145595e55db1629fa126ffa2628fe9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a871cb5dc17625bc3534f28672bee6cfb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#a871cb5dc17625bc3534f28672bee6cfb">read</a> ()</td></tr>
+<tr class="separator:a871cb5dc17625bc3534f28672bee6cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa70609890c15df7c49d65b07d1161a3f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#aa70609890c15df7c49d65b07d1161a3f">read</a> (void *buf, size_t nbyte)</td></tr>
 <tr class="separator:aa70609890c15df7c49d65b07d1161a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5dd9c5f9764db71c90c5fcfb02b2c97"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#ae5dd9c5f9764db71c90c5fcfb02b2c97">readDir</a> (dir_t *dir)</td></tr>
@@ -232,7 +234,7 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a47d4ba2177ffcd99c2387f9fac182d5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> with Print. </p>
+<div class="textblock"><p><a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> with Arduino Stream. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="afe0d4370c9edf39cf04a29362704ba5a"></a>
 <div class="memitem">
@@ -292,7 +294,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac4381fe633716069f2161d9e9fef5d16"></a>
+<a class="anchor" id="abbb16ccfa24386ea381835778577626a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -300,7 +302,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t SdBaseFile::available </td>
+          <td class="memname">int SdFile::available </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -308,11 +310,11 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>number of bytes available from yhe current position to EOF </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>number of bytes available from the current position to EOF or INT_MAX if more than INT_MAX bytes are available. </dd></dl>
 
 </div>
 </div>
@@ -808,6 +810,30 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a3a2221cc545cddb5996df4e1905ab987"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SdFile::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Ensure that any bytes written to the file are saved to the SD card. </p>
+
+</div>
+</div>
 <a class="anchor" id="a2e84ccce858fd7e4d88e26b23d19a822"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1264,7 +1290,7 @@ Public Attributes</h2></td></tr>
 <p>O_EXCL - If O_CREAT and O_EXCL are set, <a class="el" href="class_sd_base_file.html#a6ff5b48f672515ec20831583de74407f">open()</a> shall fail if the file exists.</p>
 <p>O_SYNC - Call <a class="el" href="class_sd_base_file.html#a292247972772be832f2c6ea166f4049a">sync()</a> after each write. This flag should not be used with write(uint8_t), write_P(PGM_P), writeln_P(PGM_P), or the Arduino Print class. These functions do character at a time writes so <a class="el" href="class_sd_base_file.html#a292247972772be832f2c6ea166f4049a">sync()</a> will be called after each byte.</p>
 <p>O_TRUNC - If the file exists and is a regular file, and the file is successfully opened and is not read only, its length shall be truncated to 0.</p>
-<p>WARNING: A given file must not be opened by more than one <a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> object of file corruption may occur.</p>
+<p>WARNING: A given file must not be opened by more than one <a class="el" href="class_sd_base_file.html" title="Base class for SdFile with Print and C++ streams. ">SdBaseFile</a> object or file corruption may occur.</p>
 <dl class="section note"><dt>Note</dt><dd>Directory files must be opened read only. Write and truncation is not allowed for directory files.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include this file is already open, <em>dirFile</em> is not a directory, <em>path</em> is invalid, the file does not exist or can't be opened in the access mode specified by oflag. </dd></dl>
 
@@ -1389,7 +1415,7 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a996abee868ce928d04d9d0ad9305c915"></a>
+<a class="anchor" id="ab8c0d875083803413f0160b3f75f70b7"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1397,7 +1423,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int SdBaseFile::peek </td>
+          <td class="memname">int SdFile::peek </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1405,7 +1431,7 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1931,7 +1957,7 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a145595e55db1629fa126ffa2628fe9eb"></a>
+<a class="anchor" id="a871cb5dc17625bc3534f28672bee6cfb"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1939,7 +1965,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int16_t SdBaseFile::read </td>
+          <td class="memname">int SdFile::read </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1947,12 +1973,12 @@ Public Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Read the next byte from a file.</p>
-<dl class="section return"><dt>Returns</dt><dd>For success read returns the next byte in the file as an int. If an error occurs or end of file is reached -1 is returned. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>For success return the next byte in the file as an int. If an error occurs or end of file is reached return -1. </dd></dl>
 
 </div>
 </div>
@@ -2773,7 +2799,7 @@ Modify and access timestamps may be overwritten if a date time callback function
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 5 2014 13:07:46 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 24 2014 05:45:13 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

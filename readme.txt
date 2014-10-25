@@ -1,12 +1,19 @@
-This is a beta version of SdFat with support for Software SPI on 
-AVR,  Due, and Teensy 3.1 boards.  SPI transactions are also supported. 
+This is a beta version of SdFat.
 
-See SoftwareSPI.txt and SPI_Transactions.txt for more information.
+A new class, "File", has been added to provide compatibility with the Arduino
+SD.h library. To use SdFat with programs written for SD.h replace
 
+#include <SD.h>
 
-Please check the changes.txt file!
+with these two lines:
 
-For those who don't like too much documentation read QuickStart.txt.
+#include <SdFat.h>
+SdFat SD;
+
+Support has been added for Software SPI on AVR, Due, and Teensy 3.1 boards.
+
+SPI transactions are supported. See SoftwareSPI.txt and SPI_Transactions.txt
+for more information.
 
 The Arduino SdFat library provides read/write access to FAT16/FAT32
 file systems on SD/SDHC flash cards.
@@ -14,50 +21,14 @@ file systems on SD/SDHC flash cards.
 SdFat requires Arduino 1.05 or greater.
 
 To use SdFat, unzip the download file and place the SdFat folder
-into the libraries subfolder in your main sketch folder.  You may
-need to create the libraries folder.  Restart the Arduino IDE if
-it was open.  See the Arduino site for more details om installing libraries.
+into the libraries sub-folder in your main sketch folder.
 
-The default chip select for the SD card is the hardware SS pin.  On a
-168/328 Arduino this is pin 10 and on a Mega this is pin 53.  If you are
-using another pin for chip select you will need call SdFat::begin(chipSelectPin)
-or SdFat::begin(chipSelectPin, sckRateID) with second parameter set to the
-SPI rate ID.
+For more information see the Manual installation section of this guide:
 
-If you have a shield like the SparkFun shield that uses pin 8 for chip
-select you would change the line:
-  sd.begin();
-to
-  sd.begin(8);
-or
-  sd.begin(8, SPI_HALF_SPEED);
-to use a slower SPI clock.
-  
-If the example uses
-  sd.init();
-change it to:
-  sd.begin(8, SPI_FULL_SPEED);
-
+http://arduino.cc/en/Guide/Libraries 
 
 A number of configuration options can be set by editing SdFatConfig.h
-#define macros.  Options include:
-
-USE_SD_CRC - enable or disable SD card crc checking.
-
-USE_MULTIPLE_CARDS - enable or disable use of multiple SD card sockets.
-
-USE_SERIAL_FOR_STD_OUT - use Serial for the default stdOut.
-
-ENDL_CALLS_FLUSH - enable a flush() call after endl.
-
-SPI_SCK_INIT_DIVISOR - set the SPI rate for card initialization.
-
-LEONARDO_SOFT_SPI - use software SPI on Leonardo Arduinos.
-
-MEGA_SOFT_SPI - use software SPI on Mega Arduinos.
-
-USE_SOFTWARE_SPI - always use software SPI.
-
+#define macros.  See the html documentation for details
 
 If you wish to report bugs or have comments, send email to
 fat16lib@sbcglobal.net
@@ -68,7 +39,10 @@ Read troubleshooting.txt for common hardware problems.
 
 Please read the html documentation for this library.  Start with
 html/index.html and read the Main Page.  Next go to the Classes tab and
-read the documentation for the classes SdFat, SdFile, ifstream, ofstream.
+read the documentation for the classes SdFat, SdBaseFile, SdFile, File,
+StdioStream, ifstream, ofstream, and others.
+
+The File class implements a SD.h compatible class.
 
 The SdFile class implements binary files similar to Linux's system calls.
 
@@ -104,7 +78,7 @@ level shifter.  SdFat sets the SPI bus frequency to 8 MHz which results
 in signal rise times that are too slow for the edge detectors in many
 newer SD card controllers when resistor voltage dividers are used.
 
-The 5 to 3.3 V level shifter for 5 V arduinos should be IC based like
+The 5 to 3.3 V level shifter for 5 V Arduinos should be IC based like
 the 74HC4050N based circuit shown in the file SdLevel.png.  The
 Adafruit Wave Shield uses a 74AHC125N.  Gravitech sells SD and MicroSD
 Card Adapters based on the 74LCX245.
@@ -193,4 +167,4 @@ Compile, upload to your Arduino and click on Serial Monitor to run
 the example.
 
 
-Updated 24 Oct 2014
+Updated 25 Oct 2014

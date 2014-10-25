@@ -450,7 +450,7 @@ bool Sd2Card::readData(uint8_t* dst, size_t count) {
  * \return true for success else false.
  */
 bool Sd2Card::readOCR(uint32_t* ocr) {
-  uint8_t *p = (uint8_t*)ocr;
+  uint8_t *p = reinterpret_cast<uint8_t*>(ocr);
   if (cardCommand(CMD58, 0)) {
     error(SD_CARD_ERROR_CMD58);
     goto fail;

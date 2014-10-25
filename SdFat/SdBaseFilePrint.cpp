@@ -49,7 +49,6 @@ void SdBaseFile::ls(uint8_t flags) {
  * \param[in] indent Amount of space before file name. Used for recursive
  * list to indicate subdirectory level.
  */
-//------------------------------------------------------------------------------
 void SdBaseFile::ls(Print* pr, uint8_t flags, uint8_t indent) {
   if (!isDir()) {
     pr->println(F("bad dir"));
@@ -337,6 +336,13 @@ size_t SdBaseFile::printName() {
   return printName(SdFat::stdOut());
 }
 //------------------------------------------------------------------------------
+/** Print a file's size.
+ *
+ * \param[in] pr Print stream for output.
+ *
+ * \return The value one, true, is returned for success and
+ * the value zero, false, is returned for failure. 
+ */
 size_t SdBaseFile::printFileSize(Print* pr) {
   char buf[10];
   char *ptr = fmtDec(fileSize(), buf + sizeof(buf));

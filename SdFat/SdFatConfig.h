@@ -24,29 +24,16 @@
 #ifndef SdFatConfig_h
 #define SdFatConfig_h
 #include <stdint.h>
-
+#ifdef __AVR__
+#include <avr/io.h>
+#endif  // __AVR__
 //------------------------------------------------------------------------------
 /**
- * Set USE_SEPARATE_FAT_CACHE nonzero to use a second 512 byte cache
- * for FAT table entries.  Improves performance for large writes that
- * are not a multiple of 512 bytes.
+ * Set SD_FILE_USES_STREAM nonzero to use Stream instead of Print for SdFile.
+ * Using Stream will use more flash and may cause compatibility problems
+ * with code written for older versions of SdFat. 
  */
-#ifdef __arm__
-#define USE_SEPARATE_FAT_CACHE 1
-#else  // __arm__
-#define USE_SEPARATE_FAT_CACHE 0
-#endif  // __arm__
-//------------------------------------------------------------------------------
-/**
- * Set USE_MULTI_BLOCK_SD_IO nonzero to use multi-block SD read/write.
- *
- * Don't use mult-block read/write on small AVR boards.
- */
-#if defined(RAMEND) && RAMEND < 3000
-#define USE_MULTI_BLOCK_SD_IO 0
-#else  // RAMEND
-#define USE_MULTI_BLOCK_SD_IO 1
-#endif // RAMEND
+#define SD_FILE_USES_STREAM 0
 
 //------------------------------------------------------------------------------
 /**
@@ -90,39 +77,10 @@
 #define USE_SERIAL_FOR_STD_OUT 0
 //------------------------------------------------------------------------------
 /**
- * Call flush for endl if ENDL_CALLS_FLUSH is nonzero
- *
- * The standard for iostreams is to call flush.  This is very costly for
- * SdFat.  Each call to flush causes 2048 bytes of I/O to the SD.
- *
- * SdFat has a single 512 byte buffer for SD I/O so it must write the current
- * data block to the SD, read the directory block from the SD, update the
- * directory entry, write the directory block to the SD and read the data
- * block back into the buffer.
- *
- * The SD flash memory controller is not designed for this many rewrites
- * so performance may be reduced by more than a factor of 100.
- *
- * If ENDL_CALLS_FLUSH is zero, you must call flush and/or close to force
- * all data to be written to the SD.
- */
-#define ENDL_CALLS_FLUSH 0
-//------------------------------------------------------------------------------
-/**
- * Allow FAT12 volumes if FAT12_SUPPORT is nonzero.
- * FAT12 has not been well tested.
+ * Set FAT12_SUPPORT nonzero to enable use if FAT12 volumes.
+ * FAT12 has not been well tested and requires additional flash.
  */
 #define FAT12_SUPPORT 0
-//------------------------------------------------------------------------------
-/**
- * SPI SCK divisor for SD initialization commands.
- * or greater
- */
-#ifdef __AVR__
-const uint8_t SPI_SCK_INIT_DIVISOR = 64;
-#else
-const uint8_t SPI_SCK_INIT_DIVISOR = 128;
-#endif
 //------------------------------------------------------------------------------
 /**
  * Set ENABLE_SPI_TRANSACTION nonzero to enable the SPI transaction feature
@@ -145,31 +103,31 @@ const uint8_t SPI_SCK_INIT_DIVISOR = 128;
 #define ENABLE_SPI_YIELD 0
 //------------------------------------------------------------------------------
 /**
- * Force use of Arduino Standard SPI library if USE_ARDUINO_SPI_LIBRARY
- * is nonzero. This will override native and software SPI for all boards.
+ * Set USE_ARDUINO_SPI_LIBRARY nonzero to force use of Arduino Standard
+ * SPI library. This will override native and software SPI for all boards.
  */
 #define USE_ARDUINO_SPI_LIBRARY 0
 //------------------------------------------------------------------------------
 /**
- * Define AVR_SOF_SPI nonzero to use software SPI on all AVR Arduinos.
+ * Set AVR_SOFT_SPI nonzero to use software SPI on all AVR Arduinos.
  */
 #define AVR_SOFT_SPI 0
 //------------------------------------------------------------------------------
 /**
- * Define DUE_SOFT_SPI nonzero to use software SPI on Due Arduinos.
+ * Set DUE_SOFT_SPI nonzero to use software SPI on Due Arduinos.
  */
 #define DUE_SOFT_SPI 0
 //------------------------------------------------------------------------------
 
 /**
- * Define LEONARDO_SOFT_SPI nonzero to use software SPI on Leonardo Arduinos.
+ * Set LEONARDO_SOFT_SPI nonzero to use software SPI on Leonardo Arduinos.
  * LEONARDO_SOFT_SPI allows an unmodified 328 Shield to be used
  * on Leonardo Arduinos.
  */
 #define LEONARDO_SOFT_SPI 0
 //------------------------------------------------------------------------------
 /**
- * Define MEGA_SOFT_SPI nonzero to use software SPI on Mega Arduinos.
+ * Set MEGA_SOFT_SPI nonzero to use software SPI on Mega Arduinos.
  * MEGA_SOFT_SPI allows an unmodified 328 Shield to be used
  * on Mega Arduinos.
  */
@@ -193,4 +151,55 @@ uint8_t const SOFT_SPI_MOSI_PIN = 11;
 uint8_t const SOFT_SPI_MISO_PIN = 12;
 /** Software SPI Clock pin */
 uint8_t const SOFT_SPI_SCK_PIN = 13;
+//------------------------------------------------------------------------------
+/**
+ * Call flush for endl if ENDL_CALLS_FLUSH is nonzero
+ *
+ * The standard for iostreams is to call flush.  This is very costly for
+ * SdFat.  Each call to flush causes 2048 bytes of I/O to the SD.
+ *
+ * SdFat has a single 512 byte buffer for SD I/O so it must write the current
+ * data block to the SD, read the directory block from the SD, update the
+ * directory entry, write the directory block to the SD and read the data
+ * block back into the buffer.
+ *
+ * The SD flash memory controller is not designed for this many rewrites
+ * so performance may be reduced by more than a factor of 100.
+ *
+ * If ENDL_CALLS_FLUSH is zero, you must call flush and/or close to force
+ * all data to be written to the SD.
+ */
+#define ENDL_CALLS_FLUSH 0
+//------------------------------------------------------------------------------
+/**
+ * SPI SCK divisor for SD initialization commands.
+ * or greater
+ */
+#ifdef __AVR__
+const uint8_t SPI_SCK_INIT_DIVISOR = 64;
+#else
+const uint8_t SPI_SCK_INIT_DIVISOR = 128;
+#endif
+//------------------------------------------------------------------------------
+/**
+ * Set USE_SEPARATE_FAT_CACHE nonzero to use a second 512 byte cache
+ * for FAT table entries.  Improves performance for large writes that
+ * are not a multiple of 512 bytes.
+ */
+#ifdef __arm__
+#define USE_SEPARATE_FAT_CACHE 1
+#else  // __arm__
+#define USE_SEPARATE_FAT_CACHE 0
+#endif  // __arm__
+//------------------------------------------------------------------------------
+/**
+ * Set USE_MULTI_BLOCK_SD_IO nonzero to use multi-block SD read/write.
+ *
+ * Don't use mult-block read/write on small AVR boards.
+ */
+#if defined(RAMEND) && RAMEND < 3000
+#define USE_MULTI_BLOCK_SD_IO 0
+#else  // RAMEND
+#define USE_MULTI_BLOCK_SD_IO 1
+#endif  // RAMEND
 #endif  // SdFatConfig_h

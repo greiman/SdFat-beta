@@ -1,11 +1,9 @@
 /*
  * Example use of two SD cards.
  */
+#include <SPI.h>
 #include <SdFat.h>
 #include <SdFatUtil.h>
-#if !USE_MULTIPLE_CARDS
-#error You must set USE_MULTIPLE_CARDS nonzero in SdFatConfig.h
-#endif
 
 SdFat sd1;
 const uint8_t SD1_CS = 10;  // chip select for sd1
@@ -21,20 +19,20 @@ const uint16_t NWRITE = FILE_SIZE/BUF_DIM;
 //------------------------------------------------------------------------------
 // print error msg, any SD error codes, and halt.
 // store messages in flash
-#define errorExit(msg) errorHalt_P(PSTR(msg))
-#define initError(msg) initErrorHalt_P(PSTR(msg))
+#define errorExit(msg) errorHalt(F(msg))
+#define initError(msg) initErrorHalt(F(msg))
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
   while (!Serial) {}  // wait for Leonardo
-  PgmPrint("FreeRam: ");
+  Serial.print(F("FreeRam: "));
 
   Serial.println(FreeRam());
   
   // fill buffer with known data
   for (int i = 0; i < sizeof(buf); i++) buf[i] = i;
   
-  PgmPrintln("type any character to start");
+  Serial.println(F("type any character to start"));
   while (Serial.read() <= 0) {}
   delay(400);  // catch Due reset problem
 
@@ -59,9 +57,9 @@ void setup() {
     if (!sd2.mkdir("/DIR2")) sd2.errorExit("sd2.mkdir");
   }
   // list root directory on both cards
-  PgmPrintln("------sd1 root-------");
+  Serial.println(F("------sd1 root-------"));
   sd1.ls();
-  PgmPrintln("------sd2 root-------");
+  Serial.println(F("------sd2 root-------"));
   sd2.ls();
 
   // make /DIR1 the default directory for sd1
@@ -71,11 +69,11 @@ void setup() {
   if (!sd2.chdir("/DIR2")) sd2.errorExit("sd2.chdir");
   
   // list current directory on both cards
-  PgmPrintln("------sd1 DIR1-------");
+  Serial.println(F("------sd1 DIR1-------"));
   sd1.ls();
-  PgmPrintln("------sd2 DIR2-------");
+  Serial.println(F("------sd2 DIR2-------"));
   sd2.ls();
-  PgmPrintln("---------------------");
+  Serial.println(F("---------------------"));
   
   // remove RENAME.BIN from /DIR2 directory of sd2
   if (sd2.exists("RENAME.BIN")) {
@@ -91,7 +89,7 @@ void setup() {
   if (!file1.open("TEST.BIN", O_RDWR | O_CREAT | O_TRUNC)) {
     sd1.errorExit("file1");
   }
-  PgmPrintln("Writing TEST.BIN to sd1");
+  Serial.println(F("Writing TEST.BIN to sd1"));
   
   // write data to /DIR1/TEST.BIN on sd1
   for (int i = 0; i < NWRITE; i++) {
@@ -107,7 +105,7 @@ void setup() {
   if (!file2.open("COPY.BIN", O_WRITE | O_CREAT | O_TRUNC)) {
     sd2.errorExit("file2");
   }
-  PgmPrintln("Copying TEST.BIN to COPY.BIN");
+  Serial.println(F("Copying TEST.BIN to COPY.BIN"));
   
   // copy file1 to file2
   file1.rewind();
@@ -120,11 +118,11 @@ void setup() {
     if (file2.write(buf, n) != n) sd2.errorExit("write2");
   }
   t = millis() - t;
-  PgmPrint("File size: ");
+  Serial.print(F("File size: "));
   Serial.println(file2.fileSize());
-  PgmPrint("Copy time: ");
+  Serial.print(F("Copy time: "));
   Serial.print(t);
-  PgmPrintln(" millis");
+  Serial.println(F(" millis"));
   
   // close TEST.BIN
   file1.close();
@@ -134,7 +132,7 @@ void setup() {
   if (!sd2.rename("COPY.BIN", "RENAME.BIN")) {
     sd2.errorExit("sd2.rename");
   }
-  PgmPrintln("Done");
+  Serial.println(F("Done"));
 }
 //------------------------------------------------------------------------------
 void loop() {}

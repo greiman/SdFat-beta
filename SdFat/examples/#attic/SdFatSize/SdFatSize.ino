@@ -3,6 +3,7 @@
  * See SD_Size.pde for Arduino SD sketch.
  *
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 SdFat sd;

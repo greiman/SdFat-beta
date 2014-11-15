@@ -1,6 +1,7 @@
 /*
  * Example use of chdir(), ls(), mkdir(), and  rmdir().
  */
+#include <SPI.h> 
 #include <SdFat.h>
 // SD card chip select pin.
 const uint8_t SD_CHIP_SELECT = SS;
@@ -24,11 +25,7 @@ char cinBuf[40];
 ArduinoInStream cin(Serial, cinBuf, sizeof(cinBuf));
 //==============================================================================
 // Error messages stored in flash.
-#define error(msg) error_P(PSTR(msg))
-//------------------------------------------------------------------------------
-void error_P(const char* msg) {
-  sd.errorHalt_P(msg);
-}
+#define error(msg) sd.errorHalt(F(msg))
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);

@@ -1,12 +1,6 @@
 /*
  * This sketch illustrates raw write functions in SdFat that
- * can be used for high speed data logging.  These functions
- * are used in the WaveRP library to record audio with the
- * Adafruit Wave Shield using the built-in Arduino ADC.
- *
- * The WaveRP library captures data from the ADC in an ISR
- * that is driven driven by timer one.  Data is collected in
- * two 512 byte buffers and written to the SD card.
+ * can be used for high speed data logging. 
  *
  * This sketch simulates logging from a source that produces
  * data at a constant rate of one block every MICROS_PER_BLOCK.
@@ -15,12 +9,12 @@
  * no overruns occur and the maximum block write time is
  * under 2000 micros.
  *
- * Note: WaveRP creates a very large file then truncates it
- * to the length that is used for a recording. It only takes
+ * Note: Apps should create a very large file then truncates it
+ * to the length that is used for a logging. It only takes
  * a few seconds to erase a 500 MB file since the card only
  * marks the blocks as erased; no data transfer is required.
  */
-
+#include <SPI.h> 
 #include <SdFat.h>
 #include <SdFatUtil.h>
 
@@ -46,7 +40,7 @@ uint32_t bgnBlock, endBlock;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 // log of first overruns
 #define OVER_DIM 20

@@ -24,11 +24,74 @@
 #ifndef SdFile_h
 #define SdFile_h
 #include <limits.h>
-#include <SdBaseFile.h>
+#include "utility/FatLib.h"
 //------------------------------------------------------------------------------
+/** Arduino SD.h style flag for open for read. */
+#define FILE_READ O_READ
+/** Arduino SD.h style flag for open at EOF for read/write with create. */
+#define FILE_WRITE (O_RDWR | O_CREAT | O_AT_END)
+//==============================================================================
+/**
+ * \class SdBaseFile
+ * \brief SdBaseFile base for SdFile and File.
+ */
+class SdBaseFile : public FatFile {
+ public:
+  SdBaseFile() {}
+  /** Constructor with file open.
+   *
+   * \param[in] path File location and name.
+   * \param[in] oflag File open mode.
+   */
+  SdBaseFile(const char* path, uint8_t oflag) {open(path, oflag);}
+  using FatFile::ls;
+  using FatFile::printFatDate;
+  using FatFile::printFatTime;
+  using FatFile::printName;
+  /** List directory contents.
+   *
+   * \param[in] flags The inclusive OR of
+   *
+   * LS_DATE - %Print file modification date
+   *
+   * LS_SIZE - %Print file size.
+   *
+   * LS_R - Recursive list of subdirectories.
+   */
+  void ls(uint8_t flags = 0) {
+    ls(&Serial, flags);
+  }
+  /** %Print a directory date field.
+   *
+   *  Format is yyyy-mm-dd.
+   *
+   * \param[in] fatDate The date field from a directory entry.
+   */
+  static void printFatDate(uint16_t fatDate) {
+    printFatDate(&Serial, fatDate);
+  }
+  /** %Print a directory time field.
+   *
+   * Format is hh:mm:ss.
+   *
+   * \param[in] fatTime The time field from a directory entry.
+   */
+  static void printFatTime(uint16_t fatTime) {
+    printFatTime(&Serial, fatTime);
+  }
+  /** Print a file's name.
+   *
+   * \return The value one, true, is returned for success and
+   * the value zero, false, is returned for failure.
+   */
+  size_t printName() {
+    return FatFile::printName(&Serial);
+  }
+};
+//==============================================================================
 /**
  * \class SdFile
- * \brief SdBaseFile with Arduino Stream.
+ * \brief SdFile SdBaseFile with Print.
  */
 #if SD_FILE_USES_STREAM
 class SdFile : public SdBaseFile, public Stream {
@@ -37,10 +100,22 @@ class SdFile : public SdBaseFile, public Print {
 #endif  // SD_FILE_USES_STREAM
  public:
   SdFile() {}
-  SdFile(const char* name, uint8_t oflag);
+  /**  Create a file object and open it in the current working directory.
+   *
+   * \param[in] path A path with a valid 8.3 DOS name for a file to be opened.
+   *
+   * \param[in] oflag Values for \a oflag are constructed by a
+   * bitwise-inclusive OR of open flags. see
+   * SdBaseFile::open(SdBaseFile*, const char*, uint8_t).
+   */
+  SdFile(const char* path, uint8_t oflag) : SdBaseFile(path, oflag) {}
 #if DESTRUCTOR_CLOSES_FILE
   ~SdFile() {}
 #endif  // DESTRUCTOR_CLOSES_FILE
+  using SdBaseFile::clearWriteError;
+  using SdBaseFile::getWriteError;
+  using SdBaseFile::read;
+  using SdBaseFile::write;
   /** \return number of bytes available from the current position to EOF
    *   or INT_MAX if more than INT_MAX bytes are available.
    */
@@ -53,51 +128,28 @@ class SdFile : public SdBaseFile, public Print {
   /** Return the next available byte without consuming it.
    *
    * \return The byte if no error and not at eof else -1;
-   */  
+   */
   int peek() {return SdBaseFile::peek();}
   /** Read the next byte from a file.
    *
    * \return For success return the next byte in the file as an int.
    * If an error occurs or end of file is reached return -1.
-   */  
+   */
   int read() {return SdBaseFile::read();}
-  /** Read data from a file starting at the current position.
-   *
-   * \param[out] buf Pointer to the location that will receive the data.
-   *
-   * \param[in] nbyte Maximum number of bytes to read.
-   *
-   * \return For success read() returns the number of bytes read.
-   * A value less than \a nbyte, including zero, will be returned
-   * if end of file is reached.
-   * If an error occurs, read() returns -1.  Possible errors include
-   * read() called before a file has been opened, corrupt file system
-   * or an I/O error occurred.
-   */  
-  int read(void* buf, size_t nbyte) {return SdBaseFile::read(buf, nbyte);}
-  /** \return value of writeError */
-  bool getWriteError() {return SdBaseFile::getWriteError();}
-  /** Set writeError to zero */
-  void clearWriteError() {SdBaseFile::clearWriteError();}
-  size_t write(uint8_t b);
-
-  int write(const char* str);
-  /** Write data to an open file.
-   *
-   * \note Data is moved to the cache but may not be written to the
-   * storage device until sync() is called.
-   *
-   * \param[in] buf Pointer to the location of the data to be written.
-   *
-   * \param[in] nbyte Number of bytes to write.
-   *
-   * \return For success write() returns the number of bytes written, always
-   * \a nbyte.  If an error occurs, write() returns -1.  Possible errors
-   * include write() is called before a file has been opened, write is called
-   * for a read-only file, device is full, a corrupt file system or an 
-   * I/O error.
-   */  
-  int write(const void* buf, size_t nbyte);
+  /** Write a byte to a file. Required by the Arduino Print class.
+   * \param[in] b the byte to be written.
+   * Use getWriteError to check for errors.
+   * \return 1 for success and 0 for failure.
+   */
+  size_t write(uint8_t b) {return SdBaseFile::write(b);}
+  /** Write a string to a file. Used by the Arduino Print class.
+   * \param[in] str Pointer to the string.
+   * Use getWriteError to check for errors.
+   * \return count of characters written for success or -1 for failure.
+   */
+  int write(const char* str) {
+    return SdBaseFile::write(str, strlen(str));
+  }
   /** Write data to an open file.  Form required by Print.
    *
    * \note Data is moved to the cache but may not be written to the
@@ -110,25 +162,47 @@ class SdFile : public SdBaseFile, public Print {
    * \return For success write() returns the number of bytes written, always
    * \a nbyte.  If an error occurs, write() returns -1.  Possible errors
    * include write() is called before a file has been opened, write is called
-   * for a read-only file, device is full, a corrupt file system or an 
+   * for a read-only file, device is full, a corrupt file system or an
    * I/O error.
-   */  
+   */
   size_t write(const uint8_t *buf, size_t size) {
-    return SdBaseFile::write(buf, size);}
-  void write_P(PGM_P str);
-  void writeln_P(PGM_P str);
+    return SdBaseFile::write(buf, size);
+  }
+  /** Write a PROGMEM string to a file.
+   * \param[in] str Pointer to the PROGMEM string.
+   * Use getWriteError to check for errors.
+   */
+  void write_P(PGM_P str) {
+    for (uint8_t c; (c = pgm_read_byte(str)); str++) write(c);
+  }
+  /** Write a PROGMEM string followed by CR/LF to a file.
+   * \param[in] str Pointer to the PROGMEM string.
+   * Use getWriteError to check for errors.
+   */
+  void writeln_P(PGM_P str) {
+    write_P(str);
+    write_P(PSTR("\r\n"));
+  }
 };
-//------------------------------------------------------------------------------
-/** Arduino SD.h style flag for open for read. */
-#define FILE_READ O_READ
-/** Arduino SD.h style flag for open at EOF for read/write with create. */
-#define FILE_WRITE (O_RDWR | O_CREAT | O_AT_END)
+//==============================================================================
 /**
  * \class File
  * \brief Arduino SD.h style File API
  */
 class File : public SdBaseFile, public Stream {
  public:
+  File() {}
+  /**  Create a file object and open it in the current working directory.
+   *
+   * \param[in] path A path with a valid 8.3 DOS name for a file to be opened.
+   *
+   * \param[in] oflag Values for \a oflag are constructed by a
+   * bitwise-inclusive OR of open flags. see
+   * SdBaseFile::open(SdBaseFile*, const char*, uint8_t).
+   */
+  File(const char* path, uint8_t oflag) {open(path, oflag);}
+  using SdBaseFile::clearWriteError;
+  using SdBaseFile::getWriteError;
  /** The parenthesis operator.
    *
    * \return true if a file is open.
@@ -141,15 +215,11 @@ class File : public SdBaseFile, public Stream {
     uint32_t n = SdBaseFile::available();
     return n > INT_MAX ? INT_MAX : n;
   }
-  /** Set writeError to zero */
-  void clearWriteError() {SdBaseFile::clearWriteError();}
   /** Ensure that any bytes written to the file are saved to the SD card. */
-  void flush() {sync();}
-  /** \return value of writeError */
-  bool getWriteError() {return SdBaseFile::getWriteError();}
+  void flush() {SdBaseFile::sync();}
    /** This function reports if the current file is a directory or not.
    * \return true if the file is a directory.
-   */  
+   */
   bool isDirectory() {return isDir();}
   /** \return a pointer to the file's name. */
   char* name() {
@@ -160,7 +230,7 @@ class File : public SdBaseFile, public Stream {
   /** Return the next available byte without consuming it.
    *
    * \return The byte if no error and not at eof else -1;
-   */  
+   */
   int peek() {return SdBaseFile::peek();}
   /** \return the current file position. */
   uint32_t position() {return curPosition();}
@@ -178,27 +248,13 @@ class File : public SdBaseFile, public Stream {
    *
    * \return For success return the next byte in the file as an int.
    * If an error occurs or end of file is reached return -1.
-   */  
+   */
   int read() {return SdBaseFile::read();}
-  /** Read data from a file starting at the current position.
-   *
-   * \param[out] buf Pointer to the location that will receive the data.
-   *
-   * \param[in] nbyte Maximum number of bytes to read.
-   *
-   * \return For success read() returns the number of bytes read.
-   * A value less than \a nbyte, including zero, will be returned
-   * if end of file is reached.
-   * If an error occurs, read() returns -1.  Possible errors include
-   * read() called before a file has been opened, corrupt file system
-   * or an I/O error occurred.
-   */  
-  int read(void* buf, size_t nbyte) {return SdBaseFile::read(buf, nbyte);}
   /** Rewind a file if it is a directory */
   void rewindDirectory() {
     if (isDir()) rewind();
   }
-  /** 
+  /**
    * Seek to a new position in the file, which must be between
    * 0 and the size of the file (inclusive).
    *
@@ -213,25 +269,7 @@ class File : public SdBaseFile, public Stream {
    * Use getWriteError to check for errors.
    * \return 1 for success and 0 for failure.
    */
-  size_t write(uint8_t b) {
-    return SdBaseFile::write(&b, 1) == 1 ? 1 : 0;
-  }
-  /** Write data to an open file.
-   *
-   * \note Data is moved to the cache but may not be written to the
-   * storage device until sync() is called.
-   *
-   * \param[in] buf Pointer to the location of the data to be written.
-   *
-   * \param[in] nbyte Number of bytes to write.
-   *
-   * \return For success write() returns the number of bytes written, always
-   * \a nbyte.  If an error occurs, write() returns -1.  Possible errors
-   * include write() is called before a file has been opened, write is called
-   * for a read-only file, device is full, a corrupt file system or an 
-   * I/O error.
-   */  
-  int write(const void* buf, size_t nbyte);
+  size_t write(uint8_t b) {return SdBaseFile::write(b);}
   /** Write data to an open file.  Form required by Print.
    *
    * \note Data is moved to the cache but may not be written to the
@@ -244,9 +282,9 @@ class File : public SdBaseFile, public Stream {
    * \return For success write() returns the number of bytes written, always
    * \a nbyte.  If an error occurs, write() returns -1.  Possible errors
    * include write() is called before a file has been opened, write is called
-   * for a read-only file, device is full, a corrupt file system or an 
+   * for a read-only file, device is full, a corrupt file system or an
    * I/O error.
-   */  
+   */
   size_t write(const uint8_t *buf, size_t size) {
     return SdBaseFile::write(buf, size);
   }

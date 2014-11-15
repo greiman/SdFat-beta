@@ -6,6 +6,7 @@
  * Note: This example is meant to demonstrate subtleties the standard and
  * may not the best way to read a file.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin

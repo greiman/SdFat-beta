@@ -2,6 +2,7 @@
  * Read the logfile created by the eventlog.pde example.
  * Demo of pathnames and working directories
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin

@@ -2,6 +2,7 @@
  * This sketch demonstrates use of SdFile::rename() 
  * and SdFat::rename().
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin
@@ -14,7 +15,7 @@ SdFat sd;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);

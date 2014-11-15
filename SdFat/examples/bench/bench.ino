@@ -1,6 +1,7 @@
 /*
  * This sketch is a simple binary write/read benchmark.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 #include <SdFatUtil.h>
 
@@ -36,7 +37,7 @@ SdFile file;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 void cidDmp() {
   cid_t cid;

@@ -1,6 +1,7 @@
 /*
  * This sketch is a simple Print benchmark.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 #include <SdFatUtil.h>
 
@@ -20,7 +21,7 @@ SdFile file;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
@@ -117,7 +118,7 @@ void loop() {
         file.printField((float)0.01*i, '\n');
         break;
       }
-      if (file.writeError) {
+      if (file.getWriteError()) {
         error("write failed");
       }
       m = micros() - m;

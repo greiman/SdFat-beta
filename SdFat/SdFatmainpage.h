@@ -31,13 +31,18 @@ cards are supported.
 Experimental support for FAT12 can be enabled by setting FAT12_SUPPORT
 nonzero in SdFatConfig.h.
 
-The %SdFat library only supports short 8.3 names.
+The %SdFat library only supports short 8.3 names.  Limited Long %File Name
+access is provided by \ref SdFile::openNextLFN.  See the LongFileName example.
 
-The main classes in %SdFat are SdFat, SdBaseFile, SdFile, File, StdioStream,
-\ref fstream, \ref ifstream, and \ref ofstream.
+The main classes in %SdFat are SdFat, SdFatSoftSpi, SdFatLibSpi,
+SdBaseFile, SdFile, File, StdioStream, \ref fstream, \ref ifstream,
+and \ref ofstream.
 
-The SdFat class maintains a FAT volume, a current working directory, 
-and simplifies initialization of other classes.
+The SdFat, SdFatLibSpi, and SdFatSoftSpi classes maintain a FAT volume,
+a current working directory, and simplifies initialization of other classes.
+The SdFat class uses a fast custom hardware SPI implementation. The
+SdFatLibSpi class uses the standard Arduino SPI library.  The SdFatSoftSpi
+class uses software SPI. 
 
 The SdBaseFile class provides basic file access functions such as open(),
 binary read(), binary write(), close(), remove(), and sync(). SdBaseFile
@@ -59,6 +64,14 @@ text files.
 The \ref ifstream class implements C++ iostreams for reading text files.
 
 The \ref ofstream class implements C++ iostreams for writing text files.
+
+The classes \ref ifstream, \ref ofstream, \ref istream, and \ref ostream 
+follow the C++ \ref iostream standard when possible.
+
+There are many tutorials and much documentation about using C++ iostreams
+on the web.
+
+http://www.cplusplus.com/  is a good C++ site for learning iostreams.
 
 The classes \ref ibufstream and \ref obufstream format and parse character
  strings in memory buffers.
@@ -83,22 +96,22 @@ http://arduino.cc/en/Guide/Libraries
 Several configuration options may be changed by editing the SdFatConfig.h
 file in the SdFat folder.
 
-Set SD_FILE_USES_STREAM nonzero to use Stream instead of Print for SdFile.
-Using Stream will use more flash.
+Set USE_MULTIPLE_SPI_TYPES nonzero to enable the SdFatSoftSpi and
+SdFatLibSpi classes. SdFatSoftSpi uses software SPI and SdFatLibSpi
+uses the standard Arduino SPI library.
 
 To enable SD card CRC checking set USE_SD_CRC nonzero.
-
-To use multiple SD cards set USE_MULTIPLE_CARDS nonzero.
 
 Set FAT12_SUPPORT nonzero to enable use of FAT12 volumes.
 FAT12 has not been well tested and requires additional flash.
 
-Set USE_ARDUINO_SPI_LIBRARY nonzero to force use of Arduino Standard
-SPI library. This will override native and software SPI for all boards.
+Set USE_ARDUINO_SPI_LIBRARY nonzero to force use of the Arduino Standard
+SPI library in the SdFat class. This will override native and software
+SPI for all boards.
 
-Use of software SPI can be enabled for selected boards by setting the symbols
-AVR_SOFT_SPI, DUE_SOFT_SPI, LEONARDO_SOFT_SPI, MEGA_SOFT_SPI,
-and TEENSY3_SOFT_SPI.
+Use of software SPI can be enabled in the SdFat class for selected boards
+by setting the symbols AVR_SOFT_SPI, DUE_SOFT_SPI, LEONARDO_SOFT_SPI,
+MEGA_SOFT_SPI, and TEENSY3_SOFT_SPI.
 
 Set ENABLE_SPI_TRANSACTION nonzero to enable the SPI transaction feature
 of the standard Arduino SPI library.  You must include SPI.h in your
@@ -142,6 +155,13 @@ uses a 74AHC125N.  Gravitech sells SD and MicroSD Card Adapters based on the
 If you are using a resistor based level shifter and are having problems try
 setting the SPI bus frequency to 4 MHz.  This can be done by using 
 card.init(SPI_HALF_SPEED) to initialize the SD card.
+
+A feature to use software SPI is available.  Software SPI is slower
+than hardware SPI but allows any digital pins to be used.  See
+SdFatConfig.h for software SPI definitions.
+
+An many shields designed for an Uno can be use on an Arduino Mega
+by defining MEGA_SOFT_SPI in SdFatConfig.h.
 
 \section comment Bugs and Comments
 
@@ -232,6 +252,8 @@ formating - Print a table with various formatting options.
 
 getline - Example of getline from section 27.7.1.3 of the C++ standard.
 
+LongFileName - Example use of openNextLFN and open by index.
+
 LowLatencyLogger - A modifiable data logger for higher data rates.
 
 OpenNext - Open all files in the root dir and print their filename.
@@ -250,14 +272,16 @@ rename - A demo of SdFat::rename(old, new) and SdFile::rename(dirFile, newPath).
 
 SdFormatter - This sketch will format an SD or SDHC card.
 
+SoftwareSpi - Simple demonstration of the SdFatSoftSpi template class.
+ 
 SdInfo - Initialize an SD card and analyze its structure for trouble shooting.
 
 StdioBench - Demo and test of stdio style stream.
 
-StreamParseInt - Simple demo of parseInt() Stream member function.
+StreamParseInt - Demo of the SD.h API and the File class parseInt() function.
 
-StressTest - Create and write files until the SD is full.
-
+ThreeCards - Demonstrate simultaneous use of SdFat, SdFatLibSpi, SdFatSoftSpi.
+ 
 Timestamp - Sets file create, modify, and access timestamps.
 
 TwoCards - Example using two SD cards.

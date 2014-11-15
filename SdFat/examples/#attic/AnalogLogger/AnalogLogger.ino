@@ -1,5 +1,6 @@
 // A simple data logger for the Arduino analog pins with optional DS1307
 // uses RTClib from https://github.com/adafruit/RTClib
+#include <SPI.h> 
 #include <SdFat.h>
 #include <SdFatUtil.h>  // define FreeRam()
 
@@ -28,7 +29,7 @@ char buf[80];
 #endif  // SENSOR_COUNT
 //------------------------------------------------------------------------------
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 #if USE_DS1307
 // use RTClib from Adafruit

@@ -17,10 +17,10 @@
  * along with the Arduino SdSpi Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#include <SdSpi.h>
-#if USE_NATIVE_TEENSY3_SPI
+#include "SdSpi.h"
+#if defined(__arm__) && defined(CORE_TEENSY)
 // Teensy 3.0 functions
-#include <mk20dx128.h>
+#include "mk20dx128.h"
 // use 16-bit frame if SPI_USE_8BIT_FRAME is zero
 #define SPI_USE_8BIT_FRAME 0
 // Limit initial fifo to three entries to avoid fifo overrun
@@ -220,4 +220,4 @@ void SdSpi::send(const uint8_t* buf , size_t n) {
   }
 #endif  // SPI_USE_8BIT_FRAME
 }
-#endif  // USE_NATIVE_TEENSY3_SPI
+#endif  // defined(__arm__) && defined(CORE_TEENSY)

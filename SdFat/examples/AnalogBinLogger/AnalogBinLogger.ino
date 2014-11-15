@@ -19,9 +19,10 @@
  *
  * Data is written to the file using a SD multiple block write command.
  */
+#ifdef __AVR__
+#include <SPI.h> 
 #include <SdFat.h>
 #include <SdFatUtil.h>
-#include <StdioStream.h>
 #include "AnalogBinLogger.h"
 //------------------------------------------------------------------------------
 // Analog pin number list for a sample.  Pins may be in any order and pin
@@ -247,10 +248,10 @@ ISR(TIMER1_COMPB_vect) {
 }
 //==============================================================================
 // Error messages stored in flash.
-#define error(msg) error_P(PSTR(msg))
+#define error(msg) errorFlash(F(msg))
 //------------------------------------------------------------------------------
-void error_P(const char* msg) {
-  sd.errorPrint_P(msg);
+void errorFlash(const __FlashStringHelper* msg) {
+  sd.errorPrint(msg);
   fatalBlink();
 }
 //------------------------------------------------------------------------------
@@ -785,3 +786,6 @@ void loop(void) {
     Serial.println(F("Invalid entry"));
   }
 }
+#else  // __AVR__
+#error This program is only for AVR.
+#endif  // __AVR__

@@ -20,6 +20,7 @@ const int chipSelect = 4;
  This example code is in the public domain.
  	 
  */
+#include <SPI.h> 
 #include <SdFat.h>
 SdFat sd;
 SdFile myFile;

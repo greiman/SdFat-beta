@@ -1,6 +1,7 @@
 /*
  * Simple data logger.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin.  Be sure to disable any other SPI devices such as Enet.
@@ -59,11 +60,7 @@ void logData() {
 }
 //==============================================================================
 // Error messages stored in flash.
-#define error(msg) error_P(PSTR(msg))
-//------------------------------------------------------------------------------
-void error_P(const char* msg) {
-  sd.errorHalt_P(msg);
-}
+#define error(msg) sd.errorHalt(F(msg))
 //------------------------------------------------------------------------------
 void setup() {
   const uint8_t BASE_NAME_SIZE = sizeof(FILE_BASE_NAME) - 1;

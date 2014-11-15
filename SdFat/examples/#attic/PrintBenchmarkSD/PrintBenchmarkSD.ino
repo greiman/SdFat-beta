@@ -1,8 +1,8 @@
 /*
  * This sketch is a simple Print benchmark.
  */
+#include <SPI.h> 
 #include <SD.h>
-#include <SPI.h>
 
 // SD chip select pin
 const uint8_t chipSelect = SS;
@@ -79,9 +79,9 @@ void loop() {
         break;
       }
 
-//      if (file.writeError) {
-//        error("write failed");
-//      }
+      if (file.getWriteError()) {
+        error("write failed");
+      }
       m = micros() - m;
       if (maxLatency < m) maxLatency = m;
       if (minLatency > m) minLatency = m;

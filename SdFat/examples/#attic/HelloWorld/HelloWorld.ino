@@ -1,3 +1,4 @@
+#include <SPI.h>
 #include <SdFat.h>
 
 //  create a serial output stream

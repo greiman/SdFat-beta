@@ -1,5 +1,6 @@
 // Quick hardware test.
 //
+#include <SPI.h> 
 #include <SdFat.h>
 //
 // Set DISABLE_CHIP_SELECT to disable a second SPI device.
@@ -12,12 +13,8 @@ const int8_t DISABLE_CHIP_SELECT = -1;
 // Use SPI_QUARTER_SPEED for even slower SPI bus speed
 const uint8_t spiSpeed = SPI_HALF_SPEED;
 //------------------------------------------------------------------------------
-// Normally the SdFat class is used in applications in place
-// of Sd2Card, SdVolume, and SdFile for root.
-// These internal classes are used here to diagnose problems.
-Sd2Card card;
-SdVolume volume;
-SdFile root;
+// File system object.
+SdFat sd;
 
 // Serial streams
 ArduinoOutStream cout(Serial);
@@ -43,12 +40,12 @@ void reformatMsg() {
 void setup() {
   Serial.begin(9600);
   while (!Serial) {}  // Wait for Leonardo.
-  delay(1000);        // Delay for Due.
   
   cout << pstr("\nSPI pins:\n");
+  cout << pstr("MISO: ") << int(MISO) << endl;  
   cout << pstr("MOSI: ") << int(MOSI) << endl;  
-  cout << pstr("MISO: ") << int(MISO) << endl;
   cout << pstr("SCK:  ") << int(SCK) << endl;
+  cout << pstr("SS:   ") << int(SS) << endl;
   
   if (DISABLE_CHIP_SELECT < 0) {
     cout << pstr(
@@ -74,6 +71,9 @@ void loop() {
   firstTry = false;
 
   cout << pstr("\nEnter the chip select pin number: ");
+  while (!Serial.available()) {}
+  delay(400);  // catch Due restart problem 
+  
   cin.readline();
   if (cin >> chipSelect) {
     cout << chipSelect << endl;
@@ -91,23 +91,39 @@ void loop() {
     pinMode(DISABLE_CHIP_SELECT, OUTPUT);
     digitalWrite(DISABLE_CHIP_SELECT, HIGH);
   }
-  if (!card.init(spiSpeed, chipSelect)) {
-    cout << pstr(
-      "\nSD initialization failed.\n"
-      "Do not reformat the card!\n"
-      "Is the card correctly inserted?\n"
-      "Is chipSelect set to the correct value?\n"
-      "Does another SPI device need to be disabled?\n"
-      "Is there a wiring/soldering problem?\n");
-    cout << pstr("errorCode: ") << hex << showbase << int(card.errorCode());
-    cout << pstr(", errorData: ") << int(card.errorData());
-    cout << dec << noshowbase << endl;
+  if (!sd.begin(chipSelect, spiSpeed)) {
+    if (sd.card()->errorCode()) {
+      cout << pstr(
+        "\nSD initialization failed.\n"
+        "Do not reformat the card!\n"
+        "Is the card correctly inserted?\n"
+        "Is chipSelect set to the correct value?\n"
+        "Does another SPI device need to be disabled?\n"
+        "Is there a wiring/soldering problem?\n");
+      cout << pstr("\nerrorCode: ") << hex << showbase;
+      cout << int(sd.card()->errorCode());
+      cout << pstr(", errorData: ") << int(sd.card()->errorData());
+      cout << dec << noshowbase << endl;
+      return;
+    }
+    cout << pstr("\nCard successfully initialized.\n");    
+    if (sd.vol()->fatType() == 0) {
+      cout << pstr("Can't find a valid FAT16/FAT32 partition.\n");
+      reformatMsg();
+      return;
+    }    
+    if (!sd.vwd()->isOpen()) {
+      cout << pstr("Can't open root directory.\n");
+      reformatMsg();
+      return;
+    }    
+    cout << pstr("Can't determine error type\n");
     return;
   }
   cout << pstr("\nCard successfully initialized.\n");
   cout << endl;
 
-  uint32_t size = card.cardSize();
+  uint32_t size = sd.card()->cardSize();
   if (size == 0) {
     cout << pstr("Can't determine the card size.\n");
     cardOrSpeed();
@@ -117,32 +133,15 @@ void loop() {
   cout << pstr("Card size: ") << sizeMB;
   cout << pstr(" MB (MB = 1,000,000 bytes)\n");
   cout << endl;
-
-  if (!volume.init(&card)) {
-    if (card.errorCode()) {
-      cout << pstr("Can't read the card.\n");
-      cardOrSpeed();
-    } else {
-      cout << pstr("Can't find a valid FAT16/FAT32 partition.\n");
-      reformatMsg();
-    }
-    return;
-  }
-  cout << pstr("Volume is FAT") << int(volume.fatType());
-  cout << pstr(", Cluster size (bytes): ") << 512L * volume.blocksPerCluster();
+  cout << pstr("Volume is FAT") << int(sd.vol()->fatType());
+  cout << pstr(", Cluster size (bytes): ") << 512L * sd.vol()->blocksPerCluster();
   cout << endl << endl;
 
-  root.close();
-  if (!root.openRoot(&volume)) {
-    cout << pstr("Can't open root directory.\n");
-    reformatMsg();
-    return;
-  }
   cout << pstr("Files found (name date time size):\n");
-  root.ls(LS_R | LS_DATE | LS_SIZE);
+  sd.ls(LS_R | LS_DATE | LS_SIZE);
 
-  if ((sizeMB > 1100 && volume.blocksPerCluster() < 64)
-    || (sizeMB < 2200 && volume.fatType() == 32)) {
+  if ((sizeMB > 1100 && sd.vol()->blocksPerCluster() < 64)
+    || (sizeMB < 2200 && sd.vol()->fatType() == 32)) {
     cout << pstr("\nThis card should be reformatted for best performance.\n");
     cout << pstr("Use a cluster size of 32 KB for cards larger than 1 GB.\n");
     cout << pstr("Only cards larger than 2 GB should be formatted FAT32.\n");

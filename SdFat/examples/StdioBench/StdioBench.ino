@@ -1,4 +1,5 @@
 // Benchmark comparing SdFile and StdioStream.
+#include <SPI.h> 
 #include <SdFat.h>
 
 // Define PRINT_FIELD nonzero to use printField.
@@ -29,13 +30,15 @@ void setup() {
   uint32_t stdioTime;
   
   Serial.begin(9600);
+  while (!Serial) {}
+  
   Serial.println(F("Type any character to start"));
   while (!Serial.available());
   Serial.println(F("Starting test"));
   if (!sd.begin(SD_CS_PIN)) sd.errorHalt();
 
   for (uint8_t i = 0; i < 100; i++) {
-    f[i] = 123.0 + 0.12345*i;
+    f[i] = 123.0 + 0.1234*i;
   }  
 
   for (uint8_t dataType = 0; dataType < 5; dataType++) {

@@ -29,12 +29,11 @@
 #endif  // __AVR__
 //------------------------------------------------------------------------------
 /**
- * Set SD_FILE_USES_STREAM nonzero to use Stream instead of Print for SdFile.
- * Using Stream will use more flash and may cause compatibility problems
- * with code written for older versions of SdFat. 
+ * Set USE_MULTIPLE_SPI_TYPES nonzero to enable the SdFatSoftSpi and
+ * SdFatLibSpi classes. SdFatSoftSpi uses software SPI and SdFatLibSpi
+ * uses the standard Arduino SPI library.
  */
-#define SD_FILE_USES_STREAM 0
-
+#define USE_MULTIPLE_SPI_TYPES 0
 //------------------------------------------------------------------------------
 /**
  * To enable SD card CRC checking set USE_SD_CRC nonzero.
@@ -44,43 +43,6 @@
  * Set USE_SD_CRC to 2 to used a larger faster table driven CRC-CCITT function.
  */
 #define USE_SD_CRC 0
-//------------------------------------------------------------------------------
-/**
- * To use multiple SD cards set USE_MULTIPLE_CARDS nonzero.
- *
- * Using multiple cards costs about 200  bytes of flash.
- *
- * Each card requires about 550 bytes of SRAM so use of a Mega is recommended.
- */
-#define USE_MULTIPLE_CARDS 0
-//------------------------------------------------------------------------------
-/**
- * Set DESTRUCTOR_CLOSES_FILE nonzero to close a file in its destructor.
- *
- * Causes use of lots of heap in ARM.
- */
-#define DESTRUCTOR_CLOSES_FILE 0
-//------------------------------------------------------------------------------
-/**
- * For AVR
- *
- * Set USE_SERIAL_FOR_STD_OUT nonzero to use Serial (the HardwareSerial class)
- * for error messages and output from print functions like ls().
- *
- * If USE_SERIAL_FOR_STD_OUT is zero, a small non-interrupt driven class
- * is used to output messages to serial port zero.  This allows an alternate
- * Serial library like SerialPort to be used with SdFat.
- *
- * You can redirect stdOut with SdFat::setStdOut(Print* stream) and
- * get the current stream with SdFat::stdOut().
- */
-#define USE_SERIAL_FOR_STD_OUT 0
-//------------------------------------------------------------------------------
-/**
- * Set FAT12_SUPPORT nonzero to enable use if FAT12 volumes.
- * FAT12 has not been well tested and requires additional flash.
- */
-#define FAT12_SUPPORT 0
 //------------------------------------------------------------------------------
 /**
  * Set ENABLE_SPI_TRANSACTION nonzero to enable the SPI transaction feature
@@ -103,38 +65,45 @@
 #define ENABLE_SPI_YIELD 0
 //------------------------------------------------------------------------------
 /**
- * Set USE_ARDUINO_SPI_LIBRARY nonzero to force use of Arduino Standard
- * SPI library. This will override native and software SPI for all boards.
+ * Set USE_ARDUINO_SPI_LIBRARY nonzero to force use of the Arduino Standard
+ * SPI library in the SdFat class. This will override native and software
+ * SPI for all boards.
  */
 #define USE_ARDUINO_SPI_LIBRARY 0
 //------------------------------------------------------------------------------
 /**
- * Set AVR_SOFT_SPI nonzero to use software SPI on all AVR Arduinos.
+ * Set AVR_SOFT_SPI nonzero to use software SPI in the SdFat class
+ * on all AVR Arduinos.  Set the soft SPI pins below.
  */
 #define AVR_SOFT_SPI 0
 //------------------------------------------------------------------------------
 /**
- * Set DUE_SOFT_SPI nonzero to use software SPI on Due Arduinos.
+ * Set DUE_SOFT_SPI nonzero to use software SPI in the SdFat class
+ * on Due Arduinos.  Set the soft SPI pins below.
  */
 #define DUE_SOFT_SPI 0
 //------------------------------------------------------------------------------
-
 /**
- * Set LEONARDO_SOFT_SPI nonzero to use software SPI on Leonardo Arduinos.
+ * Set LEONARDO_SOFT_SPI nonzero to use software SPI in the SdFat class
+ * on Leonardo Arduinos.  Set the soft SPI pins below.
+ *
  * LEONARDO_SOFT_SPI allows an unmodified 328 Shield to be used
  * on Leonardo Arduinos.
  */
 #define LEONARDO_SOFT_SPI 0
 //------------------------------------------------------------------------------
 /**
- * Set MEGA_SOFT_SPI nonzero to use software SPI on Mega Arduinos.
+ * Set MEGA_SOFT_SPI nonzero to use software SPI in the SdFat class
+ * on Mega Arduinos.  Set the soft SPI pins below.
+ *
  * MEGA_SOFT_SPI allows an unmodified 328 Shield to be used
- * on Mega Arduinos.
+ * on Mega Arduinos.  Set the soft SPI pins below.
  */
 #define MEGA_SOFT_SPI 0
 //------------------------------------------------------------------------------
 /**
- * Set TEENSY3_SOFT_SPI nonzero to use software SPI on Teensy 3.x boards.
+ * Set TEENSY3_SOFT_SPI nonzero to use software SPI in the SdFat class
+ * on Teensy 3.x boards.  Set the soft SPI pins below.
  */
 #define TEENSY3_SOFT_SPI 0
 //------------------------------------------------------------------------------
@@ -143,14 +112,25 @@
  * boards.
  */
 // define software SPI pins
-/** Default Software SPI chip select pin */
-uint8_t const SOFT_SPI_CS_PIN = 10;
 /** Software SPI Master Out Slave In pin */
 uint8_t const SOFT_SPI_MOSI_PIN = 11;
 /** Software SPI Master In Slave Out pin */
 uint8_t const SOFT_SPI_MISO_PIN = 12;
 /** Software SPI Clock pin */
 uint8_t const SOFT_SPI_SCK_PIN = 13;
+//------------------------------------------------------------------------------
+/**
+ * Set FAT12_SUPPORT nonzero to enable use if FAT12 volumes.
+ * FAT12 has not been well tested and requires additional flash.
+ */
+#define FAT12_SUPPORT 0
+//------------------------------------------------------------------------------
+/**
+ * Set DESTRUCTOR_CLOSES_FILE nonzero to close a file in its destructor.
+ *
+ * Causes use of lots of heap in ARM.
+ */
+#define DESTRUCTOR_CLOSES_FILE 0
 //------------------------------------------------------------------------------
 /**
  * Call flush for endl if ENDL_CALLS_FLUSH is nonzero
@@ -170,6 +150,13 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
  * all data to be written to the SD.
  */
 #define ENDL_CALLS_FLUSH 0
+//------------------------------------------------------------------------------
+/**
+ * Set SD_FILE_USES_STREAM nonzero to use Stream instead of Print for SdFile.
+ * Using Stream will use more flash and may cause compatibility problems
+ * with code written for older versions of SdFat. 
+ */
+#define SD_FILE_USES_STREAM 0
 //------------------------------------------------------------------------------
 /**
  * SPI SCK divisor for SD initialization commands.
@@ -198,8 +185,8 @@ const uint8_t SPI_SCK_INIT_DIVISOR = 128;
  * Don't use mult-block read/write on small AVR boards.
  */
 #if defined(RAMEND) && RAMEND < 3000
-#define USE_MULTI_BLOCK_SD_IO 0
+#define USE_MULTI_BLOCK_IO 0
 #else  // RAMEND
-#define USE_MULTI_BLOCK_SD_IO 1
+#define USE_MULTI_BLOCK_IO 1
 #endif  // RAMEND
 #endif  // SdFatConfig_h

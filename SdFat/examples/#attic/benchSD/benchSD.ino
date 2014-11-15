@@ -5,7 +5,6 @@
 #include <SPI.h>
 #include <SD.h>
 
-
 // SD chip select pin
 const uint8_t chipSelect = SS;
 
@@ -14,7 +13,6 @@ const uint8_t chipSelect = SS;
 #define BUF_SIZE 100
 
 uint8_t buf[BUF_SIZE];
-
 
 // test file
 File file;

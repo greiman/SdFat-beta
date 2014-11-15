@@ -1,6 +1,7 @@
 /*
  * Print size, modify date/time, and name for all files in root.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin

@@ -17,8 +17,8 @@
  * along with the Arduino SdSpi Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#include <SdSpi.h>
-#if USE_NATIVE_SAM3X_SPI
+#include "SdSpi.h"
+#if defined(__SAM3X8E__) || defined(__SAM3X8H__)
 /** Use SAM3X DMAC if nonzero */
 #define USE_SAM3X_DMAC 1
 /** Use extra Bus Matrix arbitration fix if nonzero */
@@ -213,4 +213,4 @@ void SdSpi::send(const uint8_t* buf , size_t n) {
   // leave RDR empty
   uint8_t b = pSpi->SPI_RDR;
 }
-#endif  // USE_NATIVE_SAM3X_SPI
+#endif  // defined(__SAM3X8E__) || defined(__SAM3X8H__)

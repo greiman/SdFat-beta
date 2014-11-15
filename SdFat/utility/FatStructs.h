@@ -182,7 +182,7 @@ struct fat_boot {
           /**
            * This dates back to the old MS-DOS 1.x media determination and is
            * no longer usually used for anything.  0xF8 is the standard value
-           * for fixed (nonremovable) media. For removable media, 0xF0 is
+           * for fixed (non-removable) media. For removable media, 0xF0 is
            * frequently used. Legal values are 0xF0 or 0xF8-0xFF.
            */
   uint8_t  mediaType;
@@ -537,11 +537,11 @@ struct directoryEntry {
            /** 32-bit unsigned holding this file's size in bytes. */
   uint32_t fileSize;
 }__attribute__((packed));
+/** Type name for directoryEntry */
+typedef struct directoryEntry dir_t;
 //------------------------------------------------------------------------------
 // Definitions for directory entries
 //
-/** Type name for directoryEntry */
-typedef struct directoryEntry dir_t;
 /** escape for name[0] = 0XE5 */
 uint8_t const DIR_NAME_0XE5 = 0X05;
 /** name[0] value for entry that is free after being "deleted" */
@@ -550,7 +550,7 @@ uint8_t const DIR_NAME_DELETED = 0XE5;
 uint8_t const DIR_NAME_FREE = 0X00;
 /** file is read-only */
 uint8_t const DIR_ATT_READ_ONLY = 0X01;
-/** File should hidden in directory listings */
+/** File should e hidden in directory listings */
 uint8_t const DIR_ATT_HIDDEN = 0X02;
 /** Entry is for a system file */
 uint8_t const DIR_ATT_SYSTEM = 0X04;
@@ -567,6 +567,26 @@ uint8_t const DIR_ATT_LONG_NAME = 0X0F;
 uint8_t const DIR_ATT_LONG_NAME_MASK = 0X3F;
 /** defined attribute bits */
 uint8_t const DIR_ATT_DEFINED_BITS = 0X3F;
+
+/** Mask for file/subdirectory tests */
+uint8_t const DIR_ATT_FILE_TYPE_MASK = (DIR_ATT_VOLUME_ID | DIR_ATT_DIRECTORY);
+
+/** Directory entry is for a file
+ * \param[in] dir Pointer to a directory entry.
+ *
+ * \return true if the entry is for a normal file else false.
+ */
+static inline uint8_t DIR_IS_FILE(const dir_t* dir) {
+  return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == 0;
+}
+/** Directory entry is for a file or subdirectory
+ * \param[in] dir Pointer to a directory entry.
+ *
+ * \return true if the entry is for a normal file or subdirectory else false.
+ */
+static inline uint8_t DIR_IS_FILE_OR_SUBDIR(const dir_t* dir) {
+  return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
+}
 /** Directory entry is part of a long name
  * \param[in] dir Pointer to a directory entry.
  *
@@ -575,15 +595,13 @@ uint8_t const DIR_ATT_DEFINED_BITS = 0X3F;
 static inline uint8_t DIR_IS_LONG_NAME(const dir_t* dir) {
   return (dir->attributes & DIR_ATT_LONG_NAME_MASK) == DIR_ATT_LONG_NAME;
 }
-/** Mask for file/subdirectory tests */
-uint8_t const DIR_ATT_FILE_TYPE_MASK = (DIR_ATT_VOLUME_ID | DIR_ATT_DIRECTORY);
-/** Directory entry is for a file
+/** Directory entry is hidden 
  * \param[in] dir Pointer to a directory entry.
  *
- * \return true if the entry is for a normal file else false.
+ * \return true if the entry is hidden else false.
  */
-static inline uint8_t DIR_IS_FILE(const dir_t* dir) {
-  return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == 0;
+static inline uint8_t DIR_IS_HIDDEN(const dir_t* dir) {
+  return dir->attributes & DIR_ATT_HIDDEN;
 }
 /** Directory entry is for a subdirectory
  * \param[in] dir Pointer to a directory entry.
@@ -593,13 +611,13 @@ static inline uint8_t DIR_IS_FILE(const dir_t* dir) {
 static inline uint8_t DIR_IS_SUBDIR(const dir_t* dir) {
   return (dir->attributes & DIR_ATT_FILE_TYPE_MASK) == DIR_ATT_DIRECTORY;
 }
-/** Directory entry is for a file or subdirectory
+/** Directory entry is system type 
  * \param[in] dir Pointer to a directory entry.
  *
- * \return true if the entry is for a normal file or subdirectory else false.
+ * \return true if the entry is system else false.
  */
-static inline uint8_t DIR_IS_FILE_OR_SUBDIR(const dir_t* dir) {
-  return (dir->attributes & DIR_ATT_VOLUME_ID) == 0;
+static inline uint8_t DIR_IS_SYSTEM(const dir_t* dir) {
+  return dir->attributes & DIR_ATT_SYSTEM;
 }
 /** date field for FAT directory entry
  * \param[in] year [1980,2107]
@@ -675,4 +693,70 @@ static inline uint8_t FAT_SECOND(uint16_t fatTime) {
 uint16_t const FAT_DEFAULT_DATE = ((2000 - 1980) << 9) | (1 << 5) | 1;
 /** Default time for file timestamp is 1 am */
 uint16_t const FAT_DEFAULT_TIME = (1 << 11);
+//------------------------------------------------------------------------------
+/** Dimension of first name field in long directory entry */
+const uint8_t LDIR_NAME1_DIM = 5;
+/** Dimension of first name field in long directory entry */
+const uint8_t LDIR_NAME2_DIM = 6;
+/** Dimension of first name field in long directory entry */
+const uint8_t LDIR_NAME3_DIM = 2;
+/**
+ * \struct longDirectoryEntry
+ * \brief FAT long directory entry
+ */
+struct longDirectoryEntry {
+          /**
+           * The order of this entry in the sequence of long dir entries
+           * associated with the short dir entry at the end of the long dir set.
+           *
+           * If masked with 0x40 (LAST_LONG_ENTRY), this indicates the
+           * entry is the last long dir entry in a set of long dir entries.
+           * All valid sets of long dir entries must begin with an entry having
+           * this mask.
+           */
+  uint8_t ord;
+          /** Characters 1-5 of the long-name sub-component in this entry. */
+  uint16_t name1[LDIR_NAME1_DIM];
+          /** Attributes - must be ATTR_LONG_NAME */
+  uint8_t attr;
+          /**
+           * If zero, indicates a directory entry that is a sub-component of a
+           * long name. NOTE: Other values reserved for future extensions.
+           * 
+           * Non-zero implies other directory entry types.
+           */
+  uint8_t type;
+          /**
+           * Checksum of name in the short dir entry at the end of the
+           * long dir set.  
+           */
+  uint8_t chksum;
+          /** Characters 6-11 of the long-name sub-component in this entry. */
+  uint16_t name2[LDIR_NAME2_DIM];
+          /** Must be ZERO. This is an artifact of the FAT "first cluster" */
+  uint16_t mustBeZero;
+          /** Characters 6-11 of the long-name sub-component in this entry. */
+  uint16_t name3[LDIR_NAME3_DIM];
+}__attribute__((packed));
+/** Type name for longDirectoryEntry */
+typedef struct longDirectoryEntry ldir_t;
+/**
+ * Ord mast that indicates the entry is the last long dir entry in a
+ * set of long dir entries. All valid sets of long dir entries must
+ * begin with an entry having this mask.
+ */
+const uint8_t LDIR_ORD_LAST_LONG_ENTRY = 0X40;
+/**
+ * Fetch a 16-bit long file name character.
+ *
+ * \param[in] ldir Pointer to long file name directory entry.
+ * \param[in] i Index of character to return;
+ * \return The 16-bit field.
+ */
+inline uint16_t lfnChar(ldir_t *ldir, uint8_t i) {
+  return  i < LDIR_NAME1_DIM ? ldir->name1[i] :
+          i < (LDIR_NAME1_DIM + LDIR_NAME2_DIM) ?
+          ldir->name2[i - LDIR_NAME1_DIM] :
+          ldir->name3[i - (LDIR_NAME1_DIM + LDIR_NAME2_DIM)];
+}
 #endif  // FatStructs_h

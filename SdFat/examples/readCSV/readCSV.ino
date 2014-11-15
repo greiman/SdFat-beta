@@ -2,6 +2,7 @@
  *  This example reads a simple CSV, comma-separated values, file.
  *  Each line of the file has three values, a long and two floats.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin
@@ -16,7 +17,7 @@ ArduinoOutStream cout(Serial);
 char fileName[] = "TESTFILE.CSV";
 //------------------------------------------------------------------------------
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 // read and print CSV test file
 void readFile() {

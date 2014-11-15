@@ -13,6 +13,7 @@
  *
  * Data is written to the file using a SD multiple block write command.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 #include <SdFatUtil.h>
 //------------------------------------------------------------------------------
@@ -139,10 +140,10 @@ uint8_t fullTail;
 inline uint8_t queueNext(uint8_t ht) {return ht < (QUEUE_DIM - 1) ? ht + 1 : 0;}
 //==============================================================================
 // Error messages stored in flash.
-#define error(msg) error_P(PSTR(msg))
+#define error(msg) errorFlash(F(msg))
 //------------------------------------------------------------------------------
-void error_P(const char* msg) {
-  sd.errorPrint_P(msg);
+void errorFlash(const __FlashStringHelper* msg) {
+  sd.errorPrint(msg);
   fatalBlink();
 }
 //------------------------------------------------------------------------------
@@ -481,6 +482,7 @@ void setup(void) {
     pinMode(ERROR_LED_PIN, OUTPUT);
   }
   Serial.begin(9600);
+  while (!Serial) {}
   
   Serial.print(F("FreeRam: "));
   Serial.println(FreeRam());

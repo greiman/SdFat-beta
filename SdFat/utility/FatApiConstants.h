@@ -46,7 +46,7 @@ uint8_t const O_CREAT = 0X40;
 /** If O_CREAT and O_EXCL are set, open() shall fail if the file exists */
 uint8_t const O_EXCL = 0X80;
 
-// SdBaseFile class static and const definitions
+// FatFile class static and const definitions
 // flags for ls()
 /** ls() flag to print modify date */
 uint8_t const LS_DATE = 1;

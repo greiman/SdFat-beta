@@ -2,6 +2,7 @@
  * This sketch tests the dateTimeCallback() function
  * and the timestamp() function.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 SdFat sd;
@@ -15,14 +16,14 @@ const uint8_t chipSelect = SS;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 /*
  * date/time values for debug
  * normally supplied by a real-time clock or GPS
  */
-// date 1-Oct-09
-uint16_t year = 2009;
+// date 1-Oct-14
+uint16_t year = 2014;
 uint8_t month = 10;
 uint8_t day = 1;
 
@@ -147,15 +148,15 @@ void setup(void) {
     error("open STAMP.TXT failed");
   }
   // set creation date time
-  if (!file.timestamp(T_CREATE, 2009, 11, 10, 1, 2, 3)) {
+  if (!file.timestamp(T_CREATE, 2014, 11, 10, 1, 2, 3)) {
     error("set create time failed");
   }
   // set write/modification date time
-  if (!file.timestamp(T_WRITE, 2009, 11, 11, 4, 5, 6)) {
+  if (!file.timestamp(T_WRITE, 2014, 11, 11, 4, 5, 6)) {
     error("set write time failed");
   }
   // set access date
-  if (!file.timestamp(T_ACCESS, 2009, 11, 12, 7, 8, 9)) {
+  if (!file.timestamp(T_ACCESS, 2014, 11, 12, 7, 8, 9)) {
     error("set access time failed");
   }
   cout << pstr("\nTimes after timestamp() calls\n");

@@ -1,6 +1,7 @@
 /*
  * Append a line to a file - demo of pathnames and streams
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin

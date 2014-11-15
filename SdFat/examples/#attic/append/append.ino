@@ -5,6 +5,7 @@
  * The sketch will append 100 line each time it opens the file.
  * The sketch will open and close the file 100 times.
  */
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD chip select pin
@@ -17,7 +18,7 @@ SdFat sd;
 ArduinoOutStream cout(Serial);
 
 // store error strings in flash to save RAM
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 void setup() {
   // filename for this example

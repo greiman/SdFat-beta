@@ -1,4 +1,5 @@
 // Demo of rewriting a line read by fgets
+#include <SPI.h> 
 #include <SdFat.h>
 
 // SD card chip select pin
@@ -11,7 +12,7 @@ SdFat sd;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 // store error strings in flash memory
-#define error(s) sd.errorHalt_P(PSTR(s))
+#define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 void demoFgets() {
   char line[25];
@@ -60,7 +61,7 @@ void makeTestFile() {
   if (!wrfile.isOpen()) error("MakeTestFile");
   
   // write test file
-  wrfile.write_P(PSTR(
+  wrfile.print(F(
     "Line A\r\n"
     "Line B\r\n"
     "Line C\r\n"

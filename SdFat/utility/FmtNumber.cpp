@@ -17,10 +17,10 @@
  * along with the FatLib Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#include <avr/pgmspace.h>
-#include <FmtNumber.h>
+#include "FmtNumber.h"
 // Use Stimmer div/mod 10 on avr
 #ifdef __AVR__
+#include <avr/pgmspace.h>
 #define USE_STIMMER
 #endif  // __AVR__
 //------------------------------------------------------------------------------
@@ -149,9 +149,15 @@ unsigned divu10(unsigned n) {
 }
 */
 //------------------------------------------------------------------------------
-
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+#ifdef __AVR__
 static const float m[] PROGMEM = {1e-1, 1e-2, 1e-4, 1e-8, 1e-16, 1e-32};
 static const float p[] PROGMEM = {1e+1, 1e+2, 1e+4, 1e+8, 1e+16, 1e+32};
+#else  // __AVR__
+static const float m[] = {1e-1, 1e-2, 1e-4, 1e-8, 1e-16, 1e-32};
+static const float p[] = {1e+1, 1e+2, 1e+4, 1e+8, 1e+16, 1e+32};
+#endif  // __AVR__
+#endif  // DOXYGEN_SHOULD_SKIP_THIS
 // scale float v by power of ten. return v*10^n
 float scale10(float v, int8_t n) {
   const float *s;
@@ -163,7 +169,11 @@ float scale10(float v, int8_t n) {
   }
   n &= 63;
   for (uint8_t i = 0; n; n >>= 1, i++) {
+#ifdef __AVR__
     if (n & 1) v *= pgm_read_float(&s[i]);
+#else  // __AVR__
+    if (n & 1) v *= s[i];
+#endif  // __AVR__
   }
   return v;
 }

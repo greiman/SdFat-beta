@@ -2,6 +2,7 @@
  * Print a table with various formatting options
  * Format dates
  */
+#include <SPI.h>
 #include <SdFat.h>
 
 // create Serial stream

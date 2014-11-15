@@ -23,7 +23,7 @@
  * \file
  * \brief Useful utility functions.
  */
-#include <SdFat.h>
+#include "SdFat.h"
 /** Store and print a string in flash memory.*/
 #define PgmPrint(x) SerialPrint_P(PSTR(x))
 /** Store and print a string in flash memory followed by a CR/LF.*/
@@ -33,8 +33,24 @@ namespace SdFatUtil {
   int FreeRam();
   void print_P(Print* pr, PGM_P str);
   void println_P(Print* pr, PGM_P str);
+  //----------------------------------------------------------------------------
+  /** %Print a string in flash memory to Serial.
+   *
+   * \param[in] str Pointer to string stored in flash memory.
+   */
+  inline void SerialPrint_P(PGM_P str) {
+    print_P(&Serial, str);
+  }
+  //----------------------------------------------------------------------------
+  /** %Print a string in flash memory to Serial followed by a CR/LF.
+   *
+   * \param[in] str Pointer to string stored in flash memory.
+   */
+  inline void SerialPrintln_P(PGM_P str) {
+    println_P(&Serial, str);
+  }
   void SerialPrint_P(PGM_P str);
   void SerialPrintln_P(PGM_P str);
-}
+}  // namespace SdFatUtil
 using namespace SdFatUtil;  // NOLINT
 #endif  // #define SdFatUtil_h

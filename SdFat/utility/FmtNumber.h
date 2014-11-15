@@ -19,7 +19,9 @@
  */
 #ifndef FmtNumber_h
 #define FmtNumber_h
-#include <Arduino.h>
+#include <ctype.h>
+#include <math.h>
+#include <stdint.h>
 char* fmtDec(uint16_t n, char* p);
 char* fmtDec(uint32_t n, char* p);
 char* fmtFloat(float value, char* p, uint8_t prec);

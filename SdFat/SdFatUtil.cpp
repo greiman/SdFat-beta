@@ -18,27 +18,29 @@
  * <http://www.gnu.org/licenses/>.
  */
 #include <stdlib.h>
-#include <SdFat.h>
-#include <SdFatUtil.h>
-#ifdef __arm__
-// should use uinstd.h to define sbrk but Due causes a conflict
-extern "C" char* sbrk(int incr);
-#else  // __ARM__
-extern char *__brkval;
-extern char __bss_end;
-#endif  // __arm__
+#include "SdFat.h"
+#include "SdFatUtil.h"
 //------------------------------------------------------------------------------
+#ifdef __arm__
+extern "C" char* sbrk(int incr);
 /** Amount of free RAM
  * \return The number of free bytes.
  */
 int SdFatUtil::FreeRam() {
   char top;
-#ifdef __arm__
   return &top - reinterpret_cast<char*>(sbrk(0));
-#else  // __arm__
-  return __brkval ? &top - __brkval : &top - &__bss_end;
-#endif  // __arm__
 }
+#else  // __arm__
+extern char *__brkval;
+extern char __bss_end;
+/** Amount of free RAM
+ * \return The number of free bytes.
+ */
+int SdFatUtil::FreeRam() {
+  char top;
+  return __brkval ? &top - __brkval : &top - &__bss_end;
+}
+#endif  // __arm
 //------------------------------------------------------------------------------
 /** %Print a string in flash memory.
  *
@@ -57,20 +59,4 @@ void SdFatUtil::print_P(Print* pr, PGM_P str) {
 void SdFatUtil::println_P(Print* pr, PGM_P str) {
   print_P(pr, str);
   pr->println();
-}
-//------------------------------------------------------------------------------
-/** %Print a string in flash memory to Serial.
- *
- * \param[in] str Pointer to string stored in flash memory.
- */
-void SdFatUtil::SerialPrint_P(PGM_P str) {
-  print_P(SdFat::stdOut(), str);
-}
-//------------------------------------------------------------------------------
-/** %Print a string in flash memory to Serial followed by a CR/LF.
- *
- * \param[in] str Pointer to string stored in flash memory.
- */
-void SdFatUtil::SerialPrintln_P(PGM_P str) {
-  println_P(SdFat::stdOut(), str);
 }

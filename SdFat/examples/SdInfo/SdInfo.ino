@@ -1,6 +1,7 @@
 /*
  * This sketch attempts to initialize an SD card and analyze its structure.
  */
+#include <SPI.h>
 #include <SdFat.h>
 /*
  * SD chip select pin.  Common values are:
@@ -10,10 +11,14 @@
  * Adafruit SD shields and modules, pin 10.
  * Default SD chip select is the SPI SS pin.
  */
-const uint8_t SdChipSelect = SS;
-
-Sd2Card card;
-SdVolume vol;
+const uint8_t SD_CHIP_SELECT = SS;
+/*
+ * Set DISABLE_CHIP_SELECT to disable a second SPI device.
+ * For example, with the Ethernet shield, set DISABLE_CHIP_SELECT
+ * to 10 to disable the Ethernet controller.
+ */
+const int8_t DISABLE_CHIP_SELECT = -1;
+SdFat sd;
 
 // serial output steam
 ArduinoOutStream cout(Serial);
@@ -28,17 +33,17 @@ uint32_t eraseSize;
 #define sdErrorMsg(msg) sdErrorMsg_P(PSTR(msg));
 void sdErrorMsg_P(const char* str) {
   cout << pgm(str) << endl;
-  if (card.errorCode()) {
+  if (sd.card()->errorCode()) {
     cout << pstr("SD errorCode: ");
-    cout << hex << int(card.errorCode()) << endl;
+    cout << hex << int(sd.card()->errorCode()) << endl;
     cout << pstr("SD errorData: ");
-    cout << int(card.errorData()) << dec << endl;
+    cout << int(sd.card()->errorData()) << dec << endl;
   }
 }
 //------------------------------------------------------------------------------
 uint8_t cidDmp() {
   cid_t cid;
-  if (!card.readCID(&cid)) {
+  if (!sd.card()->readCID(&cid)) {
     sdErrorMsg("readCID failed");
     return false;
   }
@@ -62,7 +67,7 @@ uint8_t cidDmp() {
 uint8_t csdDmp() {
   csd_t csd;
   uint8_t eraseSingleBlock;
-  if (!card.readCSD(&csd)) {
+  if (!sd.card()->readCSD(&csd)) {
     sdErrorMsg("readCSD failed");
     return false;
   }
@@ -92,12 +97,12 @@ uint8_t csdDmp() {
 //------------------------------------------------------------------------------
 // print partition table
 uint8_t partDmp() {
-  cache_t *p = vol.cacheClear();
+  cache_t *p = sd.vol()->cacheClear();
   if (!p) {
     sdErrorMsg("cacheClear failed");
     return false;
   }
-  if (!card.readBlock(0, p->data)) {
+  if (!sd.card()->readBlock(0, p->data)) {
       sdErrorMsg("read MBR failed");
       return false;
   }
@@ -119,21 +124,22 @@ uint8_t partDmp() {
 }
 //------------------------------------------------------------------------------
 void volDmp() {
-  cout << pstr("\nVolume is FAT") << int(vol.fatType()) << endl;
-  cout << pstr("blocksPerCluster: ") << int(vol.blocksPerCluster()) << endl;
-  cout << pstr("clusterCount: ") << vol.clusterCount() << endl;
-  uint32_t volFree = vol.freeClusterCount();
-  cout << pstr("freeClusters: ") <<  volFree << endl;
-  float fs = 0.000512*volFree*vol.blocksPerCluster();
+  cout << pstr("\nVolume is FAT") << int(sd.vol()->fatType()) << endl;
+  cout << pstr("blocksPerCluster: ") << int(sd.vol()->blocksPerCluster()) << endl;
+  cout << pstr("clusterCount: ") << sd.vol()->clusterCount() << endl;
+  cout << pstr("freeClusters: "); 
+  uint32_t volFree = sd.vol()->freeClusterCount();
+  cout <<  volFree << endl;
+  float fs = 0.000512*volFree*sd.vol()->blocksPerCluster();
   cout << pstr("freeSpace: ") << fs << pstr(" MB (MB = 1,000,000 bytes)\n");
-  cout << pstr("fatStartBlock: ") << vol.fatStartBlock() << endl;
-  cout << pstr("fatCount: ") << int(vol.fatCount()) << endl;
-  cout << pstr("blocksPerFat: ") << vol.blocksPerFat() << endl;
-  cout << pstr("rootDirStart: ") << vol.rootDirStart() << endl;
-  cout << pstr("dataStartBlock: ") << vol.dataStartBlock() << endl;
-  if (vol.dataStartBlock() % eraseSize) {
+  cout << pstr("fatStartBlock: ") << sd.vol()->fatStartBlock() << endl;
+  cout << pstr("fatCount: ") << int(sd.vol()->fatCount()) << endl;
+  cout << pstr("blocksPerFat: ") << sd.vol()->blocksPerFat() << endl;
+  cout << pstr("rootDirStart: ") << sd.vol()->rootDirStart() << endl;
+  cout << pstr("dataStartBlock: ") << sd.vol()->dataStartBlock() << endl;
+  if (sd.vol()->dataStartBlock() % eraseSize) {
     cout << pstr("Data area is not aligned on flash erase boundaries!\n");
-    cout << pstr("Download and use formatter from www.sdcard.org/consumer!\n");
+    cout << pstr("Download and use formatter from www.sdsd.card()->org/consumer!\n");
   }
 }
 //------------------------------------------------------------------------------
@@ -146,6 +152,18 @@ void setup() {
 
   // pstr stores strings in flash to save RAM
   cout << pstr("SdFat version: ") << SD_FAT_VERSION << endl;
+  if (DISABLE_CHIP_SELECT < 0) {
+    cout << pstr(
+      "\nAssuming the SD is the only SPI device.\n"
+      "Edit DISABLE_CHIP_SELECT to disable another device.\n");
+  } else {
+    cout << pstr("\nDisabling SPI device on pin ");
+    cout << int(DISABLE_CHIP_SELECT) << endl;
+    pinMode(DISABLE_CHIP_SELECT, OUTPUT);
+    digitalWrite(DISABLE_CHIP_SELECT, HIGH);
+  }
+  cout << pstr("\nAssuming the SD chip select pin is: ") <<int(SD_CHIP_SELECT);
+  cout << pstr("\nEdit SD_CHIP_SELECT to change the SD chip select pin.\n");
 }
 //------------------------------------------------------------------------------
 void loop() {
@@ -160,20 +178,20 @@ void loop() {
   uint32_t t = millis();
   // initialize the SD card at SPI_HALF_SPEED to avoid bus errors with
   // breadboards.  use SPI_FULL_SPEED for better performance.
-  if (!card.init(SPI_HALF_SPEED, SdChipSelect)) {
-    sdErrorMsg("\ncard.init failed");
+  if (!sd.cardBegin(SD_CHIP_SELECT, SPI_HALF_SPEED)) {
+    sdErrorMsg("\ncardBegin failed");
     return;
   }
   t = millis() - t;
   
-  cardSize = card.cardSize();
+  cardSize = sd.card()->cardSize();
   if (cardSize == 0) {
     sdErrorMsg("cardSize failed");
     return;
   }
   cout << pstr("\ninit time: ") << t << " ms" << endl;
   cout << pstr("\nCard type: ");
-  switch (card.type()) {
+  switch (sd.card()->type()) {
     case SD_CARD_TYPE_SD1:
       cout << pstr("SD1\n");
       break;
@@ -196,14 +214,14 @@ void loop() {
   if (!cidDmp()) return;
   if (!csdDmp()) return;
   uint32_t ocr;
-  if (!card.readOCR(&ocr)) {
+  if (!sd.card()->readOCR(&ocr)) {
     sdErrorMsg("\nreadOCR failed");
     return;    
   }
   cout << pstr("OCR: ") << hex << ocr << dec << endl;
   if (!partDmp()) return;
-  if (!vol.init(&card)) {
-    sdErrorMsg("\nvol.init failed");
+  if (!sd.fsBegin()) {
+    sdErrorMsg("\nFile System initialization failed.\n");
     return;
   }
   volDmp();

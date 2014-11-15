@@ -13,6 +13,7 @@
  */
 // Print extra info for debug if DEBUG_PRINT is nonzero
 #define DEBUG_PRINT 0
+#include <SPI.h> 
 #include <SdFat.h>
 #if DEBUG_PRINT
 #include <SdFatUtil.h>
@@ -461,12 +462,12 @@ void setup() {
     return;
   }
 
-  if (!card.init(spiSpeed, chipSelect)) {
+  if (!card.begin(chipSelect, spiSpeed)) {
     cout << pstr(
      "\nSD initialization failure!\n"
      "Is the SD card inserted correctly?\n"
      "Is chip select correct at the top of this sketch?\n");
-    sdError("card.init failed");
+    sdError("card.begin failed");
   }
   cardSizeBlocks = card.cardSize();
   if (cardSizeBlocks == 0) sdError("cardSize");

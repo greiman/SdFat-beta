@@ -17,7 +17,7 @@
  * along with the FatLib Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#include <ctype.h>
+//  #include <ctype.h>
 #include <float.h>
 #include "istream.h"
 //------------------------------------------------------------------------------
@@ -35,7 +35,9 @@ int istream::get() {
 //------------------------------------------------------------------------------
 istream& istream::get(char& c) {
   int tmp = get();
-  if (tmp >= 0) c = tmp;
+  if (tmp >= 0) {
+    c = tmp;
+  }
   return *this;
 }
 //------------------------------------------------------------------------------
@@ -54,8 +56,12 @@ istream& istream::get(char *str, streamsize n, char delim) {
     }
     str[m_gcount++] = c;
   }
-  if (n > 0) str[m_gcount] = '\0';
-  if (m_gcount == 0) setstate(failbit);
+  if (n > 0) {
+    str[m_gcount] = '\0';
+  }
+  if (m_gcount == 0) {
+    setstate(failbit);
+  }
   return *this;
 }
 //------------------------------------------------------------------------------
@@ -75,7 +81,9 @@ void istream::getBool(bool *b) {
   while (1) {
     falseOk = falseOk && c == pgm_read_byte(falsePtr + i);
     trueOk = trueOk && c == pgm_read_byte(truePtr + i);
-    if (trueOk == false && falseOk == false) break;
+    if (trueOk == false && falseOk == false) {
+      break;
+    }
     i++;
     if (trueOk && i == true_len) {
       *b = true;
@@ -128,19 +136,27 @@ bool istream::getDouble(double* value) {
       got_digit = true;
       if (frac < uint32_max/10) {
         frac = frac * 10 + (c  - '0');
-        if (got_dot) fracExp--;
+        if (got_dot) {
+          fracExp--;
+        }
       } else {
-        if (!got_dot) fracExp++;
+        if (!got_dot) {
+          fracExp++;
+        }
       }
     } else if (!got_dot && c == '.') {
       got_dot = true;
     } else {
       break;
     }
-    if (fracExp < -EXP_LIMIT || fracExp > EXP_LIMIT) goto fail;
+    if (fracExp < -EXP_LIMIT || fracExp > EXP_LIMIT) {
+      goto fail;
+    }
     c = getch(&endPos);
   }
-  if (!got_digit) goto fail;
+  if (!got_digit) {
+    goto fail;
+  }
   if (c == 'e' || c == 'E') {
     c = getch();
     expNeg = c == '-';
@@ -148,7 +164,9 @@ bool istream::getDouble(double* value) {
       c = getch();
     }
     while (isdigit(c)) {
-      if (exp > EXP_LIMIT) goto fail;
+      if (exp > EXP_LIMIT) {
+        goto fail;
+      }
       exp = exp * 10 + (c - '0');
       c = getch(&endPos);
     }
@@ -156,17 +174,23 @@ bool istream::getDouble(double* value) {
   v = static_cast<double>(frac);
   exp = expNeg ? fracExp - exp : fracExp + exp;
   expNeg = exp < 0;
-  if (expNeg) exp = -exp;
+  if (expNeg) {
+    exp = -exp;
+  }
   pow10 = 10.0;
   while (exp) {
     if (exp & 1) {
       if (expNeg) {
         // check for underflow
-        if (v < FLT_MIN * pow10  && frac != 0) goto fail;
+        if (v < FLT_MIN * pow10  && frac != 0) {
+          goto fail;
+        }
         v /= pow10;
       } else {
         // check for overflow
-        if (v > FLT_MAX / pow10) goto fail;
+        if (v > FLT_MAX / pow10) {
+          goto fail;
+        }
         v *= pow10;
       }
     }
@@ -177,7 +201,7 @@ bool istream::getDouble(double* value) {
   *value = neg ? -v : v;
   return true;
 
- fail:
+fail:
   // error restore position to last good place
   setpos(&endPos);
   setstate(failbit);
@@ -189,7 +213,9 @@ istream& istream::getline(char *str, streamsize n, char delim) {
   FatPos_t pos;
   int c;
   m_gcount = 0;
-  if (n > 0) str[0] = '\0';
+  if (n > 0) {
+    str[0] = '\0';
+  }
   while (1) {
     c = getch(&pos);
     if (c < 0) {
@@ -207,7 +233,9 @@ istream& istream::getline(char *str, streamsize n, char delim) {
     str[m_gcount++] = c;
     str[m_gcount] = '\0';
   }
-  if (m_gcount == 0) setstate(failbit);
+  if (m_gcount == 0) {
+    setstate(failbit);
+  }
   return *this;
 }
 //------------------------------------------------------------------------------
@@ -295,7 +323,9 @@ void istream::getStr(char *str) {
     }
   }
   str[i] = '\0';
-  if (i == 0) setstate(failbit);
+  if (i == 0) {
+    setstate(failbit);
+  }
   width(0);
 }
 //------------------------------------------------------------------------------
@@ -308,7 +338,9 @@ istream& istream::ignore(streamsize n, int delim) {
       break;
     }
     m_gcount++;
-    if (c == delim) break;
+    if (c == delim) {
+      break;
+    }
   }
   return *this;
 }
@@ -320,7 +352,9 @@ int istream::peek() {
   getpos(&pos);
   c = getch();
   if (c < 0) {
-    if (!bad()) setstate(eofbit);
+    if (!bad()) {
+      setstate(eofbit);
+    }
   } else {
     setpos(&pos);
   }

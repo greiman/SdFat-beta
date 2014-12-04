@@ -1,7 +1,6 @@
 var searchData=
 [
   ['tailsignature',['tailSignature',['../structfat32__fsinfo.html#a484dd16425e4e687dc914d12309470e0',1,'fat32_fsinfo']]],
-  ['teensy3_5fsoft_5fspi',['TEENSY3_SOFT_SPI',['../_sd_fat_config_8h.html#a7e12956d7ec38c1dd9a27b9208e98fb8',1,'SdFatConfig.h']]],
   ['tellg',['tellg',['../classistream.html#a18332bdcb7fbe33ca06045c786cac4c3',1,'istream']]],
   ['tellp',['tellp',['../classostream.html#a92dec0e2bc8352df1419d1cdc434e619',1,'ostream']]],
   ['timestamp',['timestamp',['../class_fat_file.html#aa53a8d1d2467ad9af7d61cbf8ee85243',1,'FatFile::timestamp(FatFile *file)'],['../class_fat_file.html#a56dabdf73833b7e961c4530eb8e16d23',1,'FatFile::timestamp(uint8_t flags, uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second)']]],

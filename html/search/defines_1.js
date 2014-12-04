@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['dbg_5ffail_5fmacro',['DBG_FAIL_MACRO',['../_fat_volume_8h.html#a37bec5b50aeab45dfcad2149552d73fc',1,'FatVolume.h']]],
-  ['destructor_5fcloses_5ffile',['DESTRUCTOR_CLOSES_FILE',['../_sd_fat_config_8h.html#a9a2b1ca4d91cff876f48deeaacbc33da',1,'SdFatConfig.h']]],
-  ['due_5fsoft_5fspi',['DUE_SOFT_SPI',['../_sd_fat_config_8h.html#a6aa3b31a011653ee9e194fc1c270fb84',1,'SdFatConfig.h']]]
+  ['enable_5fspi_5ftransaction',['ENABLE_SPI_TRANSACTION',['../_sd_fat_config_8h.html#a5fa85e013e8661465ff4bc2395d77dd1',1,'SdFatConfig.h']]],
+  ['enable_5fspi_5fyield',['ENABLE_SPI_YIELD',['../_sd_fat_config_8h.html#a360adabab0d776df344efa2f8cd34b83',1,'SdFatConfig.h']]],
+  ['endl_5fcalls_5fflush',['ENDL_CALLS_FLUSH',['../_sd_fat_config_8h.html#a270eefdaec4778f2a491658f34f61b17',1,'SdFatConfig.h']]],
+  ['eof',['EOF',['../_stdio_stream_8h.html#a59adc4c82490d23754cd39c2fb99b0da',1,'StdioStream.h']]]
 ];

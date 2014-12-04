@@ -113,6 +113,8 @@ Collaboration diagram for SdFile:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abbb16ccfa24386ea381835778577626a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#abbb16ccfa24386ea381835778577626a">available</a> ()</td></tr>
 <tr class="separator:abbb16ccfa24386ea381835778577626a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052e2c15a39b322a5307b693b8835b22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a052e2c15a39b322a5307b693b8835b22">clearError</a> ()</td></tr>
+<tr class="separator:a052e2c15a39b322a5307b693b8835b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeca2a2eff91e6aa55fe1b0e3860c9a05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aeca2a2eff91e6aa55fe1b0e3860c9a05">clearWriteError</a> ()</td></tr>
 <tr class="separator:aeca2a2eff91e6aa55fe1b0e3860c9a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd16af325e0642e4bff6430b7d8bb18b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#afd16af325e0642e4bff6430b7d8bb18b">close</a> ()</td></tr>
@@ -129,6 +131,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6858d18c807411a071fd6d1b39d50087"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5ec24d4a94d3780384d3f2b731c7eb9"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ae5ec24d4a94d3780384d3f2b731c7eb9">dirIndex</a> ()</td></tr>
 <tr class="separator:ae5ec24d4a94d3780384d3f2b731c7eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2ed15f05c9ccbce355e7a8d3ce8382d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ae2ed15f05c9ccbce355e7a8d3ce8382d">dirSize</a> ()</td></tr>
+<tr class="separator:ae2ed15f05c9ccbce355e7a8d3ce8382d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f01d27954ae49aeb6888ac7302f55d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a4f01d27954ae49aeb6888ac7302f55d9">dmpFile</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint32_t pos, size_t n)</td></tr>
+<tr class="separator:a4f01d27954ae49aeb6888ac7302f55d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50242f98dea0d4488ce4039a279f2a57"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a50242f98dea0d4488ce4039a279f2a57">exists</a> (const char *path)</td></tr>
 <tr class="separator:a50242f98dea0d4488ce4039a279f2a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31ef26b3ee37cf5f5f4c6024c0ddab69"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a31ef26b3ee37cf5f5f4c6024c0ddab69">fgets</a> (char *str, int16_t num, char *delim=0)</td></tr>
@@ -141,10 +147,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1057bc23b92a074539f661e896e79a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a2221cc545cddb5996df4e1905ab987"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#a3a2221cc545cddb5996df4e1905ab987">flush</a> ()</td></tr>
 <tr class="separator:a3a2221cc545cddb5996df4e1905ab987"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7bcba15a3073d6a16b669dfec5dda78"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ac7bcba15a3073d6a16b669dfec5dda78">getFilename</a> (char *name)</td></tr>
-<tr class="separator:ac7bcba15a3073d6a16b669dfec5dda78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0dbbd083180f44c7a3ce7124d4ce19c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ad0dbbd083180f44c7a3ce7124d4ce19c">getError</a> ()</td></tr>
+<tr class="separator:ad0dbbd083180f44c7a3ce7124d4ce19c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58a8aa8e48c2d4a5ee9585184efcfbfd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a58a8aa8e48c2d4a5ee9585184efcfbfd">getFilename</a> (char *name, size_t size)</td></tr>
+<tr class="separator:a58a8aa8e48c2d4a5ee9585184efcfbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa4f9886887947815a61eaf015996932"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aaa4f9886887947815a61eaf015996932">getpos</a> (<a class="el" href="struct_fat_pos__t.html">FatPos_t</a> *pos)</td></tr>
 <tr class="separator:aaa4f9886887947815a61eaf015996932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba30e92a66f8e0d2f815c85662772a58"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aba30e92a66f8e0d2f815c85662772a58">getSFN</a> (char *name)</td></tr>
+<tr class="separator:aba30e92a66f8e0d2f815c85662772a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8062c0d3a118e8d77d0310418703d5f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a8062c0d3a118e8d77d0310418703d5f5">getWriteError</a> ()</td></tr>
 <tr class="separator:a8062c0d3a118e8d77d0310418703d5f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef41d65e0f1ce753d18cc9ed691f7de4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aef41d65e0f1ce753d18cc9ed691f7de4">isDir</a> () const </td></tr>
@@ -153,12 +163,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afcf6270ea8d4a3a5f8e89523bc684e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eefe7408f34b6326f0c6e78af7eb05f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a7eefe7408f34b6326f0c6e78af7eb05f">isHidden</a> () const </td></tr>
 <tr class="separator:a7eefe7408f34b6326f0c6e78af7eb05f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed36d17f8fde597b6ed9446faec1f7e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aed36d17f8fde597b6ed9446faec1f7e3">isLFN</a> () const </td></tr>
+<tr class="separator:aed36d17f8fde597b6ed9446faec1f7e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c8a07b081f04aa25839c6f56c739bdc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a4c8a07b081f04aa25839c6f56c739bdc">isOpen</a> () const </td></tr>
 <tr class="separator:a4c8a07b081f04aa25839c6f56c739bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6872d3acb1e70f81c9c2be2495977583"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a6872d3acb1e70f81c9c2be2495977583">isReadOnly</a> () const </td></tr>
 <tr class="separator:a6872d3acb1e70f81c9c2be2495977583"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4a206803a4bf8243be20244c1aef4d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aa4a206803a4bf8243be20244c1aef4d2">isRoot</a> () const </td></tr>
 <tr class="separator:aa4a206803a4bf8243be20244c1aef4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1449b294e3a838396c62e47674ca8cf0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a1449b294e3a838396c62e47674ca8cf0">isRoot32</a> () const </td></tr>
+<tr class="separator:a1449b294e3a838396c62e47674ca8cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8215bd4b21e11ec83fa88ef226ceb06f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a8215bd4b21e11ec83fa88ef226ceb06f">isRootFixed</a> () const </td></tr>
 <tr class="separator:a8215bd4b21e11ec83fa88ef226ceb06f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95b503b17442c2b364a2f53de1b2aeba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a95b503b17442c2b364a2f53de1b2aeba">isSubDir</a> () const </td></tr>
@@ -167,7 +181,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:add932e13e5bf32ad467af6ec34824e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a925b3badddc0f9472730a4ccd4ff7b67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a925b3badddc0f9472730a4ccd4ff7b67">ls</a> (uint8_t flags=0)</td></tr>
 <tr class="separator:a925b3badddc0f9472730a4ccd4ff7b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acabf31ff85e696fbf384c49428012fea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#acabf31ff85e696fbf384c49428012fea">ls</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint8_t flags=0, uint8_t indent=0)</td></tr>
+<tr class="memitem:acabf31ff85e696fbf384c49428012fea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#acabf31ff85e696fbf384c49428012fea">ls</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint8_t flags=0, uint8_t indent=0)</td></tr>
 <tr class="separator:acabf31ff85e696fbf384c49428012fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abab5b9f72cc796388dd4eed01d13d90d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#abab5b9f72cc796388dd4eed01d13d90d">mkdir</a> (<a class="el" href="class_fat_file.html">FatFile</a> *dir, const char *path, bool pFlag=true)</td></tr>
 <tr class="separator:abab5b9f72cc796388dd4eed01d13d90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,13 +195,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab0e7075062c89f356441f80fc64d03e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8034c4649eb0d26715b1a8a69e73d9d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a8034c4649eb0d26715b1a8a69e73d9d0">openNext</a> (<a class="el" href="class_fat_file.html">FatFile</a> *dirFile, uint8_t oflag=O_READ)</td></tr>
 <tr class="separator:a8034c4649eb0d26715b1a8a69e73d9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76b34d6ecd7b343fdaa0bb1c3ec229e3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a76b34d6ecd7b343fdaa0bb1c3ec229e3">openNextLFN</a> (<a class="el" href="class_fat_file.html">FatFile</a> *dirFile, char *name, size_t size, uint8_t oflag)</td></tr>
-<tr class="separator:a76b34d6ecd7b343fdaa0bb1c3ec229e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e0c0548fed3a69e7284b91b694439d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a7e0c0548fed3a69e7284b91b694439d4">openRoot</a> (<a class="el" href="class_fat_volume.html">FatVolume</a> *vol)</td></tr>
 <tr class="separator:a7e0c0548fed3a69e7284b91b694439d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8c0d875083803413f0160b3f75f70b7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#ab8c0d875083803413f0160b3f75f70b7">peek</a> ()</td></tr>
 <tr class="separator:ab8c0d875083803413f0160b3f75f70b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a558530f20314a8d8ee3d1a488fc7f46e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a558530f20314a8d8ee3d1a488fc7f46e">printCreateDateTime</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
+<tr class="memitem:a558530f20314a8d8ee3d1a488fc7f46e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a558530f20314a8d8ee3d1a488fc7f46e">printCreateDateTime</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a558530f20314a8d8ee3d1a488fc7f46e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7478cad0f9e5079311b9e1fa558016ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a7478cad0f9e5079311b9e1fa558016ff">printField</a> (float value, char term, uint8_t prec=2)</td></tr>
 <tr class="separator:a7478cad0f9e5079311b9e1fa558016ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,14 +211,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a41b3b32dd8482429b74c7af3432d6cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a097240f08baadeb1c64b63eab9afb088"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a097240f08baadeb1c64b63eab9afb088">printField</a> (uint32_t value, char term)</td></tr>
 <tr class="separator:a097240f08baadeb1c64b63eab9afb088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12a5d2de2737c201aa39ca1bd2ab9c47"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a12a5d2de2737c201aa39ca1bd2ab9c47">printFileSize</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
+<tr class="memitem:a12a5d2de2737c201aa39ca1bd2ab9c47"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a12a5d2de2737c201aa39ca1bd2ab9c47">printFileSize</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a12a5d2de2737c201aa39ca1bd2ab9c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05cee5df46a370bf916d3ba597c82e39"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a05cee5df46a370bf916d3ba597c82e39">printModifyDateTime</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
+<tr class="memitem:a05cee5df46a370bf916d3ba597c82e39"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a05cee5df46a370bf916d3ba597c82e39">printModifyDateTime</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a05cee5df46a370bf916d3ba597c82e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add1a682e60aa3d8c030805122d5aa4e3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#add1a682e60aa3d8c030805122d5aa4e3">printName</a> ()</td></tr>
 <tr class="separator:add1a682e60aa3d8c030805122d5aa4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe18a787fb8640e2d2483370c770f82f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#afe18a787fb8640e2d2483370c770f82f">printName</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
+<tr class="memitem:afe18a787fb8640e2d2483370c770f82f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#afe18a787fb8640e2d2483370c770f82f">printName</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:afe18a787fb8640e2d2483370c770f82f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a791cd7aade71f609aab62ec018aea3c0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a791cd7aade71f609aab62ec018aea3c0">printSFN</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
+<tr class="separator:a791cd7aade71f609aab62ec018aea3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a871cb5dc17625bc3534f28672bee6cfb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#a871cb5dc17625bc3534f28672bee6cfb">read</a> ()</td></tr>
 <tr class="separator:a871cb5dc17625bc3534f28672bee6cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a200e6e0553d5b709520c9dfac9ef77dd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a200e6e0553d5b709520c9dfac9ef77dd">read</a> (void *buf, size_t nbyte)</td></tr>
@@ -251,10 +265,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6f5bdc5ca583ca71356f99d22a5c3e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ab9df44a9ee4b6eb0a78f15f1e30004"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a0ab9df44a9ee4b6eb0a78f15f1e30004">write</a> (const void *buf, size_t nbyte)</td></tr>
 <tr class="separator:a0ab9df44a9ee4b6eb0a78f15f1e30004"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaa153fed109a0a03cfd545a259de4fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#adaa153fed109a0a03cfd545a259de4fe">write_P</a> (<a class="el" href="_fat_file_8h.html#a963f816fc88a5d8479c285ed4c630229">PGM_P</a> str)</td></tr>
-<tr class="separator:adaa153fed109a0a03cfd545a259de4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad760d51410f36fd1e1b005a754624954"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html#ad760d51410f36fd1e1b005a754624954">writeln_P</a> (<a class="el" href="_fat_file_8h.html#a963f816fc88a5d8479c285ed4c630229">PGM_P</a> str)</td></tr>
-<tr class="separator:ad760d51410f36fd1e1b005a754624954"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -266,13 +276,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a5df02f1d037e6091375488af25244ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a648461081fe07578780f4cd3f246cb66"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a648461081fe07578780f4cd3f246cb66">dirName</a> (const <a class="el" href="_fat_structs_8h.html#a803db59d4e16a0c54a647afc6a7954e3">dir_t</a> *dir, char *name)</td></tr>
 <tr class="separator:a648461081fe07578780f4cd3f246cb66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94df8090f16e9666cdc53ca20f6aff90"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a94df8090f16e9666cdc53ca20f6aff90">legal83Char</a> (uint8_t c)</td></tr>
+<tr class="separator:a94df8090f16e9666cdc53ca20f6aff90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f73ca0c68654c3dc8fa7c818f2cfe9f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a9f73ca0c68654c3dc8fa7c818f2cfe9f">printFatDate</a> (uint16_t fatDate)</td></tr>
 <tr class="separator:a9f73ca0c68654c3dc8fa7c818f2cfe9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada5364f66204b1a64afbf9d2e6cd2b0b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ada5364f66204b1a64afbf9d2e6cd2b0b">printFatDate</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint16_t fatDate)</td></tr>
+<tr class="memitem:ada5364f66204b1a64afbf9d2e6cd2b0b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ada5364f66204b1a64afbf9d2e6cd2b0b">printFatDate</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint16_t fatDate)</td></tr>
 <tr class="separator:ada5364f66204b1a64afbf9d2e6cd2b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dbde542faa736b47c524205325463bb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html#a9dbde542faa736b47c524205325463bb">printFatTime</a> (uint16_t fatTime)</td></tr>
 <tr class="separator:a9dbde542faa736b47c524205325463bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e7e56ba52ca17c602af1b85684b09a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a4e7e56ba52ca17c602af1b85684b09a9">printFatTime</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint16_t fatTime)</td></tr>
+<tr class="memitem:a4e7e56ba52ca17c602af1b85684b09a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a4e7e56ba52ca17c602af1b85684b09a9">printFatTime</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint16_t fatTime)</td></tr>
 <tr class="separator:a4e7e56ba52ca17c602af1b85684b09a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe820bbb056863e91ec482961c8dc695"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#afe820bbb056863e91ec482961c8dc695">remove</a> (<a class="el" href="class_fat_file.html">FatFile</a> *dirFile, const char *path)</td></tr>
 <tr class="separator:afe820bbb056863e91ec482961c8dc695"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -349,6 +361,30 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a052e2c15a39b322a5307b693b8835b22"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FatFile::clearError </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Clear all error bits. </p>
+
+</div>
+</div>
 <a class="anchor" id="aeca2a2eff91e6aa55fe1b0e3860c9a05"></a>
 <div class="memitem">
 <div class="memproto">
@@ -394,7 +430,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Close a file and force cached data and directory information to be written to the storage device.</p>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include no file is open or an I/O error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -437,7 +473,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include file is not contiguous, file has zero length or an I/O error occurred. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -488,7 +524,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include <em>path</em> contains an invalid DOS 8.3 file name, the FAT volume has not been initialized, a file is already open, the file already exists, the root directory is full or an I/O error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false, is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -661,7 +697,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -729,6 +765,78 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>length of the name. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae2ed15f05c9ccbce355e7a8d3ce8382d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FatFile::dirSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes allocated to a directory or zero if an error occurs. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4f01d27954ae49aeb6888ac7302f55d9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FatFile::dmpFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramname"><em>pr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Dump file in Hex </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>Print stream for list. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>Start position in file. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number of locations to dump. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -863,7 +971,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The total number of bytes in a file or directory. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The total number of bytes in a file. </dd></dl>
 
 </div>
 </div>
@@ -915,7 +1023,31 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac7bcba15a3073d6a16b669dfec5dda78"></a>
+<a class="anchor" id="ad0dbbd083180f44c7a3ce7124d4ce19c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t FatFile::getError </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>All error bits. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a58a8aa8e48c2d4a5ee9585184efcfbfd"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -926,8 +1058,18 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">bool FatFile::getFilename </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -936,14 +1078,15 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get a file's name</p>
+<p>Get a file's name followed by a zero byte.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>An array of 13 characters for the file's name.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>An array of characters for the file's name. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>The size of the array in bytes. The array must be at least 13 bytes long. The file name will be truncated if it is too long. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true, is returned for success and the value false, is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -974,6 +1117,38 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="aba30e92a66f8e0d2f815c85662772a58"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFile::getSFN </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get a file's Short <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a> Name followed by a zero byte.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>An array of characters for the file's name. The array must be at least 13 bytes long. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true, is returned for success and the value false, is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1073,6 +1248,30 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aed36d17f8fde597b6ed9446faec1f7e3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFile::isLFN </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>true if this file has a Long <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a> Name. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a4c8a07b081f04aa25839c6f56c739bdc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1142,6 +1341,30 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>True if this is the root directory. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1449b294e3a838396c62e47674ca8cf0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFile::isRoot32 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>True if this is the FAT32 root directory. </dd></dl>
 
 </div>
 </div>
@@ -1217,6 +1440,37 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a94df8090f16e9666cdc53ca20f6aff90"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool FatFile::legal83Char </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Check for a legal 8.3 character. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>Character to be checked. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true for a legal 8.3 character else false. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a925b3badddc0f9472730a4ccd4ff7b67"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1261,7 +1515,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void FatFile::ls </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -1354,7 +1608,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include this file is already open, <em>parent</em> is not a directory, <em>path</em> is invalid or already exists in <em>parent</em>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1404,7 +1658,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1517,7 +1771,7 @@ Static Public Member Functions</h2></td></tr>
 <p>O_TRUNC - If the file exists and is a regular file, and the file is successfully opened and is not read only, its length shall be truncated to 0.</p>
 <p>WARNING: A given file must not be opened by more than one <a class="el" href="class_fat_file.html" title="Basic file class. ">FatFile</a> object or file corruption may occur.</p>
 <dl class="section note"><dt>Note</dt><dd>Directory files must be opened read only. Write and truncation is not allowed for directory files.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include this file is already open, <em>dirFile</em> is not a directory, <em>path</em> is invalid, the file does not exist or can't be opened in the access mode specified by oflag. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1560,7 +1814,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1607,63 +1861,6 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a76b34d6ecd7b343fdaa0bb1c3ec229e3"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int FatFile::openNextLFN </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_fat_file.html">FatFile</a> *&#160;</td>
-          <td class="paramname"><em>dirFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>oflag</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Open the next file or subdirectory in a directory and return the file name. The Long File Name, LFN, is returned if present otherwise the 8.3 short name will be returned.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dirFile</td><td>An open <a class="el" href="class_fat_file.html" title="Basic file class. ">FatFile</a> instance for the directory containing the file to be opened.</td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">name</td><td>Location that will receive the name.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>The size of the name array.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">oflag</td><td>bitwise-inclusive OR of open mode flags. See see <a class="el" href="class_fat_file.html#a211be757679b18708f6b6a36464e4f61">FatFile::open(FatFile*, const char*, uint8_t)</a>.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>For success, the length of the returned name. The name will be truncated to size - 1 bytes followed by a zero byte. For EOF, zero will be returned. If an error occurs, -1 is returned. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="a7e0c0548fed3a69e7284b91b694439d4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1692,7 +1889,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include the file is already open, the FAT volume has not been initialized or it a FAT12 volume. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1731,7 +1928,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool FatFile::printCreateDateTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1749,7 +1946,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1795,7 +1992,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void FatFile::printFatDate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -1870,7 +2067,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void FatFile::printFatTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -2130,7 +2327,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">size_t FatFile::printFileSize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2148,7 +2345,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of characters printed is returned for success and zero is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2162,7 +2359,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool FatFile::printModifyDateTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2180,7 +2377,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2205,7 +2402,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Print a file's name.</p>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2219,7 +2416,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">size_t FatFile::printName </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2237,7 +2434,39 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a791cd7aade71f609aab62ec018aea3c0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t FatFile::printSFN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramname"><em>pr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Print a file's Short <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a> Name.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>Print stream for output.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of characters printed is returned for success and zero is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2364,7 +2593,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Remove a file.</p>
 <p>The directory entry and all data for the file are deleted.</p>
 <dl class="section note"><dt>Note</dt><dd>This function should not be used to delete the 8.3 version of a file that has a long name. For example if a file has the long name "New Text Document.txt" you should not delete the 8.3 name "NEWTEX~1.TXT".</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include the file read-only, is a directory, or an I/O error occurred. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2409,7 +2638,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This function should not be used to delete the 8.3 version of a file that has a long name. For example if a file has the long name "New Text Document.txt" you should not delete the 8.3 name "NEWTEX~1.TXT".</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include the file is a directory, is read only, <em>dirFile</em> is not a directory, <em>path</em> is not found or an I/O error occurred. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2452,7 +2681,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include <em>dirFile</em> is not open or is not a directory file, newPath is invalid or already exists, or an I/O error occurs. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2503,7 +2732,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Remove a directory file.</p>
 <p>The directory file will be removed only if it is empty and is not the root directory. <a class="el" href="class_fat_file.html#a9515bac181d33e7f0125e88fa2ccd283">rmdir()</a> follows DOS and Windows and ignores the read-only attribute for the directory.</p>
 <dl class="section note"><dt>Note</dt><dd>This function should not be used to delete the 8.3 version of a directory that has a long name. For example if a directory has the long name "New folder" you should not delete the 8.3 name "NEWFOL~1".</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include the file is not a directory, is the root directory, is not empty, or an I/O error occurred. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2531,7 +2760,7 @@ Static Public Member Functions</h2></td></tr>
 <p>This is like the Unix/Linux 'rm -rf *' if called with the root directory hence the name.</p>
 <p>Warning - This will remove all contents of the directory including subdirectories. The directory will then be removed if it is not root. The read-only attribute for files will be ignored.</p>
 <dl class="section note"><dt>Note</dt><dd>This function should not be used to delete the 8.3 version of a directory that has a long name. See <a class="el" href="class_fat_file.html#ac837a537fbcca14c7aa390c5fc9f4e7c">remove()</a> and <a class="el" href="class_fat_file.html#a9515bac181d33e7f0125e88fa2ccd283">rmdir()</a>.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2587,7 +2816,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set the files position to end-of-file + <em>offset</em>. See <a class="el" href="class_fat_file.html#ab067190d25733ed7e697d9890f61fd7a">seekSet()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Set the files position to end-of-file + <em>offset</em>. See <a class="el" href="class_fat_file.html#ab067190d25733ed7e697d9890f61fd7a">seekSet()</a>. Can't be used for directory files since file size is not defined. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">offset</td><td>The new position in bytes from end-of-file. </td></tr>
   </table>
@@ -2625,7 +2854,7 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2712,7 +2941,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>The <a class="el" href="class_fat_file.html#a67f3dc4896c542d695e11aac927f585e">sync()</a> call causes all modified data and directory fields to be written to the storage device.</p>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include a call to <a class="el" href="class_fat_file.html#a67f3dc4896c542d695e11aac927f585e">sync()</a> before a file has been opened or an I/O error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2745,7 +2974,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Modify and access timestamps may be overwritten if a date time callback function has been set by <a class="el" href="class_fat_file.html#a29a623f50df057e8b49045ba6611ec2b">dateTimeCallback()</a>.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2834,7 +3063,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>It is possible to set an invalid date since there is no check for the number of days in a month.</dd>
 <dd>
 Modify and access timestamps may be overwritten if a date time callback function has been set by <a class="el" href="class_fat_file.html#a29a623f50df057e8b49045ba6611ec2b">dateTimeCallback()</a>.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -2866,7 +3095,7 @@ Modify and access timestamps may be overwritten if a date time callback function
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include file is read only, file is a directory, <em>length</em> is greater than the current file size or an I/O error occurs. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -3044,73 +3273,13 @@ Modify and access timestamps may be overwritten if a date time callback function
 
 </div>
 </div>
-<a class="anchor" id="adaa153fed109a0a03cfd545a259de4fe"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SdFile::write_P </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#a963f816fc88a5d8479c285ed4c630229">PGM_P</a>&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Write a PROGMEM string to a file. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>Pointer to the PROGMEM string. Use getWriteError to check for errors. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="ad760d51410f36fd1e1b005a754624954"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SdFile::writeln_P </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#a963f816fc88a5d8479c285ed4c630229">PGM_P</a>&#160;</td>
-          <td class="paramname"><em>str</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Write a PROGMEM string followed by CR/LF to a file. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>Pointer to the PROGMEM string. Use getWriteError to check for errors. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Arduino/libraries/SdFat/<a class="el" href="_sd_file_8h.html">SdFile.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 15 2014 10:05:36 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 08:53:21 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

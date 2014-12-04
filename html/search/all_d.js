@@ -9,7 +9,6 @@ var searchData=
   ['openmode',['openmode',['../classios__base.html#aaa192ec0dccc43050715553a34644523',1,'ios_base']]],
   ['opennext',['openNext',['../class_fat_file.html#a8034c4649eb0d26715b1a8a69e73d9d0',1,'FatFile']]],
   ['opennextfile',['openNextFile',['../class_file.html#acd72000ab1f6a1ce73ac8fbdc854ae0c',1,'File']]],
-  ['opennextlfn',['openNextLFN',['../class_fat_file.html#a76b34d6ecd7b343fdaa0bb1c3ec229e3',1,'FatFile']]],
   ['openroot',['openRoot',['../class_fat_file.html#a7e0c0548fed3a69e7284b91b694439d4',1,'FatFile']]],
   ['operator_20bool',['operator bool',['../class_file.html#af171fbf441c899cf71d88b8b0b83d38b',1,'File::operator bool()'],['../class_digital_pin.html#ab609c911b4a672e4d382260fc1fdd266',1,'DigitalPin::operator bool()']]],
   ['operator_20const_20void_20_2a',['operator const void *',['../classios.html#a8c2e7e42e31d3d7898a51c0bc837b2a3',1,'ios']]],

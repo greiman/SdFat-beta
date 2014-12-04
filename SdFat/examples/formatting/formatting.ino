@@ -15,7 +15,7 @@ void example(void) {
 
   for (int row = 1; row <= max; row++) {
     for (int col = 1; col <= max; col++) {
-     cout << setw(width) << row * col << (col == max ? '\n' : ' ');
+      cout << setw(width) << row * col << (col == max ? '\n' : ' ');
     }
   }
   cout << endl;
@@ -25,7 +25,9 @@ void example(void) {
 // shows how to set and restore the fill character
 void showDate(int m, int d, int y) {
   // convert two digit year
-  if (y < 100) y += 2000;
+  if (y < 100) {
+    y += 2000;
+  }
 
   // set new fill to '0' save old fill character
   char old = cout.fill('0');
@@ -39,10 +41,10 @@ void showDate(int m, int d, int y) {
 //------------------------------------------------------------------------------
 void setup(void) {
   Serial.begin(9600);
-  
+
   while (!Serial) {}  // wait for Leonardo
   delay(2000);
-  
+
   cout << endl << "default formatting" << endl;
   example();
 

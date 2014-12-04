@@ -1,6 +1,6 @@
 // Quick hardware test.
 //
-#include <SPI.h> 
+#include <SPI.h>
 #include <SdFat.h>
 //
 // Set DISABLE_CHIP_SELECT to disable a second SPI device.
@@ -27,39 +27,39 @@ ArduinoInStream cin(Serial, cinBuf, sizeof(cinBuf));
 int chipSelect;
 
 void cardOrSpeed() {
-  cout << pstr("Try another SD card or reduce the SPI bus speed.\n");
-  cout << pstr("Edit spiSpeed in this sketch to change it.\n");
+  cout << F("Try another SD card or reduce the SPI bus speed.\n");
+  cout << F("Edit spiSpeed in this program to change it.\n");
 }
 
 void reformatMsg() {
-  cout << pstr("Try reformatting the card.  For best results use\n");
-  cout << pstr("the SdFormatter sketch in SdFat/examples or download\n");
-  cout << pstr("and use SDFormatter from www.sdcard.org/downloads.\n");
+  cout << F("Try reformatting the card.  For best results use\n");
+  cout << F("the SdFormatter program in SdFat/examples or download\n");
+  cout << F("and use SDFormatter from www.sdcard.org/downloads.\n");
 }
 
 void setup() {
   Serial.begin(9600);
   while (!Serial) {}  // Wait for Leonardo.
-  
-  cout << pstr("\nSPI pins:\n");
-  cout << pstr("MISO: ") << int(MISO) << endl;  
-  cout << pstr("MOSI: ") << int(MOSI) << endl;  
-  cout << pstr("SCK:  ") << int(SCK) << endl;
-  cout << pstr("SS:   ") << int(SS) << endl;
-  
+
+  cout << F("\nSPI pins:\n");
+  cout << F("MISO: ") << int(MISO) << endl;
+  cout << F("MOSI: ") << int(MOSI) << endl;
+  cout << F("SCK:  ") << int(SCK) << endl;
+  cout << F("SS:   ") << int(SS) << endl;
+
   if (DISABLE_CHIP_SELECT < 0) {
-    cout << pstr(
-      "\nBe sure to edit DISABLE_CHIP_SELECT if you have\n"
-      "a second SPI device.  For example, with the Ethernet\n"
-      "shield, DISABLE_CHIP_SELECT should be set to 10\n"
-      "to disable the Ethernet controller.\n");
+    cout << F(
+           "\nBe sure to edit DISABLE_CHIP_SELECT if you have\n"
+           "a second SPI device.  For example, with the Ethernet\n"
+           "shield, DISABLE_CHIP_SELECT should be set to 10\n"
+           "to disable the Ethernet controller.\n");
   }
-  cout << pstr(
-    "\nSD chip select is the key hardware option.\n"
-    "Common values are:\n"
-    "Arduino Ethernet shield, pin 4\n"
-    "Sparkfun SD shield, pin 8\n"
-    "Adafruit SD shields and modules, pin 10\n");
+  cout << F(
+         "\nSD chip select is the key hardware option.\n"
+         "Common values are:\n"
+         "Arduino Ethernet shield, pin 4\n"
+         "Sparkfun SD shield, pin 8\n"
+         "Adafruit SD shields and modules, pin 10\n");
 }
 
 bool firstTry = true;
@@ -67,89 +67,91 @@ void loop() {
   // read any existing Serial data
   while (Serial.read() >= 0) {}
 
-  if (!firstTry) cout << pstr("\nRestarting\n");
+  if (!firstTry) {
+    cout << F("\nRestarting\n");
+  }
   firstTry = false;
 
-  cout << pstr("\nEnter the chip select pin number: ");
+  cout << F("\nEnter the chip select pin number: ");
   while (!Serial.available()) {}
-  delay(400);  // catch Due restart problem 
-  
+  delay(400);  // catch Due restart problem
+
   cin.readline();
   if (cin >> chipSelect) {
     cout << chipSelect << endl;
   } else {
-    cout << pstr("\nInvalid pin number\n");
+    cout << F("\nInvalid pin number\n");
     return;
   }
   if (DISABLE_CHIP_SELECT < 0) {
-    cout << pstr(
-      "\nAssuming the SD is the only SPI device.\n"
-      "Edit DISABLE_CHIP_SELECT to disable another device.\n");
+    cout << F(
+           "\nAssuming the SD is the only SPI device.\n"
+           "Edit DISABLE_CHIP_SELECT to disable another device.\n");
   } else {
-    cout << pstr("\nDisabling SPI device on pin ");
+    cout << F("\nDisabling SPI device on pin ");
     cout << int(DISABLE_CHIP_SELECT) << endl;
     pinMode(DISABLE_CHIP_SELECT, OUTPUT);
     digitalWrite(DISABLE_CHIP_SELECT, HIGH);
   }
   if (!sd.begin(chipSelect, spiSpeed)) {
     if (sd.card()->errorCode()) {
-      cout << pstr(
-        "\nSD initialization failed.\n"
-        "Do not reformat the card!\n"
-        "Is the card correctly inserted?\n"
-        "Is chipSelect set to the correct value?\n"
-        "Does another SPI device need to be disabled?\n"
-        "Is there a wiring/soldering problem?\n");
-      cout << pstr("\nerrorCode: ") << hex << showbase;
+      cout << F(
+             "\nSD initialization failed.\n"
+             "Do not reformat the card!\n"
+             "Is the card correctly inserted?\n"
+             "Is chipSelect set to the correct value?\n"
+             "Does another SPI device need to be disabled?\n"
+             "Is there a wiring/soldering problem?\n");
+      cout << F("\nerrorCode: ") << hex << showbase;
       cout << int(sd.card()->errorCode());
-      cout << pstr(", errorData: ") << int(sd.card()->errorData());
+      cout << F(", errorData: ") << int(sd.card()->errorData());
       cout << dec << noshowbase << endl;
       return;
     }
-    cout << pstr("\nCard successfully initialized.\n");    
+    cout << F("\nCard successfully initialized.\n");
     if (sd.vol()->fatType() == 0) {
-      cout << pstr("Can't find a valid FAT16/FAT32 partition.\n");
+      cout << F("Can't find a valid FAT16/FAT32 partition.\n");
       reformatMsg();
       return;
-    }    
+    }
     if (!sd.vwd()->isOpen()) {
-      cout << pstr("Can't open root directory.\n");
+      cout << F("Can't open root directory.\n");
       reformatMsg();
       return;
-    }    
-    cout << pstr("Can't determine error type\n");
+    }
+    cout << F("Can't determine error type\n");
     return;
   }
-  cout << pstr("\nCard successfully initialized.\n");
+  cout << F("\nCard successfully initialized.\n");
   cout << endl;
 
   uint32_t size = sd.card()->cardSize();
   if (size == 0) {
-    cout << pstr("Can't determine the card size.\n");
+    cout << F("Can't determine the card size.\n");
     cardOrSpeed();
     return;
   }
   uint32_t sizeMB = 0.000512 * size + 0.5;
-  cout << pstr("Card size: ") << sizeMB;
-  cout << pstr(" MB (MB = 1,000,000 bytes)\n");
+  cout << F("Card size: ") << sizeMB;
+  cout << F(" MB (MB = 1,000,000 bytes)\n");
   cout << endl;
-  cout << pstr("Volume is FAT") << int(sd.vol()->fatType());
-  cout << pstr(", Cluster size (bytes): ") << 512L * sd.vol()->blocksPerCluster();
+  cout << F("Volume is FAT") << int(sd.vol()->fatType());
+  cout << F(", Cluster size (bytes): ") << 512L * sd.vol()->blocksPerCluster();
   cout << endl << endl;
 
-  cout << pstr("Files found (name date time size):\n");
+  cout << F("Files found (date time size name):\n");
   sd.ls(LS_R | LS_DATE | LS_SIZE);
 
   if ((sizeMB > 1100 && sd.vol()->blocksPerCluster() < 64)
-    || (sizeMB < 2200 && sd.vol()->fatType() == 32)) {
-    cout << pstr("\nThis card should be reformatted for best performance.\n");
-    cout << pstr("Use a cluster size of 32 KB for cards larger than 1 GB.\n");
-    cout << pstr("Only cards larger than 2 GB should be formatted FAT32.\n");
+      || (sizeMB < 2200 && sd.vol()->fatType() == 32)) {
+    cout << F("\nThis card should be reformatted for best performance.\n");
+    cout << F("Use a cluster size of 32 KB for cards larger than 1 GB.\n");
+    cout << F("Only cards larger than 2 GB should be formatted FAT32.\n");
     reformatMsg();
     return;
   }
   // read any existing Serial data
   while (Serial.read() >= 0) {}
-  cout << pstr("\nSuccess!  Type any character to restart.\n");
+  cout << F("\nSuccess!  Type any character to restart.\n");
   while (Serial.read() < 0) {}
 }

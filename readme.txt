@@ -6,6 +6,8 @@ Please report problems to the email address listed in the
 
 Here are the most recent changes:
 
+Added support for Long File Names. See the LongFileName example.
+
 Replaced the core SdFat code with FatLib, a generic FAT12/FAT16/FAT32
 library.  This may result in bugs and backward compatibility problems.
 
@@ -16,8 +18,7 @@ Added SdFatLibSpi, a class that uses the Arduino SPI.h library.
 
 Allow simultaneous use of hardware and software SPI with multiple cards.
 See the ThreeCard example. 
-
-Added minimal Long File Name support.  See the LongFileName example.
+ 
 
 Added the "File" class for compatibility with the Arduino SD.h library 
 
@@ -41,23 +42,15 @@ A number of configuration options can be set by editing SdFatConfig.h
 
 Read changes.txt if you have used previous releases of this library.
 
-Read troubleshooting.txt for common hardware problems.
-
 Please read the html documentation for this library.  Start with
 html/index.html and read the Main Page.  Next go to the Classes tab and
 read the documentation for the classes SdFat, SdBaseFile, SdFile, File,
 StdioStream, ifstream, ofstream, and others.
-
-Limited support is available for Long File Names.  See the LongFileName
-example.  Support for creating Long File Names will be added in the future.
  
 Support has been added for Software SPI on AVR, Due, and Teensy 3.1 boards.
 
 See the ThreeCard example for use of multiple SD cards with simultaneous 
 use of hardware and software SPI.
-
-SPI transactions are supported. See SoftwareSPI.txt and SPI_Transactions.txt
-for more information.
 
 A new class, "File", has been added to provide compatibility with the Arduino
 SD.h library. To use SdFat with programs written for SD.h replace
@@ -71,4 +64,4 @@ SdFat SD;
 
 Please continue by reading the html documentation.
 
-Updated 14 Nov 2014
+Updated 04 Dec 2014

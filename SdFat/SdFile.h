@@ -43,7 +43,9 @@ class SdBaseFile : public FatFile {
    * \param[in] path File location and name.
    * \param[in] oflag File open mode.
    */
-  SdBaseFile(const char* path, uint8_t oflag) {open(path, oflag);}
+  SdBaseFile(const char* path, uint8_t oflag) {
+    open(path, oflag);
+  }
   using FatFile::ls;
   using FatFile::printFatDate;
   using FatFile::printFatTime;
@@ -81,8 +83,8 @@ class SdBaseFile : public FatFile {
   }
   /** Print a file's name.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   size_t printName() {
     return FatFile::printName(&Serial);
@@ -124,24 +126,32 @@ class SdFile : public SdBaseFile, public Print {
     return n > INT_MAX ? INT_MAX : n;
   }
   /** Ensure that any bytes written to the file are saved to the SD card. */
-  void flush() {SdBaseFile::sync();}
+  void flush() {
+    SdBaseFile::sync();
+  }
   /** Return the next available byte without consuming it.
    *
    * \return The byte if no error and not at eof else -1;
    */
-  int peek() {return SdBaseFile::peek();}
+  int peek() {
+    return SdBaseFile::peek();
+  }
   /** Read the next byte from a file.
    *
    * \return For success return the next byte in the file as an int.
    * If an error occurs or end of file is reached return -1.
    */
-  int read() {return SdBaseFile::read();}
+  int read() {
+    return SdBaseFile::read();
+  }
   /** Write a byte to a file. Required by the Arduino Print class.
    * \param[in] b the byte to be written.
    * Use getWriteError to check for errors.
    * \return 1 for success and 0 for failure.
    */
-  size_t write(uint8_t b) {return SdBaseFile::write(b);}
+  size_t write(uint8_t b) {
+    return SdBaseFile::write(b);
+  }
   /** Write a string to a file. Used by the Arduino Print class.
    * \param[in] str Pointer to the string.
    * Use getWriteError to check for errors.
@@ -168,21 +178,6 @@ class SdFile : public SdBaseFile, public Print {
   size_t write(const uint8_t *buf, size_t size) {
     return SdBaseFile::write(buf, size);
   }
-  /** Write a PROGMEM string to a file.
-   * \param[in] str Pointer to the PROGMEM string.
-   * Use getWriteError to check for errors.
-   */
-  void write_P(PGM_P str) {
-    for (uint8_t c; (c = pgm_read_byte(str)); str++) write(c);
-  }
-  /** Write a PROGMEM string followed by CR/LF to a file.
-   * \param[in] str Pointer to the PROGMEM string.
-   * Use getWriteError to check for errors.
-   */
-  void writeln_P(PGM_P str) {
-    write_P(str);
-    write_P(PSTR("\r\n"));
-  }
 };
 //==============================================================================
 /**
@@ -200,14 +195,18 @@ class File : public SdBaseFile, public Stream {
    * bitwise-inclusive OR of open flags. see
    * SdBaseFile::open(SdBaseFile*, const char*, uint8_t).
    */
-  File(const char* path, uint8_t oflag) {open(path, oflag);}
+  File(const char* path, uint8_t oflag) {
+    open(path, oflag);
+  }
   using SdBaseFile::clearWriteError;
   using SdBaseFile::getWriteError;
- /** The parenthesis operator.
-   *
-   * \return true if a file is open.
-   */
-  operator bool() {return isOpen();}
+  /** The parenthesis operator.
+    *
+    * \return true if a file is open.
+    */
+  operator bool() {
+    return isOpen();
+  }
   /** \return number of bytes available from the current position to EOF
    *   or INT_MAX if more than INT_MAX bytes are available.
    */
@@ -216,24 +215,32 @@ class File : public SdBaseFile, public Stream {
     return n > INT_MAX ? INT_MAX : n;
   }
   /** Ensure that any bytes written to the file are saved to the SD card. */
-  void flush() {SdBaseFile::sync();}
-   /** This function reports if the current file is a directory or not.
-   * \return true if the file is a directory.
-   */
-  bool isDirectory() {return isDir();}
-  /** \return a pointer to the file's name. */
+  void flush() {
+    SdBaseFile::sync();
+  }
+  /** This function reports if the current file is a directory or not.
+  * \return true if the file is a directory.
+  */
+  bool isDirectory() {
+    return isDir();
+  }
+  /** \return a pointer to the file's short name. */
   char* name() {
     m_name[0] = 0;
-    getFilename(m_name);
+    getSFN(m_name);
     return m_name;
   }
   /** Return the next available byte without consuming it.
    *
    * \return The byte if no error and not at eof else -1;
    */
-  int peek() {return SdBaseFile::peek();}
+  int peek() {
+    return SdBaseFile::peek();
+  }
   /** \return the current file position. */
-  uint32_t position() {return curPosition();}
+  uint32_t position() {
+    return curPosition();
+  }
   /** Opens the next file or folder in a directory.
    *
    * \param[in] mode open mode flags.
@@ -249,10 +256,14 @@ class File : public SdBaseFile, public Stream {
    * \return For success return the next byte in the file as an int.
    * If an error occurs or end of file is reached return -1.
    */
-  int read() {return SdBaseFile::read();}
+  int read() {
+    return SdBaseFile::read();
+  }
   /** Rewind a file if it is a directory */
   void rewindDirectory() {
-    if (isDir()) rewind();
+    if (isDir()) {
+      rewind();
+    }
   }
   /**
    * Seek to a new position in the file, which must be between
@@ -261,15 +272,21 @@ class File : public SdBaseFile, public Stream {
    * \param[in] pos the new file position.
    * \return true for success else false.
    */
-  bool seek(uint32_t pos) {return seekSet(pos);}
+  bool seek(uint32_t pos) {
+    return seekSet(pos);
+  }
   /** \return the file's size. */
-  uint32_t size() {return fileSize();}
+  uint32_t size() {
+    return fileSize();
+  }
   /** Write a byte to a file. Required by the Arduino Print class.
    * \param[in] b the byte to be written.
    * Use getWriteError to check for errors.
    * \return 1 for success and 0 for failure.
    */
-  size_t write(uint8_t b) {return SdBaseFile::write(b);}
+  size_t write(uint8_t b) {
+    return SdBaseFile::write(b);
+  }
   /** Write data to an open file.  Form required by Print.
    *
    * \note Data is moved to the cache but may not be written to the

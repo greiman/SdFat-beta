@@ -110,7 +110,7 @@ Collaboration diagram for SdFatSoftSpi&lt; MisoPin, MosiPin, SckPin &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d3f2cc4df1b6f2a129c3a614c1e5e1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a3d3f2cc4df1b6f2a129c3a614c1e5e1f">begin</a> (<a class="el" href="class_sd_spi_card.html#a31a561750501b6635ad2b85c8c960381">SdSpiCard::m_spi_t</a> *spi, uint8_t csPin=SS, uint8_t divisor=2)</td></tr>
+<tr class="memitem:a3d3f2cc4df1b6f2a129c3a614c1e5e1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a3d3f2cc4df1b6f2a129c3a614c1e5e1f">begin</a> (<a class="el" href="class_sd_spi_card.html#aee22e896c14d3baca69ddf0ec1c39724">SdSpiCard::m_spi_t</a> *spi, uint8_t csPin=SS, uint8_t divisor=2)</td></tr>
 <tr class="separator:a3d3f2cc4df1b6f2a129c3a614c1e5e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa99af872cd02612cf17e46b250b1192"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_soft_spi.html#aaa99af872cd02612cf17e46b250b1192">begin</a> (uint8_t csPin=SS, uint8_t divisor=2)</td></tr>
 <tr class="separator:aaa99af872cd02612cf17e46b250b1192"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,9 +176,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9c334faf236651db265d5acf65271666"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0b7161c1385841264323ac244f5c89c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#ac0b7161c1385841264323ac244f5c89c">initErrorPrint</a> (Print *pr, const __FlashStringHelper *msg)</td></tr>
 <tr class="separator:ac0b7161c1385841264323ac244f5c89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad17f2a0925b34cb3807e4c1677a2872f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#ad17f2a0925b34cb3807e4c1677a2872f">ls</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint8_t flags)</td></tr>
+<tr class="memitem:ad17f2a0925b34cb3807e4c1677a2872f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#ad17f2a0925b34cb3807e4c1677a2872f">ls</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint8_t flags)</td></tr>
 <tr class="separator:ad17f2a0925b34cb3807e4c1677a2872f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa79695db8e910300507210b3067d39fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#aa79695db8e910300507210b3067d39fd">ls</a> (<a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, const char *path, uint8_t flags)</td></tr>
+<tr class="memitem:aa79695db8e910300507210b3067d39fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#aa79695db8e910300507210b3067d39fd">ls</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, const char *path, uint8_t flags)</td></tr>
 <tr class="separator:aa79695db8e910300507210b3067d39fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e2ba60320f47912a96ad83820073ce8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a6e2ba60320f47912a96ad83820073ce8">ls</a> (uint8_t flags=0)</td></tr>
 <tr class="separator:a6e2ba60320f47912a96ad83820073ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,6 +200,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4ca68fe47bb675df0a80df1ed7a53698"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24dfcd1a1c716e8e56f8128d69dc1463"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sd_base_file.html">SdBaseFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a24dfcd1a1c716e8e56f8128d69dc1463">vwd</a> ()</td></tr>
 <tr class="separator:a24dfcd1a1c716e8e56f8128d69dc1463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36d7831f92acfbfef1c4a24dd7103dc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a36d7831f92acfbfef1c4a24dd7103dc4">wipe</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr=0)</td></tr>
+<tr class="separator:a36d7831f92acfbfef1c4a24dd7103dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt;<br />
@@ -217,7 +219,7 @@ class SdFatSoftSpi&lt; MisoPin, MosiPin, SckPin &gt;</h3>
         <tr>
           <td class="memname">bool SdFatBase::begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_sd_spi_card.html#a31a561750501b6635ad2b85c8c960381">SdSpiCard::m_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_sd_spi_card.html#aee22e896c14d3baca69ddf0ec1c39724">SdSpiCard::m_spi_t</a> *&#160;</td>
           <td class="paramname"><em>spi</em>, </td>
         </tr>
         <tr>
@@ -358,7 +360,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Initialize SD card - use for diagnostic purposes. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Diagnostic call to initialize SD card - use for diagnostic purposes only. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">csPin</td><td>SD card chip select pin. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">divisor</td><td>SPI divisor. </td></tr>
@@ -398,7 +400,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -444,7 +446,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -928,7 +930,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Diagnostic call to initialize <a class="el" href="class_fat_file_system.html" title="Integration class for the FatLib library. ">FatFileSystem</a>. </p><dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
+<p>Diagnostic call to initialize <a class="el" href="class_fat_file_system.html" title="Integration class for the FatLib library. ">FatFileSystem</a> - use for diagnostic purposes only. </p><dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
 
 </div>
 </div>
@@ -1342,7 +1344,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
         <tr>
           <td class="memname">void FatFileSystem::ls </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -1387,7 +1389,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
         <tr>
           <td class="memname">void FatFileSystem::ls </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -1547,7 +1549,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1622,7 +1624,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1667,7 +1669,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
 </dl>
 <p>The <em>newPath</em> object must not exist before the rename call.</p>
 <p>The file to be renamed must not be open. The directory entry may be moved and file system corruption could occur if the file is accessed by a file object that was opened before the <a class="el" href="class_fat_file_system.html#a0187891a24017b41bd7c5ba63e659e65">rename()</a> call.</p>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1700,7 +1702,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </dd>
 </dl>
 <p>The subdirectory file will be removed only if it is empty.</p>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1743,7 +1745,7 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include file is read only, file is a directory, <em>length</em> is greater than the current file size or an I/O error occurs. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1795,13 +1797,44 @@ template&lt;uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a36d7831f92acfbfef1c4a24dd7103dc4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFileSystem::wipe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramname"><em>pr</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Wipe all data from the volume. You must reinitialize the volume before accessing it again. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>print stream for status dots. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Arduino/libraries/SdFat/<a class="el" href="_sd_fat_8h.html">SdFat.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 15 2014 10:05:36 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 08:53:21 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

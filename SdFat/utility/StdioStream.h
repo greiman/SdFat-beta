@@ -106,9 +106,9 @@ const uint8_t UNGETC_BUF_SIZE = 2;
  */
 class StdioStream : private FatFile {
  public:
- /** Constructor
-  *
-  */
+  /** Constructor
+   *
+   */
   StdioStream() {
     m_w = m_r = 0;
     m_p = m_buf;
@@ -116,7 +116,9 @@ class StdioStream : private FatFile {
   }
   //----------------------------------------------------------------------------
   /** Clear the stream's end-of-file and error indicators. */
-  void clearerr() {m_flags &= ~(F_ERR | F_EOF);}
+  void clearerr() {
+    m_flags &= ~(F_ERR | F_EOF);
+  }
   //----------------------------------------------------------------------------
   /** Close a stream.
    *
@@ -134,12 +136,16 @@ class StdioStream : private FatFile {
   /** Test the stream's end-of-file indicator.
    * \return non-zero if and only if the end-of-file indicator is set.
    */
-  int feof() {return (m_flags & F_EOF) != 0;}
+  int feof() {
+    return (m_flags & F_EOF) != 0;
+  }
   //----------------------------------------------------------------------------
   /** Test the stream's error indicator.
    * \return return non-zero if and only if the error indicator is set.
    */
-  int ferror() {return (m_flags & F_ERR) != 0;}
+  int ferror() {
+    return (m_flags & F_ERR) != 0;
+  }
   //----------------------------------------------------------------------------
   /** Flush the stream.
    *
@@ -160,7 +166,9 @@ class StdioStream : private FatFile {
    * set and the fgetc function returns EOF. Otherwise, the fgetc function
    * returns the next character from the input stream.
    */
-  int fgetc() {return m_r-- == 0 ? fillGet() : *m_p++;}
+  int fgetc() {
+    return m_r-- == 0 ? fillGet() : *m_p++;
+  }
   //----------------------------------------------------------------------------
   /** Get a string from a stream.
    *
@@ -256,7 +264,9 @@ class StdioStream : private FatFile {
    * has written. Otherwise, it returns EOF and sets the error indicator for
    * the stream.
    */
-  int fputc(int c) {return m_w-- == 0 ? flushPut(c) : *m_p++ = c;}
+  int fputc(int c) {
+    return m_w-- == 0 ? flushPut(c) : *m_p++ = c;
+  }
   //----------------------------------------------------------------------------
   /** Write a string to a stream.
    *
@@ -348,7 +358,9 @@ class StdioStream : private FatFile {
    * returns the next character from the input stream.
    */
   inline __attribute__((always_inline))
-  int getc() {return m_r-- == 0 ? fillGet() : *m_p++;}
+  int getc() {
+    return m_r-- == 0 ? fillGet() : *m_p++;
+  }
   //----------------------------------------------------------------------------
   /** Write a byte to a stream.
    *
@@ -362,7 +374,9 @@ class StdioStream : private FatFile {
    * the stream.
    */
   inline __attribute__((always_inline))
-  int putc(int c) {return m_w-- == 0 ? flushPut(c) : *m_p++ = c;}
+  int putc(int c) {
+    return m_w-- == 0 ? flushPut(c) : *m_p++ = c;
+  }
   //----------------------------------------------------------------------------
   /** Write a CR/LF.
    *
@@ -371,7 +385,9 @@ class StdioStream : private FatFile {
   inline __attribute__((always_inline))
   int putCRLF() {
     if (m_w < 2) {
-      if (!flushBuf()) return -1;
+      if (!flushBuf()) {
+        return -1;
+      }
     }
     *m_p++ = '\r';
     *m_p++ = '\n';
@@ -554,32 +570,32 @@ class StdioStream : private FatFile {
    */
   int printDec(float value, uint8_t prec);
   //----------------------------------------------------------------------------
-/** Print a number followed by a field terminator.
- * \param[in] value The number to be printed.
- * \param[in] term The field terminator.
- * \param[in] prec Number of digits after decimal point.
- * \return The number of bytes written or -1 if an error occurs.
- */
+  /** Print a number followed by a field terminator.
+   * \param[in] value The number to be printed.
+   * \param[in] term The field terminator.
+   * \param[in] prec Number of digits after decimal point.
+   * \return The number of bytes written or -1 if an error occurs.
+   */
   int printField(double value, char term, uint8_t prec = 2) {
     return printField(static_cast<float>(value), term, prec) > 0;
   }
   //----------------------------------------------------------------------------
-/** Print a number followed by a field terminator.
- * \param[in] value The number to be printed.
- * \param[in] term The field terminator.
- * \param[in] prec Number of digits after decimal point.
- * \return The number of bytes written or -1 if an error occurs.
- */
+  /** Print a number followed by a field terminator.
+   * \param[in] value The number to be printed.
+   * \param[in] term The field terminator.
+   * \param[in] prec Number of digits after decimal point.
+   * \return The number of bytes written or -1 if an error occurs.
+   */
   int printField(float value, char term, uint8_t prec = 2) {
     int rtn = printDec(value, prec);
     return rtn < 0 || putc(term) < 0 ? -1 : rtn + 1;
   }
   //----------------------------------------------------------------------------
-/** Print a number followed by a field terminator.
- * \param[in] value The number to be printed.
- * \param[in] term The field terminator.
- * \return The number of bytes written or -1 if an error occurs.
- */
+  /** Print a number followed by a field terminator.
+   * \param[in] value The number to be printed.
+   * \param[in] term The field terminator.
+   * \return The number of bytes written or -1 if an error occurs.
+   */
   template <typename T>
   int printField(T value, char term) {
     int rtn = printDec(value);

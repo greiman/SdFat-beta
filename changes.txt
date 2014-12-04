@@ -1,3 +1,7 @@
+04 Dec 2014
+
+Added support for Long File Names.
+
 14 Nov 2014
 
 Replaced the core SdFat code with FatLib, a generic FAT12/FAT16/FAT32

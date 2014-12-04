@@ -230,20 +230,26 @@ class ostream : public virtual ios {
    * \return A reference to the ostream object.
    */
   ostream& flush() {
-    if (!sync()) setstate(badbit);
+    if (!sync()) {
+      setstate(badbit);
+    }
     return *this;
   }
   /**
    * \return the stream position
    */
-  pos_type tellp() {return tellpos();}
+  pos_type tellp() {
+    return tellpos();
+  }
   /**
    * Set the stream position
    * \param[in] pos The absolute position in which to move the write pointer.
    * \return Is always *this.  Failure is indicated by the state of *this.
    */
   ostream& seekp(pos_type pos) {
-    if (!seekpos(pos)) setstate(failbit);
+    if (!seekpos(pos)) {
+      setstate(failbit);
+    }
     return *this;
   }
   /**
@@ -255,7 +261,9 @@ class ostream : public virtual ios {
    * \return Is always *this.  Failure is indicated by the state of *this.
    */
   ostream& seekp(off_type off, seekdir way) {
-    if (!seekoff(off, way)) setstate(failbit);
+    if (!seekoff(off, way)) {
+      setstate(failbit);
+    }
     return *this;
   }
 

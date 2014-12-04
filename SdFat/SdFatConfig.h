@@ -29,11 +29,58 @@
 #endif  // __AVR__
 //------------------------------------------------------------------------------
 /**
- * Set USE_MULTIPLE_SPI_TYPES nonzero to enable the SdFatSoftSpi and
- * SdFatLibSpi classes. SdFatSoftSpi uses software SPI and SdFatLibSpi
- * uses the standard Arduino SPI library.
+ * Set USE_LONG_FILE_NAMES nonzero to use long file names (LFN).
+ * Long File Name are limited to a maximum length of 255 characters.
+ *
+ * This implementation allows 7-bit characters in the range
+ * 0X20 to 0X7E except the following characters are not allowed:
+ *
+ *  < (less than)
+ *  > (greater than)
+ *  : (colon)
+ *  " (double quote)
+ *  / (forward slash)
+ *  \ (backslash)
+ *  | (vertical bar or pipe)
+ *  ? (question mark)
+ *  * (asterisk)
+ *
  */
-#define USE_MULTIPLE_SPI_TYPES 0
+#define USE_LONG_FILE_NAMES 1
+//------------------------------------------------------------------------------
+/**
+ * The symbol SD_SPI_CONFIGURATION defines SPI access to the SD card.
+ *
+ * IF SD_SPI_CONFIGUTATION is define to be zero, only the SdFat class
+ * is define and SdFat uses a fast custom SPI implementation.
+ *
+ * If SD_SPI_CONFIGURATION is define to be one, only the SdFat class is
+ * define and SdFat uses the standard Arduino SD.h library.
+ *
+ * If SD_SPI_CONFIGURATION is define to be two, only the SdFat class is
+ * define and SdFat uses software SPI on the pins defined below. 
+ *
+ * If SD_SPI_CONFIGURATION is define to be three, the three classes, SdFat,
+ * SdFatLibSpi, and SdFatSoftSpi are defined.  SdFat uses the fast
+ * custom SPI implementation. SdFatLibSpi uses the standard Arduino SPI
+ * library.  SdFatSoftSpi is a template class that uses Software SPI. The
+ * template parameters define the software SPI pins.  See the ThreeCard
+ * example for simultaneous use of all three classes. 
+ */
+#define SD_SPI_CONFIGURATION 0
+//------------------------------------------------------------------------------
+/** 
+ * If SD_SPI_CONFIGURATION is defined to be two, these definitions
+ * will define the pins used for software SPI.
+ *
+ * The default definition allows Uno shields to be used on other boards.
+ */
+/** Software SPI Master Out Slave In pin */
+uint8_t const SOFT_SPI_MOSI_PIN = 11;
+/** Software SPI Master In Slave Out pin */
+uint8_t const SOFT_SPI_MISO_PIN = 12;
+/** Software SPI Clock pin */
+uint8_t const SOFT_SPI_SCK_PIN = 13;
 //------------------------------------------------------------------------------
 /**
  * To enable SD card CRC checking set USE_SD_CRC nonzero.
@@ -47,77 +94,22 @@
 /**
  * Set ENABLE_SPI_TRANSACTION nonzero to enable the SPI transaction feature
  * of the standard Arduino SPI library.  You must include SPI.h in your
- * sketches when ENABLE_SPI_TRANSACTION is nonzero.
+ * programs when ENABLE_SPI_TRANSACTION is nonzero.
  */
 #define ENABLE_SPI_TRANSACTION 0
 //------------------------------------------------------------------------------
 /**
  * Set ENABLE_SPI_YIELD nonzero to enable release of the SPI bus during
- * SD card busy waits.  
+ * SD card busy waits.
  *
- * This will allow interrupt routines to access the SPI bus if 
+ * This will allow interrupt routines to access the SPI bus if
  * ENABLE_SPI_TRANSACTION is nonzero.
- * 
+ *
  * Setting ENABLE_SPI_YIELD will introduce some extra overhead and will
- * slightly slow transfer rates.  A few older SD cards may fail when 
+ * slightly slow transfer rates.  A few older SD cards may fail when
  * ENABLE_SPI_YIELD is nonzero.
  */
 #define ENABLE_SPI_YIELD 0
-//------------------------------------------------------------------------------
-/**
- * Set USE_ARDUINO_SPI_LIBRARY nonzero to force use of the Arduino Standard
- * SPI library in the SdFat class. This will override native and software
- * SPI for all boards.
- */
-#define USE_ARDUINO_SPI_LIBRARY 0
-//------------------------------------------------------------------------------
-/**
- * Set AVR_SOFT_SPI nonzero to use software SPI in the SdFat class
- * on all AVR Arduinos.  Set the soft SPI pins below.
- */
-#define AVR_SOFT_SPI 0
-//------------------------------------------------------------------------------
-/**
- * Set DUE_SOFT_SPI nonzero to use software SPI in the SdFat class
- * on Due Arduinos.  Set the soft SPI pins below.
- */
-#define DUE_SOFT_SPI 0
-//------------------------------------------------------------------------------
-/**
- * Set LEONARDO_SOFT_SPI nonzero to use software SPI in the SdFat class
- * on Leonardo Arduinos.  Set the soft SPI pins below.
- *
- * LEONARDO_SOFT_SPI allows an unmodified 328 Shield to be used
- * on Leonardo Arduinos.
- */
-#define LEONARDO_SOFT_SPI 0
-//------------------------------------------------------------------------------
-/**
- * Set MEGA_SOFT_SPI nonzero to use software SPI in the SdFat class
- * on Mega Arduinos.  Set the soft SPI pins below.
- *
- * MEGA_SOFT_SPI allows an unmodified 328 Shield to be used
- * on Mega Arduinos.  Set the soft SPI pins below.
- */
-#define MEGA_SOFT_SPI 0
-//------------------------------------------------------------------------------
-/**
- * Set TEENSY3_SOFT_SPI nonzero to use software SPI in the SdFat class
- * on Teensy 3.x boards.  Set the soft SPI pins below.
- */
-#define TEENSY3_SOFT_SPI 0
-//------------------------------------------------------------------------------
-/** 
- * Define software SPI pins.  Default allows Uno shields to be used on other 
- * boards.
- */
-// define software SPI pins
-/** Software SPI Master Out Slave In pin */
-uint8_t const SOFT_SPI_MOSI_PIN = 11;
-/** Software SPI Master In Slave Out pin */
-uint8_t const SOFT_SPI_MISO_PIN = 12;
-/** Software SPI Clock pin */
-uint8_t const SOFT_SPI_SCK_PIN = 13;
 //------------------------------------------------------------------------------
 /**
  * Set FAT12_SUPPORT nonzero to enable use if FAT12 volumes.
@@ -154,7 +146,7 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
 /**
  * Set SD_FILE_USES_STREAM nonzero to use Stream instead of Print for SdFile.
  * Using Stream will use more flash and may cause compatibility problems
- * with code written for older versions of SdFat. 
+ * with code written for older versions of SdFat.
  */
 #define SD_FILE_USES_STREAM 0
 //------------------------------------------------------------------------------
@@ -170,8 +162,8 @@ const uint8_t SPI_SCK_INIT_DIVISOR = 128;
 //------------------------------------------------------------------------------
 /**
  * Set USE_SEPARATE_FAT_CACHE nonzero to use a second 512 byte cache
- * for FAT table entries.  Improves performance for large writes that
- * are not a multiple of 512 bytes.
+ * for FAT table entries.  This improves performance for large writes
+ * that are not a multiple of 512 bytes.
  */
 #ifdef __arm__
 #define USE_SEPARATE_FAT_CACHE 1

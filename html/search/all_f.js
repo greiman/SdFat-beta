@@ -24,6 +24,6 @@ var searchData=
   ['right',['right',['../classios__base.html#aec064a12730b5d87e718c1864e29ac64',1,'ios_base::right()'],['../ios_8h.html#aee80fd600c5c58a2bebbd48afdcf8280',1,'right():&#160;ios.h']]],
   ['rmdir',['rmdir',['../class_fat_file.html#a9515bac181d33e7f0125e88fa2ccd283',1,'FatFile::rmdir()'],['../class_fat_file_system.html#aaed2edc7ff7fedb163458c870bb41b33',1,'FatFileSystem::rmdir()']]],
   ['rmrfstar',['rmRfStar',['../class_fat_file.html#ac780a80526f86d3def701ecdc99d8bfe',1,'FatFile']]],
-  ['rootdirentrycount',['rootDirEntryCount',['../structfat__boot.html#a2124f89e12307df944f08e6657dbf4af',1,'fat_boot::rootDirEntryCount()'],['../structfat32__boot.html#a94185496fb56c6e0e8078fc3803e9142',1,'fat32_boot::rootDirEntryCount()'],['../class_fat_volume.html#ae86d9615ddfb386c1ba8af5de23519d9',1,'FatVolume::rootDirEntryCount()']]],
+  ['rootdirentrycount',['rootDirEntryCount',['../structfat__boot.html#a2124f89e12307df944f08e6657dbf4af',1,'fat_boot::rootDirEntryCount()'],['../structfat32__boot.html#a94185496fb56c6e0e8078fc3803e9142',1,'fat32_boot::rootDirEntryCount()'],['../class_fat_volume.html#ab2d483670a0a6a6a4754b23614fe11bc',1,'FatVolume::rootDirEntryCount()']]],
   ['rootdirstart',['rootDirStart',['../class_fat_volume.html#ae9363ebbbae90e895ea56e8fa3f60c13',1,'FatVolume']]]
 ];

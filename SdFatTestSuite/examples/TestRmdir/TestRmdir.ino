@@ -21,7 +21,7 @@ SdFat sd;
  * remove all files in dir.
  */
 void deleteFiles(SdBaseFile* dir) {
-  char name[13];
+  char name[32];
   SdFile file;
  
   // open and delete files

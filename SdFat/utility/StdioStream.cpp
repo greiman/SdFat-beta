@@ -26,9 +26,13 @@ int StdioStream::fclose() {
     return EOF;
   }
   if (m_flags & F_SWR) {
-    if (!flushBuf()) rtn = EOF;
+    if (!flushBuf()) {
+      rtn = EOF;
+    }
   }
-  if (!FatFile::close()) rtn = EOF;
+  if (!FatFile::close()) {
+    rtn = EOF;
+  }
   m_r = 0;
   m_w = 0;
   m_flags = 0;
@@ -37,7 +41,9 @@ int StdioStream::fclose() {
 //------------------------------------------------------------------------------
 int StdioStream::fflush() {
   if ((m_flags & (F_SWR | F_SRW)) && !(m_flags & F_SRD)) {
-    if (flushBuf() && FatFile::sync()) return 0;
+    if (flushBuf() && FatFile::sync()) {
+      return 0;
+    }
   }
   return EOF;
 }
@@ -45,16 +51,22 @@ int StdioStream::fflush() {
 char* StdioStream::fgets(char* str, size_t num, size_t* len) {
   char* s = str;
   size_t n;
-  if (num-- == 0) return 0;
+  if (num-- == 0) {
+    return 0;
+  }
   while (num) {
     if ((n = m_r) == 0) {
       if (!fillBuf()) {
-        if (s == str) return 0;
+        if (s == str) {
+          return 0;
+        }
         break;
       }
       n = m_r;
     }
-    if (n > num) n = num;
+    if (n > num) {
+      n = num;
+    }
     uint8_t* end = reinterpret_cast<uint8_t*>(memchr(m_p, '\n', n));
     if (end != 0) {
       n = ++end - m_p;
@@ -71,7 +83,9 @@ char* StdioStream::fgets(char* str, size_t num, size_t* len) {
     num -= n;
   }
   *s = 0;
-  if (len) *len = s - str;
+  if (len) {
+    *len = s - str;
+  }
   return str;
 }
 //------------------------------------------------------------------------------
@@ -114,14 +128,18 @@ bool StdioStream::fopen(const char* filename, const char* mode) {
       goto fail;
     }
   }
-  if ((oflag & O_EXCL) && !(oflag & O_WRITE)) goto fail;
-  if (!FatFile::open(filename, oflag)) goto fail;
+  if ((oflag & O_EXCL) && !(oflag & O_WRITE)) {
+    goto fail;
+  }
+  if (!FatFile::open(filename, oflag)) {
+    goto fail;
+  }
   m_r = 0;
   m_w = 0;
   m_p = m_buf;
   return true;
 
- fail:
+fail:
   m_flags = 0;
   return false;
 }
@@ -134,7 +152,9 @@ int StdioStream::fputs(const char* str) {
 int StdioStream::fputs_P(PGM_P str) {
   PGM_P bgn = str;
   for (char c; (c = pgm_read_byte(str)); str++) {
-    if (putc(c) < 0) return EOF;
+    if (putc(c) < 0) {
+      return EOF;
+    }
   }
   return str - bgn;
 }
@@ -142,7 +162,9 @@ int StdioStream::fputs_P(PGM_P str) {
 size_t StdioStream::fread(void* ptr, size_t size, size_t count) {
   uint8_t* dst = reinterpret_cast<uint8_t*>(ptr);
   size_t total = size*count;
-  if (total == 0) return 0;
+  if (total == 0) {
+    return 0;
+  }
   size_t need = total;
   while (need > m_r) {
     memcpy(dst, m_p, m_r);
@@ -197,14 +219,16 @@ int StdioStream::fseek(int32_t offset, int origin) {
   m_p = m_buf;
   return 0;
 
- fail:
+fail:
   return EOF;
 }
 //------------------------------------------------------------------------------
 int32_t StdioStream::ftell() {
   uint32_t pos = FatFile::curPosition();
   if (m_flags & F_SRD) {
-    if (m_r > pos) return -1L;
+    if (m_r > pos) {
+      return -1L;
+    }
     pos -= m_r;
   } else if (m_flags & F_SWR) {
     pos += m_p - m_buf;
@@ -217,7 +241,9 @@ size_t StdioStream::fwrite(const void* ptr, size_t size, size_t count) {
 #if 0  ////////////////////////////////////////////////////////////////////////////////////
   const uint8_t* src = static_cast<const uint8_t*>(ptr);
   size_t total = count*size;
-  if (total == 0) return 0;
+  if (total == 0) {
+    return 0;
+  }
   size_t todo = total;
 
   while (todo > m_w) {
@@ -236,7 +262,7 @@ size_t StdioStream::fwrite(const void* ptr, size_t size, size_t count) {
 #endif  //////////////////////////////////////////////////////////////////////////////////
 }
 //------------------------------------------------------------------------------
-  int StdioStream::write(const void* buf, size_t count) {
+int StdioStream::write(const void* buf, size_t count) {
   const uint8_t* src = static_cast<const uint8_t*>(buf);
   size_t todo = count;
 
@@ -245,7 +271,9 @@ size_t StdioStream::fwrite(const void* ptr, size_t size, size_t count) {
     m_p += m_w;
     src += m_w;
     todo -= m_w;
-    if (!flushBuf()) return EOF;
+    if (!flushBuf()) {
+      return EOF;
+    }
   }
   memcpy(m_p, src, todo);
   m_p += todo;
@@ -257,7 +285,9 @@ size_t StdioStream::print(const __FlashStringHelper *str) {
   const char *p = (const char PROGMEM *)str;
   uint8_t c;
   while ((c = pgm_read_byte(p))) {
-    if (putc(c) < 0) return 0;
+    if (putc(c) < 0) {
+      return 0;
+    }
     p++;
   }
   return p - (const char PROGMEM *)str;
@@ -281,56 +311,76 @@ int StdioStream::printDec(float value, uint8_t prec) {
   }
   // check for NaN INF OVF
   if (isnan(value)) {
-    if (fputs_P(PSTR("nan")) < 0) return -1;
+    if (fputs_P(PSTR("nan")) < 0) {
+      return -1;
+    }
     rtn += 3;
   } else if (isinf(value)) {
-    if (fputs_P(PSTR("inf")) < 0) return -1;
+    if (fputs_P(PSTR("inf")) < 0) {
+      return -1;
+    }
     rtn += 3;
   } else if (value > 4294967040.0) {
-    if (fputs_P(PSTR("ovf")) < 0) return -1;;
+    if (fputs_P(PSTR("ovf")) < 0) {
+      return -1;
+    }
     rtn += 3;
   } else {
     if (sign) {
-     if (putc(sign) < 0) return -1;
+      if (putc(sign) < 0) {
+        return -1;
+      }
       rtn++;
     }
-    if (prec > 9) prec = 9;
-
- /*
-    uint32_t s = 1;
-    for (uint8_t i = 0; i < prec; i++) {
-      // s *= 10;
-      s = ((s << 2) + s) << 1;
+    if (prec > 9) {
+      prec = 9;
     }
-    // round value
-    value += 0.5/s;
-  */
+
+    /*
+       uint32_t s = 1;
+       for (uint8_t i = 0; i < prec; i++) {
+         // s *= 10;
+         s = ((s << 2) + s) << 1;
+       }
+       // round value
+       value += 0.5/s;
+     */
     value += scale10(0.5, -prec);
     uint32_t whole = value;
     int np;
-    if ((np = printDec(whole)) < 0) return -1;
+    if ((np = printDec(whole)) < 0) {
+      return -1;
+    }
     rtn += np;
     if (prec) {
-      if (putc('.') < 0) return -1;
+      if (putc('.') < 0) {
+        return -1;
+      }
       char* str = fmtSpace(prec);
-      if (!str) return -1;
+      if (!str) {
+        return -1;
+      }
       char* tmp = str - prec;
 
-  //  uint32_t fraction = s*(value - whole);
+      //  uint32_t fraction = s*(value - whole);
       uint32_t fraction =  scale10(value - whole, prec);
       ptr = fmtDec(fraction, str);
-      while (ptr > tmp) *--ptr = '0';
+      while (ptr > tmp) {
+        *--ptr = '0';
+      }
       rtn += prec + 1;
     }
   }
   return rtn;
-  #endif
+#endif
 }
 //------------------------------------------------------------------------------
 int StdioStream::printDec(signed char n) {
   uint8_t s = 0;
   if (n < 0) {
-    if (fputc('-') < 0) return -1;
+    if (fputc('-') < 0) {
+      return -1;
+    }
     n = -n;
     s = 1;
   }
@@ -341,11 +391,15 @@ int StdioStream::printDec(int16_t n) {
   int s;
   uint8_t rtn = 0;
   if (n < 0) {
-    if (fputc('-') < 0) return -1;
+    if (fputc('-') < 0) {
+      return -1;
+    }
     n = -n;
     rtn++;
   }
-  if ((s = printDec((uint16_t)n)) < 0) return s;
+  if ((s = printDec((uint16_t)n)) < 0) {
+    return s;
+  }
   return rtn;
 }
 //------------------------------------------------------------------------------
@@ -364,7 +418,9 @@ int StdioStream::printDec(uint16_t n) {
     len = n < 1000 ? 3 : n < 10000 ? 4 : 5;
   }
   char* str = fmtSpace(len);
-  if (!str) return -1;
+  if (!str) {
+    return -1;
+  }
   fmtDec(n, str);
   return len;
 #endif
@@ -373,7 +429,9 @@ int StdioStream::printDec(uint16_t n) {
 int StdioStream::printDec(int32_t n) {
   uint8_t s = 0;
   if (n < 0) {
-    if (fputc('-') < 0) return -1;
+    if (fputc('-') < 0) {
+      return -1;
+    }
     n = -n;
     s = 1;
   }
@@ -399,7 +457,9 @@ int StdioStream::printDec(uint32_t n) {
   }
 
   char* str = fmtSpace(len);
-  if (!str) return -1;
+  if (!str) {
+    return -1;
+  }
   fmtDec(n, str);
   return len;
 #endif
@@ -419,7 +479,9 @@ int StdioStream::printHex(uint32_t n) {
     len = n < 0X100000 ? 5 : n < 0X1000000 ? 6 : n < 0X10000000 ? 7 : 8;
   }
   char* str = fmtSpace(len);
-  if (!str) return -1;
+  if (!str) {
+    return -1;
+  }
 
   do {
     uint8_t h = n & 0XF;
@@ -432,7 +494,9 @@ int StdioStream::printHex(uint32_t n) {
 //------------------------------------------------------------------------------
 bool StdioStream::rewind() {
   if (m_flags & F_SWR) {
-    if (!flushBuf()) return false;
+    if (!flushBuf()) {
+      return false;
+    }
   }
   FatFile::seekSet(0);
   m_r = 0;
@@ -441,11 +505,17 @@ bool StdioStream::rewind() {
 //------------------------------------------------------------------------------
 int StdioStream::ungetc(int c) {
   // error if EOF.
-  if (c == EOF) return EOF;
+  if (c == EOF) {
+    return EOF;
+  }
   // error if not reading.
-  if ((m_flags & F_SRD) == 0) return EOF;
+  if ((m_flags & F_SRD) == 0) {
+    return EOF;
+  }
   // error if no space.
-  if (m_p == m_buf) return EOF;
+  if (m_p == m_buf) {
+    return EOF;
+  }
   m_r++;
   m_flags &= ~F_EOF;
   return *--m_p = (uint8_t)c;
@@ -463,7 +533,8 @@ int StdioStream::fillGet() {
 //------------------------------------------------------------------------------
 // private
 bool StdioStream::fillBuf() {
-  if (!(m_flags & F_SRD)) {  /////////////check for F_ERR and F_EOF ??/////////////////
+  if (!(m_flags &
+        F_SRD)) {  /////////////check for F_ERR and F_EOF ??/////////////////
     if (!(m_flags & F_SRW)) {
       m_flags |= F_ERR;
       return false;
@@ -490,7 +561,8 @@ bool StdioStream::fillBuf() {
 //------------------------------------------------------------------------------
 // private
 bool StdioStream::flushBuf() {
-  if (!(m_flags & F_SWR)) {  /////////////////check for F_ERR ??////////////////////////
+  if (!(m_flags &
+        F_SWR)) {  /////////////////check for F_ERR ??////////////////////////
     if (!(m_flags & F_SRW)) {
       m_flags |= F_ERR;
       return false;
@@ -505,13 +577,17 @@ bool StdioStream::flushBuf() {
   uint8_t n = m_p - m_buf;
   m_p = m_buf;
   m_w = sizeof(m_buf);
-  if (FatFile::write(m_buf, n) == n) return true;
+  if (FatFile::write(m_buf, n) == n) {
+    return true;
+  }
   m_flags |= F_ERR;
   return false;
 }
 //------------------------------------------------------------------------------
 int StdioStream::flushPut(uint8_t c) {
-  if (!flushBuf()) return EOF;
+  if (!flushBuf()) {
+    return EOF;
+  }
   m_w--;
   return *m_p++ = c;
 }
@@ -522,7 +598,9 @@ char* StdioStream::fmtSpace(uint8_t len) {
       return 0;
     }
   }
-  if (len > m_w) return 0;
+  if (len > m_w) {
+    return 0;
+  }
   m_p += len;
   m_w -= len;
   return reinterpret_cast<char*>(m_p);

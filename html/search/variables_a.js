@@ -8,5 +8,7 @@ var searchData=
   ['ldir_5fname3_5fdim',['LDIR_NAME3_DIM',['../_fat_structs_8h.html#a99fbd27fa9e5003a8d77ca7fc14d2090',1,'FatStructs.h']]],
   ['ldir_5ford_5flast_5flong_5fentry',['LDIR_ORD_LAST_LONG_ENTRY',['../_fat_structs_8h.html#a8cfb60b9eaf04dcdc6e4f5a466af5540',1,'FatStructs.h']]],
   ['leadsignature',['leadSignature',['../structfat32__fsinfo.html#aa8ee056cc1beb1355e15610c1beba5e3',1,'fat32_fsinfo']]],
-  ['left',['left',['../classios__base.html#ad364df9af2cfde1f40bd8e10c62bb215',1,'ios_base']]]
+  ['left',['left',['../classios__base.html#ad364df9af2cfde1f40bd8e10c62bb215',1,'ios_base']]],
+  ['len',['len',['../structfname__t.html#a471184cc4c2671526d7d6fb80b2fe20c',1,'fname_t']]],
+  ['lfn',['lfn',['../structfname__t.html#a76ffd7abd5b7d3acf90b329c905770fd',1,'fname_t']]]
 ];

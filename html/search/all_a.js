@@ -11,9 +11,10 @@ var searchData=
   ['ldir_5ft',['ldir_t',['../_fat_structs_8h.html#aa1b540ee1eedd1aa9b267d11cba0d9e2',1,'FatStructs.h']]],
   ['leadsignature',['leadSignature',['../structfat32__fsinfo.html#aa8ee056cc1beb1355e15610c1beba5e3',1,'fat32_fsinfo']]],
   ['left',['left',['../classios__base.html#ad364df9af2cfde1f40bd8e10c62bb215',1,'ios_base::left()'],['../ios_8h.html#a24a80a73f0a0d2d72d1cb74f49ff4759',1,'left():&#160;ios.h']]],
+  ['legal83char',['legal83Char',['../class_fat_file.html#a94df8090f16e9666cdc53ca20f6aff90',1,'FatFile']]],
+  ['len',['len',['../structfname__t.html#a471184cc4c2671526d7d6fb80b2fe20c',1,'fname_t']]],
   ['length',['length',['../classobufstream.html#ac650708e968b0c0545a3badeb809cf15',1,'obufstream']]],
-  ['leonardo_5fsoft_5fspi',['LEONARDO_SOFT_SPI',['../_sd_fat_config_8h.html#a60a162fdb06d182b5cefc271d67ea765',1,'SdFatConfig.h']]],
-  ['lfnchar',['lfnChar',['../_fat_structs_8h.html#a28a106f8c82836cfd89732068b8ce59b',1,'FatStructs.h']]],
+  ['lfn',['lfn',['../structfname__t.html#a76ffd7abd5b7d3acf90b329c905770fd',1,'fname_t']]],
   ['longdirectoryentry',['longDirectoryEntry',['../structlong_directory_entry.html',1,'']]],
   ['low',['low',['../class_digital_pin.html#aeb6a3f66fb3f9fb9ec8233bdb18aa6eb',1,'DigitalPin']]],
   ['ls',['ls',['../class_sd_fat_base.html#a6e2ba60320f47912a96ad83820073ce8',1,'SdFatBase::ls(uint8_t flags=0)'],['../class_sd_fat_base.html#a85bd146c6fb0120ac69c3d93267321e6',1,'SdFatBase::ls(const char *path, uint8_t flags=0)'],['../class_sd_base_file.html#a925b3badddc0f9472730a4ccd4ff7b67',1,'SdBaseFile::ls()'],['../class_fat_file.html#acabf31ff85e696fbf384c49428012fea',1,'FatFile::ls()'],['../class_fat_file_system.html#ad17f2a0925b34cb3807e4c1677a2872f',1,'FatFileSystem::ls(print_t *pr, uint8_t flags)'],['../class_fat_file_system.html#aa79695db8e910300507210b3067d39fd',1,'FatFileSystem::ls(print_t *pr, const char *path, uint8_t flags)']]]

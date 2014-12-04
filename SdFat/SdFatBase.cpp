@@ -35,7 +35,9 @@ void SdFatBase::errorHalt(Print* pr, const __FlashStringHelper* msg) {
 }
 //------------------------------------------------------------------------------
 void SdFatBase::errorPrint(Print* pr) {
-  if (!cardErrorCode()) return;
+  if (!cardErrorCode()) {
+    return;
+  }
   pr->print(F("SD errorCode: 0X"));
   pr->print(cardErrorCode(), HEX);
   pr->print(F(",0X"));
@@ -64,10 +66,6 @@ void SdFatBase::initErrorHalt(Print* pr, char const *msg) {
   initErrorHalt(pr);
 }
 //------------------------------------------------------------------------------
-/**Print message, error details, and halt after SdFatBase::init() fails.
- * \param[in] pr Print device for message.
- * \param[in] msg Message to print.
- */
 void SdFatBase::initErrorHalt(Print* pr, const __FlashStringHelper* msg) {
   pr->println(msg);
   initErrorHalt(pr);

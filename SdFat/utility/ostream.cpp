@@ -24,7 +24,9 @@
 #endif
 //------------------------------------------------------------------------------
 void ostream::do_fill(unsigned len) {
-  for (; len < width(); len++) putch(fill());
+  for (; len < width(); len++) {
+    putch(fill());
+  }
   width(0);
 }
 //------------------------------------------------------------------------------
@@ -86,13 +88,17 @@ void ostream::putDouble(double n) {
     return;
   }
   // round up and separate int and fraction parts
-  for (uint8_t i = 0; i < nd; ++i) round *= 0.1;
+  for (uint8_t i = 0; i < nd; ++i) {
+    round *= 0.1;
+  }
   n += round;
   uint32_t intPart = n;
   double fractionPart = n - intPart;
 
   // format intPart and decimal point
-  if (nd || (flags() & showpoint)) *--str = '.';
+  if (nd || (flags() & showpoint)) {
+    *--str = '.';
+  }
   str = fmtNum(intPart, str, 10);
 
   // calculate length for fill
@@ -102,12 +108,16 @@ void ostream::putDouble(double n) {
   // extract adjust field
   fmtflags adj = flags() & adjustfield;
   if (adj == internal) {
-    if (sign) putch(sign);
+    if (sign) {
+      putch(sign);
+    }
     do_fill(len);
   } else {
     // do fill for internal or right
     fill_not_left(len);
-    if (sign) *--str = sign;
+    if (sign) {
+      *--str = sign;
+    }
   }
   putstr(str);
   // output fraction
@@ -123,7 +133,9 @@ void ostream::putDouble(double n) {
 //------------------------------------------------------------------------------
 void ostream::putNum(int32_t n) {
   bool neg = n < 0 && flagsToBase() == 10;
-  if (neg) n = -n;
+  if (neg) {
+    n = -n;
+  }
   putNum(n, neg);
 }
 //------------------------------------------------------------------------------
@@ -150,7 +162,9 @@ void ostream::putNum(uint32_t n, bool neg) {
   uint8_t len = end - str;
   fmtflags adj = flags() & adjustfield;
   if (adj == internal) {
-    while (str < num) putch(*str++);
+    while (str < num) {
+      putch(*str++);
+    }
   }
   if (adj != left) {
     do_fill(len);

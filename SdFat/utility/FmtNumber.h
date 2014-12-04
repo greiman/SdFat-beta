@@ -19,7 +19,13 @@
  */
 #ifndef FmtNumber_h
 #define FmtNumber_h
-#include <ctype.h>
+//  #include <ctype.h>
+inline bool isDigit(char c) {
+  return '0' <= c && c <= '9';
+}
+inline bool isSpace(char c) {
+  return c == ' ' || (0X9 <= c && c <= 0XD);
+}
 #include <math.h>
 #include <stdint.h>
 char* fmtDec(uint16_t n, char* p);

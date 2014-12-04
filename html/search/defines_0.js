@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['avr_5fsoft_5fspi',['AVR_SOFT_SPI',['../_sd_fat_config_8h.html#a9b2b6f07bfc371ed5b9c1e305cd8ac07',1,'SdFatConfig.h']]]
+  ['destructor_5fcloses_5ffile',['DESTRUCTOR_CLOSES_FILE',['../_sd_fat_config_8h.html#a9a2b1ca4d91cff876f48deeaacbc33da',1,'SdFatConfig.h']]]
 ];

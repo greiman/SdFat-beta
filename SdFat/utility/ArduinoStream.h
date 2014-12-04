@@ -54,7 +54,9 @@ class ArduinoInStream : public ibufstream {
     while (1) {
       t = millis();
       while (!m_hw->available()) {
-        if ((millis() - t) > 10) goto done;
+        if ((millis() - t) > 10) {
+          goto done;
+        }
       }
       if (i >= (m_size - 1)) {
         setstate(failbit);
@@ -63,7 +65,7 @@ class ArduinoInStream : public ibufstream {
       m_line[i++] = m_hw->read();
       m_line[i] = '\0';
     }
-  done:
+done:
     init(m_line);
   }
 
@@ -73,12 +75,16 @@ class ArduinoInStream : public ibufstream {
    * \param[in] way
    * \return true/false.
    */
-  bool seekoff(off_type off, seekdir way) {return false;}
- /** Internal - do not use.
-  * \param[in] pos
-  * \return true/false.
-  */
-  bool seekpos(pos_type pos) {return false;}
+  bool seekoff(off_type off, seekdir way) {
+    return false;
+  }
+  /** Internal - do not use.
+   * \param[in] pos
+   * \return true/false.
+   */
+  bool seekpos(pos_type pos) {
+    return false;
+  }
 
  private:
   char *m_line;
@@ -105,14 +111,26 @@ class ArduinoOutStream : public ostream {
    * \param[in] c
    */
   void putch(char c) {
-    if (c == '\n') m_pr->write('\r');
+    if (c == '\n') {
+      m_pr->write('\r');
+    }
     m_pr->write(c);
   }
-  void putstr(const char* str) {m_pr->write(str);}
-  bool seekoff(off_type off, seekdir way) {return false;}
-  bool seekpos(pos_type pos) {return false;}
-  bool sync() {return true;}
-  pos_type tellpos() {return 0;}
+  void putstr(const char* str) {
+    m_pr->write(str);
+  }
+  bool seekoff(off_type off, seekdir way) {
+    return false;
+  }
+  bool seekpos(pos_type pos) {
+    return false;
+  }
+  bool sync() {
+    return true;
+  }
+  pos_type tellpos() {
+    return 0;
+  }
   /// @endcond
  private:
   ArduinoOutStream() {}

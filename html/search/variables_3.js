@@ -18,6 +18,8 @@ var searchData=
   ['dir_5fname_5f0xe5',['DIR_NAME_0XE5',['../_fat_structs_8h.html#a27c8cd1e50f71974c9d98a868cfc4c77',1,'FatStructs.h']]],
   ['dir_5fname_5fdeleted',['DIR_NAME_DELETED',['../_fat_structs_8h.html#a5de4ada3536d89559f6433e835e311da',1,'FatStructs.h']]],
   ['dir_5fname_5ffree',['DIR_NAME_FREE',['../_fat_structs_8h.html#a23b2e4d06e245c778f4c52909cf97c76',1,'FatStructs.h']]],
+  ['dir_5fnt_5flc_5fbase',['DIR_NT_LC_BASE',['../_fat_structs_8h.html#a39f9b8960dba007b537e9b71c25384fe',1,'FatStructs.h']]],
+  ['dir_5fnt_5flc_5fext',['DIR_NT_LC_EXT',['../_fat_structs_8h.html#a8766a8bbab6ad3da38c1b308545d7572',1,'FatStructs.h']]],
   ['disksignature',['diskSignature',['../structmaster_boot_record.html#a77151c641444c0653ff71a253f0423ef',1,'masterBootRecord']]],
   ['drivenumber',['driveNumber',['../structfat__boot.html#aebd280b93563b75b9612d3db844b0d16',1,'fat_boot::driveNumber()'],['../structfat32__boot.html#aca415c1a6eb1c242d460a6d0ffa9ebec',1,'fat32_boot::driveNumber()']]]
 ];

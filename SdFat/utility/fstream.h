@@ -40,11 +40,15 @@ class FatStreamBase : protected FatFile, virtual public ios {
   /** Internal do not use
    * \return mode
    */
-  ios::openmode getmode() {return m_mode;}
+  ios::openmode getmode() {
+    return m_mode;
+  }
   /** Internal do not use
    * \param[in] mode
    */
-  void setmode(ios::openmode mode) {m_mode = mode;}
+  void setmode(ios::openmode mode) {
+    m_mode = mode;
+  }
   bool seekoff(off_type off, seekdir way);
   bool seekpos(pos_type pos);
   int write(const void* buf, size_t n);
@@ -83,7 +87,9 @@ class fstream : public iostream, FatStreamBase {
   /**  Close a file and force cached data and directory information
    *  to be written to the storage device.
    */
-  void close() {FatFile::close();}
+  void close() {
+    FatFile::close();
+  }
   /** Open a fstream
    * \param[in] path file to open
    * \param[in] mode open mode
@@ -110,36 +116,54 @@ class fstream : public iostream, FatStreamBase {
     FatStreamBase::open(path, mode);
   }
   /** \return True if stream is open else false. */
-  bool is_open () {return FatFile::isOpen();}
+  bool is_open() {
+    return FatFile::isOpen();
+  }
 
  protected:
   /// @cond SHOW_PROTECTED
   /** Internal - do not use
    * \return
    */
-  int16_t getch() {return FatStreamBase::getch();}
-    /** Internal - do not use
-   * \param[out] pos
-   */
-  void getpos(FatPos_t* pos) {FatFile::getpos(pos);}
+  int16_t getch() {
+    return FatStreamBase::getch();
+  }
+  /** Internal - do not use
+  * \param[out] pos
+  */
+  void getpos(FatPos_t* pos) {
+    FatFile::getpos(pos);
+  }
   /** Internal - do not use
    * \param[in] c
    */
-  void putch(char c) {FatStreamBase::putch(c);}
+  void putch(char c) {
+    FatStreamBase::putch(c);
+  }
   /** Internal - do not use
    * \param[in] str
    */
-  void putstr(const char *str) {FatStreamBase::putstr(str);}
+  void putstr(const char *str) {
+    FatStreamBase::putstr(str);
+  }
   /** Internal - do not use
    * \param[in] pos
    */
   bool seekoff(off_type off, seekdir way) {
     return FatStreamBase::seekoff(off, way);
   }
-  bool seekpos(pos_type pos) {return FatStreamBase::seekpos(pos);}
-  void setpos(FatPos_t* pos) {FatFile::setpos(pos);}
-  bool sync() {return FatStreamBase::sync();}
-  pos_type tellpos() {return FatStreamBase::curPosition();}
+  bool seekpos(pos_type pos) {
+    return FatStreamBase::seekpos(pos);
+  }
+  void setpos(FatPos_t* pos) {
+    FatFile::setpos(pos);
+  }
+  bool sync() {
+    return FatStreamBase::sync();
+  }
+  pos_type tellpos() {
+    return FatStreamBase::curPosition();
+  }
   /// @endcond
 };
 //==============================================================================
@@ -164,9 +188,13 @@ class ifstream : public istream, FatStreamBase {
   /**  Close a file and force cached data and directory information
    *  to be written to the storage device.
    */
-  void close() {FatFile::close();}
+  void close() {
+    FatFile::close();
+  }
   /** \return True if stream is open else false. */
-  bool is_open() {return FatFile::isOpen();}
+  bool is_open() {
+    return FatFile::isOpen();
+  }
   /** Open an ifstream
    * \param[in] path file to open
    * \param[in] mode open mode
@@ -182,20 +210,30 @@ class ifstream : public istream, FatStreamBase {
   /** Internal - do not use
    * \return
    */
-  int16_t getch() {return FatStreamBase::getch();}
+  int16_t getch() {
+    return FatStreamBase::getch();
+  }
   /** Internal - do not use
    * \param[out] pos
    */
-  void getpos(FatPos_t* pos) {FatFile::getpos(pos);}
+  void getpos(FatPos_t* pos) {
+    FatFile::getpos(pos);
+  }
   /** Internal - do not use
    * \param[in] pos
    */
   bool seekoff(off_type off, seekdir way) {
     return FatStreamBase::seekoff(off, way);
   }
-  bool seekpos(pos_type pos) {return FatStreamBase::seekpos(pos);}
-  void setpos(FatPos_t* pos) {FatFile::setpos(pos);}
-  pos_type tellpos() {return FatStreamBase::curPosition();}
+  bool seekpos(pos_type pos) {
+    return FatStreamBase::seekpos(pos);
+  }
+  void setpos(FatPos_t* pos) {
+    FatFile::setpos(pos);
+  }
+  pos_type tellpos() {
+    return FatStreamBase::curPosition();
+  }
   /// @endcond
 };
 //==============================================================================
@@ -226,7 +264,9 @@ class ofstream : public ostream, FatStreamBase {
   /**  Close a file and force cached data and directory information
    *  to be written to the storage device.
    */
-  void close() {FatFile::close();}
+  void close() {
+    FatFile::close();
+  }
   /** Open an ofstream
    * \param[in] path file to open
    * \param[in] mode open mode
@@ -237,7 +277,9 @@ class ofstream : public ostream, FatStreamBase {
     FatStreamBase::open(path, mode | out);
   }
   /** \return True if stream is open else false. */
-  bool is_open() {return FatFile::isOpen();}
+  bool is_open() {
+    return FatFile::isOpen();
+  }
 
  protected:
   /// @cond SHOW_PROTECTED
@@ -245,18 +287,28 @@ class ofstream : public ostream, FatStreamBase {
    * Internal do not use
    * \param[in] c
    */
-  void putch(char c) {FatStreamBase::putch(c);}
-  void putstr(const char* str) {FatStreamBase::putstr(str);}
+  void putch(char c) {
+    FatStreamBase::putch(c);
+  }
+  void putstr(const char* str) {
+    FatStreamBase::putstr(str);
+  }
   bool seekoff(off_type off, seekdir way) {
     return FatStreamBase::seekoff(off, way);
   }
-  bool seekpos(pos_type pos) {return FatStreamBase::seekpos(pos);}
+  bool seekpos(pos_type pos) {
+    return FatStreamBase::seekpos(pos);
+  }
   /**
    * Internal do not use
    * \param[in] b
    */
-  bool sync() {return FatStreamBase::sync();}
-  pos_type tellpos() {return FatStreamBase::curPosition();}
+  bool sync() {
+    return FatStreamBase::sync();
+  }
+  pos_type tellpos() {
+    return FatStreamBase::curPosition();
+  }
   /// @endcond
 };
 //------------------------------------------------------------------------------

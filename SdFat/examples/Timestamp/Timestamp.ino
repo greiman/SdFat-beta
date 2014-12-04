@@ -1,8 +1,8 @@
 /*
- * This sketch tests the dateTimeCallback() function
+ * This program tests the dateTimeCallback() function
  * and the timestamp() function.
  */
-#include <SPI.h> 
+#include <SPI.h>
 #include <SdFat.h>
 
 SdFat sd;
@@ -52,21 +52,23 @@ void dateTime(uint16_t* date, uint16_t* time) {
  */
 void printTimestamps(SdFile& f) {
   dir_t d;
-  if (!f.dirEntry(&d)) error("f.dirEntry failed");
+  if (!f.dirEntry(&d)) {
+    error("f.dirEntry failed");
+  }
 
-  cout << pstr("Creation: ");
+  cout << F("Creation: ");
   f.printFatDate(d.creationDate);
   cout << ' ';
   f.printFatTime(d.creationTime);
   cout << endl;
 
-  cout << pstr("Modify: ");
+  cout << F("Modify: ");
   f.printFatDate(d.lastWriteDate);
   cout <<' ';
   f.printFatTime(d.lastWriteTime);
   cout << endl;
 
-  cout << pstr("Access: ");
+  cout << F("Access: ");
   f.printFatDate(d.lastAccessDate);
   cout << endl;
 }
@@ -75,24 +77,26 @@ void setup(void) {
   Serial.begin(9600);
   while (!Serial) {}  // wait for Leonardo
 
-  cout << pstr("Type any character to start\n");
+  cout << F("Type any character to start\n");
   while (!Serial.available());
   delay(400);  // catch Due reset problem
-  
+
   // initialize the SD card at SPI_HALF_SPEED to avoid bus errors with
   // breadboards.  use SPI_FULL_SPEED for better performance.
-  if (!sd.begin(chipSelect, SPI_HALF_SPEED)) sd.initErrorHalt();
+  if (!sd.begin(chipSelect, SPI_HALF_SPEED)) {
+    sd.initErrorHalt();
+  }
 
   // remove files if they exist
-  sd.remove("CALLBACK.TXT");
-  sd.remove("DEFAULT.TXT");
-  sd.remove("STAMP.TXT");
+  sd.remove("callback.txt");
+  sd.remove("default.txt");
+  sd.remove("stamp.txt");
 
   // create a new file with default timestamps
-  if (!file.open("DEFAULT.TXT", O_CREAT | O_WRITE)) {
-    error("open DEFAULT.TXT failed");
+  if (!file.open("default.txt", O_CREAT | O_WRITE)) {
+    error("open default.txt failed");
   }
-  cout << pstr("\nOpen with default times\n");
+  cout << F("\nOpen with default times\n");
   printTimestamps(file);
 
   // close file
@@ -112,8 +116,8 @@ void setup(void) {
   SdFile::dateTimeCallback(dateTime);
 
   // create a new file with callback timestamps
-  if (!file.open("CALLBACK.TXT", O_CREAT | O_WRITE)) {
-    error("open CALLBACK.TXT failed");
+  if (!file.open("callback.txt", O_CREAT | O_WRITE)) {
+    error("open callback.txt failed");
   }
   cout << ("\nOpen with callback times\n");
   printTimestamps(file);
@@ -130,7 +134,7 @@ void setup(void) {
   // force dir update
   file.sync();
 
-  cout << pstr("\nTimes after write\n");
+  cout << F("\nTimes after write\n");
   printTimestamps(file);
 
   // close file
@@ -144,8 +148,8 @@ void setup(void) {
   SdFile::dateTimeCallbackCancel();
 
   // create a new file with default timestamps
-  if (!file.open("STAMP.TXT", O_CREAT | O_WRITE)) {
-    error("open STAMP.TXT failed");
+  if (!file.open("stamp.txt", O_CREAT | O_WRITE)) {
+    error("open stamp.txt failed");
   }
   // set creation date time
   if (!file.timestamp(T_CREATE, 2014, 11, 10, 1, 2, 3)) {
@@ -159,11 +163,11 @@ void setup(void) {
   if (!file.timestamp(T_ACCESS, 2014, 11, 12, 7, 8, 9)) {
     error("set access time failed");
   }
-  cout << pstr("\nTimes after timestamp() calls\n");
+  cout << F("\nTimes after timestamp() calls\n");
   printTimestamps(file);
 
   file.close();
-  cout << pstr("\nDone\n");
+  cout << F("\nDone\n");
 }
 
-void loop(void){}
+void loop(void) {}

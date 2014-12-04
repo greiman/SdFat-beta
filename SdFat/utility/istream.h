@@ -55,124 +55,124 @@ class istream : public virtual ios {
     pf(*this);
     return *this;
   }
- /**
-  * Extract a character string
-  * \param[out] str location to store the string.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a character string
+   * \param[out] str location to store the string.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream& operator>>(char *str) {
     getStr(str);
     return *this;
   }
- /**
-  * Extract a character
-  * \param[out] ch location to store the character.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a character
+   * \param[out] ch location to store the character.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream& operator>>(char& ch) {
     getChar(&ch);
     return *this;
   }
- /**
-  * Extract a character string
-  * \param[out] str location to store the string.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a character string
+   * \param[out] str location to store the string.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream& operator>>(signed char *str) {
     getStr(reinterpret_cast<char*>(str));
     return *this;
   }
- /**
-  * Extract a character
-  * \param[out] ch location to store the character.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a character
+   * \param[out] ch location to store the character.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream& operator>>(signed char& ch) {
     getChar(reinterpret_cast<char*>(&ch));
     return *this;
   }
- /**
-  * Extract a character string
-  * \param[out] str location to store the string.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a character string
+   * \param[out] str location to store the string.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream& operator>>(unsigned char *str) {
     getStr(reinterpret_cast<char*>(str));
     return *this;
   }
- /**
-  * Extract a character
-  * \param[out] ch location to store the character.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a character
+   * \param[out] ch location to store the character.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream& operator>>(unsigned char& ch) {
     getChar(reinterpret_cast<char*>(&ch));
     return *this;
   }
- /**
-  * Extract a value of type bool.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type bool.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream& operator>>(bool& arg) {
     getBool(&arg);
     return *this;
   }
- /**
-  * Extract a value of type short.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type short.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream &operator>>(short& arg) {  // NOLINT
     getNumber(&arg);
     return *this;
   }
- /**
-  * Extract a value of type unsigned short.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type unsigned short.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream &operator>>(unsigned short& arg) {  // NOLINT
     getNumber(&arg);
     return *this;
   }
- /**
-  * Extract a value of type int.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type int.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream &operator>>(int& arg) {
     getNumber(&arg);
     return *this;
   }
- /**
-  * Extract a value of type unsigned int.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type unsigned int.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream &operator>>(unsigned int& arg) {
     getNumber(&arg);
     return *this;
   }
- /**
-  * Extract a value of type long.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type long.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream &operator>>(long& arg) {  // NOLINT
     getNumber(&arg);
     return *this;
   }
- /**
-  * Extract a value of type unsigned long.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type unsigned long.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream &operator>>(unsigned long& arg) {  // NOLINT
     getNumber(&arg);
     return *this;
   }
-   /**
+  /**
   * Extract a value of type double.
   * \param[out] arg location to store the value.
   * \return Is always *this.  Failure is indicated by the state of *this.
@@ -181,11 +181,11 @@ class istream : public virtual ios {
     getDouble(&arg);
     return *this;
   }
- /**
-  * Extract a value of type float.
-  * \param[out] arg location to store the value.
-  * \return Is always *this.  Failure is indicated by the state of *this.
-  */
+  /**
+   * Extract a value of type float.
+   * \param[out] arg location to store the value.
+   * \return Is always *this.  Failure is indicated by the state of *this.
+   */
   istream &operator>> (float& arg) {
     double v;
     getDouble(&v);
@@ -207,13 +207,15 @@ class istream : public virtual ios {
    * \return The number of characters extracted by the last unformatted
    * input function.
    */
-  streamsize gcount() const {return m_gcount;}
+  streamsize gcount() const {
+    return m_gcount;
+  }
   /**
    * Extract a character if one is available.
    *
    * \return The character or -1 if a failure occurs.  A failure is indicated
    * by the stream state.
-   */  
+   */
   int get();
   /**
    * Extract a character if one is available.
@@ -221,10 +223,10 @@ class istream : public virtual ios {
    * \param[out] ch location to receive the extracted character.
    *
    * \return always returns *this. A failure is indicated by the stream state.
-   */  
+   */
   istream& get(char& ch);
   /**
-   * Extract characters. 
+   * Extract characters.
    *
    * \param[out] str Location to receive extracted characters.
    * \param[in] n Size of str.
@@ -236,7 +238,7 @@ class istream : public virtual ios {
    * failbit is set.  If end-of-file occurs the eofbit is set.
    *
    * \return always returns *this. A failure is indicated by the stream state.
-   */  
+   */
   istream& get(char *str, streamsize n, char delim = '\n');
   /**
    * Extract characters
@@ -269,28 +271,32 @@ class istream : public virtual ios {
    *
    * \return *this
    *
-   */  
+   */
   istream& ignore(streamsize n = 1, int delim= -1);
   /**
    * Return the next available character without consuming it.
    *
    * \return The character if the stream state is good else -1;
    *
-   */  
+   */
   int peek();
 // istream& read(char *str, streamsize count);
 // streamsize readsome(char *str, streamsize count);
   /**
    * \return the stream position
    */
-  pos_type tellg() {return tellpos();}
+  pos_type tellg() {
+    return tellpos();
+  }
   /**
    * Set the stream position
    * \param[in] pos The absolute position in which to move the read pointer.
    * \return Is always *this.  Failure is indicated by the state of *this.
    */
   istream& seekg(pos_type pos) {
-    if (!seekpos(pos)) setstate(failbit);
+    if (!seekpos(pos)) {
+      setstate(failbit);
+    }
     return *this;
   }
   /**
@@ -302,17 +308,19 @@ class istream : public virtual ios {
    * \return Is always *this.  Failure is indicated by the state of *this.
    */
   istream& seekg(off_type off, seekdir way) {
-    if (!seekoff(off, way)) setstate(failbit);
+    if (!seekoff(off, way)) {
+      setstate(failbit);
+    }
     return *this;
   }
   void skipWhite();
 
  protected:
   /// @cond SHOW_PROTECTED
-   /**
-   * Internal - do not use
-   * \return
-   */
+  /**
+  * Internal - do not use
+  * \return
+  */
   virtual int16_t getch() = 0;
   /**
    * Internal - do not use

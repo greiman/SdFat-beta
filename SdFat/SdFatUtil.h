@@ -12,7 +12,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
+ *
  * You should have received a copy of the GNU General Public License
  * along with the Arduino SdFat Library.  If not, see
  * <http://www.gnu.org/licenses/>.
@@ -30,8 +30,21 @@
 #define PgmPrintln(x) SerialPrintln_P(PSTR(x))
 
 namespace SdFatUtil {
+  /** Amount of free RAM
+   * \return The number of free bytes.
+   */
   int FreeRam();
+  /** %Print a string in flash memory.
+   *
+   * \param[in] pr Print object for output.
+   * \param[in] str Pointer to string stored in flash memory.
+   */
   void print_P(Print* pr, PGM_P str);
+  /** %Print a string in flash memory followed by a CR/LF.
+   *
+   * \param[in] pr Print object for output.
+   * \param[in] str Pointer to string stored in flash memory.
+   */
   void println_P(Print* pr, PGM_P str);
   //----------------------------------------------------------------------------
   /** %Print a string in flash memory to Serial.
@@ -49,8 +62,6 @@ namespace SdFatUtil {
   inline void SerialPrintln_P(PGM_P str) {
     println_P(&Serial, str);
   }
-  void SerialPrint_P(PGM_P str);
-  void SerialPrintln_P(PGM_P str);
 }  // namespace SdFatUtil
 using namespace SdFatUtil;  // NOLINT
 #endif  // #define SdFatUtil_h

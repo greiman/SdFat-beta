@@ -17,40 +17,15 @@
  * along with the Arduino SdSpi Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
- /**
- * \file
- * \brief SdSpi class for V2 SD/SDHC cards
- */
+/**
+* \file
+* \brief SdSpi class for V2 SD/SDHC cards
+*/
 #ifndef SdSpi_h
 #define SdSpi_h
 #include <Arduino.h>
 #include "SdFatConfig.h"
 #include "utility/SoftSPI.h"
-#if !USE_ARDUINO_SPI_LIBRARY
-// AVR Arduinos
-#ifdef __AVR__
-#if AVR_SOFT_SPI
-#define USE_SOFTWARE_SPI 1
-#elif LEONARDO_SOFT_SPI && defined(__AVR_ATmega32U4__) && !defined(CORE_TEENSY)
-#define USE_SOFTWARE_SPI 1
-#elif MEGA_SOFT_SPI && (defined(__AVR_ATmega1280__)\
-      || defined(__AVR_ATmega2560__))
-#define USE_SOFTWARE_SPI 1
-#endif  // USE_SOFTWARE_SPI
-#endif  // __AVR__
-// Due
-#if DUE_SOFT_SPI && defined(__arm__) && !defined(CORE_TEENSY)
-#define USE_SOFTWARE_SPI 1
-#endif  // DUE_SOFT_SPI && defined(__arm__) && !defined(CORE_TEENSY)
-// Teensy 3.x
-#if TEENSY3_SOFT_SPI && defined(__arm__) && defined(CORE_TEENSY)
-#define USE_SOFTWARE_SPI 1
-#endif  // TEENSY3_SOFT_SPI && defined(__arm__) && defined(CORE_TEENSY)
-#endif  // !USE_ARDUINO_SPI_LIBRARY
-#ifndef USE_SOFTWARE_SPI
-/** Default is no software SPI */
-#define USE_SOFTWARE_SPI 0
-#endif  //  USE_SOFTWARE_SPI
 //------------------------------------------------------------------------------
 /**
  * \class SdSpiBase
@@ -83,11 +58,11 @@ class SdSpiBase {
    * \param[in] data Byte to send
    */
   virtual void send(uint8_t data) = 0;
-   /** Send multiple bytes.
-   *
-   * \param[in] buf Buffer for data to be sent.
-   * \param[in] n Number of bytes to send.
-   */
+  /** Send multiple bytes.
+  *
+  * \param[in] buf Buffer for data to be sent.
+  * \param[in] n Number of bytes to send.
+  */
   virtual void send(const uint8_t* buf, size_t n) = 0;
   /** \return true if hardware SPI else false */
   virtual bool useSpiTransactions() = 0;
@@ -97,11 +72,11 @@ class SdSpiBase {
  * \class SdSpi
  * \brief SPI class for access to SD and SDHC flash memory cards.
  */
-#if USE_MULTIPLE_SPI_TYPES
+#if SD_SPI_CONFIGURATION >= 3
 class SdSpi : public SdSpiBase {
-#else
+#else  // SD_SPI_CONFIGURATION >= 3
 class SdSpi {
-#endif
+#endif  // SD_SPI_CONFIGURATION >= 3
  public:
   /** Initialize the SPI bus */
   void begin();
@@ -135,27 +110,30 @@ class SdSpi {
    */
   void send(const uint8_t* buf, size_t n);
   /** \return true - uses SPI transactions */
-  bool useSpiTransactions() {return true;}
+  bool useSpiTransactions() {
+    return true;
+  }
 };
-
 //------------------------------------------------------------------------------
-#if USE_MULTIPLE_SPI_TYPES || USE_ARDUINO_SPI_LIBRARY || defined(DOXYGEN)
-#include <SPI.h>
 /**
  * \class SdSpiLib
  * \brief Arduino SPI library class for access to SD and SDHC flash
  *        memory cards.
  */
-#if USE_MULTIPLE_SPI_TYPES
+#if SD_SPI_CONFIGURATION >= 3 || SD_SPI_CONFIGURATION == 1 || defined(DOXYGEN)
+#include <SPI.h>
+#if SD_SPI_CONFIGURATION >= 3
 class SdSpiLib : public SdSpiBase {
-#else
+#else  // SD_SPI_CONFIGURATION >= 3
 class SdSpiLib {
-#endif
+#endif  // SD_SPI_CONFIGURATION >= 3
  public:
   /**
    * Initialize SPI pins.
    */
-  void begin() {SPI.begin();}
+  void begin() {
+    SPI.begin();
+  }
   /** Set SPI options for access to SD/SDHC cards.
    *
    * \param[in] divisor SCK clock divider relative to the system clock.
@@ -163,25 +141,35 @@ class SdSpiLib {
   void init(uint8_t divisor) {
     SPI.setBitOrder(MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
-  #ifndef SPI_CLOCK_DIV128
+#ifndef SPI_CLOCK_DIV128
     SPI.setClockDivider(divisor);
-  #else  // SPI_CLOCK_DIV128
+#else  // SPI_CLOCK_DIV128
     int v;
-    if (divisor <= 2) v = SPI_CLOCK_DIV2;
-    else  if (divisor <= 4) v = SPI_CLOCK_DIV4;
-    else  if (divisor <= 8) v = SPI_CLOCK_DIV8;
-    else  if (divisor <= 16) v = SPI_CLOCK_DIV16;
-    else  if (divisor <= 32) v = SPI_CLOCK_DIV32;
-    else  if (divisor <= 64) v = SPI_CLOCK_DIV64;
-    else  v = SPI_CLOCK_DIV128;
+    if (divisor <= 2) {
+      v = SPI_CLOCK_DIV2;
+    } else  if (divisor <= 4) {
+      v = SPI_CLOCK_DIV4;
+    } else  if (divisor <= 8) {
+      v = SPI_CLOCK_DIV8;
+    } else  if (divisor <= 16) {
+      v = SPI_CLOCK_DIV16;
+    } else  if (divisor <= 32) {
+      v = SPI_CLOCK_DIV32;
+    } else  if (divisor <= 64) {
+      v = SPI_CLOCK_DIV64;
+    } else {
+      v = SPI_CLOCK_DIV128;
+    }
     SPI.setClockDivider(v);
-  #endif  // SPI_CLOCK_DIV128
+#endif  // SPI_CLOCK_DIV128
   }
   /** Receive a byte.
    *
    * \return The byte.
    */
-  uint8_t receive() {return SPI.transfer(0XFF);}
+  uint8_t receive() {
+    return SPI.transfer(0XFF);
+  }
   /** Receive multiple bytes.
    *
    * \param[out] buf Buffer to receive the data.
@@ -213,25 +201,25 @@ class SdSpiLib {
     }
   }
   /** \return true - uses SPI transactions */
-  bool useSpiTransactions() {return true;}
+  bool useSpiTransactions() {
+    return true;
+  }
 };
-#endif  // USE_MULTIPLE_SPI_TYPES || USE_ARDUINO_SPI_LIBRARY
+#endif  // SD_SPI_CONFIGURATION >= 3 || SD_SPI_CONFIGURATION == 1
 //------------------------------------------------------------------------------
 /**
  * \class SdSpiSoft
  * \brief Software SPI class for access to SD and SDHC flash memory cards.
  */
 template<uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin>
-#if USE_MULTIPLE_SPI_TYPES
 class SdSpiSoft : public SdSpiBase {
-#else
-class SdSpiSoft {
-#endif
  public:
   /**
    * initialize SPI pins
    */
-  void begin() {m_spi.begin();}
+  void begin() {
+    m_spi.begin();
+  }
   /**
    * Initialize hardware SPI - dummy for soft SPI
    * \param[in] divisor SCK divisor - ignored.
@@ -241,14 +229,16 @@ class SdSpiSoft {
    *
    * \return The byte.
    */
-  uint8_t receive() {return m_spi.receive();}
-   /** Receive multiple bytes.
-   *
-   * \param[out] buf Buffer to receive the data.
-   * \param[in] n Number of bytes to receive.
-   *
-   * \return Zero for no error or nonzero error code.
-   */
+  uint8_t receive() {
+    return m_spi.receive();
+  }
+  /** Receive multiple bytes.
+  *
+  * \param[out] buf Buffer to receive the data.
+  * \param[in] n Number of bytes to receive.
+  *
+  * \return Zero for no error or nonzero error code.
+  */
   uint8_t receive(uint8_t* buf, size_t n) {
     for (size_t i = 0; i < n; i++) {
       buf[i] = receive();
@@ -259,7 +249,9 @@ class SdSpiSoft {
    *
    * \param[in] data Byte to send
    */
-  void send(uint8_t data) {m_spi.send(data);}
+  void send(uint8_t data) {
+    m_spi.send(data);
+  }
   /** Send multiple bytes.
    *
    * \param[in] buf Buffer for data to be sent.
@@ -271,22 +263,27 @@ class SdSpiSoft {
     }
   }
   /** \return false - no SPI transactions */
-  bool useSpiTransactions() {return false;}
+  bool useSpiTransactions() {
+    return false;
+  }
+
  private:
   SoftSPI<MisoPin, MosiPin, SckPin, 0> m_spi;
 };
 //------------------------------------------------------------------------------
-#if USE_ARDUINO_SPI_LIBRARY
-/** Default is Arduino library SPI. */
-typedef SdSpiLib SpiDefault_t;
-#elif USE_SOFTWARE_SPI
-/** Default is software SPI. */
-typedef SdSpiSoft<SOFT_SPI_MISO_PIN, SOFT_SPI_MOSI_PIN, SOFT_SPI_SCK_PIN>
-        SpiDefault_t;
-#else  // USE_ARDUINO_SPI_LIBRARY
+#if SD_SPI_CONFIGURATION == 0 || SD_SPI_CONFIGURATION >= 3
 /** Default is custom fast SPI. */
 typedef SdSpi SpiDefault_t;
-#endif
+#elif SD_SPI_CONFIGURATION == 1
+/** Default is Arduino library SPI. */
+typedef SdSpiLib SpiDefault_t;
+#elif SD_SPI_CONFIGURATION == 2
+/** Default is software SPI. */
+typedef SdSpiSoft<SOFT_SPI_MISO_PIN, SOFT_SPI_MOSI_PIN, SOFT_SPI_SCK_PIN>
+SpiDefault_t;
+#else  // SD_SPI_CONFIGURATION == 0 || SD_SPI_CONFIGURATION >= 3
+#error bad SD_SPI_CONFIGURATION
+#endif  // SD_SPI_CONFIGURATION == 0 || SD_SPI_CONFIGURATION >= 3
 //------------------------------------------------------------------------------
 // Use of in-line for AVR to save flash.
 #ifdef __AVR__
@@ -327,7 +324,9 @@ inline uint8_t SdSpi::receive() {
 }
 //------------------------------------------------------------------------------
 inline uint8_t SdSpi::receive(uint8_t* buf, size_t n) {
-  if (n-- == 0) return 0;
+  if (n-- == 0) {
+    return 0;
+  }
   SPDR = 0XFF;
   for (size_t i = 0; i < n; i++) {
     while (!(SPSR & (1 << SPIF))) {}
@@ -346,7 +345,9 @@ inline void SdSpi::send(uint8_t data) {
 }
 //------------------------------------------------------------------------------
 inline void SdSpi::send(const uint8_t* buf , size_t n) {
-  if (n == 0) return;
+  if (n == 0) {
+    return;
+  }
   SPDR = buf[0];
   if (n > 1) {
     uint8_t b = buf[1];
@@ -354,7 +355,9 @@ inline void SdSpi::send(const uint8_t* buf , size_t n) {
     while (1) {
       while (!(SPSR & (1 << SPIF))) {}
       SPDR = b;
-      if (i == n) break;
+      if (i == n) {
+        break;
+      }
       b = buf[i++];
     }
   }

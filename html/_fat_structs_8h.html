@@ -175,8 +175,6 @@ Functions</h2></td></tr>
 <tr class="separator:a375720927be5a39475d48b2d75dae29a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a279a75f907dd2603543c7bdad00ff603"><td class="memItemLeft" align="right" valign="top">static uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_structs_8h.html#a279a75f907dd2603543c7bdad00ff603">FAT_YEAR</a> (uint16_t fatDate)</td></tr>
 <tr class="separator:a279a75f907dd2603543c7bdad00ff603"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28a106f8c82836cfd89732068b8ce59b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_structs_8h.html#a28a106f8c82836cfd89732068b8ce59b">lfnChar</a> (<a class="el" href="_fat_structs_8h.html#aa1b540ee1eedd1aa9b267d11cba0d9e2">ldir_t</a> *ldir, uint8_t i)</td></tr>
-<tr class="separator:a28a106f8c82836cfd89732068b8ce59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -210,6 +208,10 @@ Variables</h2></td></tr>
 <tr class="separator:a5de4ada3536d89559f6433e835e311da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23b2e4d06e245c778f4c52909cf97c76"><td class="memItemLeft" align="right" valign="top">uint8_t const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_structs_8h.html#a23b2e4d06e245c778f4c52909cf97c76">DIR_NAME_FREE</a> = 0X00</td></tr>
 <tr class="separator:a23b2e4d06e245c778f4c52909cf97c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f9b8960dba007b537e9b71c25384fe"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_structs_8h.html#a39f9b8960dba007b537e9b71c25384fe">DIR_NT_LC_BASE</a> = 0X08</td></tr>
+<tr class="separator:a39f9b8960dba007b537e9b71c25384fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8766a8bbab6ad3da38c1b308545d7572"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_structs_8h.html#a8766a8bbab6ad3da38c1b308545d7572">DIR_NT_LC_EXT</a> = 0X10</td></tr>
+<tr class="separator:a8766a8bbab6ad3da38c1b308545d7572"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac856ff0a92288eb124e1688581628cd0"><td class="memItemLeft" align="right" valign="top">uint8_t const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_structs_8h.html#ac856ff0a92288eb124e1688581628cd0">EXTENDED_BOOT_SIG</a> = 0X29</td></tr>
 <tr class="separator:ac856ff0a92288eb124e1688581628cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5beb263a9cb768739f5ddb476ede6690"><td class="memItemLeft" align="right" valign="top">uint16_t const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_structs_8h.html#a5beb263a9cb768739f5ddb476ede6690">FAT12EOC</a> = 0XFFF</td></tr>
@@ -809,49 +811,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a28a106f8c82836cfd89732068b8ce59b"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t lfnChar </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_fat_structs_8h.html#aa1b540ee1eedd1aa9b267d11cba0d9e2">ldir_t</a> *&#160;</td>
-          <td class="paramname"><em>ldir</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>i</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Fetch a 16-bit long file name character.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">ldir</td><td>Pointer to long file name directory entry. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>Index of character to return; </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The 16-bit field. </dd></dl>
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a class="anchor" id="aa1aeb3a5e2838c5c7270fa17bcc31e8e"></a>
 <div class="memitem">
@@ -1045,6 +1004,32 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>name[0] value for entry that is free and no allocated entries follow </p>
+
+</div>
+</div>
+<a class="anchor" id="a39f9b8960dba007b537e9b71c25384fe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t DIR_NT_LC_BASE = 0X08</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Filename base-name is all lower case </p>
+
+</div>
+</div>
+<a class="anchor" id="a8766a8bbab6ad3da38c1b308545d7572"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t DIR_NT_LC_EXT = 0X10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Filename extension is all lower case. </p>
 
 </div>
 </div>
@@ -1259,7 +1244,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 15 2014 10:05:35 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 08:53:21 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

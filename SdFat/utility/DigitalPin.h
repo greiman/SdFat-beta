@@ -81,7 +81,9 @@ inline void fastDigitalToggle(uint8_t pin) {
   fastDigitalWrite(pin, !fastDigitalRead(pin));
 }
 //------------------------------------------------------------------------------
-inline void fastPinMode(uint8_t pin, bool mode) {pinMode(pin, mode);}
+inline void fastPinMode(uint8_t pin, bool mode) {
+  pinMode(pin, mode);
+}
 #else  // __arm__
 #include <avr/io.h>
 #include <util/atomic.h>
@@ -449,7 +451,7 @@ static const uint8_t digitalPinCount = sizeof(pinMap)/sizeof(pin_map_t);
 //==============================================================================
 /** generate bad pin number error */
 void badPinNumber(void)
-  __attribute__((error("Pin number is too large or not a constant")));
+__attribute__((error("Pin number is too large or not a constant")));
 //------------------------------------------------------------------------------
 /** Check for valid pin number
  * @param[in] pin Number of pin to be checked.
@@ -457,7 +459,7 @@ void badPinNumber(void)
 static inline __attribute__((always_inline))
 void badPinCheck(uint8_t pin) {
   if (!__builtin_constant_p(pin) || pin >= digitalPinCount) {
-     badPinNumber();
+    badPinNumber();
   }
 }
 //------------------------------------------------------------------------------
@@ -502,13 +504,13 @@ bool fastDigitalRead(uint8_t pin) {
 static inline __attribute__((always_inline))
 void fastDigitalToggle(uint8_t pin) {
   badPinCheck(pin);
-    if (pinMap[pin].pin > reinterpret_cast<uint8_t*>(0X5F)) {
-      // must write bit to high address port
-      *pinMap[pin].pin = 1 << pinMap[pin].bit;
-    } else {
-      // will compile to sbi and PIN register will not be read.
-      *pinMap[pin].pin |= 1 << pinMap[pin].bit;
-    }
+  if (pinMap[pin].pin > reinterpret_cast<uint8_t*>(0X5F)) {
+    // must write bit to high address port
+    *pinMap[pin].pin = 1 << pinMap[pin].bit;
+  } else {
+    // will compile to sbi and PIN register will not be read.
+    *pinMap[pin].pin |= 1 << pinMap[pin].bit;
+  }
 }
 //------------------------------------------------------------------------------
 /** Set pin value
@@ -594,7 +596,7 @@ class DigitalPin {
   //----------------------------------------------------------------------------
   /** set pin configuration
    * @param[in] mode If true set output mode else input mode
-   * @param[in] level If mode is output, set level high/low.  If mode 
+   * @param[in] level If mode is output, set level high/low.  If mode
    *                  is input, enable or disable the pin's 20K pull-up.
    */
   inline __attribute__((always_inline))
@@ -606,13 +608,17 @@ class DigitalPin {
    * Set pin level high if output mode or enable 20K pull-up if input mode.
    */
   inline __attribute__((always_inline))
-  void high() {write(true);}
+  void high() {
+    write(true);
+  }
   //----------------------------------------------------------------------------
   /**
    * Set pin level low if output mode or disable 20K pull-up if input mode.
    */
   inline __attribute__((always_inline))
-  void low() {write(false);}
+  void low() {
+    write(false);
+  }
   //----------------------------------------------------------------------------
   /**
    * Set pin mode

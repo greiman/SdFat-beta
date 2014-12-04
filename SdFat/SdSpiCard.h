@@ -35,11 +35,11 @@
 class SdSpiCard {
  public:
   /** typedef for SPI class.  */
-#if USE_MULTIPLE_SPI_TYPES
-  typedef SdSpiBase m_spi_t;
-#else  // USE_MULTIPLE_SPI_TYPES
+#if SD_SPI_CONFIGURATION < 3
   typedef SpiDefault_t m_spi_t;
-#endif  // USE_MULTIPLE_SPI_TYPES
+#else  // SD_SPI_CONFIGURATION < 3
+  typedef SdSpiBase m_spi_t;
+#endif  // SD_SPI_CONFIGURATION < 3
   /** Construct an instance of SdSpiCard. */
   SdSpiCard() : m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
   /** Initialize the SD card.
@@ -49,7 +49,7 @@ class SdSpiCard {
    * \return true for success else false.
    */
   bool begin(m_spi_t* spi, uint8_t chipSelectPin = SS,
-              uint8_t sckDivisor = SPI_FULL_SPEED);
+             uint8_t sckDivisor = SPI_FULL_SPEED);
   /**
    * Determine the size of an SD flash memory card.
    *
@@ -67,8 +67,8 @@ class SdSpiCard {
    * either 0 or 1, depends on the card vendor.  The card must support
    * single block erase.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool erase(uint32_t firstBlock, uint32_t lastBlock);
   /** Determine if card supports single block erase.
@@ -81,13 +81,19 @@ class SdSpiCard {
    *  Set SD error code.
    *  \param[in] code value for error code.
    */
-  void error(uint8_t code) {m_errorCode = code;}
+  void error(uint8_t code) {
+    m_errorCode = code;
+  }
   /**
    * \return code for the last error. See SdSpiCard.h for a list of error codes.
    */
-  int errorCode() const {return m_errorCode;}
+  int errorCode() const {
+    return m_errorCode;
+  }
   /** \return error data for last error. */
-  int errorData() const {return m_status;}
+  int errorData() const {
+    return m_status;
+  }
   /**
    * Check for busy.  MISO low indicates the card is busy.
    *
@@ -99,8 +105,8 @@ class SdSpiCard {
    *
    * \param[in] block Logical block to be read.
    * \param[out] dst Pointer to the location that will receive the data.
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool readBlock(uint32_t block, uint8_t* dst);
   /**
@@ -109,8 +115,8 @@ class SdSpiCard {
    * \param[in] block Logical block to be read.
    * \param[in] count Number of blocks to be read.
    * \param[out] dst Pointer to the location that will receive the data.
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool readBlocks(uint32_t block, uint8_t* dst, size_t count);
   /**
@@ -140,8 +146,8 @@ class SdSpiCard {
    *
    * \param[out] dst Pointer to the location for the data to be read.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool readData(uint8_t *dst);
   /** Read OCR register.
@@ -157,32 +163,36 @@ class SdSpiCard {
    * \note This function is used with readData() and readStop() for optimized
    * multiple block reads.  SPI chipSelect must be low for the entire sequence.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool readStart(uint32_t blockNumber);
   /** End a read multiple blocks sequence.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool readStop();
   /** Return SCK divisor.
    *
    * \return Requested SCK divisor.
    */
-  uint8_t sckDivisor() {return m_sckDivisor;}
+  uint8_t sckDivisor() {
+    return m_sckDivisor;
+  }
   /** Return the card type: SD V1, SD V2 or SDHC
    * \return 0 - SD V1, 1 - SD V2, or 3 - SDHC.
    */
-  int type() const {return m_type;}
+  int type() const {
+    return m_type;
+  }
   /**
    * Writes a 512 byte block to an SD card.
    *
    * \param[in] blockNumber Logical block to be written.
    * \param[in] src Pointer to the location of the data to be written.
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool writeBlock(uint32_t blockNumber, const uint8_t* src);
   /**
@@ -191,14 +201,14 @@ class SdSpiCard {
    * \param[in] block Logical block to be written.
    * \param[in] count Number of blocks to be written.
    * \param[in] src Pointer to the location of the data to be written.
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool writeBlocks(uint32_t block, const uint8_t* src, size_t count);
   /** Write one data block in a multiple block write sequence
    * \param[in] src Pointer to the location of the data to be written.
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool writeData(const uint8_t* src);
   /** Start a write multiple blocks sequence.
@@ -209,14 +219,14 @@ class SdSpiCard {
    * \note This function is used with writeData() and writeStop()
    * for optimized multiple block writes.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool writeStart(uint32_t blockNumber, uint32_t eraseCount);
   /** End a write multiple blocks sequence.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool writeStop();
 
@@ -232,17 +242,32 @@ class SdSpiCard {
   void chipSelectHigh();
   void chipSelectLow();
   void spiYield();
-  void type(uint8_t value) {m_type = value;}
+  void type(uint8_t value) {
+    m_type = value;
+  }
   bool waitNotBusy(uint16_t timeoutMillis);
   bool writeData(uint8_t token, const uint8_t* src);
-  void spiBegin() {m_spi->begin();}
-  void spiInit(uint8_t spiDivisor) {m_spi->init(spiDivisor);}
-  uint8_t spiReceive() {return m_spi->receive();}
-  uint8_t spiReceive(uint8_t* buf, size_t n) {return m_spi->receive(buf, n);}
-  void spiSend(uint8_t data) {m_spi->send(data);}
-  void spiSend(const uint8_t* buf, size_t n) {m_spi->send(buf, n);}
-  bool useSpiTransactions() {return m_spi->useSpiTransactions();}
-
+  void spiBegin() {
+    m_spi->begin();
+  }
+  void spiInit(uint8_t spiDivisor) {
+    m_spi->init(spiDivisor);
+  }
+  uint8_t spiReceive() {
+    return m_spi->receive();
+  }
+  uint8_t spiReceive(uint8_t* buf, size_t n) {
+    return m_spi->receive(buf, n);
+  }
+  void spiSend(uint8_t data) {
+    m_spi->send(data);
+  }
+  void spiSend(const uint8_t* buf, size_t n) {
+    m_spi->send(buf, n);
+  }
+  bool useSpiTransactions() {
+    return m_spi->useSpiTransactions();
+  }
   m_spi_t* m_spi;
   uint8_t m_chipSelectPin;
   uint8_t m_errorCode;
@@ -261,7 +286,7 @@ class Sd2Card : public SdSpiCard {
    * \param[in] chipSelectPin SD chip select pin.
    * \param[in] sckDivisor SPI clock divisor.
    * \return true for success else false.
-   */  
+   */
   bool begin(uint8_t chipSelectPin = SS, uint8_t sckDivisor = 2) {
     return SdSpiCard::begin(&m_spi, chipSelectPin, sckDivisor);
   }
@@ -269,13 +294,15 @@ class Sd2Card : public SdSpiCard {
    * \param[in] chipSelectPin SD chip select pin.
    * \param[in] sckDivisor SPI clock divisor.
    * \return true for success else false.
-   */    
+   */
   bool init(uint8_t sckDivisor = 2, uint8_t chipSelectPin = SS) {
     return begin(chipSelectPin, sckDivisor);
   }
  private:
-    bool begin(m_spi_t* spi, uint8_t chipSelectPin = SS,
-              uint8_t sckDivisor = SPI_FULL_SPEED) {return false;}
+  bool begin(m_spi_t* spi, uint8_t chipSelectPin = SS,
+             uint8_t sckDivisor = SPI_FULL_SPEED) {
+    return false;
+  }
   SpiDefault_t m_spi;
 };
 #endif  // SpiCard_h

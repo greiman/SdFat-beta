@@ -25,10 +25,10 @@ SdFat sd;
  * create enough files to force a cluster to be allocated to dir.
  */
 void dirAllocTest(SdBaseFile* dir) {
-  char buf[13], name[13];
+  char buf[32], name[32];
   SdFile file;
   uint16_t n; 
-  uint32_t size = dir->fileSize();
+  uint32_t size = dir->dirSize();
  
   // create files and write name to file
   for (n = 0; ; n++){
@@ -61,7 +61,7 @@ void dirAllocTest(SdBaseFile* dir) {
     Serial.println(t2 - t1);
    
     // directory size will change when a cluster is added
-    if (dir->fileSize() != size) break;
+    if (dir->curPosition() > size) break;
   }
 
   // read files and check content
@@ -76,7 +76,7 @@ void dirAllocTest(SdBaseFile* dir) {
     
     // open end time and read start time
     uint32_t t1 = millis();
-    int16_t nr = file.read(buf, 13);
+    int16_t nr = file.read(buf, sizeof(buf));
     if (nr < 5) error("file.read failed");
     
     // read end time
@@ -112,6 +112,7 @@ void setup() {
   // try SPI_HALF_SPEED if bus errors occur.
   if (!sd.begin(SD_CHIP_SELECT, SPI_FULL_SPEED)) sd.initErrorHalt();
     
+  uint32_t m = millis();   
   // write files to root if FAT32
   if (sd.vol()->fatType() == 32) {
     Serial.println(F("Writing files to root"));
@@ -129,8 +130,9 @@ void setup() {
   if (!sub2.mkdir(&sub1, "SUB2")) error("mkdir SUB2 failed");
   Serial.println(F("Writing files to SUB2")); 
   dirAllocTest(&sub2);
-  
-  Serial.println(F("Done"));
+  m = millis() - m;
+  Serial.print(F("Done millis: "));
+  Serial.println(m);
 }
 
 void loop() { }

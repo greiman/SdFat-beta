@@ -9,6 +9,5 @@ var searchData=
   ['attr',['attr',['../structlong_directory_entry.html#aa36bf1210d0c2b3b80948e5f697eb02e',1,'longDirectoryEntry']]],
   ['attributes',['attributes',['../structdirectory_entry.html#a16c6cde55c8175c90935c386f1cfb21a',1,'directoryEntry']]],
   ['available',['available',['../class_sd_file.html#abbb16ccfa24386ea381835778577626a',1,'SdFile::available()'],['../class_file.html#acf613c4e75bae85f543b30e701ebcc44',1,'File::available()'],['../class_fat_file.html#ac1fa779d98db7ffdb96f8019ab0060d6',1,'FatFile::available()']]],
-  ['avr_5fsoft_5fspi',['AVR_SOFT_SPI',['../_sd_fat_config_8h.html#a9b2b6f07bfc371ed5b9c1e305cd8ac07',1,'SdFatConfig.h']]],
   ['arduino_20_25sdfat_20library',['Arduino %SdFat Library',['../index.html',1,'']]]
 ];

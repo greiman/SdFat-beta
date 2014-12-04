@@ -28,7 +28,7 @@
 #include "utility/FatLib.h"
 //------------------------------------------------------------------------------
 /** SdFat version YYYYMMDD */
-#define SD_FAT_VERSION 20141115
+#define SD_FAT_VERSION 20141204
 //==============================================================================
 /**
  * \class SdFatBase
@@ -44,12 +44,16 @@ class SdFatBase : public FatFileSystem {
    */
   bool begin(SdSpiCard::m_spi_t* spi, uint8_t csPin = SS, uint8_t divisor = 2) {
     return m_sdCard.begin(spi, csPin, divisor) &&
-       FatFileSystem::begin(&m_vwd);
+           FatFileSystem::begin(&m_vwd);
   }
   /** \return Pointer to SD card object */
-  SdSpiCard *card() {return &m_sdCard;}
+  SdSpiCard *card() {
+    return &m_sdCard;
+  }
   /** %Print any SD error code to Serial and halt. */
-  void errorHalt() {errorHalt(&Serial);}
+  void errorHalt() {
+    errorHalt(&Serial);
+  }
   /** %Print any SD error code and halt.
    *
    * \param[in] pr Print destination.
@@ -59,7 +63,9 @@ class SdFatBase : public FatFileSystem {
    *
    * \param[in] msg Message to print.
    */
-  void errorHalt(char const* msg) {errorHalt(&Serial, msg);}
+  void errorHalt(char const* msg) {
+    errorHalt(&Serial, msg);
+  }
   /** %Print msg, any SD error code, and halt.
    *
    * \param[in] pr Print destination.
@@ -70,7 +76,9 @@ class SdFatBase : public FatFileSystem {
    *
    * \param[in] msg Message to print.
    */
-  void errorHalt(const __FlashStringHelper* msg) {errorHalt(&Serial, msg);}
+  void errorHalt(const __FlashStringHelper* msg) {
+    errorHalt(&Serial, msg);
+  }
   /** %Print msg, any SD error code, and halt.
    *
    * \param[in] pr Print destination.
@@ -78,7 +86,9 @@ class SdFatBase : public FatFileSystem {
    */
   void errorHalt(Print* pr, const __FlashStringHelper* msg);
   /** %Print any SD error code to Serial */
-  void errorPrint() {errorPrint(&Serial);}
+  void errorPrint() {
+    errorPrint(&Serial);
+  }
   /** %Print any SD error code.
    * \param[in] pr Print device.
    */
@@ -87,7 +97,9 @@ class SdFatBase : public FatFileSystem {
    *
    * \param[in] msg Message to print.
    */
-  void errorPrint(const char* msg) {errorPrint(&Serial, msg);}
+  void errorPrint(const char* msg) {
+    errorPrint(&Serial, msg);
+  }
   /** %Print msg, any SD error code.
    *
    * \param[in] pr Print destination.
@@ -98,19 +110,26 @@ class SdFatBase : public FatFileSystem {
    *
    * \param[in] msg Message to print.
    */
-  void errorPrint(const __FlashStringHelper* msg) {errorPrint(&Serial, msg);}
+  void errorPrint(const __FlashStringHelper* msg) {
+    errorPrint(&Serial, msg);
+  }
   /** %Print msg, any SD error code.
    *
    * \param[in] pr Print destination.
    * \param[in] msg Message to print.
    */
   void errorPrint(Print* pr, const __FlashStringHelper* msg);
-  /** Diagnostic call to initialize FatFileSystem.
+  /** Diagnostic call to initialize FatFileSystem - use for
+   *  diagnostic purposes only.
    *  \return true for success else false.
    */
-  bool fsBegin() {return FatFileSystem::begin(&m_vwd);}
+  bool fsBegin() {
+    return FatFileSystem::begin(&m_vwd);
+  }
   /** %Print any SD error code and halt. */
-  void initErrorHalt() {initErrorHalt(&Serial);}
+  void initErrorHalt() {
+    initErrorHalt(&Serial);
+  }
   /** %Print error details and halt after begin fails.
    *
    * \param[in] pr Print destination.
@@ -120,22 +139,30 @@ class SdFatBase : public FatFileSystem {
    *
    * \param[in] msg Message to print.
    */
-  void initErrorHalt(char const *msg) {initErrorHalt(&Serial, msg);}
+  void initErrorHalt(char const *msg) {
+    initErrorHalt(&Serial, msg);
+  }
   /**Print message, error details, and halt after SdFatBase::init() fails.
    * \param[in] pr Print device.
    * \param[in] msg Message to print.
    */
   void initErrorHalt(Print* pr, char const *msg);
- /**Print message, error details, and halt after SdFat::init() fails.
-   *
-   * \param[in] msg Message to print.
-   */
+  /**Print message, error details, and halt after SdFat::init() fails.
+    *
+    * \param[in] msg Message to print.
+    */
   void initErrorHalt(const __FlashStringHelper* msg) {
     initErrorHalt(&Serial, msg);
   }
+  /**Print message, error details, and halt after SdFatBase::init() fails.
+   * \param[in] pr Print device for message.
+   * \param[in] msg Message to print.
+   */
   void initErrorHalt(Print* pr, const __FlashStringHelper* msg);
   /** Print error details after SdFat::init() fails. */
-  void initErrorPrint() {initErrorPrint(&Serial);}
+  void initErrorPrint() {
+    initErrorPrint(&Serial);
+  }
   /** Print error details after SdFatBase::init() fails.
    *
    * \param[in] pr Print destination.
@@ -145,7 +172,9 @@ class SdFatBase : public FatFileSystem {
    *
    * \param[in] msg Message to print.
    */
-  void initErrorPrint(char const *msg) {initErrorPrint(&Serial, msg);}
+  void initErrorPrint(char const *msg) {
+    initErrorPrint(&Serial, msg);
+  }
   /**Print message and error details and halt after SdFatBase::init() fails.
    *
    * \param[in] pr Print destination.
@@ -201,13 +230,19 @@ class SdFatBase : public FatFileSystem {
    */
   File open(const char *path, uint8_t mode = FILE_READ);
   /** \return a pointer to the volume working directory. */
-  SdBaseFile* vwd() {return &m_vwd;}
+  SdBaseFile* vwd() {
+    return &m_vwd;
+  }
 
   using FatFileSystem::ls;
 
  private:
-  uint8_t cardErrorCode() {return m_sdCard.errorCode();}
-  uint8_t cardErrorData() {return m_sdCard.errorData();}
+  uint8_t cardErrorCode() {
+    return m_sdCard.errorCode();
+  }
+  uint8_t cardErrorData() {
+    return m_sdCard.errorData();
+  }
   bool readBlock(uint32_t block, uint8_t* dst) {
     return m_sdCard.readBlock(block, dst);
   }
@@ -239,7 +274,7 @@ class SdFat : public SdFatBase {
   bool begin(uint8_t csPin = SS, uint8_t divisor = 2) {
     return SdFatBase::begin(&m_spi, csPin, divisor);
   }
-  /** Initialize SD card - use for diagnostic purposes.
+  /** Diagnostic call to initialize SD card - use for diagnostic purposes only.
    * \param[in] csPin SD card chip select pin.
    * \param[in] divisor SPI divisor.
    * \return true for success else false.
@@ -251,23 +286,23 @@ class SdFat : public SdFatBase {
   SpiDefault_t m_spi;
 };
 //==============================================================================
-#if USE_MULTIPLE_SPI_TYPES || defined(DOXYGEN)
+#if SD_SPI_CONFIGURATION >= 3 || defined(DOXYGEN)
 /**
  * \class SdFatLibSpi
  * \brief SdFat class using the standard Arduino SPI library.
  */
 class SdFatLibSpi: public SdFatBase {
  public:
-   /** Initialize SD card and file system.
-   *
-   * \param[in] csPin SD card chip select pin.
-   * \param[in] divisor SPI divisor.
-   * \return true for success else false.
-   */
+  /** Initialize SD card and file system.
+  *
+  * \param[in] csPin SD card chip select pin.
+  * \param[in] divisor SPI divisor.
+  * \return true for success else false.
+  */
   bool begin(uint8_t csPin = SS, uint8_t divisor = 2) {
     return SdFatBase::begin(&m_spi, csPin, divisor);
   }
-  /** Initialize SD card - use for diagnostic purposes.
+  /** Diagnostic call to initialize SD card - use for diagnostic purposes only.
    * \param[in] csPin SD card chip select pin.
    * \param[in] divisor SPI divisor.
    * \return true for success else false.
@@ -296,7 +331,7 @@ class SdFatSoftSpi : public SdFatBase {
   bool begin(uint8_t csPin = SS, uint8_t divisor = 2) {
     return SdFatBase::begin(&m_spi, csPin, divisor);
   }
-  /** Initialize SD card - use for diagnostic purposes.
+  /** Diagnostic call to initialize SD card - use for diagnostic purposes only.
    * \param[in] csPin SD card chip select pin.
    * \param[in] divisor SPI divisor.
    * \return true for success else false.
@@ -308,5 +343,5 @@ class SdFatSoftSpi : public SdFatBase {
  private:
   SdSpiSoft<MisoPin, MosiPin, SckPin> m_spi;
 };
-#endif  // USE_MULTIPLE_SPI_TYPES
+#endif  /// SD_SPI_CONFIGURATION >= 3 || defined(DOXYGEN)
 #endif  // SdFat_h

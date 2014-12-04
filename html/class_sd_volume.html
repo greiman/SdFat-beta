@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_sd_volume.html" title="SdVolume used in Quick start. Soon to be removed. ">SdVolume</a> used in Quick start. Soon to be removed.  
+<p><a class="el" href="class_sd_volume.html" title="SdVolume Soon to be removed. ">SdVolume</a> Soon to be removed.  
  <a href="class_sd_volume.html#details">More...</a></p>
 
 <p><code>#include &lt;SdVolume.h&gt;</code></p>
@@ -122,8 +122,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac0e63f33d71d5dc95a602834274def6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a443364af257c219f8e908d5b073d8fa3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a443364af257c219f8e908d5b073d8fa3">dataStartBlock</a> () const </td></tr>
 <tr class="separator:a443364af257c219f8e908d5b073d8fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2439fdebcf60a9226d2563600bbb752d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a2439fdebcf60a9226d2563600bbb752d">dbgFat</a> (uint32_t n, uint32_t *v)</td></tr>
-<tr class="separator:a2439fdebcf60a9226d2563600bbb752d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c6311b70fa274b3be94ff25fdebba7"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a25c6311b70fa274b3be94ff25fdebba7">dbgFat</a> (uint32_t n, uint32_t *v)</td></tr>
+<tr class="separator:a25c6311b70fa274b3be94ff25fdebba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdedc6a200b01e401c9cd9b511eae6ec"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#acdedc6a200b01e401c9cd9b511eae6ec">fatCount</a> ()</td></tr>
 <tr class="separator:acdedc6a200b01e401c9cd9b511eae6ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd0cc689b63ef0702aed1cf36b1722d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a0dd0cc689b63ef0702aed1cf36b1722d">fatStartBlock</a> () const </td></tr>
@@ -140,13 +140,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:acab819fa25a91dad1cc698a7e1e0eb32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a034d997a1e7a0b2b664a4357bcccd256"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a034d997a1e7a0b2b664a4357bcccd256">init</a> (uint8_t part)</td></tr>
 <tr class="separator:a034d997a1e7a0b2b664a4357bcccd256"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae86d9615ddfb386c1ba8af5de23519d9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#ae86d9615ddfb386c1ba8af5de23519d9">rootDirEntryCount</a> () const </td></tr>
-<tr class="separator:ae86d9615ddfb386c1ba8af5de23519d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d483670a0a6a6a4754b23614fe11bc"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#ab2d483670a0a6a6a4754b23614fe11bc">rootDirEntryCount</a> () const </td></tr>
+<tr class="separator:ab2d483670a0a6a6a4754b23614fe11bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9363ebbbae90e895ea56e8fa3f60c13"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#ae9363ebbbae90e895ea56e8fa3f60c13">rootDirStart</a> () const </td></tr>
 <tr class="separator:ae9363ebbbae90e895ea56e8fa3f60c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8088aa74cf601996905dadd2eea6966c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a8088aa74cf601996905dadd2eea6966c">wipe</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr=0)</td></tr>
+<tr class="separator:a8088aa74cf601996905dadd2eea6966c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_sd_volume.html" title="SdVolume used in Quick start. Soon to be removed. ">SdVolume</a> used in Quick start. Soon to be removed. </p>
+<div class="textblock"><p><a class="el" href="class_sd_volume.html" title="SdVolume Soon to be removed. ">SdVolume</a> Soon to be removed. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a06beed4cea5e38116b58254a57125442"></a>
 <div class="memitem">
@@ -292,7 +294,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2439fdebcf60a9226d2563600bbb752d"></a>
+<a class="anchor" id="a25c6311b70fa274b3be94ff25fdebba7"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -300,7 +302,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool FatVolume::dbgFat </td>
+          <td class="memname">int8_t FatVolume::dbgFat </td>
           <td>(</td>
           <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>n</em>, </td>
@@ -528,7 +530,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Initialize a FAT volume. Try partition one first then try super floppy format.</p>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include not finding a valid partition, not finding a valid FAT file system or an I/O error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -560,11 +562,11 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value one, true, is returned for success and the value zero, false, is returned for failure. Reasons for failure include not finding a valid partition, not finding a valid FAT file system in the specified partition or an I/O error. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="ae86d9615ddfb386c1ba8af5de23519d9"></a>
+<a class="anchor" id="ab2d483670a0a6a6a4754b23614fe11bc"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -572,7 +574,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t FatVolume::rootDirEntryCount </td>
+          <td class="memname">uint16_t FatVolume::rootDirEntryCount </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -612,13 +614,44 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a8088aa74cf601996905dadd2eea6966c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatVolume::wipe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
+          <td class="paramname"><em>pr</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Wipe all data from the volume. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>print stream for status dots. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Arduino/libraries/SdFat/SdVolume.h</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 15 2014 10:05:36 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 08:53:21 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

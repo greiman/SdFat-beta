@@ -5,7 +5,7 @@
 //
 #include <SPI.h>
 #include <SdFat.h>
-#if USE_MULTIPLE_SPI_TYPES  // Must be nonzero in SdFat/SdFatConfig.h
+#if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
 //
 // Pin numbers in templates must be constants.
 const uint8_t SOFT_MISO_PIN = 12;
@@ -23,24 +23,26 @@ SdFile file;
 
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {}  // Wait for Leonardo 
-  
+  while (!Serial) {}  // Wait for Leonardo
+
   Serial.println("Type any character to start");
   while (Serial.read() <= 0) {}
-  
-  if (!sd.begin(SD_CHIP_SELECT_PIN)) sd.initErrorHalt();
-  
-  if (!file.open("SOFT_SPI.TXT", O_CREAT | O_RDWR)) {
+
+  if (!sd.begin(SD_CHIP_SELECT_PIN)) {
+    sd.initErrorHalt();
+  }
+
+  if (!file.open("SoftSPI.txt", O_CREAT | O_RDWR)) {
     sd.errorHalt(F("open failed"));
   }
   file.println(F("This line was printed using software SPI."));
-  
+
   file.close();
-  
+
   Serial.println(F("Done."));
 }
 //------------------------------------------------------------------------------
 void loop() {}
-#else  // USE_MULTIPLE_SPI_TYPES
-#error USE_MULTIPLE_SPI_TYPES must be set nonzero in SdFat/SdFatConfig.h
-#endif  //USE_MULTIPLE_SPI_TYPES
+#else  // SD_SPI_CONFIGURATION >= 3
+#error SD_SPI_CONFIGURATION must be set to 3 in SdFat/SdFatConfig.h
+#endif  //SD_SPI_CONFIGURATION >= 3

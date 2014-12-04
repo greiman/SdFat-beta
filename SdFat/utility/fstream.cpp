@@ -19,7 +19,7 @@
  */
 #include "fstream.h"
 //==============================================================================
-  /// @cond SHOW_PROTECTED
+/// @cond SHOW_PROTECTED
 int16_t FatStreamBase::getch() {
   uint8_t c;
   int8_t s = read(&c, 1);
@@ -31,53 +31,63 @@ int16_t FatStreamBase::getch() {
     }
     return -1;
   }
-  if (c != '\r' || (getmode() & ios::binary)) return c;
+  if (c != '\r' || (getmode() & ios::binary)) {
+    return c;
+  }
   s = read(&c, 1);
-  if (s == 1 && c == '\n') return c;
-  if (s == 1) seekCur(-1);
+  if (s == 1 && c == '\n') {
+    return c;
+  }
+  if (s == 1) {
+    seekCur(-1);
+  }
   return '\r';
 }
 //------------------------------------------------------------------------------
 void FatStreamBase::open(const char* path, ios::openmode mode) {
-uint8_t flags;
+  uint8_t flags;
   switch (mode & (app | in | out | trunc)) {
-    case app | in:
-    case app | in | out:
-      flags = O_RDWR | O_APPEND | O_CREAT;
-      break;
+  case app | in:
+  case app | in | out:
+    flags = O_RDWR | O_APPEND | O_CREAT;
+    break;
 
-    case app:
-    case app | out:
-      flags = O_WRITE | O_APPEND | O_CREAT;
-      break;
+  case app:
+  case app | out:
+    flags = O_WRITE | O_APPEND | O_CREAT;
+    break;
 
-    case in:
-      flags = O_READ;
-      break;
+  case in:
+    flags = O_READ;
+    break;
 
-    case in | out:
-      flags = O_RDWR;
-      break;
+  case in | out:
+    flags = O_RDWR;
+    break;
 
-    case in | out | trunc:
-      flags = O_RDWR | O_TRUNC | O_CREAT;
-      break;
+  case in | out | trunc:
+    flags = O_RDWR | O_TRUNC | O_CREAT;
+    break;
 
-    case out:
-    case out | trunc:
-      flags = O_WRITE | O_TRUNC | O_CREAT;
-      break;
+  case out:
+  case out | trunc:
+    flags = O_WRITE | O_TRUNC | O_CREAT;
+    break;
 
-    default:
-      goto fail;
+  default:
+    goto fail;
   }
-  if (mode & ios::ate) flags |= O_AT_END;
-  if (!FatFile::open(path, flags)) goto fail;
+  if (mode & ios::ate) {
+    flags |= O_AT_END;
+  }
+  if (!FatFile::open(path, flags)) {
+    goto fail;
+  }
   setmode(mode);
   clear();
   return;
 
- fail:
+fail:
   FatFile::close();
   setstate(failbit);
   return;
@@ -88,7 +98,9 @@ void FatStreamBase::putch(char c) {
     write('\r');
   }
   write(c);
-  if (getWriteError()) setstate(badbit);
+  if (getWriteError()) {
+    setstate(badbit);
+  }
 }
 //------------------------------------------------------------------------------
 void FatStreamBase::putstr(const char* str) {
@@ -96,15 +108,21 @@ void FatStreamBase::putstr(const char* str) {
   while (1) {
     char c = str[n];
     if (c == '\0' || (c == '\n' && !(getmode() & ios::binary))) {
-      if (n > 0) write(str, n);
-      if (c == '\0') break;
+      if (n > 0) {
+        write(str, n);
+      }
+      if (c == '\0') {
+        break;
+      }
       write('\r');
       str += n;
       n = 0;
     }
     n++;
   }
-  if (getWriteError()) setstate(badbit);
+  if (getWriteError()) {
+    setstate(badbit);
+  }
 }
 //------------------------------------------------------------------------------
 /** Internal do not use
@@ -114,20 +132,20 @@ void FatStreamBase::putstr(const char* str) {
 bool FatStreamBase::seekoff(off_type off, seekdir way) {
   pos_type pos;
   switch (way) {
-    case beg:
-      pos = off;
-      break;
+  case beg:
+    pos = off;
+    break;
 
-    case cur:
-      pos = curPosition() + off;
-      break;
+  case cur:
+    pos = curPosition() + off;
+    break;
 
-    case end:
-      pos = fileSize() + off;
-      break;
+  case end:
+    pos = fileSize() + off;
+    break;
 
-    default:
-      return false;
+  default:
+    return false;
   }
   return seekpos(pos);
 }

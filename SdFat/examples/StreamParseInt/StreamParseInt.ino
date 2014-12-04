@@ -15,26 +15,26 @@ void setup() {
   while(!Serial) {}
   Serial.println(F("Type any character to start"));
   while (!Serial.available()) {}
-  
+
   // Initialize the SD.
   if (!SD.begin(csPin)) {
     Serial.println(F("begin error"));
     return;
   }
   // Create and open the file.  Use flag to truncate an existing file.
-   file = SD.open("stream.txt", O_RDWR|O_CREAT|O_TRUNC);
-   if (!file) {
-     Serial.println(F("open error"));
-     return;
+  file = SD.open("stream.txt", O_RDWR|O_CREAT|O_TRUNC);
+  if (!file) {
+    Serial.println(F("open error"));
+    return;
   }
   // Write a test number to the file.
   file.println("12345");
-  
+
   // Rewind the file and read the number with parseInt().
   file.seek(0);
   int i = file.parseInt();
   Serial.print(F("parseInt: "));
-  Serial.println(i);  
+  Serial.println(i);
   file.close();
 }
 

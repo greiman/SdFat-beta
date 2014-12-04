@@ -218,7 +218,7 @@ typedef struct CID {
   unsigned char always1 : 1;
   /** CRC7 checksum */
   unsigned char crc : 7;
-}__attribute__((packed)) cid_t;
+} __attribute__((packed)) cid_t;
 //==============================================================================
 /**
  * \class CSDV1
@@ -283,7 +283,7 @@ typedef struct CSDV1 {
   // byte 15
   unsigned char always1 : 1;
   unsigned char crc : 7;
-}__attribute__((packed)) csd1_t;
+} __attribute__((packed)) csd1_t;
 //==============================================================================
 /**
  * \class CSDV2
@@ -368,7 +368,7 @@ typedef struct CSDV2 {
   unsigned char always1 : 1;
   /** checksum */
   unsigned char crc : 7;
-}__attribute__((packed)) csd2_t;
+} __attribute__((packed)) csd2_t;
 //==============================================================================
 /**
  * \class csd_t

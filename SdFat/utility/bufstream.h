@@ -39,7 +39,7 @@ class ibufstream : public istream {
    * Warning: The string will not be copied so must stay in scope.
    */
   explicit ibufstream(const char* str) {
-  init(str);
+    init(str);
   }
   /** Initialize an ibufstream
    * \param[in] str pointer to string to be parsed
@@ -55,14 +55,18 @@ class ibufstream : public istream {
  protected:
   /// @cond SHOW_PROTECTED
   int16_t getch() {
-    if (m_pos < m_len) return m_buf[m_pos++];
+    if (m_pos < m_len) {
+      return m_buf[m_pos++];
+    }
     setstate(eofbit);
     return -1;
   }
   void getpos(FatPos_t *pos) {
     pos->position = m_pos;
   }
-  bool seekoff(off_type off, seekdir way) {return false;}
+  bool seekoff(off_type off, seekdir way) {
+    return false;
+  }
   bool seekpos(pos_type pos) {
     if (pos < m_len) {
       m_pos = pos;
@@ -109,9 +113,13 @@ class obufstream : public ostream {
     m_in = 0;
   }
   /** \return a pointer to the buffer */
-  char* buf() {return m_buf;}
+  char* buf() {
+    return m_buf;
+  }
   /** \return the length of the formatted string */
-  size_t length() {return m_in;}
+  size_t length() {
+    return m_in;
+  }
 
  protected:
   /// @cond SHOW_PROTECTED
@@ -124,16 +132,24 @@ class obufstream : public ostream {
     m_buf[m_in]= '\0';
   }
   void putstr(const char *str) {
-    while (*str) putch(*str++);
+    while (*str) {
+      putch(*str++);
+    }
   }
-  bool seekoff(off_type off, seekdir way) {return false;}
+  bool seekoff(off_type off, seekdir way) {
+    return false;
+  }
   bool seekpos(pos_type pos) {
-    if (pos > m_in) return false;
+    if (pos > m_in) {
+      return false;
+    }
     m_in = pos;
     m_buf[m_in] = '\0';
     return true;
   }
-  bool sync() {return true;}
+  bool sync() {
+    return true;
+  }
 
   pos_type tellpos() {
     return m_in;

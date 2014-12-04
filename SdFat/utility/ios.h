@@ -21,7 +21,7 @@
 #define ios_h
 #include "FatFile.h"
 /**
- * \file 
+ * \file
  * \brief \ref ios_base and \ref ios classes
  */
 //==============================================================================
@@ -116,7 +116,9 @@ class ios_base {
   ios_base() : m_fill(' '), m_fmtflags(dec | right | skipws)
     , m_precision(2), m_width(0) {}
   /** \return fill character */
-  char fill() {return m_fill;}
+  char fill() {
+    return m_fill;
+  }
   /** Set fill character
    * \param[in] c new fill character
    * \return old fill character
@@ -127,7 +129,9 @@ class ios_base {
     return r;
   }
   /** \return format flags */
-  fmtflags flags() const {return m_fmtflags;}
+  fmtflags flags() const {
+    return m_fmtflags;
+  }
   /** set format flags
    * \param[in] fl new flag
    * \return old flags
@@ -138,7 +142,9 @@ class ios_base {
     return tmp;
   }
   /** \return precision */
-  int precision() const {return m_precision;}
+  int precision() const {
+    return m_precision;
+  }
   /** set precision
    * \param[in] n new precision
    * \return old precision
@@ -176,7 +182,9 @@ class ios_base {
     m_fmtflags &= ~fl;
   }
   /** \return width */
-  unsigned width() {return m_width;}
+  unsigned width() {
+    return m_width;
+  }
   /** set width
    * \param[in] n new width
    * \return old width
@@ -360,11 +368,17 @@ class ios : public ios_base {
     return !fail() ? reinterpret_cast<const void*>(this) : 0;
   }
   /** \return true if fail() else false.  */
-  bool operator!() const {return fail();}
+  bool operator!() const {
+    return fail();
+  }
   /** \return The iostate flags for this file. */
-  iostate rdstate() const {return m_iostate;}
+  iostate rdstate() const {
+    return m_iostate;
+  }
   /** \return True if no iostate flags are set else false. */
-  bool good() const {return m_iostate == goodbit;}
+  bool good() const {
+    return m_iostate == goodbit;
+  }
   /** \return true if end of file has been reached else false.
    *
    * Warning: An empty file returns false before the first read.
@@ -372,21 +386,31 @@ class ios : public ios_base {
    * Moral: eof() is only useful in combination with fail(), to find out
    * whether EOF was the cause for failure
    */
-  bool eof() const {return m_iostate & eofbit;}
+  bool eof() const {
+    return m_iostate & eofbit;
+  }
   /** \return true if any iostate bit other than eof are set else false. */
-  bool fail() const {return m_iostate & (failbit | badbit);}
+  bool fail() const {
+    return m_iostate & (failbit | badbit);
+  }
   /** \return true if bad bit is set else false. */
-  bool bad() const {return m_iostate & badbit;}
+  bool bad() const {
+    return m_iostate & badbit;
+  }
   /** Clear iostate bits.
    *
    * \param[in] state The flags you want to set after clearing all flags.
    **/
-  void clear(iostate state = goodbit) {m_iostate = state;}
+  void clear(iostate state = goodbit) {
+    m_iostate = state;
+  }
   /** Set iostate bits.
    *
    * \param[in] state Bitts to set.
    **/
-  void setstate(iostate state) {m_iostate |= state;}
+  void setstate(iostate state) {
+    m_iostate |= state;
+  }
 
  private:
   iostate m_iostate;

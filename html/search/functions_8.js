@@ -15,9 +15,11 @@ var searchData=
   ['isdirectory',['isDirectory',['../class_file.html#a6ba5bdb943363cda56649238ccb18c27',1,'File']]],
   ['isfile',['isFile',['../class_fat_file.html#afcf6270ea8d4a3a5f8e89523bc684e22',1,'FatFile']]],
   ['ishidden',['isHidden',['../class_fat_file.html#a7eefe7408f34b6326f0c6e78af7eb05f',1,'FatFile']]],
+  ['islfn',['isLFN',['../class_fat_file.html#aed36d17f8fde597b6ed9446faec1f7e3',1,'FatFile']]],
   ['isopen',['isOpen',['../class_fat_file.html#a4c8a07b081f04aa25839c6f56c739bdc',1,'FatFile']]],
   ['isreadonly',['isReadOnly',['../class_fat_file.html#a6872d3acb1e70f81c9c2be2495977583',1,'FatFile']]],
   ['isroot',['isRoot',['../class_fat_file.html#aa4a206803a4bf8243be20244c1aef4d2',1,'FatFile']]],
+  ['isroot32',['isRoot32',['../class_fat_file.html#a1449b294e3a838396c62e47674ca8cf0',1,'FatFile']]],
   ['isrootfixed',['isRootFixed',['../class_fat_file.html#a8215bd4b21e11ec83fa88ef226ceb06f',1,'FatFile']]],
   ['issubdir',['isSubDir',['../class_fat_file.html#a95b503b17442c2b364a2f53de1b2aeba',1,'FatFile']]],
   ['issystem',['isSystem',['../class_fat_file.html#add932e13e5bf32ad467af6ec34824e3c',1,'FatFile']]]

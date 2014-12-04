@@ -23,10 +23,16 @@
  */
 #ifndef FatLibConfig_h
 #define FatLibConfig_h
+
 /** Use SdFatConfig.h if nonzero */
 #define USE_SDFAT_CONFIG 1
 #if USE_SDFAT_CONFIG
 #include "../SdFatConfig.h"
+#if !defined(USE_LONG_FILE_NAMES) || !defined(USE_SEPARATE_FAT_CACHE) || \
+    !defined(USE_MULTI_BLOCK_IO) || !defined(DESTRUCTOR_CLOSES_FILE) || \
+    !defined(ENDL_CALLS_FLUSH) || !defined(FAT12_SUPPORT)
+#error Undefined congiguration symbols.
+#endif  // Configuration symbols
 #else  //  USE_SDFAT_CONFIG
 #include <stdint.h>
 #ifdef __AVR__
@@ -34,10 +40,31 @@
 #endif  // __AVR__
 //------------------------------------------------------------------------------
 /**
+ * Set USE_LONG_FILE_NAMES nonzero to use long file names (LFN).
+ * Long File Name are limited to a maximum length of 255 characters.
+ *
+ * This implementation allows 7-bit characters in the range
+ * 0X20 to 0X7E.  The following characters are not allowed:
+ *
+ *  < (less than)
+ *  > (greater than)
+ *  : (colon)
+ *  " (double quote)
+ *  / (forward slash)
+ *  \ (backslash)
+ *  | (vertical bar or pipe)
+ *  ? (question mark)
+ *  * (asterisk)
+ *
+ */
+#define USE_LONG_FILE_NAMES 1
+//------------------------------------------------------------------------------
+/**
  * Set USE_SEPARATE_FAT_CACHE non-zero to use a second 512 byte cache
  * for FAT table entries.  Improves performance for large writes that
  * are not a multiple of 512 bytes.
  */
+
 #ifdef __arm__
 #define USE_SEPARATE_FAT_CACHE 1
 #else  // __arm__

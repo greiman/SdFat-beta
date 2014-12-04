@@ -8,6 +8,7 @@ var searchData=
   ['chvol',['chvol',['../class_fat_file_system.html#af24917d6e00c8766dab168eb834047ec',1,'FatFileSystem']]],
   ['clear',['clear',['../classfstream.html#a682b278a6a299ffb21b8737717ff12bf',1,'fstream::clear()'],['../classofstream.html#a09edfdb3dbda20aff105e751001313f0',1,'ofstream::clear()'],['../classios.html#aa49ed6670d1743e7a373b2d915ec739a',1,'ios::clear()']]],
   ['clearerr',['clearerr',['../class_stdio_stream.html#aa737e5680fc2808a03a603ea8559d82b',1,'StdioStream']]],
+  ['clearerror',['clearError',['../class_fat_file.html#a052e2c15a39b322a5307b693b8835b22',1,'FatFile']]],
   ['clearwriteerror',['clearWriteError',['../class_fat_file.html#aeca2a2eff91e6aa55fe1b0e3860c9a05',1,'FatFile']]],
   ['close',['close',['../class_fat_file.html#afd16af325e0642e4bff6430b7d8bb18b',1,'FatFile::close()'],['../classfstream.html#ac5720ee620c09d63dd186823e688ea9a',1,'fstream::close()'],['../classifstream.html#ac5892f472afdef6160f5fe2401b16dce',1,'ifstream::close()'],['../classofstream.html#a240f3752c7ff7a78d10c143d2083715f',1,'ofstream::close()']]],
   ['clustercount',['clusterCount',['../class_fat_volume.html#a18446a9c5924304fa7a87d5f03ccaf21',1,'FatVolume']]],

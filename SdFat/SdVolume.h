@@ -27,24 +27,26 @@
 //==============================================================================
 /**
  * \class SdVolume
- * \brief SdVolume used in Quick start.  Soon to be removed.
+ * \brief SdVolume Soon to be removed.
  */
 class SdVolume : public FatVolume {
  public:
-   /** Initialize a FAT volume.  Try partition one first then try super
-   * floppy format.
-   *
-   * \param[in] dev The Sd2Card where the volume is located.
-   *
-   * \return true for success else false.
-   */
-  bool init(Sd2Card* dev) {return init(dev, 1) ? true : init(dev, 0);}
-   /** Initialize a FAT volume.
-   *
-   * \param[in] dev The Sd2Card where the volume is located.
-   * \param[in] part the partition to use. Zero for super floppy or 1-4.
-   * \return true for success else false.
-   */
+  /** Initialize a FAT volume.  Try partition one first then try super
+  * floppy format.
+  *
+  * \param[in] dev The Sd2Card where the volume is located.
+  *
+  * \return true for success else false.
+  */
+  bool init(Sd2Card* dev) {
+    return init(dev, 1) ? true : init(dev, 0);
+  }
+  /** Initialize a FAT volume.
+  *
+  * \param[in] dev The Sd2Card where the volume is located.
+  * \param[in] part the partition to use. Zero for super floppy or 1-4.
+  * \return true for success else false.
+  */
   bool init(Sd2Card* dev, uint8_t part) {
     m_sdCard = dev;
     return FatVolume::init(part);

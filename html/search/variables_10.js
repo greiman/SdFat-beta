@@ -5,6 +5,8 @@ var searchData=
   ['sectorsperfat16',['sectorsPerFat16',['../structfat__boot.html#a0d5ab13399759acfa571e49b85600db1',1,'fat_boot::sectorsPerFat16()'],['../structfat32__boot.html#aeaa78272cd42b162ea448e1642f75cab',1,'fat32_boot::sectorsPerFat16()']]],
   ['sectorsperfat32',['sectorsPerFat32',['../structfat32__boot.html#aa00db084ff2f7e25febef321469adeb9',1,'fat32_boot']]],
   ['sectorspertrack',['sectorsPerTrack',['../structfat__boot.html#a6d5ceaf374e0607be8b8162bf657f282',1,'fat_boot::sectorsPerTrack()'],['../structfat32__boot.html#a9525b2e63f84a5cf62ea20199cedf5de',1,'fat32_boot::sectorsPerTrack()']]],
+  ['seqpos',['seqPos',['../structfname__t.html#a96b7c779dec8dd568be3290451078a4e',1,'fname_t']]],
+  ['sfn',['sfn',['../structfname__t.html#a37ed0c108b1feb81be4f8c041a4336bd',1,'fname_t']]],
   ['showbase',['showbase',['../classios__base.html#a7e3373ab307feecfc228bc9bdb29cd01',1,'ios_base']]],
   ['showpoint',['showpoint',['../classios__base.html#ac9bb172682e157f037bd7fb82a236ee6',1,'ios_base']]],
   ['showpos',['showpos',['../classios__base.html#a7bfa4a883933105d10f8ce2693cb9f21',1,'ios_base']]],

@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">FatFile.h File Reference</div>  </div>
 </div><!--header-->
@@ -95,21 +95,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a class="el" href="class_fat_file.html" title="Basic file class. ">FatFile</a> class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;ctype.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;limits.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_fat_lib_config_8h.html">FatLibConfig.h</a>&quot;</code><br />
 <code>#include &quot;FatApiConstants.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_fat_structs_8h.html">FatStructs.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_fat_volume_8h.html">FatVolume.h</a>&quot;</code><br />
-<code>#include &lt;Arduino.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for FatFile.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_fat_file_8h__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2utility_2_fat_file_8h" alt=""/></div>
 <map name="_arduino_2libraries_2_sd_fat_2utility_2_fat_file_8h" id="_arduino_2libraries_2_sd_fat_2utility_2_fat_file_8h">
-<area shape="rect" id="node11" href="_fat_lib_config_8h.html" title="configuration definitions " alt="" coords="249,171,353,197"/><area shape="rect" id="node17" href="_fat_structs_8h.html" title="FAT file structures. " alt="" coords="378,171,472,197"/><area shape="rect" id="node19" href="_fat_volume_8h.html" title="FatVolume class. " alt="" coords="235,96,331,123"/><area shape="rect" id="node13" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="243,245,359,272"/></map>
+<area shape="rect" id="node9" href="_fat_lib_config_8h.html" title="configuration definitions " alt="" coords="106,171,211,197"/><area shape="rect" id="node15" href="_fat_structs_8h.html" title="FAT file structures. " alt="" coords="338,171,432,197"/><area shape="rect" id="node17" href="_fat_volume_8h.html" title="FatVolume class. " alt="" coords="196,96,292,123"/><area shape="rect" id="node11" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="101,245,216,272"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -127,9 +125,14 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_fat_pos__t.html">FatPos_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal type for file position - do not use in user apps.  <a href="struct_fat_pos__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfname__t.html">fname_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal type for Short <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a> Name - do not use in user apps.  <a href="structfname__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a9f85580ad6f1dfc86fff09a58ff0a1c0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a9f85580ad6f1dfc86fff09a58ff0a1c0">isDirSeparator</a>(c)&#160;&#160;&#160;((c) == '/')</td></tr>
+<tr class="separator:a9f85580ad6f1dfc86fff09a58ff0a1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a963f816fc88a5d8479c285ed4c630229"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a963f816fc88a5d8479c285ed4c630229">PGM_P</a>&#160;&#160;&#160;const char*</td></tr>
 <tr class="separator:a963f816fc88a5d8479c285ed4c630229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48c60b057902adf805797f183286728d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a48c60b057902adf805797f183286728d">pgm_read_byte</a>(addr)&#160;&#160;&#160;(*(const unsigned char*)(addr))</td></tr>
@@ -141,14 +144,39 @@ Macros</h2></td></tr>
 <tr class="memitem:a9c00057fd19e916cc1aa0a5949336beb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a9c00057fd19e916cc1aa0a5949336beb">PSTR</a>(x)&#160;&#160;&#160;(x)</td></tr>
 <tr class="separator:a9c00057fd19e916cc1aa0a5949336beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ac62f6449331cfe1a71f29be30efe7890"><td class="memItemLeft" align="right" valign="top">typedef Print&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a></td></tr>
-<tr class="separator:ac62f6449331cfe1a71f29be30efe7890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a79e43960e1b4eecf274f5faea9c3168c"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a79e43960e1b4eecf274f5faea9c3168c">FNAME_FLAG_LC_BASE</a> = <a class="el" href="_fat_structs_8h.html#a39f9b8960dba007b537e9b71c25384fe">DIR_NT_LC_BASE</a></td></tr>
+<tr class="separator:a79e43960e1b4eecf274f5faea9c3168c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a135b7572768b09661aa38afaceec7296"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a135b7572768b09661aa38afaceec7296">FNAME_FLAG_LC_EXT</a> = <a class="el" href="_fat_structs_8h.html#a8766a8bbab6ad3da38c1b308545d7572">DIR_NT_LC_EXT</a></td></tr>
+<tr class="separator:a135b7572768b09661aa38afaceec7296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd45286b7dfc5ba68be18c8c3a9d298d"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#acd45286b7dfc5ba68be18c8c3a9d298d">FNAME_FLAG_LOST_CHARS</a> = 0X01</td></tr>
+<tr class="separator:acd45286b7dfc5ba68be18c8c3a9d298d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63994c21f3b723a55247f063a1b01c9c"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a63994c21f3b723a55247f063a1b01c9c">FNAME_FLAG_MIXED_CASE</a> = 0X02</td></tr>
+<tr class="separator:a63994c21f3b723a55247f063a1b01c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a041207a19d2fd9a1e2739343ccb29b"><td class="memItemLeft" align="right" valign="top">const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_fat_file_8h.html#a1a041207a19d2fd9a1e2739343ccb29b">FNAME_FLAG_NEED_LFN</a></td></tr>
+<tr class="separator:a1a041207a19d2fd9a1e2739343ccb29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_fat_file.html" title="Basic file class. ">FatFile</a> class. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a9f85580ad6f1dfc86fff09a58ff0a1c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define isDirSeparator</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">c</td><td>)</td>
+          <td>&#160;&#160;&#160;((c) == '/')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Expression for path name separator. </p>
+
+</div>
+</div>
 <a class="anchor" id="a963f816fc88a5d8479c285ed4c630229"></a>
 <div class="memitem">
 <div class="memproto">
@@ -226,24 +254,80 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a class="anchor" id="ac62f6449331cfe1a71f29be30efe7890"></a>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="a79e43960e1b4eecf274f5faea9c3168c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef Print <a class="el" href="_fat_file_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a></td>
+          <td class="memname">const uint8_t FNAME_FLAG_LC_BASE = <a class="el" href="_fat_structs_8h.html#a39f9b8960dba007b537e9b71c25384fe">DIR_NT_LC_BASE</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Use Print on Arduino </p>
+<p>Filename base-name is all lower case </p>
+
+</div>
+</div>
+<a class="anchor" id="a135b7572768b09661aa38afaceec7296"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t FNAME_FLAG_LC_EXT = <a class="el" href="_fat_structs_8h.html#a8766a8bbab6ad3da38c1b308545d7572">DIR_NT_LC_EXT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Filename extension is all lower case. </p>
+
+</div>
+</div>
+<a class="anchor" id="acd45286b7dfc5ba68be18c8c3a9d298d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t FNAME_FLAG_LOST_CHARS = 0X01</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Derived from a LFN with loss or conversion of characters. </p>
+
+</div>
+</div>
+<a class="anchor" id="a63994c21f3b723a55247f063a1b01c9c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t FNAME_FLAG_MIXED_CASE = 0X02</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Base-name or extension has mixed case. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1a041207a19d2fd9a1e2739343ccb29b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t FNAME_FLAG_NEED_LFN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">  <a class="code" href="_fat_file_8h.html#acd45286b7dfc5ba68be18c8c3a9d298d">FNAME_FLAG_LOST_CHARS</a> | <a class="code" href="_fat_file_8h.html#a63994c21f3b723a55247f063a1b01c9c">FNAME_FLAG_MIXED_CASE</a></div>
+<div class="ttc" id="_fat_file_8h_html_a63994c21f3b723a55247f063a1b01c9c"><div class="ttname"><a href="_fat_file_8h.html#a63994c21f3b723a55247f063a1b01c9c">FNAME_FLAG_MIXED_CASE</a></div><div class="ttdeci">const uint8_t FNAME_FLAG_MIXED_CASE</div><div class="ttdef"><b>Definition:</b> FatFile.h:96</div></div>
+<div class="ttc" id="_fat_file_8h_html_acd45286b7dfc5ba68be18c8c3a9d298d"><div class="ttname"><a href="_fat_file_8h.html#acd45286b7dfc5ba68be18c8c3a9d298d">FNAME_FLAG_LOST_CHARS</a></div><div class="ttdeci">const uint8_t FNAME_FLAG_LOST_CHARS</div><div class="ttdef"><b>Definition:</b> FatFile.h:94</div></div>
+</div><!-- fragment --><p>LFN entries are required for file name. </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 15 2014 10:05:35 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 4 2014 08:53:20 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

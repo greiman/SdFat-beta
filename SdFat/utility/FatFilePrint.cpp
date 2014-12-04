@@ -42,68 +42,34 @@ static void printU32(print_t* pr, uint32_t v) {
 }
 //------------------------------------------------------------------------------
 void FatFile::ls(print_t* pr, uint8_t flags, uint8_t indent) {
-  if (!isDir()) return;
+  FatFile file;
   rewind();
-  int8_t status;
-  while ((status = lsPrintNext(pr, flags, indent))) {
-    if (status > 1 && (flags & LS_R)) {
-      uint16_t index = curPosition()/32 - 1;
-      FatFile s;
-      if (s.open(this, index, O_READ)) s.ls(pr, flags, indent + 2);
-      seekSet(32 * (index + 1));
+  while (file.openNext(this, O_READ)) {
+    // indent for dir level
+    if (!file.isHidden() && !(flags & LS_A)) {
+      for (uint8_t i = 0; i < indent; i++) {
+        pr->write(' ');
+      }
+      if (flags & LS_DATE) {
+        file.printModifyDateTime(pr);
+        pr->write(' ');
+      }
+      if (flags & LS_SIZE) {
+        file.printFileSize(pr);
+        pr->write(' ');
+      }
+      file.printName(pr);
+      if (file.isDir()) {
+        pr->write('/');
+      }
+      pr->write('\r');
+      pr->write('\n');
+      if ((flags & LS_R) && file.isDir()) {
+        file.ls(pr, flags, indent + 2);
+      }
     }
+    file.close();
   }
-}
-//------------------------------------------------------------------------------
-// saves 32 bytes on stack for ls recursion
-// return 0 - EOF, 1 - normal file, or 2 - directory
-int8_t FatFile::lsPrintNext(print_t* pr, uint8_t flags, uint8_t indent) {
-  dir_t dir;
-  uint8_t w = 0;
-
-  while (1) {
-    if (read(&dir, sizeof(dir)) != sizeof(dir)) return 0;
-    if (dir.name[0] == DIR_NAME_FREE) return 0;
-
-    // skip deleted entry and entries for . and  ..
-    if (dir.name[0] != DIR_NAME_DELETED && dir.name[0] != '.'
-      && DIR_IS_FILE_OR_SUBDIR(&dir)) break;
-  }
-  // indent for dir level
-  for (uint8_t i = 0; i < indent; i++) pr->write(' ');
-
-  // print name
-  for (uint8_t i = 0; i < 11; i++) {
-    if (dir.name[i] == ' ')continue;
-    if (i == 8) {
-      pr->write('.');
-      w++;
-    }
-    pr->write(dir.name[i]);
-    w++;
-  }
-  if (DIR_IS_SUBDIR(&dir)) {
-    pr->write('/');
-    w++;
-  }
-  if (flags & (LS_DATE | LS_SIZE)) {
-    while (w++ < 14) pr->write(' ');
-  }
-  // print modify date/time if requested
-  if (flags & LS_DATE) {
-    pr->write(' ');
-    printFatDate(pr, dir.lastWriteDate);
-    pr->write(' ');
-    printFatTime(pr, dir.lastWriteTime);
-  }
-  // print size if requested
-  if (!DIR_IS_SUBDIR(&dir) && (flags & LS_SIZE)) {
-    pr->write(' ');
-  printU32(pr, dir.fileSize);
-  }
-  pr->write('\r');
-  pr->write('\n');
-  return DIR_IS_FILE(&dir) ? 1 : 2;
 }
 //------------------------------------------------------------------------------
 bool FatFile::printCreateDateTime(print_t* pr) {
@@ -117,7 +83,7 @@ bool FatFile::printCreateDateTime(print_t* pr) {
   printFatTime(pr, dir.creationTime);
   return true;
 
- fail:
+fail:
   return false;
 }
 //------------------------------------------------------------------------------
@@ -215,27 +181,18 @@ bool FatFile::printModifyDateTime(print_t* pr) {
   printFatTime(pr, dir.lastWriteTime);
   return true;
 
- fail:
+fail:
   return false;
 }
-//------------------------------------------------------------------------------
-size_t FatFile::printName(print_t* pr) {
-  char name[13];
-  if (!getFilename(name)) {
-    DBG_FAIL_MACRO;
-    goto fail;
-  }
-  return pr->write(name);
 
- fail:
-  return 0;
-}
 //------------------------------------------------------------------------------
 size_t FatFile::printFileSize(print_t* pr) {
   char buf[11];
   char *ptr = buf + sizeof(buf);
   *--ptr = 0;
   ptr = fmtDec(fileSize(), ptr);
-  while (ptr > buf) *--ptr = ' ';
+  while (ptr > buf) {
+    *--ptr = ' ';
+  }
   return pr->write(buf);
 }

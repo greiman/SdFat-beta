@@ -36,14 +36,14 @@ class MinimumSerial : public Print {
   /**
    *  Unbuffered read
    *  \return -1 if no character is available or an available character.
-   */  
+   */
   int read();
-/**
- * Unbuffered write
- *
- * \param[in] b byte to write.
- * \return 1
- */  
+  /**
+   * Unbuffered write
+   *
+   * \param[in] b byte to write.
+   * \return 1
+   */
   size_t write(uint8_t b);
   using Print::write;
 };

@@ -27,7 +27,7 @@
  */
 //------------------------------------------------------------------------------
 /** FatFileSystem version YYYYMMDD */
-#define FAT_LIB_VERSION 20141115
+#define FAT_LIB_VERSION 20141201
 //------------------------------------------------------------------------------
 /**
  * \class FatFileSystem
@@ -38,8 +38,8 @@ class FatFileSystem : protected FatVolume {
   /**
    * Initialize an FatFileSystem object.
    * \param[in] d Volume Working Directory.
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool begin(FatFile* d) {
     m_vwd = d;
@@ -57,8 +57,8 @@ class FatFileSystem : protected FatVolume {
    * \param[in] set_cwd Set the current working directory to this volume's
    *  working directory if true.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool chdir(bool set_cwd = false) {
     vwd()->close();
@@ -81,20 +81,28 @@ class FatFileSystem : protected FatVolume {
    * \param[in] set_cwd Set the current working directory to this volume's
    *  working directory if true.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   //----------------------------------------------------------------------------
   bool chdir(const char *path, bool set_cwd = false) {
     FatFile dir;
-    if (path[0] == '/' && path[1] == '\0') return chdir(set_cwd);
-    if (!dir.open(vwd(), path, O_READ)) goto fail;
-    if (!dir.isDir()) goto fail;
+    if (path[0] == '/' && path[1] == '\0') {
+      return chdir(set_cwd);
+    }
+    if (!dir.open(vwd(), path, O_READ)) {
+      goto fail;
+    }
+    if (!dir.isDir()) {
+      goto fail;
+    }
     *m_vwd = dir;
-    if (set_cwd) FatFile::setCwd(vwd());
+    if (set_cwd) {
+      FatFile::setCwd(vwd());
+    }
     return true;
 
-   fail:
+fail:
     return false;
   }
   //----------------------------------------------------------------------------
@@ -164,8 +172,8 @@ class FatFileSystem : protected FatVolume {
    *
    * \param[in] pFlag Create missing parent directories if true.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool mkdir(const char* path, bool pFlag = true) {
     FatFile sub;
@@ -176,8 +184,8 @@ class FatFileSystem : protected FatVolume {
   *
   * \param[in] path A path with a valid 8.3 DOS name for the file.
   *
-  * \return The value one, true, is returned for success and
-  * the value zero, false, is returned for failure.
+  * \return The value true is returned for success and
+  * the value false is returned for failure.
   */
   bool remove(const char* path) {
     return FatFile::remove(vwd(), path);
@@ -195,12 +203,14 @@ class FatFileSystem : protected FatVolume {
    * moved and file system corruption could occur if the file is accessed by
    * a file object that was opened before the rename() call.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool rename(const char *oldPath, const char *newPath) {
     FatFile file;
-    if (!file.open(vwd(), oldPath, O_READ)) return false;
+    if (!file.open(vwd(), oldPath, O_READ)) {
+      return false;
+    }
     return file.rename(vwd(), newPath);
   }
   //----------------------------------------------------------------------------
@@ -210,12 +220,14 @@ class FatFileSystem : protected FatVolume {
    *
    * The subdirectory file will be removed only if it is empty.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool rmdir(const char* path) {
     FatFile sub;
-    if (!sub.open(vwd(), path, O_READ)) return false;
+    if (!sub.open(vwd(), path, O_READ)) {
+      return false;
+    }
     return sub.rmdir();
   }
   //----------------------------------------------------------------------------
@@ -226,20 +238,33 @@ class FatFileSystem : protected FatVolume {
    * \param[in] path A path with a valid 8.3 DOS name for the file.
    * \param[in] length The desired length for the file.
    *
-   * \return The value one, true, is returned for success and
-   * the value zero, false, is returned for failure.
-   * Reasons for failure include file is read only, file is a directory,
-   * \a length is greater than the current file size or an I/O error occurs.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
    */
   bool truncate(const char* path, uint32_t length) {
     FatFile file;
-    if (!file.open(vwd(), path, O_WRITE)) return false;
+    if (!file.open(vwd(), path, O_WRITE)) {
+      return false;
+    }
     return file.truncate(length);
   }
   /** \return a pointer to the FatVolume object. */
-  FatVolume* vol() {return this;}
+  FatVolume* vol() {
+    return this;
+  }
   /** \return a pointer to the volume working directory. */
-  FatFile* vwd() {return m_vwd;}
+  FatFile* vwd() {
+    return m_vwd;
+  }
+  /** Wipe all data from the volume. You must reinitialize the volume before
+   *  accessing it again.
+   * \param[in] pr print stream for status dots.
+   * \return true for success else false.
+   */
+  bool wipe(print_t* pr = 0) {
+    m_vwd->close();
+    return FatVolume::wipe(pr);
+  }
 
  private:
   FatFile* m_vwd;

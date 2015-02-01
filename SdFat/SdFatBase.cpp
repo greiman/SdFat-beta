@@ -96,9 +96,4 @@ void SdFatBase::initErrorPrint(Print* pr, const __FlashStringHelper* msg) {
   pr->println(msg);
   initErrorPrint(pr);
 }
-//------------------------------------------------------------------------------
-File SdFatBase::open(const char *path, uint8_t mode) {
-  File tmpFile;
-  tmpFile.open(&m_vwd, path, mode);
-  return tmpFile;
-}
+

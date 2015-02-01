@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['destructor_5fcloses_5ffile',['DESTRUCTOR_CLOSES_FILE',['../_sd_fat_config_8h.html#a9a2b1ca4d91cff876f48deeaacbc33da',1,'SdFatConfig.h']]]
+  ['arduino_5ffile_5fuses_5fstream',['ARDUINO_FILE_USES_STREAM',['../_sd_fat_config_8h.html#aa918e5b1946ba4be891b081607e8193f',1,'SdFatConfig.h']]]
 ];

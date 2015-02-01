@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['name',['name',['../structdirectory_entry.html#a05dc993ea55a1a742de5970541a31ecb',1,'directoryEntry::name()'],['../class_file.html#ac6cd06ab1b72eb2d22ef41a65eded00b',1,'File::name()']]],
+  ['name',['name',['../structdirectory_entry.html#a05dc993ea55a1a742de5970541a31ecb',1,'directoryEntry::name()'],['../class_file.html#a7ca23d8d3997c10c221977c64736f575',1,'File::name()']]],
   ['name1',['name1',['../structlong_directory_entry.html#a629f1ca5ba2ccce6cac5295578b6e7b4',1,'longDirectoryEntry']]],
   ['name2',['name2',['../structlong_directory_entry.html#ad763b5a3da4b8d326d9888493fbb819a',1,'longDirectoryEntry']]],
   ['name3',['name3',['../structlong_directory_entry.html#a6f14c81b7d224dc4431217f92601257a',1,'longDirectoryEntry']]],

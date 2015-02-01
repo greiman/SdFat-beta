@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>SdFat: Arduino/libraries/SdFat/SdFile.h File Reference</title>
+<title>SdFat: Arduino/libraries/SdFat/utility/ArduinoFiles.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_a991eec27578c865874ede3d8ec657c2.html">Arduino</a></li><li class="navelem"><a class="el" href="dir_481cc946b8a81b8d9363a4aad6201160.html">libraries</a></li><li class="navelem"><a class="el" href="dir_1281b15c327061056ab3b326e90c50cf.html">SdFat</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_a991eec27578c865874ede3d8ec657c2.html">Arduino</a></li><li class="navelem"><a class="el" href="dir_481cc946b8a81b8d9363a4aad6201160.html">libraries</a></li><li class="navelem"><a class="el" href="dir_1281b15c327061056ab3b326e90c50cf.html">SdFat</a></li><li class="navelem"><a class="el" href="dir_97b7730287bc3bcd349854d6663367e4.html">utility</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -88,27 +88,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">SdFile.h File Reference</div>  </div>
+<div class="title">ArduinoFiles.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_sd_file.html" title="SdFile SdBaseFile with Print. ">SdFile</a> class.  
+<p><a class="el" href="class_print_file.html" title="FatFile with Print. ">PrintFile</a> class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;limits.h&gt;</code><br />
-<code>#include &quot;utility/FatLib.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_fat_lib_config_8h.html">FatLibConfig.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_fat_file_8h.html">FatFile.h</a>&quot;</code><br />
+<code>#include &lt;limits.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for SdFile.h:</div>
+Include dependency graph for ArduinoFiles.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="_sd_file_8h__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2_sd_file_8h" alt=""/></div>
-<map name="_arduino_2libraries_2_sd_fat_2_sd_file_8h" id="_arduino_2libraries_2_sd_fat_2_sd_file_8h">
-</map>
+<div class="center"><img src="_arduino_files_8h__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2utility_2_arduino_files_8h" alt=""/></div>
+<map name="_arduino_2libraries_2_sd_fat_2utility_2_arduino_files_8h" id="_arduino_2libraries_2_sd_fat_2utility_2_arduino_files_8h">
+<area shape="rect" id="node3" href="_fat_lib_config_8h.html" title="configuration definitions " alt="" coords="323,245,428,272"/><area shape="rect" id="node10" href="_fat_file_8h.html" title="FatFile class. " alt="" coords="211,96,284,123"/><area shape="rect" id="node7" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="366,320,481,347"/><area shape="rect" id="node19" href="_fat_structs_8h.html" title="FAT file structures. " alt="" coords="102,245,196,272"/><area shape="rect" id="node21" href="_fat_volume_8h.html" title="FatVolume class. " alt="" coords="200,171,296,197"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="_sd_file_8h__dep__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2_sd_file_8hdep" alt=""/></div>
-<map name="_arduino_2libraries_2_sd_fat_2_sd_file_8hdep" id="_arduino_2libraries_2_sd_fat_2_sd_file_8hdep">
-<area shape="rect" id="node3" href="_sd_fat_8h.html" title="SdFat class. " alt="" coords="5,97,160,138"/><area shape="rect" id="node5" href="_sd_fat_util_8h.html" title="Useful utility functions. " alt="" coords="5,187,160,229"/></map>
+<div class="center"><img src="_arduino_files_8h__dep__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2utility_2_arduino_files_8hdep" alt=""/></div>
+<map name="_arduino_2libraries_2_sd_fat_2utility_2_arduino_files_8hdep" id="_arduino_2libraries_2_sd_fat_2utility_2_arduino_files_8hdep">
+<area shape="rect" id="node3" href="_fat_file_system_8h.html" title="FatFileSystem class. " alt="" coords="5,97,163,138"/></map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -116,22 +117,19 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_file.html">File</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino SD.h style <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a> API.  <a href="class_file.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html">SdBaseFile</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sd_base_file.html" title="SdBaseFile base for SdFile and File. ">SdBaseFile</a> base for <a class="el" href="class_sd_file.html" title="SdFile SdBaseFile with Print. ">SdFile</a> and <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a>.  <a href="class_sd_base_file.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html">SdFile</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sd_file.html" title="SdFile SdBaseFile with Print. ">SdFile</a> <a class="el" href="class_sd_base_file.html" title="SdBaseFile base for SdFile and File. ">SdBaseFile</a> with Print.  <a href="class_sd_file.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_print_file.html">PrintFile</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_fat_file.html" title="Basic file class. ">FatFile</a> with Print.  <a href="class_print_file.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ad52d51659a75e25d96fb04d22ff718cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_file_8h.html#ad52d51659a75e25d96fb04d22ff718cb">FILE_READ</a>&#160;&#160;&#160;O_READ</td></tr>
+<tr class="memitem:ad52d51659a75e25d96fb04d22ff718cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_arduino_files_8h.html#ad52d51659a75e25d96fb04d22ff718cb">FILE_READ</a>&#160;&#160;&#160;O_READ</td></tr>
 <tr class="separator:ad52d51659a75e25d96fb04d22ff718cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace34e503254fa9004599ddf122264c8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_file_8h.html#ace34e503254fa9004599ddf122264c8f">FILE_WRITE</a>&#160;&#160;&#160;(O_RDWR | O_CREAT | O_AT_END)</td></tr>
+<tr class="memitem:ace34e503254fa9004599ddf122264c8f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_arduino_files_8h.html#ace34e503254fa9004599ddf122264c8f">FILE_WRITE</a>&#160;&#160;&#160;(O_RDWR | O_CREAT | O_AT_END)</td></tr>
 <tr class="separator:ace34e503254fa9004599ddf122264c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_sd_file.html" title="SdFile SdBaseFile with Print. ">SdFile</a> class. </p>
+<div class="textblock"><p><a class="el" href="class_print_file.html" title="FatFile with Print. ">PrintFile</a> class. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ad52d51659a75e25d96fb04d22ff718cb"></a>
 <div class="memitem">
@@ -162,7 +160,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 4 2014 08:53:20 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Feb 1 2015 10:21:39 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -272,7 +272,7 @@ class istream : public virtual ios {
    * \return *this
    *
    */
-  istream& ignore(streamsize n = 1, int delim= -1);
+  istream& ignore(streamsize n = 1, int delim = -1);
   /**
    * Return the next available character without consuming it.
    *

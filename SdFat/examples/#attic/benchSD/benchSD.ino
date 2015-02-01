@@ -46,7 +46,7 @@ void loop() {
   }
 
   // open or create file - truncate existing file.
-  file = SD.open("Bench.dat", O_CREAT | O_TRUNC | O_CREAT);
+  file = SD.open("Bench.dat", O_RDWR | O_TRUNC | O_CREAT);
   if (!file) {
     error("open failed");
   }

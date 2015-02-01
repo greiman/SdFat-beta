@@ -21,33 +21,70 @@
 #define FatFileSystem_h
 #include "FatVolume.h"
 #include "FatFile.h"
+#include "ArduinoFiles.h"
 /**
  * \file
  * \brief FatFileSystem class
  */
 //------------------------------------------------------------------------------
-/** FatFileSystem version YYYYMMDD */
-#define FAT_LIB_VERSION 20141201
-//------------------------------------------------------------------------------
 /**
  * \class FatFileSystem
  * \brief Integration class for the FatLib library.
  */
-class FatFileSystem : protected FatVolume {
- protected:
+class FatFileSystem : public  FatVolume {
+ public:
   /**
    * Initialize an FatFileSystem object.
-   * \param[in] d Volume Working Directory.
+   * \param[in] part partition to initialize.
    * \return The value true is returned for success and
    * the value false is returned for failure.
    */
-  bool begin(FatFile* d) {
-    m_vwd = d;
-    m_vwd->close();
-    return init() && vwd()->openRoot(this) && FatFile::setCwd(vwd());
+  bool begin(uint8_t part = 0) {
+    vwd()->close();
+    return (part ? init(part) : init(1) || init(0))
+            && vwd()->openRoot(this) && FatFile::setCwd(vwd());
   }
-
- public:
+#if ENABLE_ARDUINO_FEATURES
+   /** List the directory contents of the volume working directory to Serial.
+   *
+   * \param[in] flags The inclusive OR of
+   *
+   * LS_DATE - %Print file modification date
+   *
+   * LS_SIZE - %Print file size.
+   *
+   * LS_R - Recursive list of subdirectories.
+   */
+  void ls(uint8_t flags = 0) {
+    ls(&Serial, flags);
+  }
+  /** List the directory contents of a directory to Serial.
+   *
+   * \param[in] path directory to list.
+   *
+   * \param[in] flags The inclusive OR of
+   *
+   * LS_DATE - %Print file modification date
+   *
+   * LS_SIZE - %Print file size.
+   *
+   * LS_R - Recursive list of subdirectories.
+   */
+  void ls(const char* path, uint8_t flags = 0) {
+    ls(&Serial, path, flags);
+  }
+  /** open a file
+   *
+   * \param[in] path location of file to be opened.
+   * \param[in] mode open mode flags.
+   * \return a File object.
+   */
+  File open(const char *path, uint8_t mode = FILE_READ) {
+    File tmpFile;
+    tmpFile.open(vwd(), path, mode);
+    return tmpFile;
+  }
+#endif  // ENABLE_ARDUINO_FEATURES
   /** Change a volume's working directory to root
    *
    * Changes the volume's working directory to the SD's root directory.
@@ -96,7 +133,8 @@ class FatFileSystem : protected FatVolume {
     if (!dir.isDir()) {
       goto fail;
     }
-    *m_vwd = dir;
+//    *m_vwd = dir;
+    m_vwd = dir;
     if (set_cwd) {
       FatFile::setCwd(vwd());
     }
@@ -254,7 +292,7 @@ fail:
   }
   /** \return a pointer to the volume working directory. */
   FatFile* vwd() {
-    return m_vwd;
+    return &m_vwd;
   }
   /** Wipe all data from the volume. You must reinitialize the volume before
    *  accessing it again.
@@ -262,11 +300,11 @@ fail:
    * \return true for success else false.
    */
   bool wipe(print_t* pr = 0) {
-    m_vwd->close();
+    vwd()->close();
     return FatVolume::wipe(pr);
   }
 
  private:
-  FatFile* m_vwd;
+  FatFile m_vwd;
 };
 #endif  // FatFileSystem_h

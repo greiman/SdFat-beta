@@ -130,6 +130,48 @@ class FatFile {
   }
 #endif  // DESTRUCTOR_CLOSES_FILE
 
+#if ENABLE_ARDUINO_FEATURES
+  /** List directory contents.
+   *
+   * \param[in] flags The inclusive OR of
+   *
+   * LS_DATE - %Print file modification date
+   *
+   * LS_SIZE - %Print file size.
+   *
+   * LS_R - Recursive list of subdirectories.
+   */
+  void ls(uint8_t flags = 0) {
+    ls(&Serial, flags);
+  }
+  /** %Print a directory date field.
+   *
+   *  Format is yyyy-mm-dd.
+   *
+   * \param[in] fatDate The date field from a directory entry.
+   */
+  static void printFatDate(uint16_t fatDate) {
+    printFatDate(&Serial, fatDate);
+  }
+  /** %Print a directory time field.
+   *
+   * Format is hh:mm:ss.
+   *
+   * \param[in] fatTime The time field from a directory entry.
+   */
+  static void printFatTime(uint16_t fatTime) {
+    printFatTime(&Serial, fatTime);
+  }
+  /** Print a file's name.
+   *
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
+   */
+  size_t printName() {
+    return FatFile::printName(&Serial);
+  }
+#endif  // ENABLE_ARDUINO_FEATURES
+
   /** \return value of writeError */
   bool getWriteError() {
     return m_error & WRITE_ERROR;
@@ -318,12 +360,12 @@ class FatFile {
    *
    * \param[out] name An array of characters for the file's name.
    * \param[in] size The size of the array in bytes. The array
-   *             must be at least 13 bytes long.  The file name will be
-   *             truncated if it is too long.
+   *             must be at least 13 bytes long.  The file's name will be
+   *             truncated if the file's name is too long.
    * \return The value true, is returned for success and
    * the value false, is returned for failure.
    */
-  bool getFilename(char* name, size_t size);
+  bool getName(char* name, size_t size);
   /**
    * Get a file's Short File Name followed by a zero byte.
    *
@@ -841,6 +883,14 @@ class FatFile {
   /** \return FatVolume that contains this file. */
   FatVolume* volume() const {
     return m_vol;
+  }
+  /** Write a string to a file. Used by the Arduino Print class.
+   * \param[in] str Pointer to the string.
+   * Use getWriteError to check for errors.
+   * \return count of characters written for success or -1 for failure.
+   */
+  int write(const char* str) {
+    return write(str, strlen(str));
   }
   /** Write a single byte.
    * \param[in] b The byte to be written.

@@ -68,7 +68,7 @@ const uint8_t UNGETC_BUF_SIZE = 2;
 #undef scanf
 #undef setbuf
 #undef setvbuf
-#undef sprintf  // NOLINT
+//#undef sprintf  // NOLINT
 #undef sscanf
 #undef tmpfile
 #undef tmpnam
@@ -198,7 +198,7 @@ class StdioStream : private FatFile {
    *
    * Open a file and associates the stream with it.
    *
-   * \param[in] filename name of the file to be opened.
+   * \param[in] path file to be opened.
    *
    * \param[in] mode a string that indicates the open mode.
    *
@@ -254,7 +254,7 @@ class StdioStream : private FatFile {
    *
    * \return true for success or false for failure.
    */
-  bool fopen(const char* filename, const char * mode);
+  bool fopen(const char* path, const char * mode);
   //----------------------------------------------------------------------------
   /** Write a byte to a stream.
    *

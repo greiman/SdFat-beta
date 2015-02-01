@@ -129,7 +129,7 @@ class obufstream : public ostream {
       return;
     }
     m_buf[m_in++] = c;
-    m_buf[m_in]= '\0';
+    m_buf[m_in] = '\0';
   }
   void putstr(const char *str) {
     while (*str) {

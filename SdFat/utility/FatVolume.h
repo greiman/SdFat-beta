@@ -43,11 +43,11 @@
 #endif  // DEBUG_MODE
 #endif  // DOXYGEN_SHOULD_SKIP_THIS
 //------------------------------------------------------------------------------
-#if defined(ARDUINO) || defined(DOXYGEN)
+#if ENABLE_ARDUINO_FEATURES
 #include <Arduino.h>
 /** Use Print on Arduino */
 typedef Print print_t;
-#else  // ARDUINO
+#else  // ENABLE_ARDUINO_FEATURES
 //  Arduino type for flash string.
 class __FlashStringHelper;
 /**
@@ -59,8 +59,8 @@ class CharWriter {
   virtual size_t write(char c) = 0;
   virtual size_t write(const char* s) = 0;
 };
-typedef Print print_t;
-#endif  // ARDUINO
+typedef CharWriter print_t;
+#endif  // ENABLE_ARDUINO_FEATURES
 //------------------------------------------------------------------------------
 // Forward declaration of FatVolume.
 class FatVolume;
@@ -214,7 +214,7 @@ class FatVolume {
    * the value false is returned for failure. 
    */
   bool init() {
-    return init(1) ? true : init(0);
+    return init(1) || init(0);
   }
   /** Initialize a FAT volume.
 
@@ -235,6 +235,10 @@ class FatVolume {
        on FAT16 volumes or the first cluster number on FAT32 volumes. */
   uint32_t rootDirStart() const {
     return m_rootDirStart;
+  }
+  /** \return The number of blocks in the volume */
+  uint32_t volumeBlockCount() const {
+    return blocksPerCluster()*clusterCount();
   }
   /** Wipe all data from the volume.
    * \param[in] pr print stream for status dots.

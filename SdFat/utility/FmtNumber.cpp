@@ -381,7 +381,7 @@ float scanFloat(const char* str, char** ptr) {
   bool neg;
   int c;
   float v;
-  const char* successPtr;
+  const char* successPtr = str;
 
   if (ptr) {
     *ptr = const_cast<char*>(str);
@@ -446,7 +446,7 @@ float scanFloat(const char* str, char** ptr) {
     *ptr = const_cast<char*>(successPtr);
   }
   v = scale10(static_cast<float>(fract), fracExp);
-  return neg ? -v: v;
+  return neg ? -v : v;
 
 fail:
   return 0;

@@ -77,7 +77,7 @@ static bool lfnGetName(ldir_t *ldir, char* name, size_t n) {
     name[k] = 0;
   }
   // Truncate if name is too long.
-  name[n-1] = 0;
+  name[n - 1] = 0;
   return true;
 }
 //------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ static void lfnPutName(ldir_t *ldir, const char* name, size_t n) {
   }
 }
 //==============================================================================
-bool FatFile::getFilename(char* name, size_t size) {
+bool FatFile::getName(char* name, size_t size) {
   FatFile dirFile;
   ldir_t* ldir;
   if (!isOpen() || size < 13) {
@@ -183,8 +183,8 @@ bool FatFile::parsePathName(const char* path,
   uint8_t uc = 0;
   uint8_t i = 0;
   uint8_t in = 7;
-  size_t end;
-  size_t len = 0;
+  int end;
+  int len = 0;
   int si;
   int dot;
 
@@ -290,9 +290,9 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, uint8_t oflag) {
   uint8_t lfnOrd = 0;
   uint8_t freeNeed;
   uint8_t freeFound = 0;
-  uint8_t ord;
-  uint8_t chksum;
-  uint16_t freeIndex;
+  uint8_t ord = 0;
+  uint8_t chksum = 0;
+  uint16_t freeIndex = 0;
   uint16_t curIndex;
   dir_t* dir;
   ldir_t* ldir;
@@ -518,7 +518,7 @@ size_t FatFile::printName(print_t* pr) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    if (ldir->attr !=DIR_ATT_LONG_NAME ||
+    if (ldir->attr != DIR_ATT_LONG_NAME ||
         ord != (ldir->ord & 0X1F)) {
       DBG_FAIL_MACRO;
       goto fail;

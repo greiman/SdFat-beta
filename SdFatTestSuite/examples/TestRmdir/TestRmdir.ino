@@ -20,7 +20,7 @@ SdFat sd;
 /*
  * remove all files in dir.
  */
-void deleteFiles(SdBaseFile* dir) {
+void deleteFiles(FatFile* dir) {
   char name[32];
   SdFile file;
  

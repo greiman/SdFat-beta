@@ -73,7 +73,6 @@ bool FatVolume::allocateCluster(uint32_t current, uint32_t* next) {
     if (find > m_lastCluster) {
       find = 2;
     }
-
     uint32_t f;
     int8_t fg = fatGet(find, &f);
     if (fg < 0) {
@@ -428,12 +427,12 @@ bool FatVolume::init(uint8_t part) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    pc = cacheFetchData(volumeStartBlock, FatCache::CACHE_FOR_READ);
+    pc = cacheFetchData(0, FatCache::CACHE_FOR_READ);
     if (!pc) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    part_t* p = &pc->mbr.part[part-1];
+    part_t* p = &pc->mbr.part[part - 1];
     if ((p->boot & 0X7F) != 0 || p->firstSector == 0) {
       // not a valid partition
       DBG_FAIL_MACRO;

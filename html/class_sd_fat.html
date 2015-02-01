@@ -110,10 +110,18 @@ Collaboration diagram for SdFat:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d3f2cc4df1b6f2a129c3a614c1e5e1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a3d3f2cc4df1b6f2a129c3a614c1e5e1f">begin</a> (<a class="el" href="class_sd_spi_card.html#aee22e896c14d3baca69ddf0ec1c39724">SdSpiCard::m_spi_t</a> *spi, uint8_t csPin=SS, uint8_t divisor=2)</td></tr>
+<tr class="memitem:a05bd3d358a708efe2f9002d05c3a4139"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a05bd3d358a708efe2f9002d05c3a4139">begin</a> (uint8_t part=0)</td></tr>
+<tr class="separator:a05bd3d358a708efe2f9002d05c3a4139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d3f2cc4df1b6f2a129c3a614c1e5e1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a3d3f2cc4df1b6f2a129c3a614c1e5e1f">begin</a> (<a class="el" href="class_sd_spi_card.html#a31a561750501b6635ad2b85c8c960381">SdSpiCard::m_spi_t</a> *spi, uint8_t csPin=SS, uint8_t divisor=2)</td></tr>
 <tr class="separator:a3d3f2cc4df1b6f2a129c3a614c1e5e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9552f4c1811a1d3c00e183cf12afd45d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat.html#a9552f4c1811a1d3c00e183cf12afd45d">begin</a> (uint8_t csPin=SS, uint8_t divisor=2)</td></tr>
 <tr class="separator:a9552f4c1811a1d3c00e183cf12afd45d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06beed4cea5e38116b58254a57125442"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a06beed4cea5e38116b58254a57125442">blocksPerCluster</a> () const </td></tr>
+<tr class="separator:a06beed4cea5e38116b58254a57125442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc66d856d05198d9ebe7104c8c4155d7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#abc66d856d05198d9ebe7104c8c4155d7">blocksPerFat</a> () const </td></tr>
+<tr class="separator:abc66d856d05198d9ebe7104c8c4155d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1e3b1d0c21d202deb82668068ab00e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unioncache__t.html">cache_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#aa1e3b1d0c21d202deb82668068ab00e8">cacheClear</a> ()</td></tr>
+<tr class="separator:aa1e3b1d0c21d202deb82668068ab00e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a899294ced4e4585feae7668099338534"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sd_spi_card.html">SdSpiCard</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a899294ced4e4585feae7668099338534">card</a> ()</td></tr>
 <tr class="separator:a899294ced4e4585feae7668099338534"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae60c555879572052295b55fe2886d43a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat.html#ae60c555879572052295b55fe2886d43a">cardBegin</a> (uint8_t csPin=SS, uint8_t divisor=2)</td></tr>
@@ -124,6 +132,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a44af1b98e8d986d12107b654453acbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af24917d6e00c8766dab168eb834047ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#af24917d6e00c8766dab168eb834047ec">chvol</a> ()</td></tr>
 <tr class="separator:af24917d6e00c8766dab168eb834047ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18446a9c5924304fa7a87d5f03ccaf21"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a18446a9c5924304fa7a87d5f03ccaf21">clusterCount</a> () const </td></tr>
+<tr class="separator:a18446a9c5924304fa7a87d5f03ccaf21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0e63f33d71d5dc95a602834274def6a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#ac0e63f33d71d5dc95a602834274def6a">clusterSizeShift</a> () const </td></tr>
+<tr class="separator:ac0e63f33d71d5dc95a602834274def6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a443364af257c219f8e908d5b073d8fa3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a443364af257c219f8e908d5b073d8fa3">dataStartBlock</a> () const </td></tr>
+<tr class="separator:a443364af257c219f8e908d5b073d8fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c6311b70fa274b3be94ff25fdebba7"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a25c6311b70fa274b3be94ff25fdebba7">dbgFat</a> (uint32_t n, uint32_t *v)</td></tr>
+<tr class="separator:a25c6311b70fa274b3be94ff25fdebba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a905d883dcbaa60aa35a6eb0cad63cc9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a905d883dcbaa60aa35a6eb0cad63cc9e">errorHalt</a> ()</td></tr>
 <tr class="separator:a905d883dcbaa60aa35a6eb0cad63cc9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8cf95abf0ffb1c7a55eb1a192c28982"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#ae8cf95abf0ffb1c7a55eb1a192c28982">errorHalt</a> (Print *pr)</td></tr>
@@ -150,8 +166,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aace11e097b69144a80a4abbca54d35b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee58c6352652f216577196e32a594b67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#aee58c6352652f216577196e32a594b67">exists</a> (const char *path)</td></tr>
 <tr class="separator:aee58c6352652f216577196e32a594b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdedc6a200b01e401c9cd9b511eae6ec"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#acdedc6a200b01e401c9cd9b511eae6ec">fatCount</a> ()</td></tr>
+<tr class="separator:acdedc6a200b01e401c9cd9b511eae6ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dd0cc689b63ef0702aed1cf36b1722d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a0dd0cc689b63ef0702aed1cf36b1722d">fatStartBlock</a> () const </td></tr>
+<tr class="separator:a0dd0cc689b63ef0702aed1cf36b1722d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1364f11fe9bb4717ce0685e2b7b86027"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a1364f11fe9bb4717ce0685e2b7b86027">fatType</a> () const </td></tr>
+<tr class="separator:a1364f11fe9bb4717ce0685e2b7b86027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1683b063fc6202ab85470b9610f16f93"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a1683b063fc6202ab85470b9610f16f93">freeClusterCount</a> ()</td></tr>
+<tr class="separator:a1683b063fc6202ab85470b9610f16f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a389f0ef6fb556c67b48ade5c0c1b3a9a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a389f0ef6fb556c67b48ade5c0c1b3a9a">fsBegin</a> ()</td></tr>
 <tr class="separator:a389f0ef6fb556c67b48ade5c0c1b3a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab819fa25a91dad1cc698a7e1e0eb32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#acab819fa25a91dad1cc698a7e1e0eb32">init</a> ()</td></tr>
+<tr class="separator:acab819fa25a91dad1cc698a7e1e0eb32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a034d997a1e7a0b2b664a4357bcccd256"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a034d997a1e7a0b2b664a4357bcccd256">init</a> (uint8_t part)</td></tr>
+<tr class="separator:a034d997a1e7a0b2b664a4357bcccd256"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbfd9264f972f054e561128bad0b267e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#adbfd9264f972f054e561128bad0b267e">initErrorHalt</a> ()</td></tr>
 <tr class="separator:adbfd9264f972f054e561128bad0b267e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86770dd889bffc5788172c8d34a3582c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a86770dd889bffc5788172c8d34a3582c">initErrorHalt</a> (Print *pr)</td></tr>
@@ -176,36 +204,73 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9c334faf236651db265d5acf65271666"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0b7161c1385841264323ac244f5c89c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#ac0b7161c1385841264323ac244f5c89c">initErrorPrint</a> (Print *pr, const __FlashStringHelper *msg)</td></tr>
 <tr class="separator:ac0b7161c1385841264323ac244f5c89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2398fb37a7a9d5e0dc0ffde6a44a993d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a2398fb37a7a9d5e0dc0ffde6a44a993d">ls</a> (uint8_t flags=0)</td></tr>
+<tr class="separator:a2398fb37a7a9d5e0dc0ffde6a44a993d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a122b61dbec5051304bcc81bc08b1b99d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a122b61dbec5051304bcc81bc08b1b99d">ls</a> (const char *path, uint8_t flags=0)</td></tr>
+<tr class="separator:a122b61dbec5051304bcc81bc08b1b99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad17f2a0925b34cb3807e4c1677a2872f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#ad17f2a0925b34cb3807e4c1677a2872f">ls</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint8_t flags)</td></tr>
 <tr class="separator:ad17f2a0925b34cb3807e4c1677a2872f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa79695db8e910300507210b3067d39fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#aa79695db8e910300507210b3067d39fd">ls</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, const char *path, uint8_t flags)</td></tr>
 <tr class="separator:aa79695db8e910300507210b3067d39fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e2ba60320f47912a96ad83820073ce8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a6e2ba60320f47912a96ad83820073ce8">ls</a> (uint8_t flags=0)</td></tr>
-<tr class="separator:a6e2ba60320f47912a96ad83820073ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85bd146c6fb0120ac69c3d93267321e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a85bd146c6fb0120ac69c3d93267321e6">ls</a> (const char *path, uint8_t flags=0)</td></tr>
-<tr class="separator:a85bd146c6fb0120ac69c3d93267321e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a231c62c98ba8ac3c2624dc5ad2053ebf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a231c62c98ba8ac3c2624dc5ad2053ebf">mkdir</a> (const char *path, bool pFlag=true)</td></tr>
 <tr class="separator:a231c62c98ba8ac3c2624dc5ad2053ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2b23a0be384abb31989eb86aabdb5d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_file.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#af2b23a0be384abb31989eb86aabdb5d8">open</a> (const char *path, uint8_t mode=<a class="el" href="_sd_file_8h.html#ad52d51659a75e25d96fb04d22ff718cb">FILE_READ</a>)</td></tr>
-<tr class="separator:af2b23a0be384abb31989eb86aabdb5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a947e4586077a922892b632edac33b67a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_file.html">File</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a947e4586077a922892b632edac33b67a">open</a> (const char *path, uint8_t mode=<a class="el" href="_arduino_files_8h.html#ad52d51659a75e25d96fb04d22ff718cb">FILE_READ</a>)</td></tr>
+<tr class="separator:a947e4586077a922892b632edac33b67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf7d7d0dab43083d5be10d70ff4669e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#abf7d7d0dab43083d5be10d70ff4669e4">remove</a> (const char *path)</td></tr>
 <tr class="separator:abf7d7d0dab43083d5be10d70ff4669e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0187891a24017b41bd7c5ba63e659e65"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a0187891a24017b41bd7c5ba63e659e65">rename</a> (const char *oldPath, const char *newPath)</td></tr>
 <tr class="separator:a0187891a24017b41bd7c5ba63e659e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaed2edc7ff7fedb163458c870bb41b33"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#aaed2edc7ff7fedb163458c870bb41b33">rmdir</a> (const char *path)</td></tr>
 <tr class="separator:aaed2edc7ff7fedb163458c870bb41b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d483670a0a6a6a4754b23614fe11bc"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#ab2d483670a0a6a6a4754b23614fe11bc">rootDirEntryCount</a> () const </td></tr>
+<tr class="separator:ab2d483670a0a6a6a4754b23614fe11bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9363ebbbae90e895ea56e8fa3f60c13"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#ae9363ebbbae90e895ea56e8fa3f60c13">rootDirStart</a> () const </td></tr>
+<tr class="separator:ae9363ebbbae90e895ea56e8fa3f60c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad60cb13557f35578f868e03e9ccb8be1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#ad60cb13557f35578f868e03e9ccb8be1">truncate</a> (const char *path, uint32_t length)</td></tr>
 <tr class="separator:ad60cb13557f35578f868e03e9ccb8be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ca68fe47bb675df0a80df1ed7a53698"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_fat_volume.html">FatVolume</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a4ca68fe47bb675df0a80df1ed7a53698">vol</a> ()</td></tr>
 <tr class="separator:a4ca68fe47bb675df0a80df1ed7a53698"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24dfcd1a1c716e8e56f8128d69dc1463"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sd_base_file.html">SdBaseFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_base.html#a24dfcd1a1c716e8e56f8128d69dc1463">vwd</a> ()</td></tr>
-<tr class="separator:a24dfcd1a1c716e8e56f8128d69dc1463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07bc98088ce4a9c725700899c184f7fc"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a07bc98088ce4a9c725700899c184f7fc">volumeBlockCount</a> () const </td></tr>
+<tr class="separator:a07bc98088ce4a9c725700899c184f7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf257d02b7166683bda2abc5058004bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_fat_file.html">FatFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#acf257d02b7166683bda2abc5058004bf">vwd</a> ()</td></tr>
+<tr class="separator:acf257d02b7166683bda2abc5058004bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36d7831f92acfbfef1c4a24dd7103dc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a36d7831f92acfbfef1c4a24dd7103dc4">wipe</a> (<a class="el" href="_fat_volume_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr=0)</td></tr>
 <tr class="separator:a36d7831f92acfbfef1c4a24dd7103dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main file system class for SdFat library. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a05bd3d358a708efe2f9002d05c3a4139"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFileSystem::begin </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>part</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initialize an <a class="el" href="class_fat_file_system.html" title="Integration class for the FatLib library. ">FatFileSystem</a> object. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">part</td><td>partition to initialize. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a3d3f2cc4df1b6f2a129c3a614c1e5e1f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +281,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool SdFatBase::begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_sd_spi_card.html#aee22e896c14d3baca69ddf0ec1c39724">SdSpiCard::m_spi_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_sd_spi_card.html#a31a561750501b6635ad2b85c8c960381">SdSpiCard::m_spi_t</a> *&#160;</td>
           <td class="paramname"><em>spi</em>, </td>
         </tr>
         <tr>
@@ -295,6 +360,78 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a06beed4cea5e38116b58254a57125442"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t FatVolume::blocksPerCluster </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The volume's cluster size in blocks. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abc66d856d05198d9ebe7104c8c4155d7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FatVolume::blocksPerFat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The number of blocks in one FAT. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa1e3b1d0c21d202deb82668068ab00e8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="unioncache__t.html">cache_t</a>* FatVolume::cacheClear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Clear the cache and returns a pointer to the cache. Not for normal apps. </p><dl class="section return"><dt>Returns</dt><dd>A pointer to the cache buffer or zero if an error occurs. </dd></dl>
 
 </div>
 </div>
@@ -467,6 +604,121 @@ Public Member Functions</h2></td></tr>
 <p>This is useful with multiple SD cards.</p>
 <p>The current working directory is changed to this volume's working directory.</p>
 <p>This is like the Windows/DOS &lt;drive letter&gt;: command. </p>
+
+</div>
+</div>
+<a class="anchor" id="a18446a9c5924304fa7a87d5f03ccaf21"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FatVolume::clusterCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The total number of clusters in the volume. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac0e63f33d71d5dc95a602834274def6a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t FatVolume::clusterSizeShift </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The shift count required to multiply by blocksPerCluster. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a443364af257c219f8e908d5b073d8fa3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FatVolume::dataStartBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The logical block number for the start of file data. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a25c6311b70fa274b3be94ff25fdebba7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int8_t FatVolume::dbgFat </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Debug access to FAT table</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>cluster number. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">v</td><td>value of entry </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true for success or false for failure </dd></dl>
 
 </div>
 </div>
@@ -903,6 +1155,103 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="acdedc6a200b01e401c9cd9b511eae6ec"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t FatVolume::fatCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The number of <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a> Allocation Tables. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0dd0cc689b63ef0702aed1cf36b1722d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FatVolume::fatStartBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The logical block number for the start of the first FAT. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1364f11fe9bb4717ce0685e2b7b86027"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t FatVolume::fatType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The FAT type of the volume. Values are 12, 16 or 32. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1683b063fc6202ab85470b9610f16f93"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t FatVolume::freeClusterCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Volume free space in clusters.</p>
+<dl class="section return"><dt>Returns</dt><dd>Count of free clusters for success or -1 if an error occurs. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a389f0ef6fb556c67b48ade5c0c1b3a9a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -924,6 +1273,63 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Diagnostic call to initialize <a class="el" href="class_fat_file_system.html" title="Integration class for the FatLib library. ">FatFileSystem</a> - use for diagnostic purposes only. </p><dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acab819fa25a91dad1cc698a7e1e0eb32"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatVolume::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initialize a FAT volume. Try partition one first then try super floppy format.</p>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a034d997a1e7a0b2b664a4357bcccd256"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatVolume::init </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>part</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initialize a FAT volume.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">part</td><td>The partition to be used. Legal values for <em>part</em> are 1-4 to use the corresponding partition on a device formatted with a MBR, Master Boot Record, or zero if the device is formatted as a super floppy with the FAT boot sector in block zero.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
 
 </div>
 </div>
@@ -1327,6 +1733,85 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a2398fb37a7a9d5e0dc0ffde6a44a993d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FatFileSystem::ls </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>flags</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>List the directory contents of the volume working directory to Serial.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td>The inclusive OR of</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>LS_DATE - Print file modification date</p>
+<p>LS_SIZE - Print file size.</p>
+<p>LS_R - Recursive list of subdirectories. </p>
+
+</div>
+</div>
+<a class="anchor" id="a122b61dbec5051304bcc81bc08b1b99d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FatFileSystem::ls </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>flags</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>List the directory contents of a directory to Serial.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">path</td><td>directory to list.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td>The inclusive OR of</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>LS_DATE - Print file modification date</p>
+<p>LS_SIZE - Print file size.</p>
+<p>LS_R - Recursive list of subdirectories. </p>
+
+</div>
+</div>
 <a class="anchor" id="ad17f2a0925b34cb3807e4c1677a2872f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1424,85 +1909,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6e2ba60320f47912a96ad83820073ce8"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SdFatBase::ls </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>flags</em> = <code>0</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>List the directory contents of the volume working directory to Serial.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td>The inclusive OR of</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>LS_DATE - Print file modification date</p>
-<p>LS_SIZE - Print file size.</p>
-<p>LS_R - Recursive list of subdirectories. </p>
-
-</div>
-</div>
-<a class="anchor" id="a85bd146c6fb0120ac69c3d93267321e6"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SdFatBase::ls </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>flags</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>List the directory contents of a directory to Serial.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">path</td><td>directory to list.</td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td>The inclusive OR of</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>LS_DATE - Print file modification date</p>
-<p>LS_SIZE - Print file size.</p>
-<p>LS_R - Recursive list of subdirectories. </p>
-
-</div>
-</div>
 <a class="anchor" id="a231c62c98ba8ac3c2624dc5ad2053ebf"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1546,7 +1952,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af2b23a0be384abb31989eb86aabdb5d8"></a>
+<a class="anchor" id="a947e4586077a922892b632edac33b67a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1554,7 +1960,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_file.html">File</a> SdFatBase::open </td>
+          <td class="memname"><a class="el" href="class_file.html">File</a> FatFileSystem::open </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -1563,7 +1969,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>mode</em> = <code><a class="el" href="_sd_file_8h.html#ad52d51659a75e25d96fb04d22ff718cb">FILE_READ</a></code>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="_arduino_files_8h.html#ad52d51659a75e25d96fb04d22ff718cb">FILE_READ</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1573,7 +1979,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1699,6 +2105,54 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ab2d483670a0a6a6a4754b23614fe11bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t FatVolume::rootDirEntryCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The number of entries in the root directory for FAT16 volumes. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae9363ebbbae90e895ea56e8fa3f60c13"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FatVolume::rootDirStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The logical block number for the start of the root directory on FAT16 volumes or the first cluster number on FAT32 volumes. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ad60cb13557f35578f868e03e9ccb8be1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1766,7 +2220,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a24dfcd1a1c716e8e56f8128d69dc1463"></a>
+<a class="anchor" id="a07bc98088ce4a9c725700899c184f7fc"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1774,7 +2228,31 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_sd_base_file.html">SdBaseFile</a>* SdFatBase::vwd </td>
+          <td class="memname">uint32_t FatVolume::volumeBlockCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The number of blocks in the volume </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acf257d02b7166683bda2abc5058004bf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_fat_file.html">FatFile</a>* FatFileSystem::vwd </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1827,7 +2305,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 4 2014 08:53:21 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Feb 1 2015 10:21:40 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

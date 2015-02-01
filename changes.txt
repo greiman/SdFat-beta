@@ -1,3 +1,7 @@
+01 Feb 2015
+
+Code cleanup and re-factor.
+
 04 Dec 2014
 
 Added support for Long File Names.

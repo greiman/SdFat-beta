@@ -49,6 +49,17 @@
 #define USE_LONG_FILE_NAMES 1
 //------------------------------------------------------------------------------
 /**
+ * Set ARDUINO_FILE_USES_STREAM nonzero to use Stream as the base class
+ * for the Arduino File class.  If ARDUINO_FILE_USES_STREAM is zero, Print
+ * will be used as the base class for the Arduino File class.
+ *
+ * You can save some flash if you do not use Stream input functions such as
+ * find(), findUntil(), readBytesUntil(), readString(), readStringUntil(),
+ * parseInt(), and parseFloat().
+ */
+#define ARDUINO_FILE_USES_STREAM 1
+//------------------------------------------------------------------------------
+/**
  * The symbol SD_SPI_CONFIGURATION defines SPI access to the SD card.
  *
  * IF SD_SPI_CONFIGUTATION is define to be zero, only the SdFat class
@@ -58,18 +69,18 @@
  * define and SdFat uses the standard Arduino SD.h library.
  *
  * If SD_SPI_CONFIGURATION is define to be two, only the SdFat class is
- * define and SdFat uses software SPI on the pins defined below. 
+ * define and SdFat uses software SPI on the pins defined below.
  *
  * If SD_SPI_CONFIGURATION is define to be three, the three classes, SdFat,
  * SdFatLibSpi, and SdFatSoftSpi are defined.  SdFat uses the fast
  * custom SPI implementation. SdFatLibSpi uses the standard Arduino SPI
  * library.  SdFatSoftSpi is a template class that uses Software SPI. The
  * template parameters define the software SPI pins.  See the ThreeCard
- * example for simultaneous use of all three classes. 
+ * example for simultaneous use of all three classes.
  */
 #define SD_SPI_CONFIGURATION 0
 //------------------------------------------------------------------------------
-/** 
+/**
  * If SD_SPI_CONFIGURATION is defined to be two, these definitions
  * will define the pins used for software SPI.
  *
@@ -144,13 +155,6 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
 #define ENDL_CALLS_FLUSH 0
 //------------------------------------------------------------------------------
 /**
- * Set SD_FILE_USES_STREAM nonzero to use Stream instead of Print for SdFile.
- * Using Stream will use more flash and may cause compatibility problems
- * with code written for older versions of SdFat.
- */
-#define SD_FILE_USES_STREAM 0
-//------------------------------------------------------------------------------
-/**
  * SPI SCK divisor for SD initialization commands.
  * or greater
  */
@@ -172,7 +176,7 @@ const uint8_t SPI_SCK_INIT_DIVISOR = 128;
 #endif  // __arm__
 //------------------------------------------------------------------------------
 /**
- * Set USE_MULTI_BLOCK_SD_IO nonzero to use multi-block SD read/write.
+ * Set USE_MULTI_BLOCK_IO nonzero to use multi-block SD read/write.
  *
  * Don't use mult-block read/write on small AVR boards.
  */

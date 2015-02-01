@@ -70,7 +70,7 @@ void makeName(char first, size_t len) {
   name[i] = 0;
 }
 //------------------------------------------------------------------------------
-// test open, remove, getFilename, and ls.
+// test open, remove, getName, and ls.
 void basicTest() {
   size_t i;
   size_t n = sd.vol()->fatType() == 32 ? 255 : 99;
@@ -110,8 +110,8 @@ void basicTest() {
       sd.errorHalt(F("open by index"));
     }
     memset(name, 0, sizeof(name));
-    if (!file.getFilename(name, sizeof(name))) {
-      sd.errorHalt(F("getFilename"));
+    if (!file.getName(name, sizeof(name))) {
+      sd.errorHalt(F("getName"));
     }
     if (!checkName('A', i)) {
       Serial.println(name);
@@ -178,7 +178,7 @@ void nameTest() {
       Serial.println(F("Open failed"));
     } else {
       file.println(testName[i]);
-      if (!file.getFilename(name, sizeof(name))) {
+      if (!file.getName(name, sizeof(name))) {
         sd.errorHalt(F("getFilemame"));
       }
       file.println(name);

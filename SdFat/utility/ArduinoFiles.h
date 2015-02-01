@@ -19,12 +19,14 @@
  */
 /**
  * \file
- * \brief SdFile class
+ * \brief PrintFile class
  */
-#ifndef SdFile_h
-#define SdFile_h
+#ifndef ArduinoFiles_h
+#define ArduinoFiles_h
+#include "FatLibConfig.h"
+#if ENABLE_ARDUINO_FEATURES
+#include "FatFile.h"
 #include <limits.h>
-#include "utility/FatLib.h"
 //------------------------------------------------------------------------------
 /** Arduino SD.h style flag for open for read. */
 #define FILE_READ O_READ
@@ -32,133 +34,61 @@
 #define FILE_WRITE (O_RDWR | O_CREAT | O_AT_END)
 //==============================================================================
 /**
- * \class SdBaseFile
- * \brief SdBaseFile base for SdFile and File.
+ * \class PrintFile
+ * \brief FatFile with Print.
  */
-class SdBaseFile : public FatFile {
+class PrintFile : public FatFile, public Print {
  public:
-  SdBaseFile() {}
-  /** Constructor with file open.
-   *
-   * \param[in] path File location and name.
-   * \param[in] oflag File open mode.
-   */
-  SdBaseFile(const char* path, uint8_t oflag) {
-    open(path, oflag);
-  }
-  using FatFile::ls;
-  using FatFile::printFatDate;
-  using FatFile::printFatTime;
-  using FatFile::printName;
-  /** List directory contents.
-   *
-   * \param[in] flags The inclusive OR of
-   *
-   * LS_DATE - %Print file modification date
-   *
-   * LS_SIZE - %Print file size.
-   *
-   * LS_R - Recursive list of subdirectories.
-   */
-  void ls(uint8_t flags = 0) {
-    ls(&Serial, flags);
-  }
-  /** %Print a directory date field.
-   *
-   *  Format is yyyy-mm-dd.
-   *
-   * \param[in] fatDate The date field from a directory entry.
-   */
-  static void printFatDate(uint16_t fatDate) {
-    printFatDate(&Serial, fatDate);
-  }
-  /** %Print a directory time field.
-   *
-   * Format is hh:mm:ss.
-   *
-   * \param[in] fatTime The time field from a directory entry.
-   */
-  static void printFatTime(uint16_t fatTime) {
-    printFatTime(&Serial, fatTime);
-  }
-  /** Print a file's name.
-   *
-   * \return The value true is returned for success and
-   * the value false is returned for failure.
-   */
-  size_t printName() {
-    return FatFile::printName(&Serial);
-  }
-};
-//==============================================================================
-/**
- * \class SdFile
- * \brief SdFile SdBaseFile with Print.
- */
-#if SD_FILE_USES_STREAM
-class SdFile : public SdBaseFile, public Stream {
-#else  // SD_FILE_USES_STREAM
-class SdFile : public SdBaseFile, public Print {
-#endif  // SD_FILE_USES_STREAM
- public:
-  SdFile() {}
+  PrintFile() {}
   /**  Create a file object and open it in the current working directory.
    *
-   * \param[in] path A path with a valid 8.3 DOS name for a file to be opened.
+   * \param[in] path A path for a file to be opened.
    *
    * \param[in] oflag Values for \a oflag are constructed by a
    * bitwise-inclusive OR of open flags. see
-   * SdBaseFile::open(SdBaseFile*, const char*, uint8_t).
+   * FatFile::open(FatFile*, const char*, uint8_t).
    */
-  SdFile(const char* path, uint8_t oflag) : SdBaseFile(path, oflag) {}
+  PrintFile(const char* path, uint8_t oflag) : FatFile(path, oflag) {}
 #if DESTRUCTOR_CLOSES_FILE
-  ~SdFile() {}
+  ~PrintFile() {}
 #endif  // DESTRUCTOR_CLOSES_FILE
-  using SdBaseFile::clearWriteError;
-  using SdBaseFile::getWriteError;
-  using SdBaseFile::read;
-  using SdBaseFile::write;
+  using FatFile::clearWriteError;
+  using FatFile::getWriteError;
+  using FatFile::read;
+  using FatFile::write;
   /** \return number of bytes available from the current position to EOF
    *   or INT_MAX if more than INT_MAX bytes are available.
    */
   int available() {
-    uint32_t n = SdBaseFile::available();
+    uint32_t n = FatFile::available();
     return n > INT_MAX ? INT_MAX : n;
   }
   /** Ensure that any bytes written to the file are saved to the SD card. */
   void flush() {
-    SdBaseFile::sync();
+    FatFile::sync();
   }
   /** Return the next available byte without consuming it.
    *
    * \return The byte if no error and not at eof else -1;
    */
   int peek() {
-    return SdBaseFile::peek();
+    return FatFile::peek();
   }
   /** Read the next byte from a file.
    *
    * \return For success return the next byte in the file as an int.
    * If an error occurs or end of file is reached return -1.
    */
-  int read() {
-    return SdBaseFile::read();
-  }
+//  int read() {
+//    return FatFile::read();
+//  }
   /** Write a byte to a file. Required by the Arduino Print class.
    * \param[in] b the byte to be written.
    * Use getWriteError to check for errors.
    * \return 1 for success and 0 for failure.
    */
   size_t write(uint8_t b) {
-    return SdBaseFile::write(b);
-  }
-  /** Write a string to a file. Used by the Arduino Print class.
-   * \param[in] str Pointer to the string.
-   * Use getWriteError to check for errors.
-   * \return count of characters written for success or -1 for failure.
-   */
-  int write(const char* str) {
-    return SdBaseFile::write(str, strlen(str));
+    return FatFile::write(b);
   }
   /** Write data to an open file.  Form required by Print.
    *
@@ -176,7 +106,7 @@ class SdFile : public SdBaseFile, public Print {
    * I/O error.
    */
   size_t write(const uint8_t *buf, size_t size) {
-    return SdBaseFile::write(buf, size);
+    return FatFile::write(buf, size);
   }
 };
 //==============================================================================
@@ -184,7 +114,11 @@ class SdFile : public SdBaseFile, public Print {
  * \class File
  * \brief Arduino SD.h style File API
  */
-class File : public SdBaseFile, public Stream {
+#if ARDUINO_FILE_USES_STREAM
+class File : public FatFile, public Stream {
+#else  // ARDUINO_FILE_USES_STREAM
+class File : public FatFile, public Print {
+#endif  // ARDUINO_FILE_USES_STREAM
  public:
   File() {}
   /**  Create a file object and open it in the current working directory.
@@ -193,13 +127,15 @@ class File : public SdBaseFile, public Stream {
    *
    * \param[in] oflag Values for \a oflag are constructed by a
    * bitwise-inclusive OR of open flags. see
-   * SdBaseFile::open(SdBaseFile*, const char*, uint8_t).
+   * FatFile::open(FatFile*, const char*, uint8_t).
    */
   File(const char* path, uint8_t oflag) {
     open(path, oflag);
   }
-  using SdBaseFile::clearWriteError;
-  using SdBaseFile::getWriteError;
+  using FatFile::clearWriteError;
+  using FatFile::getWriteError;
+  using FatFile::read;
+  using FatFile::write;
   /** The parenthesis operator.
     *
     * \return true if a file is open.
@@ -211,12 +147,12 @@ class File : public SdBaseFile, public Stream {
    *   or INT_MAX if more than INT_MAX bytes are available.
    */
   int available() {
-    uint32_t n = SdBaseFile::available();
+    uint32_t n = FatFile::available();
     return n > INT_MAX ? INT_MAX : n;
   }
   /** Ensure that any bytes written to the file are saved to the SD card. */
   void flush() {
-    SdBaseFile::sync();
+    FatFile::sync();
   }
   /** This function reports if the current file is a directory or not.
   * \return true if the file is a directory.
@@ -224,18 +160,20 @@ class File : public SdBaseFile, public Stream {
   bool isDirectory() {
     return isDir();
   }
-  /** \return a pointer to the file's short name. */
-  char* name() {
-    m_name[0] = 0;
-    getSFN(m_name);
-    return m_name;
+  /** No longer implemented due to Long File Names.
+   *
+   * Use getName(char* name, size_t size).
+   * \return a pointer to replacement suggestion. 
+   */
+  const char* name() const {
+    return "use getName()";
   }
   /** Return the next available byte without consuming it.
    *
    * \return The byte if no error and not at eof else -1;
    */
   int peek() {
-    return SdBaseFile::peek();
+    return FatFile::peek();
   }
   /** \return the current file position. */
   uint32_t position() {
@@ -257,7 +195,7 @@ class File : public SdBaseFile, public Stream {
    * If an error occurs or end of file is reached return -1.
    */
   int read() {
-    return SdBaseFile::read();
+    return FatFile::read();
   }
   /** Rewind a file if it is a directory */
   void rewindDirectory() {
@@ -285,7 +223,7 @@ class File : public SdBaseFile, public Stream {
    * \return 1 for success and 0 for failure.
    */
   size_t write(uint8_t b) {
-    return SdBaseFile::write(b);
+    return FatFile::write(b);
   }
   /** Write data to an open file.  Form required by Print.
    *
@@ -303,10 +241,8 @@ class File : public SdBaseFile, public Stream {
    * I/O error.
    */
   size_t write(const uint8_t *buf, size_t size) {
-    return SdBaseFile::write(buf, size);
+    return FatFile::write(buf, size);
   }
-
- private:
-  char m_name[13];
 };
-#endif  // SdFile_h
+#endif  // ENABLE_ARDUINO_FEATURES
+#endif  // ArduinoFiles_h

@@ -19,6 +19,7 @@
  */
 //  #include <ctype.h>
 #include <float.h>
+#include <ctype.h>
 #include "istream.h"
 //------------------------------------------------------------------------------
 int istream::get() {

@@ -20,7 +20,7 @@
 
 /**
 \mainpage Arduino %SdFat Library
-<CENTER>Copyright &copy; 2012, 2013, 2014 by William Greiman
+<CENTER>Copyright &copy; 2012, 2013, 2014, 2015 by William Greiman
 </CENTER>
 
 \section Intro Introduction

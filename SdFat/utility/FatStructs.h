@@ -683,7 +683,7 @@ static inline uint8_t FAT_HOUR(uint16_t fatTime) {
  * \return Extracted minute [0,59]
  */
 static inline uint8_t FAT_MINUTE(uint16_t fatTime) {
-  return(fatTime >> 5) & 0X3F;
+  return (fatTime >> 5) & 0X3F;
 }
 /** second part of FAT directory time field
  * Note second/2 is stored in packed time.

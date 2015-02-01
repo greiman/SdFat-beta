@@ -354,7 +354,7 @@ bool SdSpiCard::isBusy() {
 bool SdSpiCard::readBlock(uint32_t blockNumber, uint8_t* dst) {
   SD_TRACE("RB", blockNumber);
   // use address if not SDHC card
-  if (type()!= SD_CARD_TYPE_SDHC) {
+  if (type() != SD_CARD_TYPE_SDHC) {
     blockNumber <<= 9;
   }
   if (cardCommand(CMD17, blockNumber)) {
@@ -434,7 +434,7 @@ bool SdSpiCard::readOCR(uint32_t* ocr) {
     goto fail;
   }
   for (uint8_t i = 0; i < 4; i++) {
-    p[3-i] = spiReceive();
+    p[3 - i] = spiReceive();
   }
 
   chipSelectHigh();
@@ -461,7 +461,7 @@ fail:
 //------------------------------------------------------------------------------
 bool SdSpiCard::readStart(uint32_t blockNumber) {
   SD_TRACE("RS", blockNumber);
-  if (type()!= SD_CARD_TYPE_SDHC) {
+  if (type() != SD_CARD_TYPE_SDHC) {
     blockNumber <<= 9;
   }
   if (cardCommand(CMD18, blockNumber)) {

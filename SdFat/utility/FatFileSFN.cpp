@@ -58,7 +58,7 @@ fail:
 }
 #if !USE_LONG_FILE_NAMES
 //------------------------------------------------------------------------------
-bool FatFile::getFilename(char* name, size_t size) {
+bool FatFile::getName(char* name, size_t size) {
   return size < 13 ? 0 : getSFN(name);
 }
 //------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, uint8_t oflag) {
           DBG_FAIL_MACRO;
           goto fail;
         }
-#endif  // SFN_OPEN_USES_CHKSUM  
+#endif  // SFN_OPEN_USES_CHKSUM
         if (!openCachedEntry(dirFile, index, oflag, lfnOrd)) {
           DBG_FAIL_MACRO;
           goto fail;
@@ -172,7 +172,7 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, uint8_t oflag) {
         lfnOrd = 0;
       }
     } else if (DIR_IS_LONG_NAME(dir)) {
-      ldir = (ldir_t*)dir;
+      ldir = reinterpret_cast<ldir_t*>(dir);
       if (ldir->ord & LDIR_ORD_LAST_LONG_ENTRY) {
         lfnOrd = ldir->ord & 0X1F;
 #if SFN_OPEN_USES_CHKSUM

@@ -198,47 +198,7 @@ uint8_t FatFile::dirName(const dir_t* dir, char* name) {
   name[j] = 0;
   return j;
 }
-//------------------------------------------------------------------------------
-void FatFile::dmpFile(print_t* pr, uint32_t pos, size_t n) {
-  char text[16];
-  if (n >= 0XFFF0) {
-    n = 0XFFF0;
-  }
-  if (!seekSet(pos)) {
-    return;
-  }
-  for (size_t i = 0; i <= n; i++) {
-    if ((i & 15) == 0) {
-      if (i) {
-        pr->write(' ');
-        pr->write(text, 16);
-        if (i == n) {
-          break;
-        }
-      }
-      pr->println();
-      if (i >= n) {
-        break;
-      }
-      for (uint16_t z = 4096; 1 < z &&  i < z; z >>= 4) {
-        pr->write('0');
-      }
-      pr->print(i, HEX);
-      pr->print(' ');
-    }
-    int16_t h = read();
-    if (h < 0) {
-      break;
-    }
-    pr->write(' ');
-    if (h < 16) {
-      pr->write('0');
-    }
-    pr->print(h, HEX);
-    text[i&15] = ' ' <= h && h < 0X7F ? h : '.';
-  }
-  pr->println();
-}
+
 //------------------------------------------------------------------------------
 uint32_t FatFile::dirSize() {
   int8_t fg;
@@ -454,7 +414,7 @@ fail:
 }
 //------------------------------------------------------------------------------
 bool FatFile::open(FatFile* dirFile, uint16_t index, uint8_t oflag) {
-  uint8_t chksum;
+  uint8_t chksum = 0;
   uint8_t lfnOrd = 0;
   dir_t* dir;
   ldir_t*ldir;
@@ -579,7 +539,7 @@ fail:
 }
 //------------------------------------------------------------------------------
 bool FatFile::openNext(FatFile* dirFile, uint8_t oflag) {
-  uint8_t chksum;
+  uint8_t chksum = 0;
   ldir_t* ldir;
   uint8_t lfnOrd = 0;
   uint16_t index;

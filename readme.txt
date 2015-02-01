@@ -11,7 +11,7 @@ Added support for Long File Names. See the LongFileName example.
 Replaced the core SdFat code with FatLib, a generic FAT12/FAT16/FAT32
 library.  This may result in bugs and backward compatibility problems.
 
-Added SdFatSoftSpi, a software SPI template class.  See the SofwareSpi
+Added SdFatSoftSpi, a software SPI template class.  See the SoftwareSpi
 example.
 
 Added SdFatLibSpi, a class that uses the Arduino SPI.h library.

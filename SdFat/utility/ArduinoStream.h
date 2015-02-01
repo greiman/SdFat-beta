@@ -23,7 +23,8 @@
  * \file
  * \brief ArduinoInStream and ArduinoOutStream classes
  */
-#if defined(ARDUINO) || defined(DOXYGEN)
+#include "FatLibConfig.h"
+#if ENABLE_ARDUINO_FEATURES
 #include <Arduino.h>
 #include "bufstream.h"
 //==============================================================================
@@ -136,5 +137,5 @@ class ArduinoOutStream : public ostream {
   ArduinoOutStream() {}
   Print* m_pr;
 };
-#endif  // ARDUINO
+#endif  // ENABLE_ARDUINO_FEATURES
 #endif  // ArduinoStream_h

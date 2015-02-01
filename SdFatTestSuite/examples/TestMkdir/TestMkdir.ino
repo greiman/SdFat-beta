@@ -24,7 +24,7 @@ SdFat sd;
 /*
  * create enough files to force a cluster to be allocated to dir.
  */
-void dirAllocTest(SdBaseFile* dir) {
+void dirAllocTest(FatFile* dir) {
   char buf[32], name[32];
   SdFile file;
   uint16_t n; 

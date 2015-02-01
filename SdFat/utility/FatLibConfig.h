@@ -23,18 +23,10 @@
  */
 #ifndef FatLibConfig_h
 #define FatLibConfig_h
-
-/** Use SdFatConfig.h if nonzero */
-#define USE_SDFAT_CONFIG 1
-#if USE_SDFAT_CONFIG
-#include "../SdFatConfig.h"
-#if !defined(USE_LONG_FILE_NAMES) || !defined(USE_SEPARATE_FAT_CACHE) || \
-    !defined(USE_MULTI_BLOCK_IO) || !defined(DESTRUCTOR_CLOSES_FILE) || \
-    !defined(ENDL_CALLS_FLUSH) || !defined(FAT12_SUPPORT)
-#error Undefined congiguration symbols.
-#endif  // Configuration symbols
-#else  //  USE_SDFAT_CONFIG
 #include <stdint.h>
+// Allow this file to override defaults.
+#include "../SdFatConfig.h"
+
 #ifdef __AVR__
 #include <avr/io.h>
 #endif  // __AVR__
@@ -57,37 +49,57 @@
  *  * (asterisk)
  *
  */
+#ifndef USE_LONG_FILE_NAMES
 #define USE_LONG_FILE_NAMES 1
+#endif  // USE_LONG_FILE_NAMES
+//------------------------------------------------------------------------------
+/** 
+ * Set ARDUINO_FILE_USES_STREAM nonzero to use Stream as the base class
+ * for the Arduino File class.  If ARDUINO_FILE_USES_STREAM is zero, Print
+ * will be used as the base class for the Arduino File class.
+ *
+ * You can save some flash if you do not use Stream input functions such as
+ * find(), findUntil(), readBytesUntil(), readString(), readStringUntil(), 
+ * parseInt(), and parsefloat().
+ */
+#ifndef ARDUINO_FILE_USES_STREAM
+#define ARDUINO_FILE_USES_STREAM 1
+#endif  // ARDUINO_FILE_USES_STREAM
 //------------------------------------------------------------------------------
 /**
  * Set USE_SEPARATE_FAT_CACHE non-zero to use a second 512 byte cache
  * for FAT table entries.  Improves performance for large writes that
  * are not a multiple of 512 bytes.
  */
-
+#ifndef USE_SEPARATE_FAT_CACHE
 #ifdef __arm__
 #define USE_SEPARATE_FAT_CACHE 1
 #else  // __arm__
 #define USE_SEPARATE_FAT_CACHE 0
 #endif  // __arm__
+#endif  // USE_SEPARATE_FAT_CACHE
 //------------------------------------------------------------------------------
 /**
  * Set USE_MULTI_BLOCK_IO non-zero to use multi-block SD read/write.
  *
  * Don't use mult-block read/write on small AVR boards.
  */
+#ifndef USE_MULTI_BLOCK_IO
 #if defined(RAMEND) && RAMEND < 3000
 #define USE_MULTI_BLOCK_IO 0
-#else
+#else  // RAMEND
 #define USE_MULTI_BLOCK_IO 1
-#endif
+#endif  // RAMEND
+#endif  // USE_MULTI_BLOCK_IO
 //------------------------------------------------------------------------------
 /**
  * Set DESTRUCTOR_CLOSES_FILE non-zero to close a file in its destructor.
  *
  * Causes use of lots of heap in ARM.
  */
+#ifndef DESTRUCTOR_CLOSES_FILE
 #define DESTRUCTOR_CLOSES_FILE 0
+#endif  // DESTRUCTOR_CLOSES_FILE
 //------------------------------------------------------------------------------
 /**
  * Call flush for endl if ENDL_CALLS_FLUSH is non-zero
@@ -106,12 +118,26 @@
  * If ENDL_CALLS_FLUSH is zero, you must call flush and/or close to force
  * all data to be written to the SD.
  */
+#ifndef  ENDL_CALLS_FLUSH
 #define ENDL_CALLS_FLUSH 0
+#endif  // ENDL_CALLS_FLUSH
 //------------------------------------------------------------------------------
 /**
  * Allow FAT12 volumes if FAT12_SUPPORT is non-zero.
  * FAT12 has not been well tested.
  */
+#ifndef FAT12_SUPPORT
 #define FAT12_SUPPORT 0
-#endif  //  USE_SDFAT_CONFIG
+#endif  // FAT12_SUPPORT
+//------------------------------------------------------------------------------
+/**
+ *  Enable Extra features for Arduino.
+ */
+#ifndef ENABLE_ARDUINO_FEATURES
+#if defined(ARDUINO) || defined(DOXYGEN)
+#define ENABLE_ARDUINO_FEATURES 1
+#else  //  #if defined(ARDUINO) || defined(DOXYGEN)
+#define ENABLE_ARDUINO_FEATURES 0
+#endif  //  defined(ARDUINO) || defined(DOXYGEN)
+#endif  // ENABLE_ARDUINO_FEATURES
 #endif  // FatLibConfig_h

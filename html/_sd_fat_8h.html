@@ -95,14 +95,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p><a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_sd_spi_card_8h.html">SdSpiCard.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_sd_file_8h.html">SdFile.h</a>&quot;</code><br />
 <code>#include &quot;utility/FatLib.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SdFat.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_sd_fat_8h__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2_sd_fat_8h" alt=""/></div>
 <map name="_arduino_2libraries_2_sd_fat_2_sd_fat_8h" id="_arduino_2libraries_2_sd_fat_2_sd_fat_8h">
-<area shape="rect" id="node3" href="_sd_spi_card_8h.html" title="SdSpiCard class for V2 SD/SDHC cards. " alt="" coords="76,96,170,123"/><area shape="rect" id="node28" href="_sd_file_8h.html" title="SdFile class. " alt="" coords="234,96,304,123"/><area shape="rect" id="node7" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="20,245,124,272"/><area shape="rect" id="node13" href="_sd_spi_8h.html" title="SdSpi class for V2 SD/SDHC cards. " alt="" coords="183,171,250,197"/><area shape="rect" id="node17" href="_soft_s_p_i_8h.html" title="Software SPI. " alt="" coords="198,245,310,272"/><area shape="rect" id="node19" href="_digital_pin_8h.html" title="Fast Digital Pin functions. " alt="" coords="210,320,298,347"/></map>
+<area shape="rect" id="node3" href="_sd_spi_card_8h.html" title="SdSpiCard class for V2 SD/SDHC cards. " alt="" coords="40,96,134,123"/><area shape="rect" id="node7" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="19,245,123,272"/><area shape="rect" id="node13" href="_sd_spi_8h.html" title="SdSpi class for V2 SD/SDHC cards. " alt="" coords="183,171,250,197"/><area shape="rect" id="node17" href="_soft_s_p_i_8h.html" title="Software SPI. " alt="" coords="198,245,310,272"/><area shape="rect" id="node19" href="_digital_pin_8h.html" title="Fast Digital Pin functions. " alt="" coords="210,320,298,347"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -114,6 +113,9 @@ This graph shows which files directly or indirectly include this file:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_base_file.html">SdBaseFile</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for backward compatibility.  <a href="class_sd_base_file.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat.html">SdFat</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main file system class for SdFat library.  <a href="class_sd_fat.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,10 +128,13 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_soft_spi.html">SdFatSoftSpi&lt; MisoPin, MosiPin, SckPin &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> class using software SPI.  <a href="class_sd_fat_soft_spi.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file.html">SdFile</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for backward compatibility.  <a href="class_sd_file.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aca25ecce379f446043bdee2c55304210"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#aca25ecce379f446043bdee2c55304210">SD_FAT_VERSION</a>&#160;&#160;&#160;20141201</td></tr>
+<tr class="memitem:aca25ecce379f446043bdee2c55304210"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#aca25ecce379f446043bdee2c55304210">SD_FAT_VERSION</a>&#160;&#160;&#160;20150201</td></tr>
 <tr class="separator:aca25ecce379f446043bdee2c55304210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -140,7 +145,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SD_FAT_VERSION&#160;&#160;&#160;20141201</td>
+          <td class="memname">#define SD_FAT_VERSION&#160;&#160;&#160;20150201</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -151,7 +156,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 4 2014 08:53:20 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Feb 1 2015 10:21:39 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

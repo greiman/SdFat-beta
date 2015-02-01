@@ -1,4 +1,5 @@
 // Program to compare size of SdFat with the SD.h library.
+#include <SPI.h>
 // Select the test library by commenting out one of the following two lines.
 // #include <SD.h>
 #include <SdFat.h>

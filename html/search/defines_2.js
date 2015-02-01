@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['fat12_5fsupport',['FAT12_SUPPORT',['../_sd_fat_config_8h.html#a28998c5daf4bd038f4f93172698320b1',1,'SdFatConfig.h']]],
-  ['fat_5flib_5fversion',['FAT_LIB_VERSION',['../_fat_file_system_8h.html#a6f54720c1a09ca610629e6d4e57dd276',1,'FatFileSystem.h']]],
-  ['file_5fread',['FILE_READ',['../_sd_file_8h.html#ad52d51659a75e25d96fb04d22ff718cb',1,'SdFile.h']]],
-  ['file_5fwrite',['FILE_WRITE',['../_sd_file_8h.html#ace34e503254fa9004599ddf122264c8f',1,'SdFile.h']]]
+  ['enable_5farduino_5ffeatures',['ENABLE_ARDUINO_FEATURES',['../_fat_lib_config_8h.html#a9a8c1ea8596f35f7f33a24b642567206',1,'FatLibConfig.h']]],
+  ['enable_5fspi_5ftransaction',['ENABLE_SPI_TRANSACTION',['../_sd_fat_config_8h.html#a5fa85e013e8661465ff4bc2395d77dd1',1,'SdFatConfig.h']]],
+  ['enable_5fspi_5fyield',['ENABLE_SPI_YIELD',['../_sd_fat_config_8h.html#a360adabab0d776df344efa2f8cd34b83',1,'SdFatConfig.h']]],
+  ['endl_5fcalls_5fflush',['ENDL_CALLS_FLUSH',['../_sd_fat_config_8h.html#a270eefdaec4778f2a491658f34f61b17',1,'SdFatConfig.h']]],
+  ['eof',['EOF',['../_stdio_stream_8h.html#a59adc4c82490d23754cd39c2fb99b0da',1,'StdioStream.h']]]
 ];

@@ -89,7 +89,7 @@ char* StdioStream::fgets(char* str, size_t num, size_t* len) {
   return str;
 }
 //------------------------------------------------------------------------------
-bool StdioStream::fopen(const char* filename, const char* mode) {
+bool StdioStream::fopen(const char* path, const char* mode) {
   uint8_t oflag;
   switch (*mode++) {
   case 'a':
@@ -131,7 +131,7 @@ bool StdioStream::fopen(const char* filename, const char* mode) {
   if ((oflag & O_EXCL) && !(oflag & O_WRITE)) {
     goto fail;
   }
-  if (!FatFile::open(filename, oflag)) {
+  if (!FatFile::open(path, oflag)) {
     goto fail;
   }
   m_r = 0;

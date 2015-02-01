@@ -24,12 +24,48 @@
  * \brief SdFat class
  */
 #include "SdSpiCard.h"
-#include "SdFile.h"
 #include "utility/FatLib.h"
 //------------------------------------------------------------------------------
 /** SdFat version YYYYMMDD */
-#define SD_FAT_VERSION 20141204
+#define SD_FAT_VERSION 20150201
 //==============================================================================
+/**
+ * \class SdBaseFile
+ * \brief Class for backward compatibility.
+ */
+class SdBaseFile : public FatFile {
+ public:
+  SdBaseFile() {}
+  /**  Create a file object and open it in the current working directory.
+   *
+   * \param[in] path A path for a file to be opened.
+   *
+   * \param[in] oflag Values for \a oflag are constructed by a
+   * bitwise-inclusive OR of open flags. see
+   * FatFile::open(FatFile*, const char*, uint8_t).
+   */
+  SdBaseFile(const char* path, uint8_t oflag) : FatFile(path, oflag) {}
+};
+#if ENABLE_ARDUINO_FEATURES
+/**
+ * \class SdFile
+ * \brief Class for backward compatibility.
+ */
+
+class SdFile : public PrintFile {
+ public:
+  SdFile() {}
+  /**  Create a file object and open it in the current working directory.
+   *
+   * \param[in] path A path for a file to be opened.
+   *
+   * \param[in] oflag Values for \a oflag are constructed by a
+   * bitwise-inclusive OR of open flags. see
+   * FatFile::open(FatFile*, const char*, uint8_t).
+   */
+  SdFile(const char* path, uint8_t oflag) : PrintFile(path, oflag) {}
+};
+#endif  // #if ENABLE_ARDUINO_FEATURES
 /**
  * \class SdFatBase
  * \brief Virtual base class for %SdFat library.
@@ -44,7 +80,7 @@ class SdFatBase : public FatFileSystem {
    */
   bool begin(SdSpiCard::m_spi_t* spi, uint8_t csPin = SS, uint8_t divisor = 2) {
     return m_sdCard.begin(spi, csPin, divisor) &&
-           FatFileSystem::begin(&m_vwd);
+           FatFileSystem::begin();
   }
   /** \return Pointer to SD card object */
   SdSpiCard *card() {
@@ -124,7 +160,7 @@ class SdFatBase : public FatFileSystem {
    *  \return true for success else false.
    */
   bool fsBegin() {
-    return FatFileSystem::begin(&m_vwd);
+    return FatFileSystem::begin();
   }
   /** %Print any SD error code and halt. */
   void initErrorHalt() {
@@ -194,47 +230,6 @@ class SdFatBase : public FatFileSystem {
    * \param[in] msg Message to print.
    */
   void initErrorPrint(Print* pr, const __FlashStringHelper* msg);
-  /** List the directory contents of the volume working directory to Serial.
-   *
-   * \param[in] flags The inclusive OR of
-   *
-   * LS_DATE - %Print file modification date
-   *
-   * LS_SIZE - %Print file size.
-   *
-   * LS_R - Recursive list of subdirectories.
-   */
-  void ls(uint8_t flags = 0) {
-    ls(&Serial, flags);
-  }
-  /** List the directory contents of a directory to Serial.
-   *
-   * \param[in] path directory to list.
-   *
-   * \param[in] flags The inclusive OR of
-   *
-   * LS_DATE - %Print file modification date
-   *
-   * LS_SIZE - %Print file size.
-   *
-   * LS_R - Recursive list of subdirectories.
-   */
-  void ls(const char* path, uint8_t flags = 0) {
-    ls(&Serial, path, flags);
-  }
-  /** open a file
-   *
-   * \param[in] path location of file to be opened.
-   * \param[in] mode open mode flags.
-   * \return a File object.
-   */
-  File open(const char *path, uint8_t mode = FILE_READ);
-  /** \return a pointer to the volume working directory. */
-  SdBaseFile* vwd() {
-    return &m_vwd;
-  }
-
-  using FatFileSystem::ls;
 
  private:
   uint8_t cardErrorCode() {
@@ -255,7 +250,6 @@ class SdFatBase : public FatFileSystem {
   bool writeBlocks(uint32_t block, const uint8_t* src, size_t n) {
     return m_sdCard.writeBlocks(block, src, n);
   }
-  SdBaseFile m_vwd;
   SdSpiCard m_sdCard;
 };
 //==============================================================================

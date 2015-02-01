@@ -212,7 +212,7 @@ typedef struct CID {
   /** Manufacturing date month */
   unsigned char mdt_month : 4;
   /** Manufacturing date year low digit */
-  unsigned char mdt_year_low :4;
+  unsigned char mdt_year_low : 4;
   // byte 15
   /** not used always 1 */
   unsigned char always1 : 1;
@@ -243,7 +243,7 @@ typedef struct CSDV1 {
   unsigned char c_size_high : 2;
   unsigned char reserved2 : 2;
   unsigned char dsr_imp : 1;
-  unsigned char read_blk_misalign :1;
+  unsigned char read_blk_misalign : 1;
   unsigned char write_blk_misalign : 1;
   unsigned char read_bl_partial : 1;
   // byte 7
@@ -251,7 +251,7 @@ typedef struct CSDV1 {
   // byte 8
   unsigned char vdd_r_curr_max : 3;
   unsigned char vdd_r_curr_min : 3;
-  unsigned char c_size_low :2;
+  unsigned char c_size_low : 2;
   // byte 9
   unsigned char c_size_mult_high : 2;
   unsigned char vdd_w_cur_max : 3;
@@ -312,7 +312,7 @@ typedef struct CSDV2 {
   unsigned char reserved2 : 4;
   unsigned char dsr_imp : 1;
   /** fixed to 0 */
-  unsigned char read_blk_misalign :1;
+  unsigned char read_blk_misalign : 1;
   /** fixed to 0 */
   unsigned char write_blk_misalign : 1;
   /** fixed to 0 - no partial read */

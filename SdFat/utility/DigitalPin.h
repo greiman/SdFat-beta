@@ -211,7 +211,7 @@ static const pin_map_t pinMap[] = {
 || defined(__AVR_ATmega324__)\
 || defined(__AVR_ATmega16__)
 
-#ifdef defined(VARIANT_MIGHTY)
+#if analogInputToDigitalPin(0)==24
 // Mighty Layout
 static const pin_map_t pinMap[] = {
   {&DDRB, &PINB, &PORTB, 0},  // B0  0
@@ -247,7 +247,7 @@ static const pin_map_t pinMap[] = {
   {&DDRA, &PINA, &PORTA, 6},  // A6 30
   {&DDRA, &PINA, &PORTA, 7}   // A7 31
 };
-#elif defined(VARIANT_BOBUINO)
+#elif analogInputToDigitalPin(0)==21
 // Bobuino Layout
 static const pin_map_t pinMap[] = {
   {&DDRD, &PIND, &PORTD, 0},  // D0  0
@@ -283,7 +283,7 @@ static const pin_map_t pinMap[] = {
   {&DDRD, &PIND, &PORTD, 4},  // D4 30
   {&DDRD, &PIND, &PORTD, 7}   // D7 31
 };
-#elif defined(VARIANT_STANDARD)
+#elif analogInputToDigitalPin(0)==31
 // Standard Layout
 static const pin_map_t pinMap[] = {
   {&DDRB, &PINB, &PORTB, 0},  // B0  0

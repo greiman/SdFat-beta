@@ -25,7 +25,7 @@
 #define SdSpi_h
 #include <Arduino.h>
 #include "SdFatConfig.h"
-#include "utility/SoftSPI.h"
+
 //------------------------------------------------------------------------------
 /**
  * \class SdSpiBase
@@ -207,6 +207,8 @@ class SdSpiLib {
 };
 #endif  // SD_SPI_CONFIGURATION >= 3 || SD_SPI_CONFIGURATION == 1
 //------------------------------------------------------------------------------
+#if SD_SPI_CONFIGURATION > 1 || defined(DOXYGEN)
+#include "utility/SoftSPI.h"
 /**
  * \class SdSpiSoft
  * \brief Software SPI class for access to SD and SDHC flash memory cards.
@@ -270,6 +272,7 @@ class SdSpiSoft : public SdSpiBase {
  private:
   SoftSPI<MisoPin, MosiPin, SckPin, 0> m_spi;
 };
+#endif  // SD_SPI_CONFIGURATION > 1 || defined(DOXYGEN)
 //------------------------------------------------------------------------------
 #if SD_SPI_CONFIGURATION == 0 || SD_SPI_CONFIGURATION >= 3
 /** Default is custom fast SPI. */

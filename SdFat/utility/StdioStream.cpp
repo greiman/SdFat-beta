@@ -376,13 +376,11 @@ int StdioStream::printDec(float value, uint8_t prec) {
 }
 //------------------------------------------------------------------------------
 int StdioStream::printDec(signed char n) {
-  uint8_t s = 0;
   if (n < 0) {
     if (fputc('-') < 0) {
       return -1;
     }
     n = -n;
-    s = 1;
   }
   return printDec((unsigned char)n);
 }

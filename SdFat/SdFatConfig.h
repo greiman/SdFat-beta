@@ -66,7 +66,7 @@
  * is define and SdFat uses a fast custom SPI implementation.
  *
  * If SD_SPI_CONFIGURATION is define to be one, only the SdFat class is
- * define and SdFat uses the standard Arduino SD.h library.
+ * define and SdFat uses the standard Arduino SPI.h library.
  *
  * If SD_SPI_CONFIGURATION is define to be two, only the SdFat class is
  * define and SdFat uses software SPI on the pins defined below.

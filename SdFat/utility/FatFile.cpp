@@ -695,7 +695,7 @@ int FatFile::peek() {
 //------------------------------------------------------------------------------
 int FatFile::read(void* buf, size_t nbyte) {
   int8_t fg;
-  uint8_t blockOfCluster;
+  uint8_t blockOfCluster = 0;
   uint8_t* dst = reinterpret_cast<uint8_t*>(buf);
   uint16_t offset;
   size_t toRead;

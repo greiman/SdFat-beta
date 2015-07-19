@@ -28,4 +28,4 @@ StdioStream, ifstream, ofstream, and others.
  
 Please continue by reading the html documentation.
 
-Updated 04 Dec 2014
+Updated 19 Jul 2015

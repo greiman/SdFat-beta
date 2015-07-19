@@ -24,6 +24,7 @@
 #ifndef SdSpi_h
 #define SdSpi_h
 #include <Arduino.h>
+#include <SPI.h>
 #include "SdFatConfig.h"
 
 //------------------------------------------------------------------------------
@@ -39,7 +40,11 @@ class SdSpiBase {
    *
    * \param[in] divisor SCK clock divider relative to the system clock.
    */
-  virtual void init(uint8_t divisor);
+  virtual void beginTransaction(uint8_t divisor);
+  /**
+   * End SPI transaction.
+   */  
+  virtual void endTransaction();
   /** Receive a byte.
    *
    * \return The byte.
@@ -64,8 +69,6 @@ class SdSpiBase {
   * \param[in] n Number of bytes to send.
   */
   virtual void send(const uint8_t* buf, size_t n) = 0;
-  /** \return true if hardware SPI else false */
-  virtual bool useSpiTransactions() = 0;
 };
 //------------------------------------------------------------------------------
 /**
@@ -84,7 +87,11 @@ class SdSpi {
    *
    * \param[in] divisor SCK clock divider relative to the system clock.
    */
-  void init(uint8_t divisor);
+  void beginTransaction(uint8_t divisor);
+  /**
+   * End SPI transaction
+   */
+  void endTransaction();
   /** Receive a byte.
    *
    * \return The byte.
@@ -110,9 +117,6 @@ class SdSpi {
    */
   void send(const uint8_t* buf, size_t n);
   /** \return true - uses SPI transactions */
-  bool useSpiTransactions() {
-    return true;
-  }
 };
 //------------------------------------------------------------------------------
 /**
@@ -120,8 +124,6 @@ class SdSpi {
  * \brief Arduino SPI library class for access to SD and SDHC flash
  *        memory cards.
  */
-#if SD_SPI_CONFIGURATION >= 3 || SD_SPI_CONFIGURATION == 1 || defined(DOXYGEN)
-#include <SPI.h>
 #if SD_SPI_CONFIGURATION >= 3
 class SdSpiLib : public SdSpiBase {
 #else  // SD_SPI_CONFIGURATION >= 3
@@ -138,9 +140,14 @@ class SdSpiLib {
    *
    * \param[in] divisor SCK clock divider relative to the system clock.
    */
-  void init(uint8_t divisor) {
-    SPI.setBitOrder(MSBFIRST);
-    SPI.setDataMode(SPI_MODE0);
+  void beginTransaction(uint8_t divisor) {
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.beginTransaction(SPISettings());
+#else  // #if ENABLE_SPI_TRANSACTIONS
+  SPI.setBitOrder(MSBFIRST);
+  SPI.setDataMode(SPI_MODE0);
+#endif  // #if ENABLE_SPI_TRANSACTIONS
+
 #ifndef SPI_CLOCK_DIV128
     SPI.setClockDivider(divisor);
 #else  // SPI_CLOCK_DIV128
@@ -162,6 +169,14 @@ class SdSpiLib {
     }
     SPI.setClockDivider(v);
 #endif  // SPI_CLOCK_DIV128
+  }
+  /**
+   * End SPI transaction.
+   */  
+  void endTransaction() {
+#if ENABLE_SPI_TRANSACTIONS
+    SPI.endTransaction();
+#endif  // ENABLE_SPI_TRANSACTIONS
   }
   /** Receive a byte.
    *
@@ -200,15 +215,10 @@ class SdSpiLib {
       SPI.transfer(buf[i]);
     }
   }
-  /** \return true - uses SPI transactions */
-  bool useSpiTransactions() {
-    return true;
-  }
 };
-#endif  // SD_SPI_CONFIGURATION >= 3 || SD_SPI_CONFIGURATION == 1
 //------------------------------------------------------------------------------
 #if SD_SPI_CONFIGURATION > 1 || defined(DOXYGEN)
-#include "utility/SoftSPI.h"
+#include "SoftSPI.h"
 /**
  * \class SdSpiSoft
  * \brief Software SPI class for access to SD and SDHC flash memory cards.
@@ -226,7 +236,11 @@ class SdSpiSoft : public SdSpiBase {
    * Initialize hardware SPI - dummy for soft SPI
    * \param[in] divisor SCK divisor - ignored.
    */
-  void init(uint8_t divisor) {}
+  void beginTransaction(uint8_t divisor) {}
+  /**
+   * End SPI transaction - dummy for soft SPI
+   */
+  void endTransaction() {}
   /** Receive a byte.
    *
    * \return The byte.
@@ -264,29 +278,23 @@ class SdSpiSoft : public SdSpiBase {
       send(buf[i]);
     }
   }
-  /** \return false - no SPI transactions */
-  bool useSpiTransactions() {
-    return false;
-  }
 
  private:
   SoftSPI<MisoPin, MosiPin, SckPin, 0> m_spi;
 };
 #endif  // SD_SPI_CONFIGURATION > 1 || defined(DOXYGEN)
 //------------------------------------------------------------------------------
-#if SD_SPI_CONFIGURATION == 0 || SD_SPI_CONFIGURATION >= 3
-/** Default is custom fast SPI. */
-typedef SdSpi SpiDefault_t;
-#elif SD_SPI_CONFIGURATION == 1
-/** Default is Arduino library SPI. */
-typedef SdSpiLib SpiDefault_t;
-#elif SD_SPI_CONFIGURATION == 2
+#if SD_SPI_CONFIGURATION == 2
 /** Default is software SPI. */
 typedef SdSpiSoft<SOFT_SPI_MISO_PIN, SOFT_SPI_MOSI_PIN, SOFT_SPI_SCK_PIN>
 SpiDefault_t;
-#else  // SD_SPI_CONFIGURATION == 0 || SD_SPI_CONFIGURATION >= 3
-#error bad SD_SPI_CONFIGURATION
-#endif  // SD_SPI_CONFIGURATION == 0 || SD_SPI_CONFIGURATION >= 3
+#elif SD_SPI_CONFIGURATION == 1 || !SD_HAS_CUSTOM_SPI
+/** Default is Arduino library SPI. */
+typedef SdSpiLib SpiDefault_t;
+#else  // SpiDefault_t
+/** Default is custom fast SPI. */
+typedef SdSpi SpiDefault_t;
+#endif  // SpiDefault_t
 //------------------------------------------------------------------------------
 // Use of in-line for AVR to save flash.
 #ifdef __AVR__
@@ -310,7 +318,10 @@ inline void SdSpi::begin() {
 #endif  // __AVR_ATmega328P__
 }
 //------------------------------------------------------------------------------
-inline void SdSpi::init(uint8_t divisor) {
+inline void SdSpi::beginTransaction(uint8_t divisor) {
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.beginTransaction(SPISettings());
+#endif  // ENABLE_SPI_TRANSACTIONS
   uint8_t b = 2;
   uint8_t r = 0;
 
@@ -318,6 +329,12 @@ inline void SdSpi::init(uint8_t divisor) {
   for (; divisor > b && r < 7; b <<= 1, r += r < 5 ? 1 : 2) {}
   SPCR = (1 << SPE) | (1 << MSTR) | (r >> 1);
   SPSR = r & 1 ? 0 : 1 << SPI2X;
+}
+//------------------------------------------------------------------------------
+inline void SdSpi::endTransaction() {
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.endTransaction();
+#endif  // ENABLE_SPI_TRANSACTIONS
 }
 //------------------------------------------------------------------------------
 inline uint8_t SdSpi::receive() {

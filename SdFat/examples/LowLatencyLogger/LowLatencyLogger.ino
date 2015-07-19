@@ -15,7 +15,7 @@
  */
 #include <SPI.h>
 #include <SdFat.h>
-#include <SdFatUtil.h>
+#include <FreeStack.h>
 //------------------------------------------------------------------------------
 // User data functions.  Modify these functions for your data items.
 #include "UserDataType.h"  // Edit this include file to change data_t.
@@ -506,8 +506,8 @@ void setup(void) {
   Serial.begin(9600);
   while (!Serial) {}
 
-  Serial.print(F("FreeRam: "));
-  Serial.println(FreeRam());
+  Serial.print(F("FreeStack: "));
+  Serial.println(FreeStack());
   Serial.print(F("Records/block: "));
   Serial.println(DATA_DIM);
   if (sizeof(block_t) != 512) {

@@ -272,6 +272,21 @@ class FatVolume {
   uint32_t m_lastCluster;          // Last cluster number in FAT.
   uint32_t m_rootDirStart;         // Start block for FAT16, cluster for FAT32.
 //------------------------------------------------------------------------------
+#if MAINTAIN_FREE_CLUSTER_COUNT
+  int32_t  m_freeClusterCount;     // Count of free clusters in volume.
+  void setFreeClusterCount(int32_t value) {
+    m_freeClusterCount = value;
+  }
+  void updateFreeClusterCount(int32_t change) {
+    if (m_freeClusterCount >= 0) {
+      m_freeClusterCount += change;
+    }
+  }
+#else  // MAINTAIN_FREE_CLUSTER_COUNT
+  void setFreeClusterCount(int32_t value) {}
+  void updateFreeClusterCount(int32_t change) {}
+#endif  // MAINTAIN_FREE_CLUSTER_COUNT
+
 // block caches
   FatCache m_cache;
 #if USE_SEPARATE_FAT_CACHE

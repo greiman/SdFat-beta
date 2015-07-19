@@ -23,11 +23,11 @@
  * \file
  * \brief SdFat class
  */
-#include "SdSpiCard.h"
-#include "utility/FatLib.h"
+#include "SdSpiCard/SdSpiCard.h"
+#include "FatLib/FatLib.h"
 //------------------------------------------------------------------------------
 /** SdFat version YYYYMMDD */
-#define SD_FAT_VERSION 20150201
+#define SD_FAT_VERSION 20150718
 //==============================================================================
 /**
  * \class SdBaseFile

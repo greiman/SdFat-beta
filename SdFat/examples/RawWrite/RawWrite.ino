@@ -16,7 +16,7 @@
  */
 #include <SPI.h>
 #include <SdFat.h>
-#include <SdFatUtil.h>
+#include <FreeStack.h>
 
 // SD chip select pin
 const uint8_t chipSelect = SS;
@@ -61,7 +61,7 @@ void loop(void) {
   while (Serial.read() <= 0) {}
   delay(400);  // catch Due reset problem
 
-  cout << F("Free RAM: ") << FreeRam() << endl;
+  cout << F("FreeStack: ") << FreeStack() << endl;
 
   // initialize the SD card at SPI_FULL_SPEED for best performance.
   // try SPI_HALF_SPEED if bus errors occur.

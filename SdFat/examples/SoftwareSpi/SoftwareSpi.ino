@@ -37,6 +37,12 @@ void setup() {
   }
   file.println(F("This line was printed using software SPI."));
 
+  file.rewind();
+  
+  while (file.available()) {
+    Serial.write(file.read());
+  }
+
   file.close();
 
   Serial.println(F("Done."));

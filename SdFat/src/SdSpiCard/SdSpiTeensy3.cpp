@@ -48,9 +48,11 @@ void SdSpi::begin() {
  * Initialize hardware SPI
  *
  */
-void SdSpi::init(uint8_t sckDivisor) {
+void SdSpi::beginTransaction(uint8_t sckDivisor) {
   uint32_t ctar, ctar0, ctar1;
-
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.beginTransaction(SPISettings());
+#endif  // #if ENABLE_SPI_TRANSACTIONS
   if (sckDivisor <= 2) {
     // 1/2 speed
     ctar = SPI_CTAR_DBR | SPI_CTAR_BR(0) | SPI_CTAR_CSSCK(0);
@@ -224,7 +226,6 @@ void SdSpi::send(const uint8_t* buf , size_t n) {
 #else  // KINETISK
 //==============================================================================
 // Use standard SPI library if not KINETISK
-#include "SPI.h"
 /**
  * Initialize SPI pins.
  */
@@ -235,9 +236,13 @@ void SdSpi::begin() {
  *
  * \param[in] divisor SCK clock divider relative to the system clock.
  */
-void SdSpi::init(uint8_t divisor) {
+void SdSpi::beginTransaction(uint8_t divisor) {
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.beginTransaction(SPISettings());
+#else  // #if ENABLE_SPI_TRANSACTIONS
   SPI.setBitOrder(MSBFIRST);
   SPI.setDataMode(SPI_MODE0);
+#endif  // #if ENABLE_SPI_TRANSACTIONS
 #ifndef SPI_CLOCK_DIV128
   SPI.setClockDivider(divisor);
 #else  // SPI_CLOCK_DIV128
@@ -298,4 +303,10 @@ void SdSpi::send(const uint8_t* buf , size_t n) {
   }
 }
 #endif  // KINETISK
+//------------------------------------------------------------------------------
+void SdSpi::endTransaction() {
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.endTransaction();
+#endif  // ENABLE_SPI_TRANSACTIONS
+}
 #endif  // defined(__arm__) && defined(CORE_TEENSY)

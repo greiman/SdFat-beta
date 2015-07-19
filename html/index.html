@@ -100,7 +100,7 @@ Introduction</h1>
 <p>A number of example are provided in the SdFat/examples folder. These were developed to test SdFat and illustrate its use.</p>
 <h1><a class="anchor" id="Install"></a>
 Installation</h1>
-<p>You must manually install <a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> by copying the <a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> folder from the download package to the Arduino libraries folder in you sketch folder.</p>
+<p>You must manually install <a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> by copying the <a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> folder from the download package to the Arduino libraries folder in your sketch folder.</p>
 <p>See the Manual installation section of this guide.</p>
 <p><a href="http://arduino.cc/en/Guide/Libraries">http://arduino.cc/en/Guide/Libraries</a></p>
 <h1><a class="anchor" id="SDconfig"></a>
@@ -110,8 +110,8 @@ SdFat Configuration</h1>
 <p>Set SD_SPI_CONFIGURATION to enable various SPI options. The <a class="el" href="class_sd_fat_soft_spi.html" title="SdFat class using software SPI. ">SdFatSoftSpi</a> and <a class="el" href="class_sd_fat_lib_spi.html" title="SdFat class using the standard Arduino SPI library. ">SdFatLibSpi</a> classes can be enabled. <a class="el" href="class_sd_fat_lib_spi.html" title="SdFat class using the standard Arduino SPI library. ">SdFatLibSpi</a> uses the standard Arduino SPI library and <a class="el" href="class_sd_fat_soft_spi.html" title="SdFat class using software SPI. ">SdFatSoftSpi</a> uses software SPI.</p>
 <p>To enable SD card CRC checking set USE_SD_CRC nonzero.</p>
 <p>Set FAT12_SUPPORT nonzero to enable use of FAT12 volumes. FAT12 has not been well tested and requires additional flash.</p>
-<p>Set ENABLE_SPI_TRANSACTION nonzero to enable the SPI transaction feature of the standard Arduino SPI library. You must include SPI.h in your programs when ENABLE_SPI_TRANSACTION is nonzero.</p>
-<p>Set ENABLE_SPI_YIELD nonzero to enable release of the SPI bus during SD card busy waits.</p>
+<p>Set ENABLE_SPI_TRANSACTIONS nonzero to enable the SPI transaction feature of the standard Arduino SPI library. You must include SPI.h in your programs when ENABLE_SPI_TRANSACTIONS is nonzero.</p>
+<p>Set ENABLE_SPI_YIELD nonzero to enable release of the SPI bus during SD card busy waits. ENABLE_SPI_TRANSACTIONS must be nonzero.</p>
 <h1><a class="anchor" id="SDPath"></a>
 Paths and Working Directories</h1>
 <p>Relative paths in <a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> are resolved in a manner similar to Windows.</p>
@@ -240,11 +240,12 @@ Examples</h1>
 <p>StreamParseInt - Demo of the SD.h API and the <a class="el" href="class_file.html" title="Arduino SD.h style File API. ">File</a> class parseInt() function.</p>
 <p>ThreeCards - Demonstrate simultaneous use of <a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a>, <a class="el" href="class_sd_fat_lib_spi.html" title="SdFat class using the standard Arduino SPI library. ">SdFatLibSpi</a>, <a class="el" href="class_sd_fat_soft_spi.html" title="SdFat class using software SPI. ">SdFatSoftSpi</a>.</p>
 <p>Timestamp - Sets file create, modify, and access timestamps.</p>
-<p>TwoCards - Example using two SD cards. </p>
+<p>TwoCards - Example using two SD cards.</p>
+<p>VolumeFreeSpace - Demonstrate the freeClusterCount() call. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 1 2015 10:21:40 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 19 2015 10:15:53 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

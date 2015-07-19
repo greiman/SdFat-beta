@@ -98,8 +98,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a607aa7e4655f29bb16ed75b66ffc2c20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#a607aa7e4655f29bb16ed75b66ffc2c20">begin</a> ()</td></tr>
 <tr class="separator:a607aa7e4655f29bb16ed75b66ffc2c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ec1b9408b99ae60e4c62c0ba8d038c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#a1ec1b9408b99ae60e4c62c0ba8d038c2">init</a> (uint8_t divisor)</td></tr>
-<tr class="separator:a1ec1b9408b99ae60e4c62c0ba8d038c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e84b817a6a5dab295fa457e8a92a5be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#a3e84b817a6a5dab295fa457e8a92a5be">beginTransaction</a> (uint8_t divisor)</td></tr>
+<tr class="separator:a3e84b817a6a5dab295fa457e8a92a5be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3eda15d0e8fb881c616eed7e4bab1ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#ab3eda15d0e8fb881c616eed7e4bab1ba">endTransaction</a> ()</td></tr>
+<tr class="separator:ab3eda15d0e8fb881c616eed7e4bab1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa017fd1d2bd196d1cbc4b845f6a72a40"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#aa017fd1d2bd196d1cbc4b845f6a72a40">receive</a> ()</td></tr>
 <tr class="separator:aa017fd1d2bd196d1cbc4b845f6a72a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a223c3b67496b7a05035060d68e8b7e0e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#a223c3b67496b7a05035060d68e8b7e0e">receive</a> (uint8_t *buf, size_t n)</td></tr>
@@ -108,8 +110,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3c6369cd5cc2e1631bcc24e9194eb09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97ef912cdc43e0800e0184160581f89e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#a97ef912cdc43e0800e0184160581f89e">send</a> (const uint8_t *buf, size_t n)</td></tr>
 <tr class="separator:a97ef912cdc43e0800e0184160581f89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a048d54bb93f2f2f86d9a499605dd1427"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi.html#a048d54bb93f2f2f86d9a499605dd1427">useSpiTransactions</a> ()</td></tr>
-<tr class="separator:a048d54bb93f2f2f86d9a499605dd1427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>SPI class for access to SD and SDHC flash memory cards. </p>
@@ -130,12 +130,12 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1ec1b9408b99ae60e4c62c0ba8d038c2"></a>
+<a class="anchor" id="a3e84b817a6a5dab295fa457e8a92a5be"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SdSpi::init </td>
+          <td class="memname">void SdSpi::beginTransaction </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>divisor</em></td><td>)</td>
@@ -150,6 +150,22 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="ab3eda15d0e8fb881c616eed7e4bab1ba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SdSpi::endTransaction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>End SPI transaction </p>
 
 </div>
 </div>
@@ -262,37 +278,13 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a048d54bb93f2f2f86d9a499605dd1427"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool SdSpi::useSpiTransactions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>true - uses SPI transactions </dd></dl>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Arduino/libraries/SdFat/<a class="el" href="_sd_spi_8h.html">SdSpi.h</a></li>
+<li>Arduino/libraries/SdFat/src/SdSpiCard/<a class="el" href="_sd_spi_8h.html">SdSpi.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 1 2015 10:21:40 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 19 2015 10:15:53 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -3,7 +3,7 @@
  */
 #include <SPI.h>
 #include <SdFat.h>
-#include <SdFatUtil.h>
+#include <FreeStack.h>
 
 SdFat sd1;
 const uint8_t SD1_CS = 10;  // chip select for sd1
@@ -25,9 +25,9 @@ const uint16_t NWRITE = FILE_SIZE/BUF_DIM;
 void setup() {
   Serial.begin(9600);
   while (!Serial) {}  // wait for Leonardo
-  Serial.print(F("FreeRam: "));
+  Serial.print(F("FreeStack: "));
 
-  Serial.println(FreeRam());
+  Serial.println(FreeStack());
 
   // fill buffer with known data
   for (int i = 0; i < sizeof(buf); i++) {

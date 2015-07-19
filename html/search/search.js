@@ -7,15 +7,15 @@
 
 var indexSectionsWithContent =
 {
-  0: "abcdefghijlmnoprstuvw",
+  0: "_abcdefghijlmnoprstuvw",
   1: "acdfilmops",
   2: "abdfios",
   3: "abcdefghilmnoprstuvw",
-  4: "abcdefghijlmnoprstuvw",
+  4: "_abcdefghijlmnoprstuvw",
   5: "dfilmops",
   6: "s",
   7: "bce",
-  8: "adefinpsu",
+  8: "adefimnpsu",
   9: "fs",
   10: "a"
 };

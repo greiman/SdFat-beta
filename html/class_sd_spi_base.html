@@ -105,8 +105,10 @@ Inheritance diagram for SdSpiBase:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1412739cdbfc3674d707736e3d9a70eb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#a1412739cdbfc3674d707736e3d9a70eb">begin</a> ()=0</td></tr>
 <tr class="separator:a1412739cdbfc3674d707736e3d9a70eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe0412d1728f3628f81caf05ce8fe93b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#abe0412d1728f3628f81caf05ce8fe93b">init</a> (uint8_t divisor)</td></tr>
-<tr class="separator:abe0412d1728f3628f81caf05ce8fe93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d53d87f8735b3c76876fb150a20378"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#a31d53d87f8735b3c76876fb150a20378">beginTransaction</a> (uint8_t divisor)</td></tr>
+<tr class="separator:a31d53d87f8735b3c76876fb150a20378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceef8d93a30e4fccb4fd81d4e3c26b55"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#aceef8d93a30e4fccb4fd81d4e3c26b55">endTransaction</a> ()</td></tr>
+<tr class="separator:aceef8d93a30e4fccb4fd81d4e3c26b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3488ab01ed4412f2c7143cfd10a7503c"><td class="memItemLeft" align="right" valign="top">virtual uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#a3488ab01ed4412f2c7143cfd10a7503c">receive</a> ()=0</td></tr>
 <tr class="separator:a3488ab01ed4412f2c7143cfd10a7503c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5810e79d39a9f6de6435f92401531be"><td class="memItemLeft" align="right" valign="top">virtual uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#af5810e79d39a9f6de6435f92401531be">receive</a> (uint8_t *buf, size_t n)=0</td></tr>
@@ -115,8 +117,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1f43194a47cb5403e82af651a370be00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a109f2f4213e7a763fb4e4dd3ec605c3b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#a109f2f4213e7a763fb4e4dd3ec605c3b">send</a> (const uint8_t *buf, size_t n)=0</td></tr>
 <tr class="separator:a109f2f4213e7a763fb4e4dd3ec605c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a13df4c86ec6978878b63386ee65007"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_base.html#a0a13df4c86ec6978878b63386ee65007">useSpiTransactions</a> ()=0</td></tr>
-<tr class="separator:a0a13df4c86ec6978878b63386ee65007"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Virtual SPI class for access to SD and SDHC flash memory cards. </p>
@@ -147,7 +147,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abe0412d1728f3628f81caf05ce8fe93b"></a>
+<a class="anchor" id="a31d53d87f8735b3c76876fb150a20378"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -155,7 +155,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void SdSpiBase::init </td>
+          <td class="memname">virtual void SdSpiBase::beginTransaction </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>divisor</em></td><td>)</td>
@@ -176,7 +176,33 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_sd_spi_soft.html#a09805938ac313cf6a6b6ea4c93d7422e">SdSpiSoft&lt; MisoPin, MosiPin, SckPin &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_sd_spi_soft.html#afe6909bd40f444c4680da3140b81de36">SdSpiSoft&lt; MisoPin, MosiPin, SckPin &gt;</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aceef8d93a30e4fccb4fd81d4e3c26b55"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void SdSpiBase::endTransaction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>End SPI transaction. </p>
+
+<p>Reimplemented in <a class="el" href="class_sd_spi_soft.html#a9efd9900dfc03582e433ff8939e96dff">SdSpiSoft&lt; MisoPin, MosiPin, SckPin &gt;</a>.</p>
 
 </div>
 </div>
@@ -329,39 +355,13 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0a13df4c86ec6978878b63386ee65007"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool SdSpiBase::useSpiTransactions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>true if hardware SPI else false </dd></dl>
-
-<p>Implemented in <a class="el" href="class_sd_spi_soft.html#aa269a343795b07845e6280db8b36dccb">SdSpiSoft&lt; MisoPin, MosiPin, SckPin &gt;</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Arduino/libraries/SdFat/<a class="el" href="_sd_spi_8h.html">SdSpi.h</a></li>
+<li>Arduino/libraries/SdFat/src/SdSpiCard/<a class="el" href="_sd_spi_8h.html">SdSpi.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 1 2015 10:21:40 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 19 2015 10:15:53 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

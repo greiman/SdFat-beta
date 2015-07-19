@@ -60,10 +60,26 @@
 #define ARDUINO_FILE_USES_STREAM 1
 //------------------------------------------------------------------------------
 /**
+ * Determine the default SPI configuration.
+ */
+#if defined(__AVR__)\
+    || defined(__SAM3X8E__) || defined(__SAM3X8H__)\
+    || (defined(__arm__) && defined(CORE_TEENSY))\
+    || defined(__STM32F1__)\
+    || defined(DOXYGEN)
+// Use custom fast implementation.
+#define SD_HAS_CUSTOM_SPI 1
+#else  // SD_HAS_CUSTOM_SPI
+// Use standard SPI library.
+#define SD_HAS_CUSTOM_SPI 0
+#endif  // SD_HAS_CUSTOM_SPI
+//------------------------------------------------------------------------------
+/**
  * The symbol SD_SPI_CONFIGURATION defines SPI access to the SD card.
  *
  * IF SD_SPI_CONFIGUTATION is define to be zero, only the SdFat class
- * is define and SdFat uses a fast custom SPI implementation.
+ * is define and SdFat uses a fast custom SPI implementation if avaiable.
+ * If SD_HAS_CUSTOM_SPI is zero, the standard SPI library is used.
  *
  * If SD_SPI_CONFIGURATION is define to be one, only the SdFat class is
  * define and SdFat uses the standard Arduino SPI.h library.
@@ -93,6 +109,13 @@ uint8_t const SOFT_SPI_MISO_PIN = 12;
 /** Software SPI Clock pin */
 uint8_t const SOFT_SPI_SCK_PIN = 13;
 //------------------------------------------------------------------------------
+/** 
+ * Set MAINTAIN_FREE_CLUSTER_COUNT nonzero to keep the count of free clusters
+ * updated.  This will increase the speed of the freeClusterCount() call
+ * after the first call.  Extra flash will be required.
+ */
+#define MAINTAIN_FREE_CLUSTER_COUNT 0
+//------------------------------------------------------------------------------
 /**
  * To enable SD card CRC checking set USE_SD_CRC nonzero.
  *
@@ -103,18 +126,18 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
 #define USE_SD_CRC 0
 //------------------------------------------------------------------------------
 /**
- * Set ENABLE_SPI_TRANSACTION nonzero to enable the SPI transaction feature
+ * Set ENABLE_SPI_TRANSACTIONS nonzero to enable the SPI transaction feature
  * of the standard Arduino SPI library.  You must include SPI.h in your
- * programs when ENABLE_SPI_TRANSACTION is nonzero.
+ * programs when ENABLE_SPI_TRANSACTIONS is nonzero.
  */
-#define ENABLE_SPI_TRANSACTION 0
+#define ENABLE_SPI_TRANSACTIONS 0
 //------------------------------------------------------------------------------
 /**
  * Set ENABLE_SPI_YIELD nonzero to enable release of the SPI bus during
  * SD card busy waits.
  *
  * This will allow interrupt routines to access the SPI bus if
- * ENABLE_SPI_TRANSACTION is nonzero.
+ * ENABLE_SPI_TRANSACTIONS is nonzero.
  *
  * Setting ENABLE_SPI_YIELD will introduce some extra overhead and will
  * slightly slow transfer rates.  A few older SD cards may fail when

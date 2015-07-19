@@ -12,7 +12,6 @@ var searchData=
   ['sdspicard',['SdSpiCard',['../class_sd_spi_card.html',1,'']]],
   ['sdspilib',['SdSpiLib',['../class_sd_spi_lib.html',1,'']]],
   ['sdspisoft',['SdSpiSoft',['../class_sd_spi_soft.html',1,'']]],
-  ['sdvolume',['SdVolume',['../class_sd_volume.html',1,'']]],
   ['setfill',['setfill',['../structsetfill.html',1,'']]],
   ['setprecision',['setprecision',['../structsetprecision.html',1,'']]],
   ['setw',['setw',['../structsetw.html',1,'']]],

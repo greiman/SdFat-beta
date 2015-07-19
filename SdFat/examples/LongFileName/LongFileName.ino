@@ -3,7 +3,7 @@
 // SdFat/examples/LongFileName/testFiles.
 #include<SPI.h>
 #include <SdFat.h>
-#include <SdFatUtil.h>
+#include <FreeStack.h>
 
 // SD card chip select pin.
 const uint8_t SD_CS_PIN = SS;
@@ -34,8 +34,8 @@ void setup() {
   if (!sd.begin(SD_CS_PIN)) {
     sd.initErrorHalt();
   }
-  Serial.print(F("Free RAM: "));
-  Serial.println(FreeRam());
+  Serial.print(F("FreeStack: "));
+  Serial.println(FreeStack());
   Serial.println();
 
   // List files in root directory.

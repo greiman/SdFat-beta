@@ -48,7 +48,7 @@ void setup() {
     for (uint8_t fileType = 0; fileType < 2; fileType++) {
       if (!fileType) {
         if (!printFile.open("print.txt", O_CREAT | O_RDWR | O_TRUNC)) {
-          Serial.println("open fail");
+          Serial.println(F("open fail"));
           return;
         }
         printTime = millis();
@@ -95,7 +95,7 @@ void setup() {
 
       } else {
         if (!stdioFile.fopen("stream.txt", "w+")) {
-          Serial.println("fopen fail");
+          Serial.println(F("fopen fail"));
           return;
         }
         stdioTime = millis();
@@ -186,22 +186,22 @@ void setup() {
       }
     }
 
-    Serial.print("fileSize: ");
+    Serial.print(F("fileSize: "));
     if (printSize != stdioSize) {
       Serial.print(printSize);
-      Serial.print(" != ");
+      Serial.print(F(" != "));
     }
     Serial.println(stdioSize);
-    Serial.print("print millis: ");
+    Serial.print(F("print millis: "));
     Serial.println(printTime);
-    Serial.print("stdio millis: ");
+    Serial.print(F("stdio millis: "));
     Serial.println(stdioTime);
-    Serial.print("ratio: ");
+    Serial.print(F("ratio: "));
     Serial.println((float)printTime/(float)stdioTime);
     Serial.println();
     printFile.close();
     stdioFile.fclose();
   }
-  Serial.println("Done");
+  Serial.println(F("Done"));
 }
 void loop() {}

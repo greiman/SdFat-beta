@@ -1,3 +1,19 @@
+19 Jul 2015
+
+Converted to 1.5x library format.
+
+Use standard SPI library is no custom SPI library is available for a board.
+
+Option to maintain freeClusterCount.
+
+16 Mar 2015
+
+Minimal support for Teensy-LC.
+
+23 Feb 2015
+
+New 1284P software SPI macros.
+
 01 Feb 2015
 
 Code cleanup and re-factor.

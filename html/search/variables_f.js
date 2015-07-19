@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['reserved1',['reserved1',['../structfat__boot.html#affa7e6efb3ccea19ba7ea0ddadce7463',1,'fat_boot::reserved1()'],['../structfat32__boot.html#a7075c3c00aae071110fd1acb2e6fd599',1,'fat32_boot::reserved1()'],['../structfat32__fsinfo.html#ac24bd4801a60a54e5133ed1bb71bcdaa',1,'fat32_fsinfo::reserved1()']]],
-  ['reserved2',['reserved2',['../structfat32__fsinfo.html#a9ec0e2756cd7e169268798a558df3814',1,'fat32_fsinfo']]],
-  ['reservednt',['reservedNT',['../structdirectory_entry.html#afe7d00be85f3b78549b21610050da52b',1,'directoryEntry']]],
-  ['reservedsectorcount',['reservedSectorCount',['../structfat__boot.html#a13f272a8f780fb43a400f873a3fd7b73',1,'fat_boot::reservedSectorCount()'],['../structfat32__boot.html#a8e490f05ad3552dfbdf8f9332d287ba0',1,'fat32_boot::reservedSectorCount()']]],
-  ['right',['right',['../classios__base.html#aec064a12730b5d87e718c1864e29ac64',1,'ios_base']]],
-  ['rootdirentrycount',['rootDirEntryCount',['../structfat__boot.html#a2124f89e12307df944f08e6657dbf4af',1,'fat_boot::rootDirEntryCount()'],['../structfat32__boot.html#a94185496fb56c6e0e8078fc3803e9142',1,'fat32_boot::rootDirEntryCount()']]]
+  ['p',['p',['../structsetprecision.html#a7cb7bb355a303fa39a8035615bde9348',1,'setprecision']]],
+  ['part',['part',['../structmaster_boot_record.html#aa4e294e50f311635c10c92f4c99227c5',1,'masterBootRecord']]],
+  ['pin',['pin',['../structpin__map__t.html#a42b51799010669a8ac2b964843afbfcf',1,'pin_map_t']]],
+  ['port',['port',['../structpin__map__t.html#a08f4c39a3cbb329c79b88f819dd7975f',1,'pin_map_t']]],
+  ['position',['position',['../struct_fat_pos__t.html#a8e14c6f2705777502b543452743eaa26',1,'FatPos_t']]],
+  ['ptr',['ptr',['../structpgm.html#a621284b0b36996d654be74a7a541febf',1,'pgm']]]
 ];

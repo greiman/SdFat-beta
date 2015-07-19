@@ -19,9 +19,6 @@
  */
 #include "SdSpiCard.h"
 #include "SdSpi.h"
-#if ENABLE_SPI_TRANSACTION
-#include <SPI.h>
-#endif  // ENABLE_SPI_TRANSACTION
 // debug trace macro
 #define SD_TRACE(m, b)
 // #define SD_TRACE(m, b) Serial.print(m);Serial.println(b);
@@ -130,13 +127,13 @@ bool SdSpiCard::begin(m_spi_t* spi, uint8_t chipSelectPin, uint8_t sckDivisor) {
 
   // set SCK rate for initialization commands
   m_sckDivisor = SPI_SCK_INIT_DIVISOR;
-  spiInit(m_sckDivisor);
+  spiBeginTransaction(m_sckDivisor);
 
   // must supply min of 74 clock cycles with CS high.
   for (uint8_t i = 0; i < 10; i++) {
     spiSend(0XFF);
   }
-
+  spiEndTransaction();
   // command to go idle in SPI mode
   while (cardCommand(CMD0, 0) != R1_IDLE_STATE) {
     if (((uint16_t)millis() - t0) > SD_INIT_TIMEOUT) {
@@ -269,30 +266,21 @@ uint32_t SdSpiCard::cardSize() {
 }
 //------------------------------------------------------------------------------
 void SdSpiCard::spiYield() {
-#if ENABLE_SPI_TRANSACTION && ENABLE_SPI_YIELD && defined(SPI_HAS_TRANSACTION)
+#if ENABLE_SPI_TRANSACTIONS && ENABLE_SPI_YIELD
   chipSelectHigh();
   chipSelectLow();
-#endif  // ENABLE_SPI_TRANSACTION && ENABLE_SPI_YIELD && SPI_HAS_TRANSACTION
+#endif  // ENABLE_SPI_TRANSACTIONS && ENABLE_SPI_YIELD
 }
 //------------------------------------------------------------------------------
 void SdSpiCard::chipSelectHigh() {
   digitalWrite(m_chipSelectPin, HIGH);
   // insure MISO goes high impedance
   spiSend(0XFF);
-#if ENABLE_SPI_TRANSACTION && defined(SPI_HAS_TRANSACTION)
-  if (useSpiTransactions()) {
-    SPI.endTransaction();
-  }
-#endif  // ENABLE_SPI_TRANSACTION && defined(SPI_HAS_TRANSACTION)
+  spiEndTransaction();
 }
 //------------------------------------------------------------------------------
 void SdSpiCard::chipSelectLow() {
-#if ENABLE_SPI_TRANSACTION && defined(SPI_HAS_TRANSACTION)
-  if (useSpiTransactions()) {
-    SPI.beginTransaction(SPISettings());
-  }
-#endif  // ENABLE_SPI_TRANSACTION && defined(SPI_HAS_TRANSACTION)
-  spiInit(m_sckDivisor);
+  spiBeginTransaction(m_sckDivisor);
   digitalWrite(m_chipSelectPin, LOW);
 }
 //------------------------------------------------------------------------------

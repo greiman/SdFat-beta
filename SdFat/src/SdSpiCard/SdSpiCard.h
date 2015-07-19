@@ -24,9 +24,9 @@
  * \brief SdSpiCard class for V2 SD/SDHC cards
  */
 #include <Arduino.h>
-#include <SdFatConfig.h>
-#include <SdInfo.h>
-#include <SdSpi.h>
+#include "SdFatConfig.h"
+#include "SdInfo.h"
+#include "SdSpi.h"
 //==============================================================================
 /**
  * \class SdSpiCard
@@ -250,8 +250,11 @@ class SdSpiCard {
   void spiBegin() {
     m_spi->begin();
   }
-  void spiInit(uint8_t spiDivisor) {
-    m_spi->init(spiDivisor);
+  void spiBeginTransaction(uint8_t spiDivisor) {
+    m_spi->beginTransaction(spiDivisor);
+  }
+  void spiEndTransaction() {
+    m_spi->endTransaction();
   }
   uint8_t spiReceive() {
     return m_spi->receive();
@@ -264,9 +267,6 @@ class SdSpiCard {
   }
   void spiSend(const uint8_t* buf, size_t n) {
     m_spi->send(buf, n);
-  }
-  bool useSpiTransactions() {
-    return m_spi->useSpiTransactions();
   }
   m_spi_t* m_spi;
   uint8_t m_chipSelectPin;

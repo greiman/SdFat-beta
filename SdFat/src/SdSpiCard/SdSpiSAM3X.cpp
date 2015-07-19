@@ -132,7 +132,10 @@ static void spiDmaTX(const uint8_t* src, uint16_t count) {
 }
 //------------------------------------------------------------------------------
 //  initialize SPI controller
-void SdSpi::init(uint8_t sckDivisor) {
+void SdSpi::beginTransaction(uint8_t sckDivisor) {
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.beginTransaction(SPISettings());
+#endif  // ENABLE_SPI_TRANSACTIONS
   uint8_t scbr = sckDivisor;
   Spi* pSpi = SPI0;
   //  disable SPI
@@ -145,6 +148,12 @@ void SdSpi::init(uint8_t sckDivisor) {
   pSpi->SPI_CSR[SPI_CHIP_SEL] = SPI_CSR_SCBR(scbr) | SPI_CSR_NCPHA;
   // enable SPI
   pSpi->SPI_CR |= SPI_CR_SPIEN;
+}
+//------------------------------------------------------------------------------
+void SdSpi::endTransaction() {
+#if ENABLE_SPI_TRANSACTIONS
+  SPI.endTransaction();
+#endif  // ENABLE_SPI_TRANSACTIONS
 }
 //------------------------------------------------------------------------------
 static inline uint8_t spiTransfer(uint8_t b) {

@@ -85,7 +85,7 @@ developed to test %SdFat and illustrate its use.
 \section Install Installation
 
 You must manually install SdFat by copying the SdFat folder from the download
-package to the Arduino libraries folder in you sketch folder.
+package to the Arduino libraries folder in your sketch folder.
 
 See the Manual installation section of this guide.
 
@@ -111,12 +111,12 @@ To enable SD card CRC checking set USE_SD_CRC nonzero.
 Set FAT12_SUPPORT nonzero to enable use of FAT12 volumes.
 FAT12 has not been well tested and requires additional flash.
 
-Set ENABLE_SPI_TRANSACTION nonzero to enable the SPI transaction feature
+Set ENABLE_SPI_TRANSACTIONS nonzero to enable the SPI transaction feature
 of the standard Arduino SPI library.  You must include SPI.h in your
-programs when ENABLE_SPI_TRANSACTION is nonzero.
+programs when ENABLE_SPI_TRANSACTIONS is nonzero.
 
 Set ENABLE_SPI_YIELD nonzero to enable release of the SPI bus during
-SD card busy waits.
+SD card busy waits. ENABLE_SPI_TRANSACTIONS must be nonzero.
 
 \section SDPath Paths and Working Directories
 
@@ -389,4 +389,6 @@ ThreeCards - Demonstrate simultaneous use of SdFat, SdFatLibSpi, SdFatSoftSpi.
 Timestamp - Sets file create, modify, and access timestamps.
 
 TwoCards - Example using two SD cards.
+
+VolumeFreeSpace - Demonstrate the freeClusterCount() call.
  */

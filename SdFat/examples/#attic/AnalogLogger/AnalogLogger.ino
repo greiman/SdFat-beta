@@ -2,7 +2,7 @@
 // uses RTClib from https://github.com/adafruit/RTClib
 #include <SPI.h>
 #include <SdFat.h>
-#include <SdFatUtil.h>  // define FreeRam()
+#include <FreeStack.h>
 
 #define SD_CHIP_SELECT  SS  // SD chip select pin
 #define USE_DS1307       0  // set nonzero to use DS1307 RTC
@@ -68,7 +68,7 @@ void setup() {
   while (!Serial) {} // wait for Leonardo
 
   // F() stores strings in flash to save RAM
-  cout << endl << F("FreeRam: ") << FreeRam() << endl;
+  cout << endl << F("FreeStack: ") << FreeStack() << endl;
 
 #if WAIT_TO_START
   cout << F("Type any character to start\n");

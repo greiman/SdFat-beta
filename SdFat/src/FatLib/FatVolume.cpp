@@ -103,6 +103,7 @@ bool FatVolume::allocateCluster(uint32_t current, uint32_t* next) {
     // Remember place for search start.
     m_allocSearchStart = find;
   }
+  updateFreeClusterCount(-1);
   *next = find;
   return true;
 
@@ -171,6 +172,9 @@ bool FatVolume::allocContiguous(uint32_t count, uint32_t* firstCluster) {
     }
     endCluster--;
   }
+  // Maintain count of free clusters.
+  updateFreeClusterCount(-count);
+
   // return first cluster number to caller
   *firstCluster = bgnCluster;
   return true;
@@ -337,6 +341,9 @@ bool FatVolume::freeChain(uint32_t cluster) {
       DBG_FAIL_MACRO;
       goto fail;
     }
+    // Add one to count of free clusters.
+    updateFreeClusterCount(1);
+
     if (cluster < m_allocSearchStart) {
       m_allocSearchStart = cluster;
     }
@@ -350,6 +357,11 @@ fail:
 }
 //------------------------------------------------------------------------------
 int32_t FatVolume::freeClusterCount() {
+#if MAINTAIN_FREE_CLUSTER_COUNT
+  if (m_freeClusterCount >= 0) {
+    return m_freeClusterCount;
+  }
+#endif  // MAINTAIN_FREE_CLUSTER_COUNT
   uint32_t free = 0;
   uint32_t lba;
   uint32_t todo = m_lastCluster + 1;
@@ -399,6 +411,7 @@ int32_t FatVolume::freeClusterCount() {
     DBG_FAIL_MACRO;
     goto fail;
   }
+  setFreeClusterCount(free);
   return free;
 
 fail:
@@ -487,6 +500,9 @@ bool FatVolume::init(uint8_t part) {
   // divide by cluster size to get cluster count
   clusterCount >>= m_clusterSizeShift;
   m_lastCluster = clusterCount + 1;
+
+  // Indicate unknown number of free clusters.
+  setFreeClusterCount(-1);
 
   // FAT type is determined by cluster count
   if (clusterCount < 4085) {

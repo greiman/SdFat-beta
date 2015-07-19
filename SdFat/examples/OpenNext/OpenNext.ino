@@ -24,7 +24,9 @@ void setup() {
     sd.initErrorHalt();
   }
 
-  // open next file in root.  The volume working directory, vwd, is root
+  // Open next file in root.  The volume working directory, vwd, is root.
+  // Warning, openNext starts at the current position of sd.vwd() so a
+  // rewind may be neccessary in your application.
   while (file.openNext(sd.vwd(), O_READ)) {
     file.printFileSize(&Serial);
     Serial.write(' ');

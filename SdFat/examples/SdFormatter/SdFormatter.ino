@@ -16,7 +16,7 @@
 #include <SPI.h>
 #include <SdFat.h>
 #if DEBUG_PRINT
-#include <SdFatUtil.h>
+#include <FreeStack.h>
 #endif  // DEBUG_PRINT
 //
 // Change the value of chipSelect if your hardware does
@@ -79,7 +79,7 @@ void sdError_F(const __FlashStringHelper* str) {
 //------------------------------------------------------------------------------
 #if DEBUG_PRINT
 void debugPrint() {
-  cout << F("FreeRam: ") << FreeRam() << endl;
+  cout << F("FreeStack: ") << FreeStack() << endl;
   cout << F("partStart: ") << relSector << endl;
   cout << F("partSize: ") << partSize << endl;
   cout << F("reserved: ") << reservedSectors << endl;
@@ -497,8 +497,8 @@ void setup() {
   }
   cardCapacityMB = (cardSizeBlocks + 2047)/2048;
 
-  cout << F("Card Size: ") << cardCapacityMB;
-  cout << F(" MB, (MB = 1,048,576 bytes)") << endl;
+  cout << F("Card Size: ") << setprecision(0) << 1.048576*cardCapacityMB;
+  cout << F(" MB, (MB = 1,000,000 bytes)") << endl;
 
   if (c == 'E' || c == 'F') {
     eraseCard();

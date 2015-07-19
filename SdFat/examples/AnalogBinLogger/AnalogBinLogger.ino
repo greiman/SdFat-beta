@@ -22,7 +22,7 @@
 #ifdef __AVR__
 #include <SPI.h>
 #include <SdFat.h>
-#include <SdFatUtil.h>
+#include <FreeStack.h>
 #include "AnalogBinLogger.h"
 //------------------------------------------------------------------------------
 // Analog pin number list for a sample.  Pins may be in any order and pin
@@ -782,8 +782,8 @@ void setup(void) {
   // Read the first sample pin to init the ADC.
   analogRead(PIN_LIST[0]);
 
-  Serial.print(F("FreeRam: "));
-  Serial.println(FreeRam());
+  Serial.print(F("FreeStack: "));
+  Serial.println(FreeStack());
 
   // initialize file system.
   if (!sd.begin(SD_CS_PIN, SPI_FULL_SPEED)) {

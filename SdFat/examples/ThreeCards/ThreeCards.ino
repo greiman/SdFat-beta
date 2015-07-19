@@ -3,7 +3,7 @@
  */
 #include <SPI.h>
 #include <SdFat.h>
-#include <SdFatUtil.h>
+#include <FreeStack.h>
 #if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
 
 // SD1 is a microSD on hardware SPI pins 50-52
@@ -46,9 +46,9 @@ void list() {
 void setup() {
   Serial.begin(9600);
   while (!Serial) {}  // wait for Leonardo
-  Serial.print(F("FreeRam: "));
+  Serial.print(F("FreeStack: "));
 
-  Serial.println(FreeRam());
+  Serial.println(FreeStack());
 
   // fill buffer with known data
   for (int i = 0; i < sizeof(buf); i++) {

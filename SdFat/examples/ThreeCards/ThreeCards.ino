@@ -2,8 +2,8 @@
  * Example use of three SD cards.
  */
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 #if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
 
 // SD1 is a microSD on hardware SPI pins 50-52

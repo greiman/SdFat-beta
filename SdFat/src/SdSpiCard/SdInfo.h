@@ -73,7 +73,7 @@ uint8_t const SD_CARD_ERROR_WRITE = 0X13;
 /** attempt to write protected block zero */
 uint8_t const SD_CARD_ERROR_WRITE_BLOCK_ZERO = 0X14;  // REMOVE - not used
 /** card did not go ready for a multiple block write */
-uint8_t const SD_CARD_ERROR_WRITE_MULTIPLE = 0X15;
+uint8_t const SD_CARD_ERROR_WRITE_MULTIPLE = 0X15;  // Not used
 /** card returned an error to a CMD13 status check after a write */
 uint8_t const SD_CARD_ERROR_WRITE_PROGRAMMING = 0X16;
 /** timeout occurred during write programming */

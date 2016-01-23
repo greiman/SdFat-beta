@@ -25,7 +25,7 @@
 #define FatLibConfig_h
 #include <stdint.h>
 // Allow this file to override defaults.
-#include "../SdFatConfig.h"
+#include "SdFatConfig.h"
 
 #ifdef __AVR__
 #include <avr/io.h>
@@ -134,7 +134,7 @@
  *  Enable Extra features for Arduino.
  */
 #ifndef ENABLE_ARDUINO_FEATURES
-#if defined(ARDUINO) || defined(DOXYGEN)
+#if defined(ARDUINO) || defined(PLATFORM_ID) || defined(DOXYGEN)
 #define ENABLE_ARDUINO_FEATURES 1
 #else  //  #if defined(ARDUINO) || defined(DOXYGEN)
 #define ENABLE_ARDUINO_FEATURES 0

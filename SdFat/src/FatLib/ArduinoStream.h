@@ -25,7 +25,7 @@
  */
 #include "FatLibConfig.h"
 #if ENABLE_ARDUINO_FEATURES
-#include <Arduino.h>
+#include "SystemInclude.h"
 #include "bufstream.h"
 //==============================================================================
 /**

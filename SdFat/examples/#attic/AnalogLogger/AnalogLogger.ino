@@ -1,8 +1,8 @@
 // A simple data logger for the Arduino analog pins with optional DS1307
 // uses RTClib from https://github.com/adafruit/RTClib
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 
 #define SD_CHIP_SELECT  SS  // SD chip select pin
 #define USE_DS1307       0  // set nonzero to use DS1307 RTC

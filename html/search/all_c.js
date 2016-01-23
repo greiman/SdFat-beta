@@ -1,18 +1,16 @@
 var searchData=
 [
-  ['m_5fspi_5ft',['m_spi_t',['../class_sd_spi_card.html#a31a561750501b6635ad2b85c8c960381',1,'SdSpiCard']]],
-  ['maintain_5ffree_5fcluster_5fcount',['MAINTAIN_FREE_CLUSTER_COUNT',['../_sd_fat_config_8h.html#ac2865dac8fdbb4fff47105db32ddf05b',1,'SdFatConfig.h']]],
-  ['masterbootrecord',['masterBootRecord',['../structmaster_boot_record.html',1,'']]],
-  ['mbr',['mbr',['../unioncache__t.html#a6ac10bfb1ebb1139c448456679663bb6',1,'cache_t']]],
-  ['mbr_5ft',['mbr_t',['../_fat_structs_8h.html#a7c429e5097f101c8c97663d6c4155bd9',1,'FatStructs.h']]],
-  ['mbrsig0',['mbrSig0',['../structmaster_boot_record.html#a42b0b413ecb21ac5314d4f6bca05308f',1,'masterBootRecord']]],
-  ['mbrsig1',['mbrSig1',['../structmaster_boot_record.html#aafbbcb4f6a2d1181c6458d4c9603df4f',1,'masterBootRecord']]],
-  ['mediatype',['mediaType',['../structfat__boot.html#a63eaf7185663369af2527309634d3c90',1,'fat_boot::mediaType()'],['../structfat32__boot.html#a3b1ab5d2dc872c0d80cd4f34622de417',1,'fat32_boot::mediaType()']]],
-  ['minimumserial',['MinimumSerial',['../class_minimum_serial.html',1,'']]],
-  ['miso_5flevel',['MISO_LEVEL',['../group__soft_s_p_i.html#ga5ed39ec843c7f42ec220a59c0b486718',1,'SoftSPI.h']]],
-  ['miso_5fmode',['MISO_MODE',['../group__soft_s_p_i.html#gad7667379ccd35490d35bb159b1492ea2',1,'SoftSPI.h']]],
-  ['mkdir',['mkdir',['../class_fat_file.html#abab5b9f72cc796388dd4eed01d13d90d',1,'FatFile::mkdir()'],['../class_fat_file_system.html#a231c62c98ba8ac3c2624dc5ad2053ebf',1,'FatFileSystem::mkdir()']]],
-  ['mode',['mode',['../class_digital_pin.html#adac065cc695efb139c12a82b7f1f0d58',1,'DigitalPin']]],
-  ['mosi_5fmode',['MOSI_MODE',['../group__soft_s_p_i.html#gadfe834b166b0ff6be3271f17420e72ec',1,'SoftSPI.h']]],
-  ['mustbezero',['mustBeZero',['../structlong_directory_entry.html#af3055930e869875e49b32ef0b49c3649',1,'longDirectoryEntry']]]
+  ['name',['name',['../structdirectory_entry.html#a05dc993ea55a1a742de5970541a31ecb',1,'directoryEntry::name()'],['../class_file.html#a7ca23d8d3997c10c221977c64736f575',1,'File::name()']]],
+  ['name1',['name1',['../structlong_directory_entry.html#a629f1ca5ba2ccce6cac5295578b6e7b4',1,'longDirectoryEntry']]],
+  ['name2',['name2',['../structlong_directory_entry.html#ad763b5a3da4b8d326d9888493fbb819a',1,'longDirectoryEntry']]],
+  ['name3',['name3',['../structlong_directory_entry.html#a6f14c81b7d224dc4431217f92601257a',1,'longDirectoryEntry']]],
+  ['nextfree',['nextFree',['../structfat32__fsinfo.html#a539b3bb0a2ead9df417df9ac8b6b1606',1,'fat32_fsinfo']]],
+  ['noboolalpha',['noboolalpha',['../ios_8h.html#aa6a1ec04992fc8090ca775a39678be01',1,'ios.h']]],
+  ['nop',['nop',['../group__soft_s_p_i.html#ga51158539d4d6022c9a445e78b0abfa94',1,'SoftSPI.h']]],
+  ['noshowbase',['noshowbase',['../ios_8h.html#ab861ff5f863de0ae002b65390dde36b0',1,'ios.h']]],
+  ['noshowpoint',['noshowpoint',['../ios_8h.html#ad85399d1b75151cf9e2436f2a1ccfc13',1,'ios.h']]],
+  ['noshowpos',['noshowpos',['../ios_8h.html#a985805b22ffb4ce2f5298168662bd2d7',1,'ios.h']]],
+  ['noskipws',['noskipws',['../ios_8h.html#a773b847300db776fde08a0b562792131',1,'ios.h']]],
+  ['nouppercase',['nouppercase',['../ios_8h.html#a24b96fb317e056b34aa84c4bb965a79a',1,'ios.h']]],
+  ['null',['NULL',['../_stdio_stream_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4',1,'StdioStream.h']]]
 ];

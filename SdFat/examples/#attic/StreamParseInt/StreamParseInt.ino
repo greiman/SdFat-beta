@@ -1,7 +1,7 @@
 // Simple demo of the Stream parsInt() member function.
 #include <SPI.h>
 // The next two lines replace #include <SD.h>.
-#include <SdFat.h>
+#include "SdFat.h"
 SdFat SD;
 
 // SD card chip select pin - Modify the value of csPin for your SD module.

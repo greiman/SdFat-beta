@@ -2,7 +2,7 @@
  * Print size, modify date/time, and name for all files in root.
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;
@@ -27,6 +27,7 @@ void setup() {
   // Open next file in root.  The volume working directory, vwd, is root.
   // Warning, openNext starts at the current position of sd.vwd() so a
   // rewind may be neccessary in your application.
+  sd.vwd()->rewind();
   while (file.openNext(sd.vwd(), O_READ)) {
     file.printFileSize(&Serial);
     Serial.write(' ');

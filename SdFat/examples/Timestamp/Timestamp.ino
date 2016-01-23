@@ -3,7 +3,7 @@
  * and the timestamp() function.
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 SdFat sd;
 

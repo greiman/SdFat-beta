@@ -1,6 +1,6 @@
 // Demo of fgets function to read lines from a file.
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;

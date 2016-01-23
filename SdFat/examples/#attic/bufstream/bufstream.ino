@@ -2,7 +2,7 @@
  * Use of ibufsteam to parse a line and obufstream to format a line
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // create a serial output stream
 ArduinoOutStream cout(Serial);

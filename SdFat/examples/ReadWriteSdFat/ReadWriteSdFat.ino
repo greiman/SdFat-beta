@@ -21,7 +21,7 @@ const int chipSelect = 4;
 
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 SdFat sd;
 SdFile myFile;
 

@@ -120,6 +120,128 @@ struct masterBootRecord {
 /** Type name for masterBootRecord */
 typedef struct masterBootRecord mbr_t;
 //------------------------------------------------------------------------------
+/** 
+ * \struct biosParmBlock
+ *
+ * \brief BIOS parameter block
+ * 
+ *  The BIOS parameter block describes the physical layout of a FAT volume.
+ */
+struct biosParmBlock{
+          /**
+           * Count of bytes per sector. This value may take on only the
+           * following values: 512, 1024, 2048 or 4096
+           */
+  uint16_t bytesPerSector;
+          /**
+           * Number of sectors per allocation unit. This value must be a
+           * power of 2 that is greater than 0. The legal values are
+           * 1, 2, 4, 8, 16, 32, 64, and 128.
+           */
+  uint8_t  sectorsPerCluster;
+          /**
+           * Number of sectors before the first FAT.
+           * This value must not be zero.
+           */
+  uint16_t reservedSectorCount;
+          /** The count of FAT data structures on the volume. This field should
+           *  always contain the value 2 for any FAT volume of any type.
+           */
+  uint8_t  fatCount;
+          /**
+          * For FAT12 and FAT16 volumes, this field contains the count of
+          * 32-byte directory entries in the root directory. For FAT32 volumes,
+          * this field must be set to 0. For FAT12 and FAT16 volumes, this
+          * value should always specify a count that when multiplied by 32
+          * results in a multiple of bytesPerSector.  FAT16 volumes should
+          * use the value 512.
+          */
+  uint16_t rootDirEntryCount;
+          /**
+           * This field is the old 16-bit total count of sectors on the volume.
+           * This count includes the count of all sectors in all four regions
+           * of the volume. This field can be 0; if it is 0, then totalSectors32
+           * must be nonzero.  For FAT32 volumes, this field must be 0. For
+           * FAT12 and FAT16 volumes, this field contains the sector count, and
+           * totalSectors32 is 0 if the total sector count fits
+           * (is less than 0x10000).
+           */
+  uint16_t totalSectors16;
+          /**
+           * This dates back to the old MS-DOS 1.x media determination and is
+           * no longer usually used for anything.  0xF8 is the standard value
+           * for fixed (nonremovable) media. For removable media, 0xF0 is
+           * frequently used. Legal values are 0xF0 or 0xF8-0xFF.
+           */
+  uint8_t  mediaType;
+          /**
+           * Count of sectors occupied by one FAT on FAT12/FAT16 volumes.
+           * On FAT32 volumes this field must be 0, and sectorsPerFat32
+           * contains the FAT size count.
+           */
+  uint16_t sectorsPerFat16;
+           /** Sectors per track for interrupt 0x13. Not used otherwise. */
+  uint16_t sectorsPerTrtack;
+           /** Number of heads for interrupt 0x13.  Not used otherwise. */
+  uint16_t headCount;
+          /**
+           * Count of hidden sectors preceding the partition that contains this
+           * FAT volume. This field is generally only relevant for media
+           *  visible on interrupt 0x13.
+           */
+  uint32_t hidddenSectors;
+          /**
+           * This field is the new 32-bit total count of sectors on the volume.
+           * This count includes the count of all sectors in all four regions
+           * of the volume.  This field can be 0; if it is 0, then
+           * totalSectors16 must be nonzero.
+           */
+  uint32_t totalSectors32;
+          /**
+           * Count of sectors occupied by one FAT on FAT32 volumes.
+           */
+  uint32_t sectorsPerFat32;
+          /**
+           * This field is only defined for FAT32 media and does not exist on
+           * FAT12 and FAT16 media.
+           * Bits 0-3 -- Zero-based number of active FAT.
+           *             Only valid if mirroring is disabled.
+           * Bits 4-6 -- Reserved.
+           * Bit 7	-- 0 means the FAT is mirrored at runtime into all FATs.
+	         *        -- 1 means only one FAT is active; it is the one referenced in bits 0-3.
+           * Bits 8-15 	-- Reserved.
+           */
+  uint16_t fat32Flags;
+          /**
+           * FAT32 version. High byte is major revision number.
+           * Low byte is minor revision number. Only 0.0 define.
+           */
+  uint16_t fat32Version;
+          /**
+           * Cluster number of the first cluster of the root directory for FAT32.
+           * This usually 2 but not required to be 2.
+           */
+  uint32_t fat32RootCluster;
+          /**
+           * Sector number of FSINFO structure in the reserved area of the
+           * FAT32 volume. Usually 1.
+           */
+  uint16_t fat32FSInfo;
+          /**
+           * If nonzero, indicates the sector number in the reserved area
+           * of the volume of a copy of the boot record. Usually 6.
+           * No value other than 6 is recommended.
+           */
+  uint16_t fat32BackBootBlock;
+          /**
+           * Reserved for future expansion. Code that formats FAT32 volumes
+           * should always set all of the bytes of this field to 0.
+           */
+  uint8_t  fat32Reserved[12];
+} __attribute__((packed));
+/** Type name for biosParmBlock */
+typedef struct biosParmBlock bpb_t;
+//------------------------------------------------------------------------------
 /**
  * \struct fat_boot
  *

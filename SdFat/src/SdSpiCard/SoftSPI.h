@@ -18,7 +18,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 /**
- * @file
+ * @file 
  * @brief  Software SPI.
  *
  * @defgroup softSPI Software SPI
@@ -110,13 +110,9 @@ class SoftSPI {
  private:
   //----------------------------------------------------------------------------
   inline __attribute__((always_inline))
-  bool MODE_CPHA(uint8_t mode) {
-    return (mode & 1) != 0;
-  }
+  bool MODE_CPHA(uint8_t mode) {return (mode & 1) != 0;}
   inline __attribute__((always_inline))
-  bool MODE_CPOL(uint8_t mode) {
-    return (mode & 2) != 0;
-  }
+  bool MODE_CPOL(uint8_t mode) {return (mode & 2) != 0;}
   inline __attribute__((always_inline))
   void receiveBit(uint8_t bit, uint8_t* data) {
     if (MODE_CPHA(Mode)) {
@@ -125,10 +121,8 @@ class SoftSPI {
     nop;
     nop;
     fastDigitalWrite(SckPin,
-                     MODE_CPHA(Mode) ? MODE_CPOL(Mode) : !MODE_CPOL(Mode));
-    if (fastDigitalRead(MisoPin)) {
-      *data |= 1 << bit;
-    }
+      MODE_CPHA(Mode) ? MODE_CPOL(Mode) : !MODE_CPOL(Mode));
+    if (fastDigitalRead(MisoPin)) *data |= 1 << bit;
     if (!MODE_CPHA(Mode)) {
       fastDigitalWrite(SckPin, MODE_CPOL(Mode));
     }
@@ -141,7 +135,7 @@ class SoftSPI {
     }
     fastDigitalWrite(MosiPin, data & (1 << bit));
     fastDigitalWrite(SckPin,
-                     MODE_CPHA(Mode) ? MODE_CPOL(Mode) : !MODE_CPOL(Mode));
+      MODE_CPHA(Mode) ? MODE_CPOL(Mode) : !MODE_CPOL(Mode));
     nop;
     nop;
     if (!MODE_CPHA(Mode)) {
@@ -156,10 +150,8 @@ class SoftSPI {
     }
     fastDigitalWrite(MosiPin, txData & (1 << bit));
     fastDigitalWrite(SckPin,
-                     MODE_CPHA(Mode) ? MODE_CPOL(Mode) : !MODE_CPOL(Mode));
-    if (fastDigitalRead(MisoPin)) {
-      *rxData |= 1 << bit;
-    }
+      MODE_CPHA(Mode) ? MODE_CPOL(Mode) : !MODE_CPOL(Mode));
+    if (fastDigitalRead(MisoPin)) *rxData |= 1 << bit;
     if (!MODE_CPHA(Mode)) {
       fastDigitalWrite(SckPin, MODE_CPOL(Mode));
     }

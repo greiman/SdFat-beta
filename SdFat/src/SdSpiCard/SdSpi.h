@@ -23,10 +23,8 @@
 */
 #ifndef SdSpi_h
 #define SdSpi_h
-#include <Arduino.h>
-#include <SPI.h>
+#include "SystemInclude.h"
 #include "SdFatConfig.h"
-
 //------------------------------------------------------------------------------
 /**
  * \class SdSpiBase
@@ -34,8 +32,11 @@
  */
 class SdSpiBase {
  public:
-  /** Initialize the SPI bus */
-  virtual void begin() = 0;
+  /** Initialize the SPI bus.
+   *
+   * \param[in] chipSelectPin SD card chip select pin.
+   */
+  virtual void begin(uint8_t chipSelectPin) = 0;
   /** Set SPI options for access to SD/SDHC cards.
    *
    * \param[in] divisor SCK clock divider relative to the system clock.
@@ -81,8 +82,11 @@ class SdSpi : public SdSpiBase {
 class SdSpi {
 #endif  // SD_SPI_CONFIGURATION >= 3
  public:
-  /** Initialize the SPI bus */
-  void begin();
+  /** Initialize the SPI bus.
+   *
+   * \param[in] chipSelectPin SD card chip select pin.
+   */
+  void begin(uint8_t chipSelectPin);
   /** Set SPI options for access to SD/SDHC cards.
    *
    * \param[in] divisor SCK clock divider relative to the system clock.
@@ -117,6 +121,13 @@ class SdSpi {
    */
   void send(const uint8_t* buf, size_t n);
   /** \return true - uses SPI transactions */
+#if IMPLEMENT_SPI_INTERFACE_SELECTION
+  void setSpiIf(uint8_t spiIf) {
+    m_spiIf = spiIf;
+  }
+ private:
+  uint8_t m_spiIf;
+#endif  // IMPLEMENT_SPI_INTERFACE_SELECTION
 };
 //------------------------------------------------------------------------------
 /**
@@ -130,10 +141,11 @@ class SdSpiLib : public SdSpiBase {
 class SdSpiLib {
 #endif  // SD_SPI_CONFIGURATION >= 3
  public:
-  /**
-   * Initialize SPI pins.
+  /** Initialize the SPI bus.
+   *
+   * \param[in] chipSelectPin SD card chip select pin.
    */
-  void begin() {
+  void begin(uint8_t chipSelectPin) {
     SPI.begin();
   }
   /** Set SPI options for access to SD/SDHC cards.
@@ -192,12 +204,16 @@ class SdSpiLib {
    *
    * \return Zero for no error or nonzero error code.
    */
+#if defined(PLATFORM_ID) && USE_SPI_LIB_DMA
+  uint8_t receive(uint8_t* buf, size_t n);
+#else  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA
   uint8_t receive(uint8_t* buf, size_t n) {
     for (size_t i = 0; i < n; i++) {
       buf[i] = SPI.transfer(0XFF);
     }
     return 0;
   }
+#endif  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA  
   /** Send a byte.
    *
    * \param[in] b Byte to send
@@ -210,15 +226,23 @@ class SdSpiLib {
    * \param[in] buf Buffer for data to be sent.
    * \param[in] n Number of bytes to send.
    */
+#if defined(PLATFORM_ID) && USE_SPI_LIB_DMA
+  void send(const uint8_t* buf , size_t n);
+#else  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA
   void send(const uint8_t* buf , size_t n) {
     for (size_t i = 0; i < n; i++) {
       SPI.transfer(buf[i]);
     }
   }
+#endif  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA
 };
 //------------------------------------------------------------------------------
 #if SD_SPI_CONFIGURATION > 1 || defined(DOXYGEN)
+#ifdef ARDUINO
 #include "SoftSPI.h"
+#elif defined(PLATFORM_ID)  //Only defined if a Particle device
+#include "SoftSPIParticle.h"
+#endif  // ARDUINO
 /**
  * \class SdSpiSoft
  * \brief Software SPI class for access to SD and SDHC flash memory cards.
@@ -226,10 +250,13 @@ class SdSpiLib {
 template<uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin>
 class SdSpiSoft : public SdSpiBase {
  public:
-  /**
-   * initialize SPI pins
+  /** Initialize the SPI bus.
+   *
+   * \param[in] chipSelectPin SD card chip select pin.
    */
-  void begin() {
+  void begin(uint8_t chipSelectPin) {
+    pinMode(chipSelectPin, OUTPUT);
+    digitalWrite(chipSelectPin, HIGH);
     m_spi.begin();
   }
   /**
@@ -299,7 +326,7 @@ typedef SdSpi SpiDefault_t;
 // Use of in-line for AVR to save flash.
 #ifdef __AVR__
 //------------------------------------------------------------------------------
-inline void SdSpi::begin() {
+inline void SdSpi::begin(uint8_t chipSelectPin) {
 #ifdef __AVR_ATmega328P__
   // Save a few bytes for 328 CPU - gcc optimizes single bit '|' to sbi.
   PORTB |= 1 << 2;  // SS high
@@ -316,6 +343,8 @@ inline void SdSpi::begin() {
   pinMode(MOSI, OUTPUT);
   pinMode(SCK, OUTPUT);
 #endif  // __AVR_ATmega328P__
+  pinMode(chipSelectPin, OUTPUT);
+  digitalWrite(chipSelectPin, HIGH);
 }
 //------------------------------------------------------------------------------
 inline void SdSpi::beginTransaction(uint8_t divisor) {

@@ -2,7 +2,7 @@
  * Calculate the sum and average of a list of floating point numbers
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;

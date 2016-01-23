@@ -37,10 +37,6 @@ class FatFileSystem;
 #ifdef __AVR__
 #include <avr/pgmspace.h>
 #else  // __AVR__
-#ifndef PGM_P
-/** pointer to flash for ARM */
-#define PGM_P const char*
-#endif  // PGM_P
 #ifndef PSTR
 /** store literal string in flash for ARM */
 #define PSTR(x) (x)
@@ -55,7 +51,7 @@ class FatFileSystem;
 #endif  // pgm_read_word
 #ifndef PROGMEM
 /** store in flash for ARM */
-#define PROGMEM const
+#define PROGMEM
 #endif  // PROGMEM
 #endif  // __AVR__
 //------------------------------------------------------------------------------
@@ -219,9 +215,6 @@ class FatFile {
    */
   bool contiguousRange(uint32_t* bgnBlock, uint32_t* endBlock);
   /** Create and open a new contiguous file of a specified size.
-   *
-   * \note This function only supports short DOS 8.3 names.
-   * See open() for more information.
    *
    * \param[in] dirFile The directory where the file will be created.
    * \param[in] path A path with a valid DOS 8.3 file name.

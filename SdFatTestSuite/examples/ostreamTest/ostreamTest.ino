@@ -150,8 +150,8 @@ void ostreamStr() {
   const signed char* csc = (const signed char*)"CSC";
   unsigned char *uc = (unsigned char *)"uc";
   const unsigned char *cuc = (const unsigned char *)"CUC";
-  ob << "lit" << c << cc << sc << csc << uc << cuc << pstr("pstr") << F("F");
-  testVerifyStr(buf, "litcCCscCSCucCUCpstrF");
+  ob << "lit" << c << cc << sc << csc << uc << cuc  << F("F");
+  testVerifyStr(buf, "litcCCscCSCucCUCF");
   
   ob.init(buf, sizeof(buf));
   ob << setfill('*') << "s" << setw(8) << "right";

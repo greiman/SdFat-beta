@@ -19,7 +19,7 @@
  */
 #ifndef MinimumSerial_h
 #define MinimumSerial_h
-#include <Arduino.h>
+#include "SystemInclude.h"
 //==============================================================================
 /**
  * \class MinimumSerial

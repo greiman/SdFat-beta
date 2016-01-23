@@ -60,21 +60,6 @@
 #define ARDUINO_FILE_USES_STREAM 1
 //------------------------------------------------------------------------------
 /**
- * Determine the default SPI configuration.
- */
-#if defined(__AVR__)\
-    || defined(__SAM3X8E__) || defined(__SAM3X8H__)\
-    || (defined(__arm__) && defined(CORE_TEENSY))\
-    || defined(__STM32F1__)\
-    || defined(DOXYGEN)
-// Use custom fast implementation.
-#define SD_HAS_CUSTOM_SPI 1
-#else  // SD_HAS_CUSTOM_SPI
-// Use standard SPI library.
-#define SD_HAS_CUSTOM_SPI 0
-#endif  // SD_HAS_CUSTOM_SPI
-//------------------------------------------------------------------------------
-/**
  * The symbol SD_SPI_CONFIGURATION defines SPI access to the SD card.
  *
  * IF SD_SPI_CONFIGUTATION is define to be zero, only the SdFat class
@@ -131,19 +116,6 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
  * programs when ENABLE_SPI_TRANSACTIONS is nonzero.
  */
 #define ENABLE_SPI_TRANSACTIONS 0
-//------------------------------------------------------------------------------
-/**
- * Set ENABLE_SPI_YIELD nonzero to enable release of the SPI bus during
- * SD card busy waits.
- *
- * This will allow interrupt routines to access the SPI bus if
- * ENABLE_SPI_TRANSACTIONS is nonzero.
- *
- * Setting ENABLE_SPI_YIELD will introduce some extra overhead and will
- * slightly slow transfer rates.  A few older SD cards may fail when
- * ENABLE_SPI_YIELD is nonzero.
- */
-#define ENABLE_SPI_YIELD 0
 //------------------------------------------------------------------------------
 /**
  * Set FAT12_SUPPORT nonzero to enable use if FAT12 volumes.
@@ -208,4 +180,45 @@ const uint8_t SPI_SCK_INIT_DIVISOR = 128;
 #else  // RAMEND
 #define USE_MULTI_BLOCK_IO 1
 #endif  // RAMEND
+//------------------------------------------------------------------------------
+/**
+ * Determine the default SPI configuration.
+ */
+#if defined(__AVR__)\
+  || defined(__SAM3X8E__) || defined(__SAM3X8H__)\
+  || (defined(__arm__) && defined(CORE_TEENSY))\
+  || defined(__STM32F1__)\
+  || defined(PLATFORM_ID)\
+  || defined(DOXYGEN)
+// Use custom fast implementation.
+#define SD_HAS_CUSTOM_SPI 1
+#else  // SD_HAS_CUSTOM_SPI
+// Use standard SPI library.
+#define SD_HAS_CUSTOM_SPI 0
+#endif  // SD_HAS_CUSTOM_SPI
+//-----------------------------------------------------------------------------
+/**
+ *  Number of hardware interfaces.
+ */
+#if defined(PLATFORM_ID)
+#if Wiring_SPI1 && Wiring_SPI2
+#define SPI_INTERFACE_COUNT 3
+#elif Wiring_SPI1
+#define SPI_INTERFACE_COUNT 2
+#endif  // Wiring_SPI1 && Wiring_SPI2
+#endif  // defined(PLATFORM_ID)
+// default is one
+#ifndef SPI_INTERFACE_COUNT
+#define SPI_INTERFACE_COUNT 1
+#endif  // SPI_INTERFACE_COUNT
+//------------------------------------------------------------------------------
+/**
+ * Check if API to select HW SPI interface is needed.
+ */
+#if SPI_INTERFACE_COUNT > 1 && SD_HAS_CUSTOM_SPI\
+  && SD_SPI_CONFIGURATION != 1 && SD_SPI_CONFIGURATION != 2
+#define IMPLEMENT_SPI_INTERFACE_SELECTION 1
+#else  // SPI_INTERFACE_COUNT > 1
+#define IMPLEMENT_SPI_INTERFACE_SELECTION 0
+#endif  // SPI_INTERFACE_COUNT > 1
 #endif  // SdFatConfig_h

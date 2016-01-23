@@ -38,14 +38,4 @@ int SdFatUtil::FreeRam() {
   return __brkval ? &top - __brkval : &top - &__bss_end;
 }
 #endif  // __arm
-//------------------------------------------------------------------------------
-void SdFatUtil::print_P(Print* pr, PGM_P str) {
-  for (uint8_t c; (c = pgm_read_byte(str)); str++) {
-    pr->write(c);
-  }
-}
-//------------------------------------------------------------------------------
-void SdFatUtil::println_P(Print* pr, PGM_P str) {
-  print_P(pr, str);
-  pr->println();
-}
+

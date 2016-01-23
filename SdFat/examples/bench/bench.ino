@@ -2,8 +2,8 @@
  * This program is a simple binary write/read benchmark.
  */
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;

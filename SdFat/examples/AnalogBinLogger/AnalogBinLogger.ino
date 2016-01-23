@@ -21,8 +21,8 @@
  */
 #ifdef __AVR__
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 #include "AnalogBinLogger.h"
 //------------------------------------------------------------------------------
 // Analog pin number list for a sample.  Pins may be in any order and pin

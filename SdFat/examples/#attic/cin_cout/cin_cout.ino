@@ -2,7 +2,7 @@
  * Demo of ArduinoInStream and ArduinoOutStream
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // create serial output stream
 ArduinoOutStream cout(Serial);

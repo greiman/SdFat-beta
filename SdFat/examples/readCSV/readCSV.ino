@@ -3,7 +3,7 @@
  *  Each line of the file has a label and three values, a long and two floats.
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;

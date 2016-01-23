@@ -29,7 +29,7 @@ static int FreeStack() {
   char top;
   return &top - reinterpret_cast<char*>(sbrk(0));
 }
-#else  // __arm__
+#elif __AVR__  // __arm__
 /** boundary between stack and heap. */
 extern char *__brkval;
 /** End of bss section.*/
@@ -41,5 +41,11 @@ static int FreeStack() {
   char top;
   return __brkval ? &top - __brkval : &top - &__bss_end;
 }
+#elif defined(PLATFORM_ID)  // Particle board
+static int FreeStack() {
+  return System.freeMemory();
+}
+#else
+#warning FreeStack is not defined for this system.
 #endif  // __arm
 #endif  // FreeStack_h

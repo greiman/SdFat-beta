@@ -57,7 +57,9 @@ static bool dmac_channel_transfer_done(uint32_t ul_num) {
   return (DMAC->DMAC_CHSR & (DMAC_CHSR_ENA0 << ul_num)) ? false : true;
 }
 //------------------------------------------------------------------------------
-void SdSpi::begin() {
+void SdSpi::begin(uint8_t chipSelectPin) {
+  pinMode(chipSelectPin, OUTPUT);
+  digitalWrite(chipSelectPin, HIGH);
   PIO_Configure(
     g_APinDescription[PIN_SPI_MOSI].pPort,
     g_APinDescription[PIN_SPI_MOSI].ulPinType,

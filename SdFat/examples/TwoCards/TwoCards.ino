@@ -2,8 +2,8 @@
  * Example use of two SD cards.
  */
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 
 SdFat sd1;
 const uint8_t SD1_CS = 10;  // chip select for sd1

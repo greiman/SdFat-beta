@@ -1,5 +1,5 @@
-This is a beta version with major changes so bugs and compatibility
-problems are likely.  
+This is a beta version so there may be bugs and compatibility
+problems.  
 
 Please report problems to the email address listed in the 
 "Bugs and Comments" section of the html documentation.
@@ -17,7 +17,7 @@ For more information see the Manual installation section of this guide:
 http://arduino.cc/en/Guide/Libraries 
 
 A number of configuration options can be set by editing SdFatConfig.h
-#define macros.  See the html documentation for details
+define macros.  See the html documentation for details
 
 Read changes.txt if you have used previous releases of this library.
 
@@ -28,4 +28,4 @@ StdioStream, ifstream, ofstream, and others.
  
 Please continue by reading the html documentation.
 
-Updated 19 Jul 2015
+Updated 23 Jan 2016

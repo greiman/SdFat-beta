@@ -1,6 +1,6 @@
 // Demo of rewriting a line read by fgets
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // SD card chip select pin
 const uint8_t chipSelect = SS;

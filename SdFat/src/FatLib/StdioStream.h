@@ -278,16 +278,6 @@ class StdioStream : private FatFile {
    */
   int fputs(const char* str);
   //----------------------------------------------------------------------------
-  /** Write a string stored in flash.
-   *
-   * \param[in] str string to be written.
-   *
-   * \return for success, fputs() returns a non-negative
-   * number. Otherwise, it returns EOF and sets the error indicator for
-   * the stream.
-   */
-  int fputs_P(PGM_P str);
-  //----------------------------------------------------------------------------
   /** Binary input.
    *
    * Reads an array of up to count elements, each one with a size of size
@@ -414,6 +404,7 @@ class StdioStream : private FatFile {
     return n < 0 ? 0 : n;
   }
   //----------------------------------------------------------------------------
+#if (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)  
   /** Print a string stored in flash memory.
    *
    * \param[in] str the string to print.
@@ -421,6 +412,7 @@ class StdioStream : private FatFile {
    * \return the number of bytes written.
    */
   size_t print(const __FlashStringHelper *str);
+#endif  // (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)
   //----------------------------------------------------------------------------
   /** Print a floating point number.
    *

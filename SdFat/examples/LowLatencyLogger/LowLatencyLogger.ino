@@ -14,8 +14,8 @@
  * Data is written to the file using a SD multiple block write command.
  */
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 //------------------------------------------------------------------------------
 // User data functions.  Modify these functions for your data items.
 #include "UserDataType.h"  // Edit this include file to change data_t.

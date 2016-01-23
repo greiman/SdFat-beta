@@ -24,24 +24,6 @@
  * \brief \ref ostream class
  */
 #include "ios.h"
-//------------------------------------------------------------------------------
-/** macro for flash inserter */
-#define pstr(str) pgm(PSTR(str))
-/** \struct pgm
- * \brief type for string in flash
- */
-struct pgm {
-  /** Pointer to flash string */
-  char *ptr;
-  /** constructor
-   * \param[in] str initializer for pointer.
-   */
-  explicit pgm(char* str) : ptr(str) {}
-  /** constructor
-   * \param[in] str initializer for pointer.
-   */
-  explicit pgm(const char *str) : ptr(const_cast<char*>(str)) {}
-};
 //==============================================================================
 /**
  * \class ostream
@@ -194,14 +176,7 @@ class ostream : public virtual ios {
     putNum(reinterpret_cast<uint32_t>(arg));
     return *this;
   }
-  /** Output a string from flash using the pstr() macro
-   * \param[in] arg pgm struct pointing to string
-   * \return the stream
-   */
-  ostream &operator<< (pgm arg) {
-    putPgm(arg.ptr);
-    return *this;
-  }
+#if (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)
   /** Output a string from flash using the Arduino F() macro.
    * \param[in] arg pointing to flash string
    * \return the stream
@@ -210,6 +185,7 @@ class ostream : public virtual ios {
     putPgm(reinterpret_cast<const char*>(arg));
     return *this;
   }
+#endif  // (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)
   /**
    * Puts a character in a stream.
    *

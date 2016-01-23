@@ -17,7 +17,7 @@
  * along with the Arduino SdFat Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#include <Arduino.h>
+#include "SystemInclude.h"
 #if defined(UDR0) || defined(DOXYGEN)
 #include "MinimumSerial.h"
 const uint16_t MIN_2X_BAUD = F_CPU/(4*(2*0XFFF + 1)) + 1;

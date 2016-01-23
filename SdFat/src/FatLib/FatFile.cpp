@@ -847,10 +847,6 @@ dir_t* FatFile::readDirCache(bool skipReadOk) {
       }
       goto fail;
     }
-//   if (read(&b, 1) != 1) {
-//     DBG_FAIL_MACRO;
-//     goto fail;
-//    }
     m_curPosition += 31;
   } else {
     m_curPosition += 32;
@@ -1106,6 +1102,10 @@ bool FatFile::seekSet(uint32_t pos) {
   if (!isOpen()) {
     DBG_FAIL_MACRO;
     goto fail;
+  }
+  // Optimize O_APPEND writes.
+  if (pos == m_curPosition) {
+    return true;
   }
   if (pos == 0) {
     // set position to start of file

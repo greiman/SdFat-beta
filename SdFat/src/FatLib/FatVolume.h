@@ -24,6 +24,7 @@
  * \brief FatVolume class
  */
 #include <stddef.h>
+#include "SystemInclude.h"
 #include "FatLibConfig.h"
 #include "FatStructs.h"
 //------------------------------------------------------------------------------
@@ -31,7 +32,6 @@
 /** Macro for debug. */
 #define DEBUG_MODE 0
 #if DEBUG_MODE
-#include <Arduino.h>
 #define DBG_FAIL_MACRO Serial.print(F(__FILE__)); Serial.println(__LINE__)
 #define DBG_PRINT_IF(b) if (b) {Serial.println(F(#b)); DBG_FAIL_MACRO;}
 #define DBG_HALT_IF(b) if (b) {Serial.println(F(#b));\
@@ -44,12 +44,9 @@
 #endif  // DOXYGEN_SHOULD_SKIP_THIS
 //------------------------------------------------------------------------------
 #if ENABLE_ARDUINO_FEATURES
-#include <Arduino.h>
-/** Use Print on Arduino */
+/** Use Print for Arduino */
 typedef Print print_t;
 #else  // ENABLE_ARDUINO_FEATURES
-//  Arduino type for flash string.
-class __FlashStringHelper;
 /**
  * \class CharWriter
  * \brief Character output - often serial port.

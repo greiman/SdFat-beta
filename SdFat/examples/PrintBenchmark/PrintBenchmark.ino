@@ -2,8 +2,8 @@
  * This program is a simple Print benchmark.
  */
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;
@@ -37,7 +37,7 @@ void loop() {
 
   while (Serial.read() >= 0) {
   }
-  // pstr stores strings in flash to save RAM
+  // F stores strings in flash to save RAM
   cout << F("Type any character to start\n");
   while (Serial.read() <= 0) {
   }

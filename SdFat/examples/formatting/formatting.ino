@@ -3,7 +3,7 @@
  * Format dates
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // create Serial stream
 ArduinoOutStream cout(Serial);

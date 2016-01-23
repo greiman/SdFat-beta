@@ -2,7 +2,7 @@
  * This program demonstrates the freeClusterCount() call.
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 /*
  * SD chip select pin.  Common values are:
  *
@@ -42,7 +42,7 @@ void setup() {
     cout << F("MAINTAIN_FREE_CLUSTER_COUNT nonzero for\n");
     cout << F("maximum freeClusterCount() performance.\n\n");
   }
-  // pstr stores strings in flash to save RAM
+  // F stores strings in flash to save RAM
   cout << F("Type any character to start\n");
   while (Serial.read() <= 0) {}
   delay(400);  // catch Due reset problem

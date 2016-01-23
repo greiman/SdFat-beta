@@ -1,7 +1,7 @@
 // Quick hardware test.
 //
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 //
 // Set DISABLE_CHIP_SELECT to disable a second SPI device.
 // For example, with the Ethernet shield, set DISABLE_CHIP_SELECT

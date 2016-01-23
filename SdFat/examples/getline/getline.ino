@@ -7,7 +7,7 @@
  * may not the best way to read a file.
  */
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;
@@ -56,7 +56,7 @@ void setup(void) {
   Serial.begin(9600);
   while (!Serial) {}  // wait for Leonardo
 
-  // pstr stores strings in flash to save RAM
+  // F stores strings in flash to save RAM
   cout << F("Type any character to start\n");
   while (Serial.read() <= 0) {}
   delay(400);  // catch Due reset problem

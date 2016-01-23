@@ -23,7 +23,7 @@
  * \file
  * \brief SdSpiCard class for V2 SD/SDHC cards
  */
-#include <Arduino.h>
+#include "SystemInclude.h"
 #include "SdFatConfig.h"
 #include "SdInfo.h"
 #include "SdSpi.h"
@@ -41,7 +41,7 @@ class SdSpiCard {
   typedef SdSpiBase m_spi_t;
 #endif  // SD_SPI_CONFIGURATION < 3
   /** Construct an instance of SdSpiCard. */
-  SdSpiCard() : m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
+  SdSpiCard() : m_selected(false), m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
   /** Initialize the SD card.
    * \param[in] spi SPI object.
    * \param[in] chipSelectPin SD chip select pin.
@@ -57,6 +57,16 @@ class SdSpiCard {
    *         or zero if an error occurs.
    */
   uint32_t cardSize();
+  /** Set the SD chip select pin high, send a dummy byte, and call SPI endTransaction.
+   *
+   * This function should only be called by programs doing raw I/O to the SD.
+   */
+  void chipSelectHigh();
+  /** Set the SD chip select pin low and call SPI beginTransaction.
+   *
+   * This function should only be called by programs doing raw I/O to the SD.
+   */  
+  void chipSelectLow();
   /** Erase a range of blocks.
    *
    * \param[in] firstBlock The address of the first block in the range.
@@ -180,6 +190,8 @@ class SdSpiCard {
   uint8_t sckDivisor() {
     return m_sckDivisor;
   }
+  /** \return the SD chip select status, true if slected else false. */
+  bool selected() {return m_selected;}
   /** Return the card type: SD V1, SD V2 or SDHC
    * \return 0 - SD V1, 1 - SD V2, or 3 - SDHC.
    */
@@ -239,16 +251,13 @@ class SdSpiCard {
   uint8_t cardCommand(uint8_t cmd, uint32_t arg);
   bool readData(uint8_t* dst, size_t count);
   bool readRegister(uint8_t cmd, void* buf);
-  void chipSelectHigh();
-  void chipSelectLow();
-  void spiYield();
   void type(uint8_t value) {
     m_type = value;
   }
   bool waitNotBusy(uint16_t timeoutMillis);
   bool writeData(uint8_t token, const uint8_t* src);
-  void spiBegin() {
-    m_spi->begin();
+  void spiBegin(uint8_t chipSelectPin) {
+    m_spi->begin(chipSelectPin);
   }
   void spiBeginTransaction(uint8_t spiDivisor) {
     m_spi->beginTransaction(spiDivisor);
@@ -269,6 +278,7 @@ class SdSpiCard {
     m_spi->send(buf, n);
   }
   m_spi_t* m_spi;
+  bool m_selected;
   uint8_t m_chipSelectPin;
   uint8_t m_errorCode;
   uint8_t m_sckDivisor;

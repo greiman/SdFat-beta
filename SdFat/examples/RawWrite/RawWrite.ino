@@ -15,8 +15,8 @@
  * marks the blocks as erased; no data transfer is required.
  */
 #include <SPI.h>
-#include <SdFat.h>
-#include <FreeStack.h>
+#include "SdFat.h"
+#include "FreeStack.h"
 
 // SD chip select pin
 const uint8_t chipSelect = SS;
@@ -56,7 +56,7 @@ void setup(void) {
 //------------------------------------------------------------------------------
 void loop(void) {
   while (Serial.read() >= 0) {}
-  // pstr stores strings in flash to save RAM
+  // F stores strings in flash to save RAM
   cout << F("Type any character to start\n");
   while (Serial.read() <= 0) {}
   delay(400);  // catch Due reset problem

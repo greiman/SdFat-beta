@@ -1,6 +1,6 @@
 // Benchmark comparing SdFile and StdioStream.
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 
 // Define PRINT_FIELD nonzero to use printField.
 #define PRINT_FIELD 0

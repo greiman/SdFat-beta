@@ -40,7 +40,9 @@
 /**
  * initialize SPI pins
  */
-void SdSpi::begin() {
+void SdSpi::begin(uint8_t chipSelectPin) {
+  pinMode(chipSelectPin, OUTPUT);
+  digitalWrite(chipSelectPin, HIGH);
   SIM_SCGC6 |= SIM_SCGC6_SPI0;
 }
 //------------------------------------------------------------------------------
@@ -229,7 +231,7 @@ void SdSpi::send(const uint8_t* buf , size_t n) {
 /**
  * Initialize SPI pins.
  */
-void SdSpi::begin() {
+void SdSpi::begin(uint8_t chipSelectPin) {
   SPI.begin();
 }
 /** Set SPI options for access to SD/SDHC cards.

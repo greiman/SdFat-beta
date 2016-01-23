@@ -56,7 +56,9 @@ static void dmac_channel_enable(dma_channel ul_num) {
   dma_enable(DMA1, ul_num);
 }
 //------------------------------------------------------------------------------
-void SdSpi::begin() {
+void SdSpi::begin(uint8_t chipSelectPin) {
+  pinMode(chipSelectPin, OUTPUT);
+  digitalWrite(chipSelectPin, HIGH);
   SPI.begin();
 }
 //------------------------------------------------------------------------------

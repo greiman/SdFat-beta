@@ -14,9 +14,9 @@
 // Print extra info for debug if DEBUG_PRINT is nonzero
 #define DEBUG_PRINT 0
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 #if DEBUG_PRINT
-#include <FreeStack.h>
+#include "FreeStack.h"
 #endif  // DEBUG_PRINT
 //
 // Change the value of chipSelect if your hardware does

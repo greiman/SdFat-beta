@@ -4,7 +4,7 @@
 // This example will also run on an Uno and other boards using software SPI.
 //
 #include <SPI.h>
-#include <SdFat.h>
+#include "SdFat.h"
 #if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
 //
 // Pin numbers in templates must be constants.

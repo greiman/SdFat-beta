@@ -29,11 +29,6 @@ void SdFatBase::errorHalt(Print* pr, char const* msg) {
   while (1) {}
 }
 //------------------------------------------------------------------------------
-void SdFatBase::errorHalt(Print* pr, const __FlashStringHelper* msg) {
-  errorPrint(pr, msg);
-  while (1) {}
-}
-//------------------------------------------------------------------------------
 void SdFatBase::errorPrint(Print* pr) {
   if (!cardErrorCode()) {
     return;
@@ -50,23 +45,12 @@ void SdFatBase::errorPrint(Print* pr, char const* msg) {
   errorPrint(pr);
 }
 //------------------------------------------------------------------------------
-void SdFatBase::errorPrint(Print* pr, const __FlashStringHelper* msg) {
-  pr->print(F("error: "));
-  pr->println(msg);
-  errorPrint(pr);
-}
-//------------------------------------------------------------------------------
 void SdFatBase::initErrorHalt(Print* pr) {
   initErrorPrint(pr);
   while (1) {}
 }
 //------------------------------------------------------------------------------
 void SdFatBase::initErrorHalt(Print* pr, char const *msg) {
-  pr->println(msg);
-  initErrorHalt(pr);
-}
-//------------------------------------------------------------------------------
-void SdFatBase::initErrorHalt(Print* pr, const __FlashStringHelper* msg) {
   pr->println(msg);
   initErrorHalt(pr);
 }
@@ -91,9 +75,26 @@ void SdFatBase::initErrorPrint(Print* pr, char const *msg) {
   pr->println(msg);
   initErrorPrint(pr);
 }
+#if defined(ARDUINO) || defined(DOXYGEN)  
+//------------------------------------------------------------------------------
+void SdFatBase::errorPrint(Print* pr, const __FlashStringHelper* msg) {
+  pr->print(F("error: "));
+  pr->println(msg);
+  errorPrint(pr);
+}
+//------------------------------------------------------------------------------
+void SdFatBase::errorHalt(Print* pr, const __FlashStringHelper* msg) {
+  errorPrint(pr, msg);
+  while (1) {}
+}
+//------------------------------------------------------------------------------
+void SdFatBase::initErrorHalt(Print* pr, const __FlashStringHelper* msg) {
+  pr->println(msg);
+  initErrorHalt(pr);
+}
 //------------------------------------------------------------------------------
 void SdFatBase::initErrorPrint(Print* pr, const __FlashStringHelper* msg) {
   pr->println(msg);
   initErrorPrint(pr);
 }
-
+#endif  // defined(ARDUINO) || defined(DOXYGEN)  

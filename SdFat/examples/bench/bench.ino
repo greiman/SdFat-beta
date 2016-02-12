@@ -36,7 +36,7 @@ SdFile file;
 // Serial output stream
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
-// store error strings in flash to save RAM
+// Store error strings in flash to save RAM.
 #define error(s) sd.errorHalt(F(s))
 //------------------------------------------------------------------------------
 void cidDmp() {
@@ -62,7 +62,11 @@ void cidDmp() {
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {} // wait for Leonardo
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   delay(1000);
   cout << F("\nUse a freshly formatted SD for best performance.\n");
 
@@ -78,12 +82,15 @@ void loop() {
   uint32_t totalLatency;
 
   // discard any input
-  while (Serial.read() >= 0) {}
+  do {
+    delay(10);
+  } while (Serial.read() >= 0);
 
   // F( stores strings in flash to save RAM
   cout << F("Type any character to start\n");
-  while (Serial.read() <= 0) {}
-  delay(400);  // catch Due reset problem
+  while (Serial.read() <= 0) {
+    SysCall::yield();
+  }
 
   cout << F("FreeStack: ") << FreeStack() << endl;
 
@@ -129,7 +136,9 @@ void loop() {
     for (uint32_t i = 0; i < n; i++) {
       uint32_t m = micros();
       if (file.write(buf, sizeof(buf)) != sizeof(buf)) {
-        error("write failed");
+        sd.errorPrint("write failed");
+        file.close();
+        return;
       }
       m = micros() - m;
       if (maxLatency < m) {
@@ -146,11 +155,11 @@ void loop() {
     cout << s/t <<',' << maxLatency << ',' << minLatency;
     cout << ',' << totalLatency/n << endl;
   }
-
   cout << endl << F("Starting read test, please wait.") << endl;
   cout << endl <<F("read speed and latency") << endl;
   cout << F("speed,max,min,avg") << endl;
   cout << F("KB/Sec,usec,usec,usec") << endl;
+
   // do read test
   for (uint8_t nTest = 0; nTest < READ_COUNT; nTest++) {
     file.rewind();
@@ -161,8 +170,11 @@ void loop() {
     for (uint32_t i = 0; i < n; i++) {
       buf[BUF_SIZE-1] = 0;
       uint32_t m = micros();
-      if (file.read(buf, sizeof(buf)) != sizeof(buf)) {
-        error("read failed");
+      int32_t nr = file.read(buf, sizeof(buf)); 
+      if (nr != sizeof(buf)) {   
+        sd.errorPrint("read failed");
+        file.close();
+        return;
       }
       m = micros() - m;
       if (maxLatency < m) {
@@ -176,6 +188,7 @@ void loop() {
         error("data check");
       }
     }
+    s = file.fileSize();
     t = millis() - t;
     cout << s/t <<',' << maxLatency << ',' << minLatency;
     cout << ',' << totalLatency/n << endl;

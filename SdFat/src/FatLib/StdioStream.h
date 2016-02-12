@@ -404,7 +404,7 @@ class StdioStream : private FatFile {
     return n < 0 ? 0 : n;
   }
   //----------------------------------------------------------------------------
-#if (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)  
+#if (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)
   /** Print a string stored in flash memory.
    *
    * \param[in] str the string to print.

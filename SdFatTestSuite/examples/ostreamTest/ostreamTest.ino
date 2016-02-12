@@ -144,7 +144,7 @@ void ostreamNumber() {
 void ostreamStr() {
   char buf[40];
   obufstream ob(buf, sizeof(buf));
-  char* c = "c";
+  char c[] = "c";
   const char* cc = "CC";
   signed char* sc = (signed char*)"sc";
   const signed char* csc = (const signed char*)"CSC";

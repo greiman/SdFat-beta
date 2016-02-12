@@ -32,7 +32,7 @@
 #endif  // ARDUINO
 //------------------------------------------------------------------------------
 /** SdFat version YYYYMMDD */
-#define SD_FAT_VERSION 20160123
+#define SD_FAT_VERSION 20160212
 //==============================================================================
 /**
  * \class SdBaseFile
@@ -186,7 +186,7 @@ class SdFatBase : public FatFileSystem {
    * \param[in] msg Message to print.
    */
   void initErrorPrint(Print* pr, char const *msg);
-#if defined(ARDUINO) || defined(DOXYGEN)    
+#if defined(ARDUINO) || defined(DOXYGEN)
   /** %Print msg, any SD error code, and halt.
    *
    * \param[in] msg Message to print.
@@ -199,7 +199,7 @@ class SdFatBase : public FatFileSystem {
    * \param[in] pr Print destination.
    * \param[in] msg Message to print.
    */
-  void errorHalt(Print* pr, const __FlashStringHelper* msg);  
+  void errorHalt(Print* pr, const __FlashStringHelper* msg);
   /** %Print msg, any SD error code.
    *
    * \param[in] msg Message to print.
@@ -212,7 +212,7 @@ class SdFatBase : public FatFileSystem {
    * \param[in] pr Print destination.
    * \param[in] msg Message to print.
    */
-  void errorPrint(Print* pr, const __FlashStringHelper* msg);  
+  void errorPrint(Print* pr, const __FlashStringHelper* msg);
   /**Print message, error details, and halt after SdFat::init() fails.
     *
     * \param[in] msg Message to print.
@@ -224,7 +224,7 @@ class SdFatBase : public FatFileSystem {
    * \param[in] pr Print device for message.
    * \param[in] msg Message to print.
    */
-  void initErrorHalt(Print* pr, const __FlashStringHelper* msg);  
+  void initErrorHalt(Print* pr, const __FlashStringHelper* msg);
   /**Print message and error details and halt after SdFat::init() fails.
    *
    * \param[in] msg Message to print.
@@ -238,8 +238,8 @@ class SdFatBase : public FatFileSystem {
    * \param[in] msg Message to print.
    */
   void initErrorPrint(Print* pr, const __FlashStringHelper* msg);
-#endif  //defined(ARDUINO) || defined(DOXYGEN)
-  
+#endif  // defined(ARDUINO) || defined(DOXYGEN)
+
  private:
   uint8_t cardErrorCode() {
     return m_sdCard.errorCode();
@@ -272,11 +272,11 @@ class SdFat : public SdFatBase {
   SdFat() {
     m_spi.setSpiIf(0);
   }
-  SdFat(uint8_t spiIf) {
+  explicit SdFat(uint8_t spiIf) {
     m_spi.setSpiIf(spiIf < SPI_INTERFACE_COUNT ? spiIf : 0);
   }
-#endif  // IMPLEMENT_SPI_INTERFACE_SELECTION 
- 
+#endif  // IMPLEMENT_SPI_INTERFACE_SELECTION
+
   /** Initialize SD card and file system.
    *
    * \param[in] csPin SD card chip select pin.
@@ -294,6 +294,7 @@ class SdFat : public SdFatBase {
   bool cardBegin(uint8_t csPin = SS, uint8_t divisor = 2) {
     return card()->begin(&m_spi, csPin, divisor);
   }
+
  private:
   SpiDefault_t m_spi;
 };

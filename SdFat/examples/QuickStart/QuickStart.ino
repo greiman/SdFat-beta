@@ -39,8 +39,11 @@ void reformatMsg() {
 
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {}  // Wait for Leonardo.
-
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   cout << F("\nSPI pins:\n");
   cout << F("MISO: ") << int(MISO) << endl;
   cout << F("MOSI: ") << int(MOSI) << endl;
@@ -65,7 +68,9 @@ void setup() {
 bool firstTry = true;
 void loop() {
   // read any existing Serial data
-  while (Serial.read() >= 0) {}
+  do {
+    delay(10);
+  } while (Serial.read() >= 0);
 
   if (!firstTry) {
     cout << F("\nRestarting\n");
@@ -73,9 +78,9 @@ void loop() {
   firstTry = false;
 
   cout << F("\nEnter the chip select pin number: ");
-  while (!Serial.available()) {}
-  delay(400);  // catch Due restart problem
-
+  while (!Serial.available()) {
+    SysCall::yield();
+  }
   cin.readline();
   if (cin >> chipSelect) {
     cout << chipSelect << endl;

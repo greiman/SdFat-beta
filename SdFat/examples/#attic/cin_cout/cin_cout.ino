@@ -15,11 +15,14 @@ ArduinoInStream cin(Serial, cinBuf, sizeof(cinBuf));
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {}  // wait for Leonardo
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
 }
 //------------------------------------------------------------------------------
 void loop() {
-  int32_t n;
+  int32_t n = 0;
 
   cout << "\nenter an integer\n";
 

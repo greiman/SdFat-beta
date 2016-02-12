@@ -7,7 +7,10 @@ ArduinoOutStream cout(Serial);
 void setup() {
   Serial.begin(9600);
 
-  while (!Serial) {}  // wait for Leonardo
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   delay(2000);
 
   cout << "Hello, World!\n";

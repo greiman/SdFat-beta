@@ -67,21 +67,24 @@ void loop() {
   while (Serial.read() > 0) {}
   Serial.print(F("\r\nEnter File Number: "));
 
-  while ((c = Serial.read()) < 0) {};
-  if (!isdigit(c) || (c -= '0') >= n) {
+  while ((c = Serial.read()) < 0) {
+    SysCall::yield();
+  }
+  uint8_t i = c - '0';
+  if (!isdigit(c) || i >= n) {
     Serial.println(F("Invald number"));
     return;
   }
-  Serial.println(c);
-  if (!file.open(&dirFile, dirIndex[c], O_READ)) {
+  Serial.println(i);
+  if (!file.open(&dirFile, dirIndex[i], O_READ)) {
     sd.errorHalt(F("open"));
   }
   Serial.println();
 
-  char last;
+  char last = 0;
 
   // Copy up to 500 characters to Serial.
-  for (int i = 0; i < 500 && (c = file.read()) > 0; i++)  {
+  for (int k = 0; k < 500 && (c = file.read()) > 0; k++)  {
     Serial.write(last = (char)c);
   }
   // Add new line if missing from last line.

@@ -16,5 +16,6 @@ var searchData=
   ['setw',['setw',['../structsetw.html',1,'']]],
   ['softspi',['SoftSPI',['../class_soft_s_p_i.html',1,'']]],
   ['softspi_3c_20misopin_2c_20mosipin_2c_20sckpin_2c_200_20_3e',['SoftSPI&lt; MisoPin, MosiPin, SckPin, 0 &gt;',['../class_soft_s_p_i.html',1,'']]],
-  ['stdiostream',['StdioStream',['../class_stdio_stream.html',1,'']]]
+  ['stdiostream',['StdioStream',['../class_stdio_stream.html',1,'']]],
+  ['syscall',['SysCall',['../class_sys_call.html',1,'']]]
 ];

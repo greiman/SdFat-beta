@@ -74,7 +74,7 @@ void sdError_F(const __FlashStringHelper* str) {
     cout << F("SD error: ") << hex << int(card.errorCode());
     cout << ',' << int(card.errorData()) << dec << endl;
   }
-  while (1);
+  SysCall::halt();
 }
 //------------------------------------------------------------------------------
 #if DEBUG_PRINT
@@ -440,8 +440,16 @@ void formatCard() {
 void setup() {
   char c;
   Serial.begin(9600);
-  while (!Serial) {} // wait for Leonardo
-
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
+  cout << F("Type any character to start\n");
+  while (Serial.read() <= 0) {
+    SysCall::yield();
+  }
+  // Discard any extra characters.
+  do {delay(10);} while (Serial.read() >= 0);
   cout << F(
          "\n"
          "This program can erase and/or format SD/SDHC cards.\n"
@@ -455,8 +463,9 @@ void setup() {
          "\n"
          "Warning, all data on the card will be erased.\n"
          "Enter 'Y' to continue: ");
-  while (!Serial.available()) {}
-  delay(400);  // catch Due restart problem
+  while (!Serial.available()) {
+    SysCall::yield();
+  }
 
   c = Serial.read();
   cout << c << endl;
@@ -465,7 +474,9 @@ void setup() {
     return;
   }
   // read any existing Serial data
-  while (Serial.read() >= 0) {}
+  do {
+    delay(10);
+  } while (Serial.read() >= 0);
 
   cout << F(
          "\n"
@@ -476,7 +487,9 @@ void setup() {
          "\n"
          "Enter option: ");
 
-  while (!Serial.available()) {}
+  while (!Serial.available()) {
+    SysCall::yield();
+  }
   c = Serial.read();
   cout << c << endl;
   if (!strchr("EFQ", c)) {

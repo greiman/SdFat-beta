@@ -67,12 +67,18 @@ void setup() {
   char fileName[13] = FILE_BASE_NAME "00.csv";
 
   Serial.begin(9600);
-  while (!Serial) {} // wait for Leonardo
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   delay(1000);
 
   Serial.println(F("Type any character to start"));
-  while (!Serial.available()) {}
-
+  while (!Serial.available()) {
+    SysCall::yield();
+  }
+  
   // Initialize the SD card at SPI_HALF_SPEED to avoid bus errors with
   // breadboards.  use SPI_FULL_SPEED for better performance.
   if (!sd.begin(chipSelect, SPI_HALF_SPEED)) {
@@ -138,6 +144,6 @@ void loop() {
     // Close file and stop.
     file.close();
     Serial.println(F("Done"));
-    while(1) {}
+    SysCall::halt();
   }
 }

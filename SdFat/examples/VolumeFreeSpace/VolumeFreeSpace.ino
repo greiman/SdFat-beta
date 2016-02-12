@@ -13,7 +13,7 @@
  */
 const uint8_t chipSelect = SS;
 
-#define TEST_FILE "CLUSTER.TST"
+#define TEST_FILE "Cluster.test"
 // file system
 SdFat sd;
 
@@ -35,8 +35,10 @@ void printFreeSpace() {
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {}  // wait for Leonardo
-
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   if (!MAINTAIN_FREE_CLUSTER_COUNT) {
     cout << F("Please edit SdFatConfig.h and set\n");
     cout << F("MAINTAIN_FREE_CLUSTER_COUNT nonzero for\n");
@@ -44,9 +46,9 @@ void setup() {
   }
   // F stores strings in flash to save RAM
   cout << F("Type any character to start\n");
-  while (Serial.read() <= 0) {}
-  delay(400);  // catch Due reset problem
-
+  while (Serial.read() <= 0) {
+    SysCall::yield();
+  }
   // initialize the SD card at SPI_HALF_SPEED to avoid bus errors with
   // breadboards.  use SPI_FULL_SPEED for better performance.
   if (!sd.begin(chipSelect, SPI_HALF_SPEED)) {

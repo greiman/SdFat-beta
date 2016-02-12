@@ -24,7 +24,7 @@
  * \brief FatVolume class
  */
 #include <stddef.h>
-#include "SystemInclude.h"
+#include "SysCall.h"
 #include "FatLibConfig.h"
 #include "FatStructs.h"
 //------------------------------------------------------------------------------
@@ -35,7 +35,7 @@
 #define DBG_FAIL_MACRO Serial.print(F(__FILE__)); Serial.println(__LINE__)
 #define DBG_PRINT_IF(b) if (b) {Serial.println(F(#b)); DBG_FAIL_MACRO;}
 #define DBG_HALT_IF(b) if (b) {Serial.println(F(#b));\
-                               DBG_FAIL_MACRO; while (1);}
+                               DBG_FAIL_MACRO; SysCall::halt();}
 #else  // DEBUG_MODE
 #define DBG_FAIL_MACRO
 #define DBG_PRINT_IF(b)
@@ -280,8 +280,12 @@ class FatVolume {
     }
   }
 #else  // MAINTAIN_FREE_CLUSTER_COUNT
-  void setFreeClusterCount(int32_t value) {}
-  void updateFreeClusterCount(int32_t change) {}
+  void setFreeClusterCount(int32_t value) {
+    (void)value;
+  }
+  void updateFreeClusterCount(int32_t change) {
+    (void)change;
+  }
 #endif  // MAINTAIN_FREE_CLUSTER_COUNT
 
 // block caches

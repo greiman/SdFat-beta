@@ -2,7 +2,7 @@
 //
 #include <SPI.h>
 #include <SdFat.h>
-#define CS_PIN 10
+#define CS_PIN SS
 
 // 5 X 4 array
 #define ROW_DIM 5
@@ -30,7 +30,7 @@ File file;
  * if not at end-of-file.
  *
  */
-size_t readField(File* file, char* str, size_t size, char* delim) {
+size_t readField(File* file, char* str, size_t size, const char* delim) {
   char ch;
   size_t n = 0;
   while ((n + 1) < size && file->read(&ch, 1) == 1) {
@@ -47,22 +47,30 @@ size_t readField(File* file, char* str, size_t size, char* delim) {
   return n;
 }
 //------------------------------------------------------------------------------
-#define errorHalt(msg) {Serial.println(F(msg)); while(1);}
+#define errorHalt(msg) {Serial.println(F(msg)); SysCall::halt();}
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
-
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
+  Serial.println("Type any character to start");
+  while (Serial.read() <= 0) {
+    SysCall::yield();
+  }
   // Initialize the SD.
   if (!SD.begin(CS_PIN)) {
     errorHalt("begin failed");
-  }
+  } 
   // Create or open the file.
   file = SD.open("READNUM.TXT", FILE_WRITE);
   if (!file) {
     errorHalt("open failed");
   }
   // Rewind file so test data is not appended.
-  file.seek(0);
+  file.rewind();
 
   // Write test data.
   file.print(F(
@@ -74,7 +82,7 @@ void setup() {
     ));
 
   // Rewind the file for read.
-  file.seek(0);
+  file.rewind();
 
   // Array for data.
   int array[ROW_DIM][COL_DIM];

@@ -39,6 +39,7 @@ var searchData=
   ['fputs',['fputs',['../class_stdio_stream.html#a6adea52f55ef7d97cdb54e9e11fc2daa',1,'StdioStream']]],
   ['fread',['fread',['../class_stdio_stream.html#a2d363b02abcef82b25ff025d50375bce',1,'StdioStream']]],
   ['freeclustercount',['freeClusterCount',['../class_fat_volume.html#a1683b063fc6202ab85470b9610f16f93',1,'FatVolume']]],
+  ['freestack',['FreeStack',['../_free_stack_8h.html#a2c0121d5649d35329a8d0a71e4ffb89b',1,'FreeStack.h']]],
   ['fsbegin',['fsBegin',['../class_sd_fat_base.html#a389f0ef6fb556c67b48ade5c0c1b3a9a',1,'SdFatBase']]],
   ['fseek',['fseek',['../class_stdio_stream.html#a71584fd5c5cda3c31ce6cdbcc56f104d',1,'StdioStream']]],
   ['fstream',['fstream',['../classfstream.html#aed23877c52f828cab8de7a23603b3b6c',1,'fstream']]],

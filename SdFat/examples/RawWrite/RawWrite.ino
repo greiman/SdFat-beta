@@ -51,15 +51,22 @@ struct {
 //------------------------------------------------------------------------------
 void setup(void) {
   Serial.begin(9600);
-  while (!Serial) {}  // wait for Leonardo
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
 }
 //------------------------------------------------------------------------------
 void loop(void) {
-  while (Serial.read() >= 0) {}
+  do {
+    delay(10);
+  } while (Serial.read() >= 0);
   // F stores strings in flash to save RAM
   cout << F("Type any character to start\n");
-  while (Serial.read() <= 0) {}
-  delay(400);  // catch Due reset problem
+  while (Serial.read() <= 0) {
+    SysCall::yield();
+  }
 
   cout << F("FreeStack: ") << FreeStack() << endl;
 

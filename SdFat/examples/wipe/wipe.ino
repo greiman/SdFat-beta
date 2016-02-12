@@ -8,9 +8,14 @@ SdFat sd;
 void setup() {
   int c;
   Serial.begin(9600);
-  while (!Serial) {}  // wait for Leonardo
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   Serial.println("Type 'Y' to wipe all data.");
-  while ((c = Serial.read()) <= 0) {}
+  while ((c = Serial.read()) <= 0) {
+    SysCall::yield();
+  }
   if (c != 'Y') {
     sd.errorHalt("Quitting, you did not type 'Y'.");
   }

@@ -41,7 +41,8 @@ class SdSpiCard {
   typedef SdSpiBase m_spi_t;
 #endif  // SD_SPI_CONFIGURATION < 3
   /** Construct an instance of SdSpiCard. */
-  SdSpiCard() : m_selected(false), m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
+  SdSpiCard() : m_selected(false),
+                m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
   /** Initialize the SD card.
    * \param[in] spi SPI object.
    * \param[in] chipSelectPin SD chip select pin.
@@ -217,7 +218,7 @@ class SdSpiCard {
    * the value false is returned for failure.
    */
   bool writeBlocks(uint32_t block, const uint8_t* src, size_t count);
-  /** Write one data block in a multiple block write sequence
+  /** Write one data block in a multiple block write sequence.
    * \param[in] src Pointer to the location of the data to be written.
    * \return The value true is returned for success and
    * the value false is returned for failure.
@@ -308,9 +309,13 @@ class Sd2Card : public SdSpiCard {
   bool init(uint8_t sckDivisor = 2, uint8_t chipSelectPin = SS) {
     return begin(chipSelectPin, sckDivisor);
   }
+
  private:
   bool begin(m_spi_t* spi, uint8_t chipSelectPin = SS,
              uint8_t sckDivisor = SPI_FULL_SPEED) {
+    (void)spi;
+    (void)chipSelectPin;
+    (void)sckDivisor;
     return false;
   }
   SpiDefault_t m_spi;

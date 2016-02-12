@@ -23,13 +23,8 @@
  * \file
  * \brief FreeStack() function.
  */
-#ifdef __arm__
-extern "C" char* sbrk(int incr);
-static int FreeStack() {
-  char top;
-  return &top - reinterpret_cast<char*>(sbrk(0));
-}
-#elif __AVR__  // __arm__
+ 
+#if defined(__AVR__) || defined(DOXYGEN)
 /** boundary between stack and heap. */
 extern char *__brkval;
 /** End of bss section.*/
@@ -40,12 +35,22 @@ extern char __bss_end;
 static int FreeStack() {
   char top;
   return __brkval ? &top - __brkval : &top - &__bss_end;
-}
+} 
 #elif defined(PLATFORM_ID)  // Particle board
 static int FreeStack() {
   return System.freeMemory();
 }
+#elif defined(__arm__)
+extern "C" char* sbrk(int incr);
+static int FreeStack() {
+  char top;
+  return &top - reinterpret_cast<char*>(sbrk(0));
+}
+
 #else
 #warning FreeStack is not defined for this system.
-#endif  // __arm
+static int FreeStack() {
+  return 0;
+}
+#endif
 #endif  // FreeStack_h

@@ -15,15 +15,19 @@ const uint16_t N_PRINT = 20000;
 File file;
 
 //------------------------------------------------------------------------------
-void error(char* s) {
+void error(const char* s) {
   Serial.println(s);
-  while(1);
+  while (1) {
+    yield();
+  }
 }
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
+  
+  // Wait for USB Serial 
   while (!Serial) {
-    // wait for Leonardo
+    yield();
   }
 }
 //------------------------------------------------------------------------------
@@ -37,17 +41,14 @@ void loop() {
   // F() stores strings in flash to save RAM
   Serial.println(F("Type any character to start"));
   while (Serial.read() <= 0) {
+    yield();
   }
-  delay(400);  // catch Due reset problem
-
 
   // initialize the SD card
-
   if (!SD.begin(chipSelect)) {
     error("begin");
   }
-
-
+  
   Serial.println(F("Starting print test.  Please wait.\n"));
 
   // do write test

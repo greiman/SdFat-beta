@@ -115,13 +115,13 @@ uint8_t const SPI_SIXTEENTH_SPEED = 32;
 //------------------------------------------------------------------------------
 // SD operation timeouts
 /** init timeout ms */
-uint16_t const SD_INIT_TIMEOUT = 2000;
+unsigned const SD_INIT_TIMEOUT = 2000;
 /** erase timeout ms */
-uint16_t const SD_ERASE_TIMEOUT = 10000;
+unsigned const SD_ERASE_TIMEOUT = 10000;
 /** read timeout ms */
-uint16_t const SD_READ_TIMEOUT = 300;
+unsigned const SD_READ_TIMEOUT = 300;
 /** write time out ms */
-uint16_t const SD_WRITE_TIMEOUT = 600;
+unsigned const SD_WRITE_TIMEOUT = 600;
 //------------------------------------------------------------------------------
 // SD card commands
 /** GO_IDLE_STATE - init card in spi mode if CS low */

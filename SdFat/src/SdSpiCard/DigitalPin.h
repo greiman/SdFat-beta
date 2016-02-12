@@ -46,11 +46,11 @@ bool fastDigitalRead(uint8_t pin) {
  */
 static inline __attribute__((always_inline))
 void fastDigitalWrite(uint8_t pin, bool value) {
-	if (value) {
-		*portSetRegister(pin) = 1;
-	} else {
-		*portClearRegister(pin) = 1;
-	}
+  if (value) {
+    *portSetRegister(pin) = 1;
+  } else {
+    *portClearRegister(pin) = 1;
+  }
 }
 #else  // CORE_TEENSY
 //------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ void fastDigitalWrite(uint8_t pin, bool value) {
  * @return value read
  */
 static inline __attribute__((always_inline))
-bool fastDigitalRead(uint8_t pin){
+bool fastDigitalRead(uint8_t pin) {
   return g_APinDescription[pin].pPort->PIO_PDSR & g_APinDescription[pin].ulPin;
 }
 //------------------------------------------------------------------------------
@@ -68,8 +68,8 @@ bool fastDigitalRead(uint8_t pin){
  * @param[in] level value to write
  */
 static inline __attribute__((always_inline))
-void fastDigitalWrite(uint8_t pin, bool value){
-  if(value) {
+void fastDigitalWrite(uint8_t pin, bool value) {
+  if (value) {
     g_APinDescription[pin].pPort->PIO_SODR = g_APinDescription[pin].ulPin;
   } else {
     g_APinDescription[pin].pPort->PIO_CODR = g_APinDescription[pin].ulPin;
@@ -78,8 +78,8 @@ void fastDigitalWrite(uint8_t pin, bool value){
 #endif  // CORE_TEENSY
 //------------------------------------------------------------------------------
 inline void fastDigitalToggle(uint8_t pin) {
- fastDigitalWrite(pin, !fastDigitalRead(pin));
- }
+  fastDigitalWrite(pin, !fastDigitalRead(pin));
+}
 //------------------------------------------------------------------------------
 inline void fastPinMode(uint8_t pin, uint8_t mode) {pinMode(pin, mode);}
 #else  // __arm__
@@ -87,7 +87,7 @@ inline void fastPinMode(uint8_t pin, uint8_t mode) {pinMode(pin, mode);}
 #include <avr/io.h>
 /** GpioPinMap type */
 struct GpioPinMap_t {
-  volatile uint8_t* pin;   /**< address of PIN for this pin */  
+  volatile uint8_t* pin;   /**< address of PIN for this pin */
   volatile uint8_t* ddr;   /**< address of DDR for this pin */
   volatile uint8_t* port;  /**< address of PORT for this pin */
   uint8_t mask;            /**< bit mask for this pin */
@@ -161,7 +161,7 @@ volatile uint8_t* portReg(uint8_t pin) {
 static inline __attribute__((always_inline))
 void fastBitWriteSafe(volatile uint8_t* address, uint8_t mask, bool level) {
   uint8_t s;
-  if (address > (uint8_t*)0X3F) {
+  if (address > reinterpret_cast<uint8_t*>(0X3F)) {
     s = SREG;
     cli();
   }
@@ -170,7 +170,7 @@ void fastBitWriteSafe(volatile uint8_t* address, uint8_t mask, bool level) {
   } else {
     *address &= ~mask;
   }
-  if (address > (uint8_t*)0X3F) {
+  if (address > reinterpret_cast<uint8_t*>(0X3F)) {
     SREG = s;
   }
 }
@@ -192,7 +192,7 @@ bool fastDigitalRead(uint8_t pin) {
  */
 static inline __attribute__((always_inline))
 void fastDigitalToggle(uint8_t pin) {
-    if (pinReg(pin) > (uint8_t*)0X3F) {
+    if (pinReg(pin) > reinterpret_cast<uint8_t*>(0X3F)) {
       // must write bit to high address port
       *pinReg(pin) = pinMask(pin);
     } else {
@@ -272,7 +272,7 @@ class DigitalPin {
   /** Parenthesis operator.
    * @return Pin's level
    */
-	inline operator bool () const __attribute__((always_inline)) {
+  inline operator bool () const __attribute__((always_inline)) {
     return read();
   }
   //----------------------------------------------------------------------------

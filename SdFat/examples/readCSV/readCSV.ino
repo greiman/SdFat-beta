@@ -21,7 +21,7 @@ char fileName[] = "testfile.csv";
 //------------------------------------------------------------------------------
 // read and print CSV test file
 void readFile() {
-  long lg;
+  long lg = 0;
   float f1, f2;
   char text[10];
   char c1, c2, c3;  // space for commas.
@@ -91,7 +91,11 @@ void writeFile() {
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {} // wait for Leonardo
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   cout << F("Type any character to start\n");
   while (Serial.read() <= 0) {}
   delay(400);  // catch Due reset problem

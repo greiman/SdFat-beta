@@ -12,7 +12,11 @@ void setup() {
   int i, j, k;    // values from parsed line
 
   Serial.begin(9600);
-  while (!Serial) {}  // wait for Leonardo
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
   delay(2000);
 
   // initialize input string

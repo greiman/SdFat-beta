@@ -145,7 +145,11 @@ void volDmp() {
 //------------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
-  while(!Serial) {}  // wait for Leonardo
+  
+  // Wait for USB Serial 
+  while (!Serial) {
+    SysCall::yield();
+  }
 
   // use uppercase in hex and use 0X base prefix
   cout << uppercase << showbase << endl;
@@ -168,12 +172,15 @@ void setup() {
 //------------------------------------------------------------------------------
 void loop() {
   // read any existing Serial data
-  while (Serial.read() >= 0) {}
+  do {
+    delay(10);
+  } while (Serial.read() >= 0);
 
   // F stores strings in flash to save RAM
   cout << F("\ntype any character to start\n");
-  while (Serial.read() <= 0) {}
-  delay(400);  // catch Due reset problem
+  while (Serial.read() <= 0) {
+    SysCall::yield();
+  }
 
   uint32_t t = millis();
   // initialize the SD card at SPI_HALF_SPEED to avoid bus errors with

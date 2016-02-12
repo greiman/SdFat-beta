@@ -1,3 +1,9 @@
+12 Feb 2016
+
+Mods for Particle.io boards.
+
+Features for shared SPI with multiple block write.
+
 23 Jan 2016
 
 New Examples.

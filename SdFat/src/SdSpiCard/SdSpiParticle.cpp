@@ -1,5 +1,5 @@
 /* Arduino SdFat Library
- * Copyright (C) 2012 by William Greiman
+ * Copyright (C) 2016 by William Greiman
  *
  * This file is part of the Arduino SdFat Library
  *
@@ -23,13 +23,13 @@
 static  uint32_t bugDelay = 0;  // fix for SPI DMA bug.
 
 static volatile bool SPI_DMA_TransferCompleted = false;
-//static uint8_t m_spiIf = 1;
+
 static SPIClass* const spiPtr[] = {
-  &SPI 
+  &SPI
 #if Wiring_SPI1
-  ,&SPI1
+  , &SPI1
 #if  Wiring_SPI2
-  ,&SPI2
+  , &SPI2
 #endif  // Wiring_SPI2
 #endif  // Wiring_SPI1
 };
@@ -72,36 +72,39 @@ void SdSpi::beginTransaction(uint8_t divisor) {
   // delay for SPI transfer done callback too soon bug.
   bugDelay = 24*divisor*(1 + m_spiIf)/60;
 }
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void SdSpi::endTransaction() {
 }
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 /** SPI receive a byte */
 uint8_t SdSpi::receive() {
   return spiPtr[m_spiIf]->transfer(0xFF);
 }
 //-----------------------------------------------------------------------------
-uint8_t SdSpi::receive(uint8_t* buf, size_t n) {  
+uint8_t SdSpi::receive(uint8_t* buf, size_t n) {
   SPI_DMA_TransferCompleted = false;
   spiPtr[m_spiIf]->transfer(0, buf, n, SD_SPI_DMA_TransferComplete_Callback);
-  while(!SPI_DMA_TransferCompleted);
+  while (!SPI_DMA_TransferCompleted) {}
   if (bugDelay) {
     delayMicroseconds(bugDelay);
   }
   return 0;
 }
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 /** SPI send a byte */
 void SdSpi::send(uint8_t b) {
   spiPtr[m_spiIf]->transfer(b);
 }
-//-----------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------
 void SdSpi::send(const uint8_t* buf , size_t n) {
   SPI_DMA_TransferCompleted = false;
-  spiPtr[m_spiIf]->transfer((void *)buf, 0, n, SD_SPI_DMA_TransferComplete_Callback);
-  while(!SPI_DMA_TransferCompleted);
+
+  spiPtr[m_spiIf]->transfer(const_cast<uint8_t*>(buf), 0, n,
+                            SD_SPI_DMA_TransferComplete_Callback);
+
+  while (!SPI_DMA_TransferCompleted) {}
   if (bugDelay) {
     delayMicroseconds(bugDelay);
   }
 }
-#endif  //defined(PLATFORM_ID)
+#endif  // defined(PLATFORM_ID)

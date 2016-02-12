@@ -273,7 +273,7 @@ int StdioStream::write(const void* buf, size_t count) {
 //------------------------------------------------------------------------------
 #if (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)
 size_t StdioStream::print(const __FlashStringHelper *str) {
-  const char *p = (const char*)str;  
+  const char *p = (const char*)str;
   uint8_t c;
   while ((c = pgm_read_byte(p))) {
     if (putc(c) < 0) {
@@ -281,7 +281,7 @@ size_t StdioStream::print(const __FlashStringHelper *str) {
     }
     p++;
   }
-  return p - (const char*)str; 
+  return p - (const char*)str;
 }
 #endif  // (defined(ARDUINO) && ENABLE_ARDUINO_FEATURES) || defined(DOXYGEN)
 //------------------------------------------------------------------------------
@@ -448,7 +448,7 @@ int StdioStream::fillGet() {
 // private
 bool StdioStream::fillBuf() {
   if (!(m_flags &
-        F_SRD)) {  /////////////check for F_ERR and F_EOF ??/////////////////
+        F_SRD)) {  // check for F_ERR and F_EOF ??/////////////////
     if (!(m_flags & F_SRW)) {
       m_flags |= F_ERR;
       return false;
@@ -476,7 +476,7 @@ bool StdioStream::fillBuf() {
 // private
 bool StdioStream::flushBuf() {
   if (!(m_flags &
-        F_SWR)) {  /////////////////check for F_ERR ??////////////////////////
+        F_SWR)) {  // check for F_ERR ??////////////////////////
     if (!(m_flags & F_SRW)) {
       m_flags |= F_ERR;
       return false;

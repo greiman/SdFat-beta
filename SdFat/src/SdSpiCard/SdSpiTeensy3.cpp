@@ -232,6 +232,8 @@ void SdSpi::send(const uint8_t* buf , size_t n) {
  * Initialize SPI pins.
  */
 void SdSpi::begin(uint8_t chipSelectPin) {
+  pinMode(chipSelectPin, OUTPUT);
+  digitalWrite(chipSelectPin, HIGH);
   SPI.begin();
 }
 /** Set SPI options for access to SD/SDHC cards.

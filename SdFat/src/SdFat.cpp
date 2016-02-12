@@ -21,12 +21,12 @@
 //------------------------------------------------------------------------------
 void SdFatBase::errorHalt(Print* pr) {
   errorPrint(pr);
-  while (1) {}
+  SysCall::halt();
 }
 //------------------------------------------------------------------------------
 void SdFatBase::errorHalt(Print* pr, char const* msg) {
   errorPrint(pr, msg);
-  while (1) {}
+  SysCall::halt();
 }
 //------------------------------------------------------------------------------
 void SdFatBase::errorPrint(Print* pr) {
@@ -47,7 +47,7 @@ void SdFatBase::errorPrint(Print* pr, char const* msg) {
 //------------------------------------------------------------------------------
 void SdFatBase::initErrorHalt(Print* pr) {
   initErrorPrint(pr);
-  while (1) {}
+  SysCall::halt();
 }
 //------------------------------------------------------------------------------
 void SdFatBase::initErrorHalt(Print* pr, char const *msg) {
@@ -75,7 +75,7 @@ void SdFatBase::initErrorPrint(Print* pr, char const *msg) {
   pr->println(msg);
   initErrorPrint(pr);
 }
-#if defined(ARDUINO) || defined(DOXYGEN)  
+#if defined(ARDUINO) || defined(DOXYGEN)
 //------------------------------------------------------------------------------
 void SdFatBase::errorPrint(Print* pr, const __FlashStringHelper* msg) {
   pr->print(F("error: "));
@@ -85,7 +85,7 @@ void SdFatBase::errorPrint(Print* pr, const __FlashStringHelper* msg) {
 //------------------------------------------------------------------------------
 void SdFatBase::errorHalt(Print* pr, const __FlashStringHelper* msg) {
   errorPrint(pr, msg);
-  while (1) {}
+  SysCall::halt();
 }
 //------------------------------------------------------------------------------
 void SdFatBase::initErrorHalt(Print* pr, const __FlashStringHelper* msg) {
@@ -97,4 +97,4 @@ void SdFatBase::initErrorPrint(Print* pr, const __FlashStringHelper* msg) {
   pr->println(msg);
   initErrorPrint(pr);
 }
-#endif  // defined(ARDUINO) || defined(DOXYGEN)  
+#endif  // defined(ARDUINO) || defined(DOXYGEN)

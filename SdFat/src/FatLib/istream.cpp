@@ -91,7 +91,7 @@ void istream::getBool(bool *b) {
 #else  // __AVR__
     falseOk = falseOk && c == falsePtr[i];
     trueOk = trueOk && c == truePtr[i];
-#endif  // __AVR   
+#endif  // __AVR__
     if (trueOk == false && falseOk == false) {
       break;
     }

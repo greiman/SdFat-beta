@@ -17,11 +17,14 @@
 #include "SdFat.h"
 #include "FreeStack.h"
 //------------------------------------------------------------------------------
-// User data functions.  Modify these functions for your data items.
-#include "UserDataType.h"  // Edit this include file to change data_t.
-
 // Set useSharedSpi true for use of an SPI sensor.
 const bool useSharedSpi = true;
+
+// File start time in micros.
+uint32_t startMicros;
+//------------------------------------------------------------------------------
+// User data functions.  Modify these functions for your data items.
+#include "UserDataType.h"  // Edit this include file to change data_t.
 
 const uint8_t ADXL345_CS = 9;
 
@@ -67,7 +70,7 @@ void acquireData(data_t* data) {
 
 // Print a data record.
 void printData(Print* pr, data_t* data) {
-  pr->print(data->time);
+  pr->print(data->time - startMicros);
   for (int i = 0; i < ACCEL_DIM; i++) {
     pr->write(',');
     pr->print(data->accel[i]);
@@ -417,6 +420,7 @@ void logData() {
   // Wait for Serial Idle.
   Serial.flush();
   delay(10);
+  bool closeFile = false;
   uint32_t bn = 0;
   uint32_t t0 = millis();
   uint32_t t1 = t0;
@@ -426,11 +430,11 @@ void logData() {
   uint32_t maxDelta = 0;
   uint32_t minDelta = 99999;
   uint32_t maxLatency = 0;
-  
-  // Start at a multiple of interval.
-  uint32_t logTime = micros()/LOG_INTERVAL_USEC + 1;
-  logTime *= LOG_INTERVAL_USEC;
-  bool closeFile = false;
+  uint32_t logTime = micros();
+
+  // Set time for first record of file.
+  startMicros = logTime + LOG_INTERVAL_USEC;
+
   while (1) {
     // Time for next data record.
     logTime += LOG_INTERVAL_USEC;

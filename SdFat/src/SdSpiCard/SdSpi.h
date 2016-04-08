@@ -156,7 +156,11 @@ class SdSpiLib {
    */
   void beginTransaction(uint8_t divisor) {
 #if ENABLE_SPI_TRANSACTIONS
+    #ifdef ESP8266
+    SPI.beginTransaction(SPISettings(ESP8266_CLOCK, MSBFIRST, SPI_MODE0));
+    #else
     SPI.beginTransaction(SPISettings());
+    #endif
 #else  // #if ENABLE_SPI_TRANSACTIONS
     SPI.setBitOrder(MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
@@ -353,7 +357,11 @@ inline void SdSpi::begin(uint8_t chipSelectPin) {
 //------------------------------------------------------------------------------
 inline void SdSpi::beginTransaction(uint8_t divisor) {
 #if ENABLE_SPI_TRANSACTIONS
+  #ifdef ESP8266
+  SPI.beginTransaction(SPISettings(ESP8266_CLOCK, MSBFIRST, SPI_MODE0));
+  #else
   SPI.beginTransaction(SPISettings());
+  #endif
 #endif  // ENABLE_SPI_TRANSACTIONS
   uint8_t b = 2;
   uint8_t r = 0;

@@ -156,12 +156,11 @@ class SdSpiLib {
    */
   void beginTransaction(uint8_t divisor) {
 #if ENABLE_SPI_TRANSACTIONS
-    SPI.beginTransaction(SPISettings());
-#else  // #if ENABLE_SPI_TRANSACTIONS
+    SPISettings settings(F_CPU/(divisor ? divisor : 1), MSBFIRST, SPI_MODE0);
+    SPI.beginTransaction(settings);
+#else  // ENABLE_SPI_TRANSACTIONS
     SPI.setBitOrder(MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
-#endif  // #if ENABLE_SPI_TRANSACTIONS
-
 #ifndef SPI_CLOCK_DIV128
     SPI.setClockDivider(divisor);
 #else  // SPI_CLOCK_DIV128
@@ -183,6 +182,7 @@ class SdSpiLib {
     }
     SPI.setClockDivider(v);
 #endif  // SPI_CLOCK_DIV128
+#endif  // ENABLE_SPI_TRANSACTIONS
   }
   /**
    * End SPI transaction.

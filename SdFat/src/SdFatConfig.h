@@ -189,6 +189,7 @@ const uint8_t SPI_SCK_INIT_DIVISOR = 128;
   || (defined(__arm__) && defined(CORE_TEENSY))\
   || defined(__STM32F1__)\
   || defined(PLATFORM_ID)\
+  || defined(ESP8266)\
   || defined(DOXYGEN)
 // Use custom fast implementation.
 #define SD_HAS_CUSTOM_SPI 1

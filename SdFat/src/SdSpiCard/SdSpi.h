@@ -206,16 +206,12 @@ class SdSpiLib {
    *
    * \return Zero for no error or nonzero error code.
    */
-#if defined(PLATFORM_ID) && USE_SPI_LIB_DMA
-  uint8_t receive(uint8_t* buf, size_t n);
-#else  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA
   uint8_t receive(uint8_t* buf, size_t n) {
     for (size_t i = 0; i < n; i++) {
       buf[i] = SPI.transfer(0XFF);
     }
     return 0;
   }
-#endif  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA
   /** Send a byte.
    *
    * \param[in] b Byte to send
@@ -228,15 +224,11 @@ class SdSpiLib {
    * \param[in] buf Buffer for data to be sent.
    * \param[in] n Number of bytes to send.
    */
-#if defined(PLATFORM_ID) && USE_SPI_LIB_DMA
-  void send(const uint8_t* buf , size_t n);
-#else  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA
   void send(const uint8_t* buf , size_t n) {
     for (size_t i = 0; i < n; i++) {
       SPI.transfer(buf[i]);
     }
   }
-#endif  // defined(PLATFORM_ID) && USE_SPI_LIB_DMA
 };
 //------------------------------------------------------------------------------
 #if SD_SPI_CONFIGURATION > 1 || defined(DOXYGEN)

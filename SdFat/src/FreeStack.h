@@ -23,7 +23,6 @@
  * \file
  * \brief FreeStack() function.
  */
- 
 #if defined(__AVR__) || defined(DOXYGEN)
 /** boundary between stack and heap. */
 extern char *__brkval;
@@ -35,7 +34,7 @@ extern char __bss_end;
 static int FreeStack() {
   char top;
   return __brkval ? &top - __brkval : &top - &__bss_end;
-} 
+}
 #elif defined(PLATFORM_ID)  // Particle board
 static int FreeStack() {
   return System.freeMemory();
@@ -46,7 +45,6 @@ static int FreeStack() {
   char top;
   return &top - reinterpret_cast<char*>(sbrk(0));
 }
-
 #else
 #warning FreeStack is not defined for this system.
 static int FreeStack() {

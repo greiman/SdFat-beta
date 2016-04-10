@@ -34,16 +34,17 @@ void SdSpi::begin(uint8_t chipSelectPin) {
 //------------------------------------------------------------------------------
 /** Set SPI options for access to SD/SDHC cards.
  *
- * \param[in] divisor SCK clock divider relative to the system clock.
+ * \param[in] divisor SCK clock divider relative to the max SPI clock.
  */
 void SdSpi::beginTransaction(uint8_t divisor) {
+  const uint32_t F_SPI_MAX = 80000000;
 #if ENABLE_SPI_TRANSACTIONS
   // Note: ESP8266 beginTransaction does not protect for interrupts.
-  SPISettings settings(F_CPU/(divisor ? divisor : 1), MSBFIRST, SPI_MODE0);
+  SPISettings settings(F_SPI_MAX/(divisor ? divisor : 1), MSBFIRST, SPI_MODE0);
   SPI.beginTransaction(settings);
 #else  // ENABLE_SPI_TRANSACTIONS
   // Note: ESP8266 beginTransaction is the same as following code.
-  SPI.setFrequency(F_CPU/(divisor ? divisor : 1));
+  SPI.setFrequency(F_SPI_MAX/(divisor ? divisor : 1));
   SPI.setBitOrder(MSBFIRST);
   SPI.setDataMode(SPI_MODE0);
 #endif  // ENABLE_SPI_TRANSACTIONS

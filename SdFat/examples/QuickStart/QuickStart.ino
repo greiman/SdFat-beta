@@ -158,5 +158,7 @@ void loop() {
   // read any existing Serial data
   while (Serial.read() >= 0) {}
   cout << F("\nSuccess!  Type any character to restart.\n");
-  while (Serial.read() < 0) {}
+  while (Serial.read() < 0) {
+    SysCall::yield();
+  }
 }

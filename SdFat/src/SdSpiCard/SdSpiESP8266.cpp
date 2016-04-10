@@ -91,7 +91,7 @@ void SdSpi::send(uint8_t b) {
  * \param[in] n Number of bytes to send.
  */
 void SdSpi::send(const uint8_t* buf , size_t n) {
-  // Adjust to 32-bit alignmented.
+  // Adjust to 32-bit alignment.
   while ((reinterpret_cast<uintptr_t>(buf) & 0X3) && n) {
     SPI.transfer(*buf++);
     n--;

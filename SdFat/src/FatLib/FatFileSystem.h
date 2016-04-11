@@ -84,6 +84,15 @@ class FatFileSystem : public  FatVolume {
     tmpFile.open(vwd(), path, mode);
     return tmpFile;
   }
+  /** open a file
+   *
+   * \param[in] path location of file to be opened.
+   * \param[in] mode open mode flags.
+   * \return a File object.
+   */
+  File open(const String &path, uint8_t mode = FILE_READ) {
+    return open(path.c_str(), mode ); 
+  }
 #endif  // ENABLE_ARDUINO_FEATURES
   /** Change a volume's working directory to root
    *

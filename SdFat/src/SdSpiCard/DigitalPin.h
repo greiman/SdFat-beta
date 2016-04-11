@@ -225,6 +225,36 @@ void fastDigitalWrite(uint8_t pin, bool value) {
     g_APinDescription[pin].pPort->PIO_CODR = g_APinDescription[pin].ulPin;
   }
 }
+#elif defined(ESP8266)
+//------------------------------------------------------------------------------
+/** Set pin value
+ * @param[in] pin Arduino pin number
+ * @param[in] level value to write
+ */
+static inline __attribute__((always_inline))
+void fastDigitalWrite(uint8_t pin, uint8_t val) {
+  if(pin < 16){
+    if(val) GPOS = (1 << pin);
+    else GPOC = (1 << pin);
+  } else if(pin == 16){
+    if(val) GP16O |= 1;
+    else GP16O &= ~1;
+  }
+}
+//------------------------------------------------------------------------------
+/** read pin value
+ * @param[in] pin Arduino pin number
+ * @return value read
+ */
+static inline __attribute__((always_inline))
+bool fastDigitalRead(uint8_t pin) {
+  if(pin < 16){
+    return GPIP(pin);
+  } else if(pin == 16){
+    return GP16I & 0x01;
+  }
+  return 0;
+}
 #else  // CORE_TEENSY
 //------------------------------------------------------------------------------
 inline void fastDigitalWrite(uint8_t pin, bool value) {

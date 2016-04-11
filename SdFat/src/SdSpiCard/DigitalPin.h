@@ -28,62 +28,7 @@
 #ifndef DigitalPin_h
 #define DigitalPin_h
 #include "SystemInclude.h"
-#ifdef __arm__
-#ifdef CORE_TEENSY
-//------------------------------------------------------------------------------
-/** read pin value
- * @param[in] pin Arduino pin number
- * @return value read
- */
-static inline __attribute__((always_inline))
-bool fastDigitalRead(uint8_t pin) {
-  return *portInputRegister(pin);
-}
-//------------------------------------------------------------------------------
-/** Set pin value
- * @param[in] pin Arduino pin number
- * @param[in] level value to write
- */
-static inline __attribute__((always_inline))
-void fastDigitalWrite(uint8_t pin, bool value) {
-  if (value) {
-    *portSetRegister(pin) = 1;
-  } else {
-    *portClearRegister(pin) = 1;
-  }
-}
-#else  // CORE_TEENSY
-//------------------------------------------------------------------------------
-/** read pin value
- * @param[in] pin Arduino pin number
- * @return value read
- */
-static inline __attribute__((always_inline))
-bool fastDigitalRead(uint8_t pin) {
-  return g_APinDescription[pin].pPort->PIO_PDSR & g_APinDescription[pin].ulPin;
-}
-//------------------------------------------------------------------------------
-/** Set pin value
- * @param[in] pin Arduino pin number
- * @param[in] level value to write
- */
-static inline __attribute__((always_inline))
-void fastDigitalWrite(uint8_t pin, bool value) {
-  if (value) {
-    g_APinDescription[pin].pPort->PIO_SODR = g_APinDescription[pin].ulPin;
-  } else {
-    g_APinDescription[pin].pPort->PIO_CODR = g_APinDescription[pin].ulPin;
-  }
-}
-#endif  // CORE_TEENSY
-//------------------------------------------------------------------------------
-inline void fastDigitalToggle(uint8_t pin) {
-  fastDigitalWrite(pin, !fastDigitalRead(pin));
-}
-//------------------------------------------------------------------------------
-inline void fastPinMode(uint8_t pin, uint8_t mode) {pinMode(pin, mode);}
-#else  // __arm__
-//==============================================================================
+#if defined(__AVR__)
 #include <avr/io.h>
 /** GpioPinMap type */
 struct GpioPinMap_t {
@@ -233,7 +178,68 @@ void fastPinMode(uint8_t pin, uint8_t mode) {
     fastDigitalWrite(pin, mode == INPUT_PULLUP);
   }
 }
-#endif  // __arm__
+#else  // defined(__AVR__)
+#if defined(CORE_TEENSY)
+//------------------------------------------------------------------------------
+/** read pin value
+ * @param[in] pin Arduino pin number
+ * @return value read
+ */
+static inline __attribute__((always_inline))
+bool fastDigitalRead(uint8_t pin) {
+  return *portInputRegister(pin);
+}
+//------------------------------------------------------------------------------
+/** Set pin value
+ * @param[in] pin Arduino pin number
+ * @param[in] level value to write
+ */
+static inline __attribute__((always_inline))
+void fastDigitalWrite(uint8_t pin, bool value) {
+  if (value) {
+    *portSetRegister(pin) = 1;
+  } else {
+    *portClearRegister(pin) = 1;
+  }
+}
+#elif defined(__SAM3X8E__) || defined(__SAM3X8H__)
+//------------------------------------------------------------------------------
+/** read pin value
+ * @param[in] pin Arduino pin number
+ * @return value read
+ */
+static inline __attribute__((always_inline))
+bool fastDigitalRead(uint8_t pin) {
+  return g_APinDescription[pin].pPort->PIO_PDSR & g_APinDescription[pin].ulPin;
+}
+//------------------------------------------------------------------------------
+/** Set pin value
+ * @param[in] pin Arduino pin number
+ * @param[in] level value to write
+ */
+static inline __attribute__((always_inline))
+void fastDigitalWrite(uint8_t pin, bool value) {
+  if (value) {
+    g_APinDescription[pin].pPort->PIO_SODR = g_APinDescription[pin].ulPin;
+  } else {
+    g_APinDescription[pin].pPort->PIO_CODR = g_APinDescription[pin].ulPin;
+  }
+}
+#else  // CORE_TEENSY
+//------------------------------------------------------------------------------
+inline void fastDigitalWrite(uint8_t pin, bool value) {
+  digitalWrite(pin, value);
+}
+//------------------------------------------------------------------------------
+inline bool fastDigitalRead(uint8_t pin) {return digitalRead(pin);}
+#endif  // CORE_TEENSY
+//------------------------------------------------------------------------------
+inline void fastDigitalToggle(uint8_t pin) {
+  fastDigitalWrite(pin, !fastDigitalRead(pin));
+}
+//------------------------------------------------------------------------------
+inline void fastPinMode(uint8_t pin, uint8_t mode) {pinMode(pin, mode);}
+#endif  // __AVR__
 //------------------------------------------------------------------------------
 /** set pin configuration
  * @param[in] pin Arduino pin number

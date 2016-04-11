@@ -281,6 +281,13 @@ void SdSpiCard::chipSelectHigh() {
 }
 //------------------------------------------------------------------------------
 void SdSpiCard::chipSelectLow() {
+#if WDT_YIELD_TIME_MICROS
+  static uint32_t last;
+  if ((micros() - last) > WDT_YIELD_TIME_MICROS) {
+    SysCall::yield();
+    last = micros();
+  }
+#endif  // WDT_YIELD_TIME_MICROS
   if (m_selected) {
     SD_CS_DBG("chipSelectLow error");
     return;

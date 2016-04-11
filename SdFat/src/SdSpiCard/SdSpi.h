@@ -160,7 +160,7 @@ class SdSpiLib {
 #else  // ENABLE_SPI_TRANSACTIONS
     SPI.setBitOrder(MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
-#endif  // ENABLE_SPI_TRANSACTIONS    
+#endif  // ENABLE_SPI_TRANSACTIONS
 #ifndef SPI_CLOCK_DIV128
     SPI.setClockDivider(divisor);
 #else  // SPI_CLOCK_DIV128

@@ -118,6 +118,19 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
 #define ENABLE_SPI_TRANSACTIONS 0
 //------------------------------------------------------------------------------
 /**
+ * Handle Watchdog Timer for WiFi modules.
+ *
+ * Yield will be called before accessing the SPI bus if it has been more
+ * than WDT_YIELD_TIME_MICROS microseconds since the last yield call by SdFat.
+ */
+#if defined(PLATFORM_ID) || defined(ESP8266)
+// If Particle device or ESP8266 call yield.
+#define WDT_YIELD_TIME_MICROS 100000
+#else
+#define WDT_YIELD_TIME_MICROS 0
+#endif
+//------------------------------------------------------------------------------
+/**
  * Set FAT12_SUPPORT nonzero to enable use if FAT12 volumes.
  * FAT12 has not been well tested and requires additional flash.
  */

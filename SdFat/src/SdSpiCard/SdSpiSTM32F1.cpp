@@ -21,40 +21,8 @@
  */
 #if defined(__STM32F1__)
 #include "SdSpi.h"
-#include <libmaple/dma.h>
-/** Use STM32 DMAC if nonzero */
 #define USE_STM32F1_DMAC 1
-/** Time in ms for DMA receive timeout */
-#define STM32F1_DMA_TIMEOUT 100
-/** DMAC receive channel */
-#define SPI1_DMAC_RX_CH  DMA_CH2
-/** DMAC transmit channel */
-#define SPI1_DMAC_TX_CH  DMA_CH3
 
-volatile bool SPI_DMA_TX_Active = false;
-volatile bool SPI_DMA_RX_Active = false;
-
-/** ISR for DMA TX event. */
-inline void SPI_DMA_TX_Event() {
-  SPI_DMA_TX_Active = false;
-  dma_disable(DMA1, SPI_DMAC_TX_CH);
-}
-
-/** ISR for DMA RX event. */
-inline void SPI_DMA_RX_Event() {
-  SPI_DMA_RX_Active = false;
-  dma_disable(DMA1, SPI1_DMAC_RX_CH);
-}
-//------------------------------------------------------------------------------
-
-/** Disable DMA Channel. */
-static void dmac_channel_disable(dma_channel ul_num) {
-  dma_disable(DMA1, ul_num);
-}
-/** Enable DMA Channel. */
-static void dmac_channel_enable(dma_channel ul_num) {
-  dma_enable(DMA1, ul_num);
-}
 //------------------------------------------------------------------------------
 void SdSpi::begin(uint8_t chipSelectPin) {
   pinMode(chipSelectPin, OUTPUT);
@@ -62,58 +30,16 @@ void SdSpi::begin(uint8_t chipSelectPin) {
   SPI.begin();
 }
 //------------------------------------------------------------------------------
-// start RX DMA
-
-static void spiDmaRX(uint8_t* dst, uint16_t count) {
-//  spi_rx_dma_enable(SPI1);
-  if (count < 1) return;
-  dma_setup_transfer(DMA1, SPI1_DMAC_RX_CH, &SPI1->regs->DR, DMA_SIZE_8BITS,
-                     dst, DMA_SIZE_8BITS, (DMA_MINC_MODE | DMA_TRNS_CMPLT));
-  dma_set_num_transfers(DMA1, SPI1_DMAC_RX_CH, count);  // 2 bytes per pixel
-  SPI_DMA_RX_Active = true;
-  dma_enable(DMA1, SPI1_DMAC_RX_CH);
-}
-//------------------------------------------------------------------------------
-// start TX DMA
-static void spiDmaTX(const uint8_t* src, uint16_t count) {
-  if (count < 1) return;
-  static uint8_t ff = 0XFF;
-
-  if (!src) {
-    src = &ff;
-    dma_setup_transfer(DMA1, SPI1_DMAC_TX_CH, &SPI1->regs->DR, DMA_SIZE_8BITS,
-                       const_cast<uint8_t*>(src), DMA_SIZE_8BITS,
-                      (DMA_FROM_MEM | DMA_TRNS_CMPLT));
-  } else {
-    dma_setup_transfer(DMA1, SPI1_DMAC_TX_CH, &SPI1->regs->DR, DMA_SIZE_8BITS,
-                       const_cast<uint8_t*>(src), DMA_SIZE_8BITS,
-                      (DMA_MINC_MODE  |  DMA_FROM_MEM | DMA_TRNS_CMPLT));
-  }
-  dma_set_num_transfers(DMA1, SPI1_DMAC_TX_CH, count);  // 2 bytes per pixel
-  SPI_DMA_TX_Active = true;
-  dma_enable(DMA1, SPI1_DMAC_TX_CH);
-}
-//------------------------------------------------------------------------------
 //  initialize SPI controller STM32F1
-void SdSpi::beginTransaction(uint8_t sckDivisor) {
+void SdSpi::beginTransaction(uint8_t divisor) {
 #if ENABLE_SPI_TRANSACTIONS
-  SPI.beginTransaction(SPISettings());
-#endif  // ENABLE_SPI_TRANSACTIONS
-
-  if (sckDivisor < SPI_CLOCK_DIV2 || sckDivisor > SPI_CLOCK_DIV256) {
-    sckDivisor = SPI_CLOCK_DIV2;  // may not be needed, testing.
-  }
-  SPI.setClockDivider(sckDivisor);
+  SPISettings settings(F_CPU/(divisor ? divisor : 1), MSBFIRST, SPI_MODE0);
+  SPI.beginTransaction(settings);
+#else  // ENABLE_SPI_TRANSACTIONS
+  SPI.setClockDivider(divisor);
   SPI.setBitOrder(MSBFIRST);
   SPI.setDataMode(SPI_MODE0);
-
-#if USE_STM32F1_DMAC
-  dma_init(DMA1);
-  dma_attach_interrupt(DMA1, SPI1_DMAC_TX_CH, SPI_DMA_TX_Event);
-  dma_attach_interrupt(DMA1, SPI1_DMAC_RX_CH, SPI_DMA_RX_Event);
-  spi_tx_dma_enable(SPI1);
-  spi_rx_dma_enable(SPI1);
-#endif  // USE_STM32F1_DMAC
+#endif  // ENABLE_SPI_TRANSACTIONS
 }
 //------------------------------------------------------------------------------
 void SdSpi::endTransaction() {
@@ -122,15 +48,10 @@ void SdSpi::endTransaction() {
 #endif  // ENABLE_SPI_TRANSACTIONS
 }
 //------------------------------------------------------------------------------
-// STM32
-static inline uint8_t spiTransfer(uint8_t b) {
-  return SPI.transfer(b);
-}
-//------------------------------------------------------------------------------
 // should be valid for STM32
 /** SPI receive a byte */
 uint8_t SdSpi::receive() {
-  return spiTransfer(0xFF);
+  return SPI.transfer(0XFF);
 }
 //------------------------------------------------------------------------------
 /** SPI receive multiple bytes */
@@ -141,22 +62,11 @@ uint8_t SdSpi::receive(uint8_t* buf, size_t n) {
 
 #if USE_STM32F1_DMAC
 
-  spiDmaRX(buf, n);
-  spiDmaTX(0, n);
-
-  uint32_t m = millis();
-  while (SPI_DMA_RX_Active) {
-    if ((millis() - m) > STM32F1_DMA_TIMEOUT)  {
-      dmac_channel_disable(SPI_DMAC_RX_CH);
-      dmac_channel_disable(SPI_DMAC_TX_CH);
-      rtn = 2;
-      break;
-    }
-  }
+  rtn = SPI.dmaTransfer(0, const_cast<uint8*>(buf), n);
 
 #else  // USE_STM32F1_DMAC
   for (size_t i = 0; i < n; i++) {
-    buf[i] = SPI.transfer(0xFF);
+    buf[i] = SPI.transfer (0xFF);
   }
 #endif  // USE_STM32F1_DMAC
   return rtn;
@@ -164,19 +74,15 @@ uint8_t SdSpi::receive(uint8_t* buf, size_t n) {
 //------------------------------------------------------------------------------
 /** SPI send a byte */
 void SdSpi::send(uint8_t b) {
-  spiTransfer(b);
+  SPI.transfer(b);
 }
 //------------------------------------------------------------------------------
 void SdSpi::send(const uint8_t* buf , size_t n) {
-#if USE_STM32F1_DMAC
-  spiDmaTX(buf, n);
-  while (SPI_DMA_TX_Active) {}
 
+#if USE_STM32F1_DMAC
+  SPI.dmaSend(const_cast<uint8*>(buf), n);
 #else  // #if USE_STM32F1_DMAC
   SPI.write(buf, n);
-#endif  // #if USE_STM32F1_DMAC
-  // leave RX register empty
-  //  while (spi_is_rx_nonempty(SPI1))
-  uint8_t b = spi_rx_reg(SPI1);
+#endif
 }
 #endif  // USE_NATIVE_STM32F1_SPI

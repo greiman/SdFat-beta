@@ -58,7 +58,7 @@ void setup() {
     buf[i] = i;
   }
   Serial.println(F("type any character to start"));
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
   // disable sd2 while initializing sd1

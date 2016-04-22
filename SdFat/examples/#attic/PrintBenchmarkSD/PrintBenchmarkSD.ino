@@ -36,11 +36,14 @@ void loop() {
   uint32_t minLatency;
   uint32_t totalLatency;
 
-  while (Serial.read() >= 0) {
-  }
+  // Read any existing Serial data.
+  do {
+    delay(10);
+  } while (Serial.available() && Serial.read() >= 0);
+
   // F() stores strings in flash to save RAM
   Serial.println(F("Type any character to start"));
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     yield();
   }
 

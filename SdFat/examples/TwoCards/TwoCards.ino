@@ -38,7 +38,7 @@ void setup() {
   }
 
   Serial.println(F("type any character to start"));
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
 

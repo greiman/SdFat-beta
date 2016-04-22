@@ -791,10 +791,10 @@ void setup(void) {
 }
 //------------------------------------------------------------------------------
 void loop(void) {
-  // discard any input
+  // Read any Serial data.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
   Serial.println();
   Serial.println(F("type:"));
   Serial.println(F("c - convert file to csv"));
@@ -809,10 +809,10 @@ void loop(void) {
   if (ERROR_LED_PIN >= 0) {
     digitalWrite(ERROR_LED_PIN, LOW);
   }
-  // Read any extra Serial data.
+  // Read any Serial data.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
 
   if (c == 'c') {
     binaryToCsv();

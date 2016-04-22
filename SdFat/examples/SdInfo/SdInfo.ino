@@ -171,14 +171,14 @@ void setup() {
 }
 //------------------------------------------------------------------------------
 void loop() {
-  // read any existing Serial data
+  // Read any existing Serial data.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
 
   // F stores strings in flash to save RAM
   cout << F("\ntype any character to start\n");
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
 

@@ -33,7 +33,7 @@ void setup() {
     SysCall::yield();
   }
   Serial.println("Type any character to start");
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
   // Initialize SdFat or print a detailed error message and halt

@@ -67,7 +67,9 @@ void setup(void) {
   }
 
   cout << F("Type any character to start\n");
-  while (Serial.read() <= 0) {}
+  while (!Serial.available()) {
+    SysCall::yield();
+  }
   delay(400);  // catch Due reset problem
 
   // initialize the SD card at SPI_HALF_SPEED to avoid bus errors with

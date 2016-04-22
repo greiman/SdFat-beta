@@ -15,10 +15,10 @@ const size_t BUF_SIZE = 512;
 const uint32_t FILE_SIZE_MB = 5;
 
 // Write pass count.
-const uint8_t WRITE_COUNT = 10;
+const uint8_t WRITE_COUNT = 2;
 
 // Read pass count.
-const uint8_t READ_COUNT = 5;
+const uint8_t READ_COUNT = 2;
 //==============================================================================
 // End of configuration constants.
 //------------------------------------------------------------------------------
@@ -29,6 +29,10 @@ uint8_t buf[BUF_SIZE];
 
 // file system
 SdFat sd;
+// Set SD_SPI_CONFIGURATION to three to test next two definitions.
+// SdFatLibSpi sd;
+// Args are misoPin, mosiPin, sckPin.
+// SdFatSoftSpi<6, 7, 5> sd;
 
 // test file
 SdFile file;
@@ -81,14 +85,14 @@ void loop() {
   uint32_t minLatency;
   uint32_t totalLatency;
 
-  // discard any input
+  // Discard any input.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
 
   // F( stores strings in flash to save RAM
   cout << F("Type any character to start\n");
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
 

@@ -102,9 +102,10 @@ void setup() {
   if (!file.open(fileName, O_CREAT | O_WRITE | O_EXCL)) {
     error("file.open");
   }
+  // Read any Serial data.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
 
   Serial.print(F("Logging to: "));
   Serial.println(fileName);

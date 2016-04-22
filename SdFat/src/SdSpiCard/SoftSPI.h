@@ -34,13 +34,13 @@
 #define nop asm volatile ("nop\n\t")
 //------------------------------------------------------------------------------
 /** Pin Mode for MISO is input.*/
-const bool MISO_MODE  = false;
+#define MISO_MODE INPUT
 /** Pullups disabled for MISO are disabled. */
-const bool MISO_LEVEL = false;
+#define MISO_LEVEL false
 /** Pin Mode for MOSI is output.*/
-const bool MOSI_MODE  = true;
+#define MOSI_MODE  OUTPUT
 /** Pin Mode for SCK is output. */
-const bool SCK_MODE   = true;
+#define SCK_MODE  OUTPUT
 //------------------------------------------------------------------------------
 /**
  * @class SoftSPI

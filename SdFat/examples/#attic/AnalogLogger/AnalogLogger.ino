@@ -75,12 +75,13 @@ void setup() {
 
 #if WAIT_TO_START
   cout << F("Type any character to start\n");
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
+  // Discard input.
   do {
     delay(10);
-  } while(Serial.read() >= 0);
+  } while(Serial.available() && Serial.read() >= 0);
 #endif  // WAIT_TO_START
 
 #if USE_DS1307

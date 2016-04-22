@@ -25,7 +25,7 @@ void setup() {
     SysCall::yield();
   }
   cout << F("Insert an empty SD.  Type any character to start.") << endl;
-  while (Serial.read() <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
 

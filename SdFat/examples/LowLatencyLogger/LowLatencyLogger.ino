@@ -16,6 +16,7 @@
 #include <SPI.h>
 #include "SdFat.h"
 #include "FreeStack.h"
+#include "UserDataType.h"  // Edit this include file to change data_t.
 //------------------------------------------------------------------------------
 // Set useSharedSpi true for use of an SPI sensor.
 const bool useSharedSpi = false;
@@ -24,7 +25,6 @@ const bool useSharedSpi = false;
 uint32_t startMicros;
 //------------------------------------------------------------------------------
 // User data functions.  Modify these functions for your data items.
-#include "UserDataType.h"  // Edit this include file to change data_t.
 
 // Acquire a data record.
 void acquireData(data_t* data) {
@@ -67,6 +67,7 @@ const uint8_t SD_CS_PIN = SS;
 // Digital pin to indicate an error, set to -1 if not used.
 // The led blinks for fatal errors. The led goes on solid for SD write
 // overrun errors and logging continues.
+#undef ERROR_LED_PIN
 const int8_t ERROR_LED_PIN = -1;
 //------------------------------------------------------------------------------
 // File definitions.
@@ -544,10 +545,10 @@ void setup(void) {
 }
 //------------------------------------------------------------------------------
 void loop(void) {
-  // discard any input
+  // Read any Serial data.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
   Serial.println();
   Serial.println(F("type:"));
   Serial.println(F("c - convert file to csv"));
@@ -563,7 +564,7 @@ void loop(void) {
   // Discard extra Serial data.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
 
   if (ERROR_LED_PIN >= 0) {
     digitalWrite(ERROR_LED_PIN, LOW);

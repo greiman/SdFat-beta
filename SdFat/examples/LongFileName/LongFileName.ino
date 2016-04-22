@@ -63,13 +63,16 @@ void setup() {
 void loop() {
   int c;
 
-  // Discard any Serial input.
-  while (Serial.read() > 0) {}
+  // Read any existing Serial data.
+  do {
+    delay(10);
+  } while (Serial.available() && Serial.read() >= 0);
   Serial.print(F("\r\nEnter File Number: "));
 
-  while ((c = Serial.read()) < 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
+  c = Serial.read();
   uint8_t i = c - '0';
   if (!isdigit(c) || i >= n) {
     Serial.println(F("Invald number"));

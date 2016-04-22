@@ -13,9 +13,10 @@ void setup() {
     SysCall::yield();
   }
   Serial.println("Type 'Y' to wipe all data.");
-  while ((c = Serial.read()) <= 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
+  c = Serial.read();
   if (c != 'Y') {
     sd.errorHalt("Quitting, you did not type 'Y'.");
   }

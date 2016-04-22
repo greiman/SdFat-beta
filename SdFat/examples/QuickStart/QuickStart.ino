@@ -67,10 +67,10 @@ void setup() {
 
 bool firstTry = true;
 void loop() {
-  // read any existing Serial data
+  // Read any existing Serial data.
   do {
     delay(10);
-  } while (Serial.read() >= 0);
+  } while (Serial.available() && Serial.read() >= 0);
 
   if (!firstTry) {
     cout << F("\nRestarting\n");
@@ -155,10 +155,12 @@ void loop() {
     reformatMsg();
     return;
   }
-  // read any existing Serial data
-  while (Serial.read() >= 0) {}
+  // Read any extra Serial data.
+  do {
+    delay(10);
+  } while (Serial.available() && Serial.read() >= 0);
   cout << F("\nSuccess!  Type any character to restart.\n");
-  while (Serial.read() < 0) {
+  while (!Serial.available()) {
     SysCall::yield();
   }
 }

@@ -94,7 +94,10 @@ uint8_t SdSpi::receive(uint8_t* buf, size_t n) {
 #if USE_STM32F1_DMAC
   rtn = SPI.dmaTransfer(0, const_cast<uint8*>(buf), n);
 #else  // USE_STM32F1_DMAC
-  SPI.read(buf, n);
+//  SPI.read(buf, n);
+  for (size_t i = 0; i < n; i++) {
+    buf[i] = SPI.transfer(0XFF);
+  }
 #endif  // USE_STM32F1_DMAC
   return rtn;
 }

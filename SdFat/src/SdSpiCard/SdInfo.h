@@ -88,6 +88,8 @@ uint8_t const SD_CARD_ERROR_CMD59 = 0X1A;
 uint8_t const SD_CARD_ERROR_READ_CRC = 0X1B;
 /** SPI DMA error */
 uint8_t const SD_CARD_ERROR_SPI_DMA = 0X1C;
+/** CMD6 not accepted */
+uint8_t const SD_CARD_ERROR_CMD6 = 0X1D;
 //------------------------------------------------------------------------------
 // card types
 /** Standard capacity V1 SD card */
@@ -126,6 +128,8 @@ unsigned const SD_WRITE_TIMEOUT = 600;
 // SD card commands
 /** GO_IDLE_STATE - init card in spi mode if CS low */
 uint8_t const CMD0 = 0X00;
+/** SWITCH_FUNC - Switch Function Command */
+uint8_t const CMD6 = 0X06;
 /** SEND_IF_COND - verify SD Memory Card interface operating condition.*/
 uint8_t const CMD8 = 0X08;
 /** SEND_CSD - read the Card Specific Data (CSD register) */

@@ -193,6 +193,25 @@ class SdSpiCard {
   }
   /** \return the SD chip select status, true if slected else false. */
   bool selected() {return m_selected;}
+  /**  Send CMD6 - Switch Function Command
+   *
+   * param[in] arg 32-bit argument to CMD6.
+   * param[out] status - 64 byte status returned by CMD6.
+   * \return true if the command was accepted else false.
+   */
+  bool sendCmd6(uint32_t arg, uint8_t* status);
+  /** Set High Speed Bus Mode.
+   *
+   * param[in] divisor new value for SPI SCK divisor.
+   * \return true if successful else false.
+   */
+  bool setHighSpeedMode(uint8_t divisor);
+  /** Set SCK divisor.
+   *  param[in] sckDivisor value for divisor.
+   */
+  void setSckDivisor(uint8_t sckDivisor) {
+    m_sckDivisor = sckDivisor;
+  }
   /** Return the card type: SD V1, SD V2 or SDHC
    * \return 0 - SD V1, 1 - SD V2, or 3 - SDHC.
    */

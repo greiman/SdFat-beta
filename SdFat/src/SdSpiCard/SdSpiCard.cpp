@@ -503,6 +503,35 @@ fail:
   return false;
 }
 //------------------------------------------------------------------------------
+bool SdSpiCard::sendCmd6(uint32_t arg, uint8_t* status) {
+  if (cardCommand(CMD6, arg)) {
+    error(SD_CARD_ERROR_CMD6);
+    goto fail;
+  }
+  if (!readData(status, 64)) {
+    goto fail;
+  }
+  chipSelectHigh();
+  return true;
+
+fail:
+  chipSelectHigh();
+  return false;
+}
+//------------------------------------------------------------------------------
+bool SdSpiCard::setHighSpeedMode(uint8_t divisor) {
+  uint8_t status[64];
+  uint8_t saveDivisor = m_sckDivisor;
+  setSckDivisor(128);
+  if (!sendCmd6(0X00FFFFFF, status) || (2 & status[13]) == 0 ||
+      !sendCmd6(0X80FFFFF1, status) || (status[16] & 0XF) != 1) {
+    setSckDivisor(saveDivisor);
+    return false;
+  }
+  setSckDivisor(divisor);
+  return true;
+}
+//------------------------------------------------------------------------------
 // wait for card to go not busy
 bool SdSpiCard::waitNotBusy(uint16_t timeoutMillis) {
   unsigned t0 = millis();

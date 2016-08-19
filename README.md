@@ -4,11 +4,13 @@ Recent versions of the Arduino IDE have bugs that may cause SdFat-beta to crash.
 
 https://forum.arduino.cc/index.php?topic=419264.0
 
-SdFat-beta was tested using with Arduino AVR boards 1.6.11. 
+SdFat-beta was tested using Arduino AVR boards 1.6.11. 
 If you are using IDE 1.6.11 you must also install AVR boards 1.6.11, not
 1.6.12 or 1.6.13.
 
-If you are Arduino IDE 1.6.11, do Tools > Board > Boards Manager > Arduino AVR Boards > 1.6.11 > Install > Close.
+If you are using Arduino IDE 1.6.11, do Tools > Board > Boards Manager > Arduino AVR Boards > 1.6.11 > Install > Close.
+
+Key changes:
 
 The SPI divisor has been replaced by SPISettings.
 

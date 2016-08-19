@@ -24,18 +24,18 @@
  * \brief FatVolume class
  */
 #include <stddef.h>
-#include "SysCall.h"
 #include "FatLibConfig.h"
 #include "FatStructs.h"
+#include "BlockDriver.h"
 //------------------------------------------------------------------------------
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 /** Macro for debug. */
 #define DEBUG_MODE 0
 #if DEBUG_MODE
-#define DBG_FAIL_MACRO Serial.print(F(__FILE__)); Serial.println(__LINE__)
+#define DBG_FAIL_MACRO Serial.print(F(__FILE__)); Serial.println(__LINE__);
 #define DBG_PRINT_IF(b) if (b) {Serial.println(F(#b)); DBG_FAIL_MACRO;}
 #define DBG_HALT_IF(b) if (b) {Serial.println(F(#b));\
-                               DBG_FAIL_MACRO; SysCall::halt();}
+                               DBG_FAIL_MACRO; while (1);}
 #else  // DEBUG_MODE
 #define DBG_FAIL_MACRO
 #define DBG_PRINT_IF(b)
@@ -100,11 +100,11 @@ class FatCache {
   /** Sync existing block but do not read new block. */
   static const uint8_t CACHE_OPTION_NO_READ = 4;
   /** Cache block for read. */
-  static uint8_t const CACHE_FOR_READ = 0;
+  static const uint8_t CACHE_FOR_READ = 0;
   /** Cache block for write. */
-  static uint8_t const CACHE_FOR_WRITE = CACHE_STATUS_DIRTY;
+  static const uint8_t CACHE_FOR_WRITE = CACHE_STATUS_DIRTY;
   /** Reserve cache block for write - do not read from block device. */
-  static uint8_t const CACHE_RESERVE_FOR_WRITE
+  static const uint8_t CACHE_RESERVE_FOR_WRITE
     = CACHE_STATUS_DIRTY | CACHE_OPTION_NO_READ;
   /** \return Cache block address. */
   cache_t* block() {
@@ -256,7 +256,9 @@ class FatVolume {
   // Allow FatFile and FatCache access to FatVolume private functions.
   friend class FatCache;
   friend class FatFile;
+  friend class FatFileSystem;
 //------------------------------------------------------------------------------
+  BlockDriver* m_blockDev;      // block device
   uint8_t  m_blocksPerCluster;     // Cluster size in blocks.
   uint8_t  m_clusterBlockMask;     // Mask to extract block of cluster.
   uint8_t  m_clusterSizeShift;     // Cluster count to block count shift.
@@ -269,6 +271,24 @@ class FatVolume {
   uint32_t m_lastCluster;          // Last cluster number in FAT.
   uint32_t m_rootDirStart;         // Start block for FAT16, cluster for FAT32.
 //------------------------------------------------------------------------------
+  // block I/O functions.
+  bool readBlock(uint32_t block, uint8_t* dst) {
+    return m_blockDev->readBlock(block, dst);
+  }
+  bool syncBlocks() {
+    return m_blockDev->syncBlocks();
+  }
+  bool writeBlock(uint32_t block, const uint8_t* src) {
+    return m_blockDev->writeBlock(block, src);
+  }
+#if USE_MULTI_BLOCK_IO
+  bool readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
+    return m_blockDev->readBlocks(block, dst, nb);
+  }
+  bool writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
+    return m_blockDev->writeBlocks(block, src, nb);
+  }
+#endif  // USE_MULTI_BLOCK_IO
 #if MAINTAIN_FREE_CLUSTER_COUNT
   int32_t  m_freeClusterCount;     // Count of free clusters in volume.
   void setFreeClusterCount(int32_t value) {
@@ -297,7 +317,7 @@ class FatVolume {
                            options | FatCache::CACHE_STATUS_MIRROR_FAT);
   }
   bool cacheSync() {
-    return m_cache.sync() && m_fatCache.sync();
+    return m_cache.sync() && m_fatCache.sync() && syncBlocks();
   }
 #else  //
   cache_t* cacheFetchFat(uint32_t blockNumber, uint8_t options) {
@@ -305,7 +325,7 @@ class FatVolume {
                           options | FatCache::CACHE_STATUS_MIRROR_FAT);
   }
   bool cacheSync() {
-    return m_cache.sync();
+    return m_cache.sync() && syncBlocks();
   }
 #endif  // USE_SEPARATE_FAT_CACHE
   cache_t* cacheFetchData(uint32_t blockNumber, uint8_t options) {
@@ -332,7 +352,7 @@ class FatVolume {
   uint8_t blockOfCluster(uint32_t position) const {
     return (position >> 9) & m_clusterBlockMask;
   }
-  uint32_t clusterStartBlock(uint32_t cluster) const;
+  uint32_t clusterFirstBlock(uint32_t cluster) const;
   int8_t fatGet(uint32_t cluster, uint32_t* value);
   bool fatPut(uint32_t cluster, uint32_t value);
   bool fatPutEOC(uint32_t cluster) {
@@ -342,13 +362,5 @@ class FatVolume {
   bool isEOC(uint32_t cluster) const {
     return cluster > m_lastCluster;
   }
-  //----------------------------------------------------------------------------
-  // Virtual block I/O functions.
-  virtual bool readBlock(uint32_t block, uint8_t* dst) = 0;
-  virtual bool writeBlock(uint32_t block, const uint8_t* src) = 0;
-#if USE_MULTI_BLOCK_IO
-  virtual bool readBlocks(uint32_t block, uint8_t* dst, size_t nb) = 0;
-  virtual bool writeBlocks(uint32_t block, const uint8_t* src, size_t nb) = 0;
-#endif  // USE_MULTI_BLOCK_IO
 };
 #endif  // FatVolume

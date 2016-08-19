@@ -23,10 +23,10 @@
  * \file
  * \brief SdSpiCard class for V2 SD/SDHC cards
  */
-#include "SystemInclude.h"
-#include "SdFatConfig.h"
+#include <stddef.h>
+#include "SysCall.h"
 #include "SdInfo.h"
-#include "SdSpi.h"
+#include "SdSpiDriver.h"
 //==============================================================================
 /**
  * \class SdSpiCard
@@ -34,23 +34,13 @@
  */
 class SdSpiCard {
  public:
-  /** typedef for SPI class.  */
-#if SD_SPI_CONFIGURATION < 3
-  typedef SpiDefault_t m_spi_t;
-#else  // SD_SPI_CONFIGURATION < 3
-  typedef SdSpiBase m_spi_t;
-#endif  // SD_SPI_CONFIGURATION < 3
   /** Construct an instance of SdSpiCard. */
-  SdSpiCard() : m_selected(false),
-                m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
+  SdSpiCard() : m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
   /** Initialize the SD card.
-   * \param[in] spi SPI object.
-   * \param[in] chipSelectPin SD chip select pin.
-   * \param[in] sckDivisor SPI clock divisor.
+   * \param[in] spiDriver SPI driver for card.
    * \return true for success else false.
    */
-  bool begin(m_spi_t* spi, uint8_t chipSelectPin = SS,
-             uint8_t sckDivisor = SPI_FULL_SPEED);
+  bool begin(SdSpiDriver* spiDriver);
   /**
    * Determine the size of an SD flash memory card.
    *
@@ -58,16 +48,6 @@ class SdSpiCard {
    *         or zero if an error occurs.
    */
   uint32_t cardSize();
-  /** Set the SD chip select pin high, send a dummy byte, and call SPI endTransaction.
-   *
-   * This function should only be called by programs doing raw I/O to the SD.
-   */
-  void chipSelectHigh();
-  /** Set the SD chip select pin low and call SPI beginTransaction.
-   *
-   * This function should only be called by programs doing raw I/O to the SD.
-   */  
-  void chipSelectLow();
   /** Erase a range of blocks.
    *
    * \param[in] firstBlock The address of the first block in the range.
@@ -178,40 +158,18 @@ class SdSpiCard {
    * the value false is returned for failure.
    */
   bool readStart(uint32_t blockNumber);
+  /** Return the 64 byte card status
+   * \param[out] status location for 64 status bytes.
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
+   */   
+  bool readStatus(uint8_t* status);
   /** End a read multiple blocks sequence.
    *
    * \return The value true is returned for success and
    * the value false is returned for failure.
    */
   bool readStop();
-  /** Return SCK divisor.
-   *
-   * \return Requested SCK divisor.
-   */
-  uint8_t sckDivisor() {
-    return m_sckDivisor;
-  }
-  /** \return the SD chip select status, true if slected else false. */
-  bool selected() {return m_selected;}
-  /**  Send CMD6 - Switch Function Command
-   *
-   * param[in] arg 32-bit argument to CMD6.
-   * param[out] status - 64 byte status returned by CMD6.
-   * \return true if the command was accepted else false.
-   */
-  bool sendCmd6(uint32_t arg, uint8_t* status);
-  /** Set High Speed Bus Mode.
-   *
-   * param[in] divisor new value for SPI SCK divisor.
-   * \return true if successful else false.
-   */
-  bool setHighSpeedMode(uint8_t divisor);
-  /** Set SCK divisor.
-   *  param[in] sckDivisor value for divisor.
-   */
-  void setSckDivisor(uint8_t sckDivisor) {
-    m_sckDivisor = sckDivisor;
-  }
   /** Return the card type: SD V1, SD V2 or SDHC
    * \return 0 - SD V1, 1 - SD V2, or 3 - SDHC.
    */
@@ -246,6 +204,18 @@ class SdSpiCard {
   /** Start a write multiple blocks sequence.
    *
    * \param[in] blockNumber Address of first block in sequence.
+   *
+   * \note This function is used with writeData() and writeStop()
+   * for optimized multiple block writes.
+   *
+   * \return The value true is returned for success and
+   * the value false is returned for failure.
+   */
+  bool writeStart(uint32_t blockNumber);
+
+  /** Start a write multiple blocks sequence with pre-erase.
+   *
+   * \param[in] blockNumber Address of first block in sequence.
    * \param[in] eraseCount The number of blocks to be pre-erased.
    *
    * \note This function is used with writeData() and writeStop()
@@ -261,6 +231,10 @@ class SdSpiCard {
    * the value false is returned for failure.
    */
   bool writeStop();
+  /** Set CS low and activate the card. */
+  void spiStart();
+  /** Set CS high and deactivate the card. */
+  void spiStop();
 
  private:
   // private functions
@@ -269,74 +243,48 @@ class SdSpiCard {
     return cardCommand(cmd, arg);
   }
   uint8_t cardCommand(uint8_t cmd, uint32_t arg);
+  bool isTimedOut(uint16_t startMS, uint16_t timeoutMS);
   bool readData(uint8_t* dst, size_t count);
   bool readRegister(uint8_t cmd, void* buf);
+
   void type(uint8_t value) {
     m_type = value;
   }
-  bool waitNotBusy(uint16_t timeoutMillis);
+
+  bool waitNotBusy(uint16_t timeoutMS);
   bool writeData(uint8_t token, const uint8_t* src);
-  void spiBegin(uint8_t chipSelectPin) {
-    m_spi->begin(chipSelectPin);
+
+  //---------------------------------------------------------------------------
+  // functions defined in SdSpiDriver.h
+  void spiActivate() {
+    m_spiDriver->activate();
   }
-  void spiBeginTransaction(uint8_t spiDivisor) {
-    m_spi->beginTransaction(spiDivisor);
-  }
-  void spiEndTransaction() {
-    m_spi->endTransaction();
+  void spiDeactivate() {
+    m_spiDriver->deactivate();
   }
   uint8_t spiReceive() {
-    return m_spi->receive();
+    return m_spiDriver->receive();
   }
   uint8_t spiReceive(uint8_t* buf, size_t n) {
-    return m_spi->receive(buf, n);
+    return  m_spiDriver->receive(buf, n);
   }
   void spiSend(uint8_t data) {
-    m_spi->send(data);
+     m_spiDriver->send(data);
   }
   void spiSend(const uint8_t* buf, size_t n) {
-    m_spi->send(buf, n);
+    m_spiDriver->send(buf, n);
   }
-  m_spi_t* m_spi;
-  bool m_selected;
-  uint8_t m_chipSelectPin;
+  void spiSelect() {
+    m_spiDriver->select();
+  }
+  void spiUnselect() {
+    m_spiDriver->unselect();
+  }
   uint8_t m_errorCode;
-  uint8_t m_sckDivisor;
+  SdSpiDriver *m_spiDriver;
+  bool    m_spiActive;
   uint8_t m_status;
   uint8_t m_type;
 };
 //==============================================================================
-/**
- * \class Sd2Card
- * \brief Raw access to SD and SDHC card using default SPI library.
- */
-class Sd2Card : public SdSpiCard {
- public:
-  /** Initialize the SD card.
-   * \param[in] chipSelectPin SD chip select pin.
-   * \param[in] sckDivisor SPI clock divisor.
-   * \return true for success else false.
-   */
-  bool begin(uint8_t chipSelectPin = SS, uint8_t sckDivisor = 2) {
-    return SdSpiCard::begin(&m_spi, chipSelectPin, sckDivisor);
-  }
-  /** Initialize the SD card. Obsolete form.
-   * \param[in] chipSelectPin SD chip select pin.
-   * \param[in] sckDivisor SPI clock divisor.
-   * \return true for success else false.
-   */
-  bool init(uint8_t sckDivisor = 2, uint8_t chipSelectPin = SS) {
-    return begin(chipSelectPin, sckDivisor);
-  }
-
- private:
-  bool begin(m_spi_t* spi, uint8_t chipSelectPin = SS,
-             uint8_t sckDivisor = SPI_FULL_SPEED) {
-    (void)spi;
-    (void)chipSelectPin;
-    (void)sckDivisor;
-    return false;
-  }
-  SpiDefault_t m_spi;
-};
 #endif  // SpiCard_h

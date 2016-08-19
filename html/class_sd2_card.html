@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -83,7 +82,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_sd2_card-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -94,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Raw access to SD and SDHC card using default SPI library.  
  <a href="class_sd2_card.html#details">More...</a></p>
 
-<p><code>#include &lt;SdSpiCard.h&gt;</code></p>
+<p><code>#include &lt;SdFat.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Sd2Card:</div>
 <div class="dyncontent">
@@ -112,21 +110,14 @@ Collaboration diagram for Sd2Card:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a31a561750501b6635ad2b85c8c960381"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="_sd_spi_8h.html#a312d9e68dd648980324728cc06d3bf6a">SpiDefault_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a31a561750501b6635ad2b85c8c960381">m_spi_t</a></td></tr>
-<tr class="separator:a31a561750501b6635ad2b85c8c960381"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a53eb48d9dae77c711460ed79d3fced4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd2_card.html#a53eb48d9dae77c711460ed79d3fced4b">begin</a> (uint8_t chipSelectPin=SS, uint8_t <a class="el" href="class_sd_spi_card.html#a0c2acfc8cdde3d35245b34018efcc6c7">sckDivisor</a>=2)</td></tr>
-<tr class="separator:a53eb48d9dae77c711460ed79d3fced4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c8131750a5b1087375aa31f59564fae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a7c8131750a5b1087375aa31f59564fae">begin</a> (<a class="el" href="_sd_spi_driver_8h.html#abf391604c1ecfed19cdcb6c8bd626972">SdSpiDriver</a> *spiDriver)</td></tr>
+<tr class="separator:a7c8131750a5b1087375aa31f59564fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9504c8f35b53d505e7dae33b0b2327d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd2_card.html#a9504c8f35b53d505e7dae33b0b2327d1">begin</a> (uint8_t chipSelectPin=SS, SPISettings spiSettings=SD_SCK_MHZ(50))</td></tr>
+<tr class="separator:a9504c8f35b53d505e7dae33b0b2327d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afca8bd6b7e465bf9c475ba375c4deec8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#afca8bd6b7e465bf9c475ba375c4deec8">cardSize</a> ()</td></tr>
 <tr class="separator:afca8bd6b7e465bf9c475ba375c4deec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa4ec01e40371d6f00c8ed7e8d8eafbc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#aaa4ec01e40371d6f00c8ed7e8d8eafbc">chipSelectHigh</a> ()</td></tr>
-<tr class="separator:aaa4ec01e40371d6f00c8ed7e8d8eafbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a198e62163012a9380a75ca69669ef4ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a198e62163012a9380a75ca69669ef4ae">chipSelectLow</a> ()</td></tr>
-<tr class="separator:a198e62163012a9380a75ca69669ef4ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1caa13d19df6596b2c0dd62365c75362"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a1caa13d19df6596b2c0dd62365c75362">erase</a> (uint32_t firstBlock, uint32_t lastBlock)</td></tr>
 <tr class="separator:a1caa13d19df6596b2c0dd62365c75362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4591884254c9f58daa8738d7c1ccdd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#aed4591884254c9f58daa8738d7c1ccdd">eraseSingleBlockEnable</a> ()</td></tr>
@@ -137,8 +128,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a50bf5f92223222beacec2b203a6b7a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b1abdb8dd5254cd4af0df19ba59ce4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a7b1abdb8dd5254cd4af0df19ba59ce4a">errorData</a> () const </td></tr>
 <tr class="separator:a7b1abdb8dd5254cd4af0df19ba59ce4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa415ea708e5212a5b4154b7eb5c1a304"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd2_card.html#aa415ea708e5212a5b4154b7eb5c1a304">init</a> (uint8_t <a class="el" href="class_sd_spi_card.html#a0c2acfc8cdde3d35245b34018efcc6c7">sckDivisor</a>=2, uint8_t chipSelectPin=SS)</td></tr>
-<tr class="separator:aa415ea708e5212a5b4154b7eb5c1a304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3cb9139dbc1e6596c6717da2b486328"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#aa3cb9139dbc1e6596c6717da2b486328">isBusy</a> ()</td></tr>
 <tr class="separator:aa3cb9139dbc1e6596c6717da2b486328"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2973091eeab7b6ba528f6442bc5df36e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a2973091eeab7b6ba528f6442bc5df36e">readBlock</a> (uint32_t block, uint8_t *dst)</td></tr>
@@ -155,12 +144,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab446e49338b3ce834a750ac6dae35f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b1710d11496c32ba4323831e00ac6d1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a3b1710d11496c32ba4323831e00ac6d1">readStart</a> (uint32_t blockNumber)</td></tr>
 <tr class="separator:a3b1710d11496c32ba4323831e00ac6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91d0413599efe0d63c8c2dfe4a12d9ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a91d0413599efe0d63c8c2dfe4a12d9ae">readStatus</a> (uint8_t *status)</td></tr>
+<tr class="separator:a91d0413599efe0d63c8c2dfe4a12d9ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdac7c399fa1ba3f904cf503526e007e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#afdac7c399fa1ba3f904cf503526e007e">readStop</a> ()</td></tr>
 <tr class="separator:afdac7c399fa1ba3f904cf503526e007e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c2acfc8cdde3d35245b34018efcc6c7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a0c2acfc8cdde3d35245b34018efcc6c7">sckDivisor</a> ()</td></tr>
-<tr class="separator:a0c2acfc8cdde3d35245b34018efcc6c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3925d9021c378be9c025b2ae14501d6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a3925d9021c378be9c025b2ae14501d6c">selected</a> ()</td></tr>
-<tr class="separator:a3925d9021c378be9c025b2ae14501d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa39feb6ebb269071ac6843a424ac311c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#aa39feb6ebb269071ac6843a424ac311c">spiStart</a> ()</td></tr>
+<tr class="separator:aa39feb6ebb269071ac6843a424ac311c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1033a4a68d38f52dddf6a1764fcca3e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a1033a4a68d38f52dddf6a1764fcca3e1">spiStop</a> ()</td></tr>
+<tr class="separator:a1033a4a68d38f52dddf6a1764fcca3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a061d92bf154a1863a6321385b7505f6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a061d92bf154a1863a6321385b7505f6e">type</a> () const </td></tr>
 <tr class="separator:a061d92bf154a1863a6321385b7505f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdf8c7fe62ab091971cd546c00714cee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#acdf8c7fe62ab091971cd546c00714cee">writeBlock</a> (uint32_t blockNumber, const uint8_t *src)</td></tr>
@@ -169,6 +160,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa5ca6901525dce4b1bc1f94a95441d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9495c0b148eb380358bb4a9721c0dffa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a9495c0b148eb380358bb4a9721c0dffa">writeData</a> (const uint8_t *src)</td></tr>
 <tr class="separator:a9495c0b148eb380358bb4a9721c0dffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56d4750a5d2f693943eec985cb61ffe2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a56d4750a5d2f693943eec985cb61ffe2">writeStart</a> (uint32_t blockNumber)</td></tr>
+<tr class="separator:a56d4750a5d2f693943eec985cb61ffe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bf0dc991308dcd2a7427bad89a9e2ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#a8bf0dc991308dcd2a7427bad89a9e2ba">writeStart</a> (uint32_t blockNumber, uint32_t eraseCount)</td></tr>
 <tr class="separator:a8bf0dc991308dcd2a7427bad89a9e2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef9154785a4de5560fb807e4f9316fb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html#aef9154785a4de5560fb807e4f9316fb0">writeStop</a> ()</td></tr>
@@ -176,8 +169,8 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Raw access to SD and SDHC card using default SPI library. </p>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="a31a561750501b6635ad2b85c8c960381"></a>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a7c8131750a5b1087375aa31f59564fae"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -185,7 +178,11 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="_sd_spi_8h.html#a312d9e68dd648980324728cc06d3bf6a">SpiDefault_t</a> <a class="el" href="class_sd_spi_card.html#a31a561750501b6635ad2b85c8c960381">SdSpiCard::m_spi_t</a></td>
+          <td class="memname">bool SdSpiCard::begin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_sd_spi_driver_8h.html#abf391604c1ecfed19cdcb6c8bd626972">SdSpiDriver</a> *&#160;</td>
+          <td class="paramname"><em>spiDriver</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -194,12 +191,17 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>typedef for SPI class. </p>
+<p>Initialize the SD card. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">spiDriver</td><td>SPI driver for card. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a53eb48d9dae77c711460ed79d3fced4b"></a>
+<a class="anchor" id="a9504c8f35b53d505e7dae33b0b2327d1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -215,8 +217,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>sckDivisor</em> = <code>2</code>&#160;</td>
+          <td class="paramtype">SPISettings&#160;</td>
+          <td class="paramname"><em>spiSettings</em> = <code>SD_SCK_MHZ(50)</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -233,7 +235,7 @@ Public Member Functions</h2></td></tr>
 <p>Initialize the SD card. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">chipSelectPin</td><td>SD chip select pin. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">sckDivisor</td><td>SPI clock divisor. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">spiSettings</td><td>SPI speed, mode, and bit order. </td></tr>
   </table>
   </dd>
 </dl>
@@ -263,56 +265,6 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Determine the size of an SD flash memory card.</p>
 <dl class="section return"><dt>Returns</dt><dd>The number of 512 byte data blocks in the card or zero if an error occurs. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aaa4ec01e40371d6f00c8ed7e8d8eafbc"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SdSpiCard::chipSelectHigh </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Set the SD chip select pin high, send a dummy byte, and call SPI endTransaction.</p>
-<p>This function should only be called by programs doing raw I/O to the SD. </p>
-
-</div>
-</div>
-<a class="anchor" id="a198e62163012a9380a75ca69669ef4ae"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SdSpiCard::chipSelectLow </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Set the SD chip select pin low and call SPI beginTransaction.</p>
-<p>This function should only be called by programs doing raw I/O to the SD. </p>
 
 </div>
 </div>
@@ -460,48 +412,6 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>error data for last error. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="aa415ea708e5212a5b4154b7eb5c1a304"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Sd2Card::init </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>sckDivisor</em> = <code>2</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>chipSelectPin</em> = <code>SS</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Initialize the SD card. Obsolete form. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">chipSelectPin</td><td>SD chip select pin. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">sckDivisor</td><td>SPI clock divisor. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
 
 </div>
 </div>
@@ -784,6 +694,37 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a91d0413599efe0d63c8c2dfe4a12d9ae"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SdSpiCard::readStatus </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return the 64 byte card status </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">status</td><td>location for 64 status bytes. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="afdac7c399fa1ba3f904cf503526e007e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -809,7 +750,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0c2acfc8cdde3d35245b34018efcc6c7"></a>
+<a class="anchor" id="aa39feb6ebb269071ac6843a424ac311c"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -817,7 +758,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t SdSpiCard::sckDivisor </td>
+          <td class="memname">void SdSpiCard::spiStart </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -825,16 +766,15 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Return SCK divisor.</p>
-<dl class="section return"><dt>Returns</dt><dd>Requested SCK divisor. </dd></dl>
+<p>Set CS low and activate the card. </p>
 
 </div>
 </div>
-<a class="anchor" id="a3925d9021c378be9c025b2ae14501d6c"></a>
+<a class="anchor" id="a1033a4a68d38f52dddf6a1764fcca3e1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -842,7 +782,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool SdSpiCard::selected </td>
+          <td class="memname">void SdSpiCard::spiStop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -850,11 +790,11 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the SD chip select status, true if slected else false. </dd></dl>
+<p>Set CS high and deactivate the card. </p>
 
 </div>
 </div>
@@ -1006,6 +946,39 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a56d4750a5d2f693943eec985cb61ffe2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SdSpiCard::writeStart </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>blockNumber</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Start a write multiple blocks sequence.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">blockNumber</td><td>Address of first block in sequence.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function is used with <a class="el" href="class_sd_spi_card.html#a9495c0b148eb380358bb4a9721c0dffa">writeData()</a> and <a class="el" href="class_sd_spi_card.html#aef9154785a4de5560fb807e4f9316fb0">writeStop()</a> for optimized multiple block writes.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false is returned for failure. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a8bf0dc991308dcd2a7427bad89a9e2ba"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1037,7 +1010,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Start a write multiple blocks sequence.</p>
+<p>Start a write multiple blocks sequence with pre-erase.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">blockNumber</td><td>Address of first block in sequence. </td></tr>
@@ -1076,12 +1049,12 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Arduino/libraries/SdFat/src/SdSpiCard/<a class="el" href="_sd_spi_card_8h.html">SdSpiCard.h</a></li>
+<li>Arduino/libraries/SdFat/src/<a class="el" href="_sd_fat_8h.html">SdFat.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 12 2016 13:43:49 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

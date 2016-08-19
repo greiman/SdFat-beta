@@ -21,6 +21,7 @@
 #define FatFileSystem_h
 #include "FatVolume.h"
 #include "FatFile.h"
+#include "ArduinoStream.h"
 #include "ArduinoFiles.h"
 /**
  * \file
@@ -35,11 +36,13 @@ class FatFileSystem : public  FatVolume {
  public:
   /**
    * Initialize an FatFileSystem object.
+   * \param[in] blockDev Device block driver.   
    * \param[in] part partition to initialize.
    * \return The value true is returned for success and
    * the value false is returned for failure.
    */
-  bool begin(uint8_t part = 0) {
+  bool begin(BlockDriver* blockDev, uint8_t part = 0) {
+    m_blockDev = blockDev;
     vwd()->close();
     return (part ? init(part) : init(1) || init(0))
             && vwd()->openRoot(this) && FatFile::setCwd(vwd());
@@ -91,7 +94,7 @@ class FatFileSystem : public  FatVolume {
    * \return a File object.
    */
   File open(const String &path, uint8_t mode = FILE_READ) {
-    return open(path.c_str(), mode ); 
+    return open(path.c_str(), mode );
   }
 #endif  // ENABLE_ARDUINO_FEATURES
   /** Change a volume's working directory to root
@@ -142,7 +145,6 @@ class FatFileSystem : public  FatVolume {
     if (!dir.isDir()) {
       goto fail;
     }
-//    *m_vwd = dir;
     m_vwd = dir;
     if (set_cwd) {
       FatFile::setCwd(vwd());
@@ -189,7 +191,7 @@ fail:
    *
    * LS_R - Recursive list of subdirectories.
    */
-  void ls(print_t* pr, uint8_t flags) {
+  void ls(print_t* pr, uint8_t flags = 0) {
     vwd()->ls(pr, flags);
   }
   //----------------------------------------------------------------------------

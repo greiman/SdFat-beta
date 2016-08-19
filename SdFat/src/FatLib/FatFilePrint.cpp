@@ -234,7 +234,6 @@ bool FatFile::printModifyDateTime(print_t* pr) {
 fail:
   return false;
 }
-
 //------------------------------------------------------------------------------
 size_t FatFile::printFileSize(print_t* pr) {
   char buf[11];

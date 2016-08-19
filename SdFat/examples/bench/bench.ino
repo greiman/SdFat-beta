@@ -29,8 +29,12 @@ uint8_t buf[BUF_SIZE];
 
 // file system
 SdFat sd;
-// Set SD_SPI_CONFIGURATION to three to test next two definitions.
-// SdFatLibSpi sd;
+
+// Set ENABLE_EXTENDED_TRANSFER_CLASS to use extended SD I/O.
+// Requires dedicated use of the SPI bus.
+// SdFatEX sd;
+
+// Set ENABLE_SOFTWARE_SPI_CLASS to use software SPI.
 // Args are misoPin, mosiPin, sckPin.
 // SdFatSoftSpi<6, 7, 5> sd;
 
@@ -98,9 +102,9 @@ void loop() {
 
   cout << F("FreeStack: ") << FreeStack() << endl;
 
-  // initialize the SD card at SPI_FULL_SPEED for best performance.
-  // try SPI_HALF_SPEED if bus errors occur.
-  if (!sd.begin(chipSelect, SPI_FULL_SPEED)) {
+  // Initialize at the highest speed supported by the board that is
+  // not over 50 MHz. Try a lower speed if SPI errors occur.
+  if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
     sd.initErrorHalt();
   }
 

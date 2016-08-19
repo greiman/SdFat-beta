@@ -53,19 +53,6 @@
 #define USE_LONG_FILE_NAMES 1
 #endif  // USE_LONG_FILE_NAMES
 //------------------------------------------------------------------------------
-/** 
- * Set ARDUINO_FILE_USES_STREAM nonzero to use Stream as the base class
- * for the Arduino File class.  If ARDUINO_FILE_USES_STREAM is zero, Print
- * will be used as the base class for the Arduino File class.
- *
- * You can save some flash if you do not use Stream input functions such as
- * find(), findUntil(), readBytesUntil(), readString(), readStringUntil(), 
- * parseInt(), and parsefloat().
- */
-#ifndef ARDUINO_FILE_USES_STREAM
-#define ARDUINO_FILE_USES_STREAM 1
-#endif  // ARDUINO_FILE_USES_STREAM
-//------------------------------------------------------------------------------
 /**
  * Set USE_SEPARATE_FAT_CACHE non-zero to use a second 512 byte cache
  * for FAT table entries.  Improves performance for large writes that
@@ -91,6 +78,15 @@
 #define USE_MULTI_BLOCK_IO 1
 #endif  // RAMEND
 #endif  // USE_MULTI_BLOCK_IO
+//------------------------------------------------------------------------------
+/** 
+ * Set MAINTAIN_FREE_CLUSTER_COUNT nonzero to keep the count of free clusters
+ * updated.  This will increase the speed of the freeClusterCount() call
+ * after the first call.  Extra flash will be required.
+ */
+#ifndef MAINTAIN_FREE_CLUSTER_COUNT
+#define MAINTAIN_FREE_CLUSTER_COUNT 0
+#endif  // MAINTAIN_FREE_CLUSTER_COUNT
 //------------------------------------------------------------------------------
 /**
  * Set DESTRUCTOR_CLOSES_FILE non-zero to close a file in its destructor.
@@ -133,7 +129,9 @@
 /**
  *  Enable Extra features for Arduino.
  */
+// #define ENABLE_ARDUINO_FEATURES 0  ////////////////////////FIX THIS /////////////////
 #ifndef ENABLE_ARDUINO_FEATURES
+#include <Arduino.h>
 #if defined(ARDUINO) || defined(PLATFORM_ID) || defined(DOXYGEN)
 #define ENABLE_ARDUINO_FEATURES 1
 #else  //  #if defined(ARDUINO) || defined(DOXYGEN)

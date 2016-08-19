@@ -1,8 +1,22 @@
-This is a beta version so there may be bugs and compatibility
-problems.  
+### Warning: This version has major changes so it may be unstable.
 
-Please report problems to the email address listed in the 
-"Bugs and Comments" section of the html documentation.
+Recent versions of the Arduino IDE have bugs that may cause SdFat-beta to crash.
+
+https://forum.arduino.cc/index.php?topic=419264.0
+
+SdFat-beta was tested using with Arduino AVR boards 1.6.11. 
+If you are using IDE 1.6.11 you must also install AVR boards 1.6.11, not
+1.6.12 or 1.6.13.
+
+If you are Arduino IDE 1.6.11, do Tools > Board > Boards Manager > Arduino AVR Boards > 1.6.11 > Install > Close.
+
+The SPI divisor has been replaced by SPISettings.
+
+There are two new classes, SdFatEX and SdFatSoftSpiEX.
+
+Please read changes.txt and the html documentation for more information.
+
+Please report problems as issues.
 
 The Arduino SdFat library provides read/write access to FAT16/FAT32
 file systems on SD/SDHC flash cards.
@@ -23,9 +37,9 @@ Read changes.txt if you have used previous releases of this library.
 
 Please read the html documentation for this library.  Start with
 html/index.html and read the Main Page.  Next go to the Classes tab and
-read the documentation for the classes SdFat, SdBaseFile, SdFile, File,
-StdioStream, ifstream, ofstream, and others.
+read the documentation for the classes SdFat, SdFatEX, SdBaseFile,
+SdFile, File, StdioStream, ifstream, ofstream, and others.
  
 Please continue by reading the html documentation.
 
-Updated 23 Jan 2016
+Updated 19 Aug 2016

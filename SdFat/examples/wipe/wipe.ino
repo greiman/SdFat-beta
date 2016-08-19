@@ -20,7 +20,9 @@ void setup() {
   if (c != 'Y') {
     sd.errorHalt("Quitting, you did not type 'Y'.");
   }
-  if (!sd.begin(chipSelect)) {
+  // Initialize at the highest speed supported by the board that is
+  // not over 50 MHz. Try a lower speed if SPI errors occur. 
+  if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
     sd.initErrorHalt();
   }
   // Use wipe() for no dot progress indicator.
@@ -28,7 +30,9 @@ void setup() {
     sd.errorHalt("Wipe failed.");
   }
   // Must reinitialize after wipe.
-  if (!sd.begin(chipSelect)) {
+  // Initialize at the highest speed supported by the board that is
+  // not over 50 MHz. Try a lower speed if SPI errors occur.  
+  if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
     sd.errorHalt("Second init failed.");
   }
   Serial.println("Done");

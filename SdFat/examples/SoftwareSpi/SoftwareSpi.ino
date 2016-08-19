@@ -5,7 +5,7 @@
 //
 #include <SPI.h>
 #include "SdFat.h"
-#if SD_SPI_CONFIGURATION >= 3  // Must be set in SdFat/SdFatConfig.h
+#if ENABLE_SOFTWARE_SPI_CLASS  // Must be set in SdFat/SdFatConfig.h
 //
 // Pin numbers in templates must be constants.
 const uint8_t SOFT_MISO_PIN = 12;
@@ -53,6 +53,6 @@ void setup() {
 }
 //------------------------------------------------------------------------------
 void loop() {}
-#else  // SD_SPI_CONFIGURATION >= 3
-#error SD_SPI_CONFIGURATION must be set to 3 in SdFat/SdFatConfig.h
-#endif  //SD_SPI_CONFIGURATION >= 3
+#else  // ENABLE_SOFTWARE_SPI_CLASS
+#error ENABLE_SOFTWARE_SPI_CLASS must be set non-zero in SdFat/SdFatConfig.h
+#endif  //ENABLE_SOFTWARE_SPI_CLASS

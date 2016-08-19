@@ -8,10 +8,10 @@
 // to 10 to disable the Ethernet controller.
 const int8_t DISABLE_CHIP_SELECT = -1;
 //
-// Test with reduced SPI speed for breadboards.
-// Change spiSpeed to SPI_FULL_SPEED for better performance
-// Use SPI_QUARTER_SPEED for even slower SPI bus speed
-const uint8_t spiSpeed = SPI_HALF_SPEED;
+// Test with reduced SPI speed for breadboards.  SD_SCK_MHZ(4) will select 
+// the highest speed supported by the board that is not over 4 MHz.
+// Change SPI_SPEED to SD_SCK_MHZ(50) for best performance.
+#define SPI_SPEED SD_SCK_MHZ(4)
 //------------------------------------------------------------------------------
 // File system object.
 SdFat sd;
@@ -28,7 +28,7 @@ int chipSelect;
 
 void cardOrSpeed() {
   cout << F("Try another SD card or reduce the SPI bus speed.\n");
-  cout << F("Edit spiSpeed in this program to change it.\n");
+  cout << F("Edit SPI_SPEED in this program to change it.\n");
 }
 
 void reformatMsg() {
@@ -98,7 +98,7 @@ void loop() {
     pinMode(DISABLE_CHIP_SELECT, OUTPUT);
     digitalWrite(DISABLE_CHIP_SELECT, HIGH);
   }
-  if (!sd.begin(chipSelect, spiSpeed)) {
+  if (!sd.begin(chipSelect, SPI_SPEED)) {
     if (sd.card()->errorCode()) {
       cout << F(
              "\nSD initialization failed.\n"

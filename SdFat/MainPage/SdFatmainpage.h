@@ -34,15 +34,17 @@ nonzero in SdFatConfig.h.
 The %SdFat library supports Long %File Names or short 8.3 names.
 Edit the SdFatConfig.h file to select short or long file names.
 
-The main classes in %SdFat are SdFat, SdFatSoftSpi, SdFatLibSpi,
+The main classes in %SdFat are SdFat, SdFatEX, SdFatSoftSpi, SdFatSoftSpiEX,
 SdBaseFile, SdFile, File, StdioStream, \ref fstream, \ref ifstream,
 and \ref ofstream.
 
-The SdFat, SdFatLibSpi, and SdFatSoftSpi classes maintain a FAT volume,
-a current working directory, and simplifies initialization of other classes.
-The SdFat class uses a fast custom hardware SPI implementation. The
-SdFatLibSpi class uses the standard Arduino SPI library.  The SdFatSoftSpi
-class uses software SPI.
+The SdFat, SdFatEX, SdFatSoftSpi and SdFatSoftSpiEX classes maintain a 
+FAT volume, a current working directory, and simplify initialization
+of other classes. The SdFat and SdFatEX classes uses a fast custom hardware SPI 
+implementation.  The SdFatSoftSpi and SdFatSoftSpiEX classes uses software SPI.
+
+the SdFatEX and SdFatSoftSpiEX use extended multi-block I/O for enhanced
+performance.  These classes must have exclusive use of the SPI bus.
 
 The SdBaseFile class provides basic file access functions such as open(),
 binary read(), binary write(), close(), remove(), and sync(). SdBaseFile
@@ -102,18 +104,21 @@ Long %File Names.  Long %File names require extra flash but no extra RAM.
 Opening Long %File Names can be slower than opening Short %File Names.
 Data read and write performance is not changed by the type of %File Name.
 
-Set SD_SPI_CONFIGURATION to enable various SPI options.  The SdFatSoftSpi
-and SdFatLibSpi classes can be enabled. SdFatLibSpi uses the standard
-Arduino SPI library and SdFatSoftSpi uses software SPI.
+If the symbol ENABLE_EXTENDED_TRANSFER_CLASS is nonzero, the class SdFatEX
+will be defined. If the symbol ENABLE_SOFTWARE_SPI_CLASS is also nonzero,
+the class SdFatSoftSpiEX will be defined.
+These classes used extended multi-block SD I/O for better performance.
+the SPI bus may not be shared with other devices in this mode.
+ 
+Set USE_STANDARD_SPI_LIBRARY and  ENABLE_SOFTWARE_SPI_CLASS to
+enable various SPI options. set USE_STANDARD_SPI_LIBRARY to use the standard
+Arduino SPI library. set ENABLE_SOFTWARE_SPI_CLASS to enable the SdFatSoftSpi
+class which uses software SPI.
 
 To enable SD card CRC checking set USE_SD_CRC nonzero.
 
 Set FAT12_SUPPORT nonzero to enable use of FAT12 volumes.
 FAT12 has not been well tested and requires additional flash.
-
-Set ENABLE_SPI_TRANSACTIONS nonzero to enable the SPI transaction feature
-of the standard Arduino SPI library.  You must include SPI.h in your
-programs when ENABLE_SPI_TRANSACTIONS is nonzero.
 
 \section SDPath Paths and Working Directories
 
@@ -352,7 +357,11 @@ getline - Example of getline from section 27.7.1.3 of the C++ standard.
 
 LongFileName - Example use of openNext, printName, and open by index.
 
-LowLatencyLogger - A modifiable data logger for higher data rates.
+LowLatencyLogger - A data logger for higher data rates. ADC version.
+
+LowLatencyLoggerADXL345 - A data logger for higher data rates. ADXL345 SPI.
+
+LowLatencyLoggerMPU6050 - A data logger for higher data rates. MPU6050 I2C.
 
 OpenNext - Open all files in the root dir and print their filename.
 
@@ -362,13 +371,13 @@ QuickStart - A program to quickly test your SD card and SD shield/module.
 
 RawWrite - A test of raw write functions for contiguous files.
 
-readCSV - Read a comma-separated value file using iostream extractors.
+ReadCsv - Function to read a CSV text file one field at a time.
+
+ReadCsvStream - Read a comma-separated value file using iostream extractors.
 
 ReadCsvArray - Read a two dimensional array from a CSV file.
 
-ReadCsvFields - Function to read a CSV text file one field at a time.
-
-ReadWriteSdFat - SdFat version of Arduino SD ReadWrite example.
+ReadWrite - Compatibility test of Arduino SD ReadWrite example.
 
 rename - A demo of SdFat::rename(old, new) and SdFile::rename(dirFile, newPath).
 
@@ -379,10 +388,6 @@ SoftwareSpi - Simple demonstration of the SdFatSoftSpi template class.
 SdInfo - Initialize an SD card and analyze its structure for trouble shooting.
 
 StdioBench - Demo and test of stdio style stream.
-
-StreamParseInt - Demo of the SD.h API and the File class parseInt() function.
-
-ThreeCards - Demonstrate simultaneous use of SdFat, SdFatLibSpi, SdFatSoftSpi.
 
 Timestamp - Sets file create, modify, and access timestamps.
 

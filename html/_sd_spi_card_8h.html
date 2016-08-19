@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -94,17 +93,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a class="el" href="class_sd_spi_card.html" title="Raw access to SD and SDHC flash memory cards via SPI protocol. ">SdSpiCard</a> class for V2 SD/SDHC cards.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;SystemInclude.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="_sd_fat_config_8h.html">SdFatConfig.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="_sys_call_8h.html">SysCall.h</a>&quot;</code><br />
 <code>#include &quot;SdInfo.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="_sd_spi_8h.html">SdSpi.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_sd_spi_driver_8h.html">SdSpiDriver.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SdSpiCard.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_sd_spi_card_8h__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2src_2_sd_spi_card_2_sd_spi_card_8h" alt=""/></div>
 <map name="_arduino_2libraries_2_sd_fat_2src_2_sd_spi_card_2_sd_spi_card_8h" id="_arduino_2libraries_2_sd_fat_2src_2_sd_spi_card_2_sd_spi_card_8h">
-<area shape="rect" id="node2" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="57,169,161,196"/>
-<area shape="rect" id="node5" href="_sd_spi_8h.html" title="SdSpi class for V2 SD/SDHC cards. " alt="" coords="158,95,226,121"/>
+<area shape="rect" id="node3" href="_sys_call_8h.html" title="SysCall class. " alt="" coords="97,95,176,121"/>
+<area shape="rect" id="node5" href="_sd_spi_driver_8h.html" title="SpiDriver classes. " alt="" coords="295,95,395,121"/>
+<area shape="rect" id="node8" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="397,169,501,196"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -112,16 +112,25 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="_sd_spi_card_8h__dep__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2src_2_sd_spi_card_2_sd_spi_card_8hdep" alt=""/></div>
 <map name="_arduino_2libraries_2_sd_fat_2src_2_sd_spi_card_2_sd_spi_card_8hdep" id="_arduino_2libraries_2_sd_fat_2src_2_sd_spi_card_2_sd_spi_card_8hdep">
-<area shape="rect" id="node2" href="_sd_fat_8h.html" title="SdFat class. " alt="" coords="21,95,176,136"/>
-<area shape="rect" id="node3" href="_sd_fat_util_8h.html" title="Useful utility functions. " alt="" coords="21,184,176,225"/>
+<area shape="rect" id="node2" href="_block_driver_8h.html" title="Define block driver. " alt="" coords="517,95,672,136"/>
+<area shape="rect" id="node3" href="_sd_fat_8h.html" title="SdFat class. " alt="" coords="427,184,581,225"/>
+<area shape="rect" id="node4" href="_fat_volume_8h.html" title="FatVolume class. " alt="" coords="605,184,768,225"/>
+<area shape="rect" id="node5" href="_fat_file_8h.html" title="FatFile class. " alt="" coords="487,273,641,315"/>
+<area shape="rect" id="node7" href="_fat_file_system_8h.html" title="FatFileSystem class. " alt="" coords="192,809,376,851"/>
+<area shape="rect" id="node6" href="_arduino_files_8h.html" title="PrintFile class. " alt="" coords="5,541,176,583"/>
+<area shape="rect" id="node8" href="ios_8h.html" title="ios_base and ios classes " alt="" coords="429,363,584,404"/>
+<area shape="rect" id="node13" href="fstream_8h.html" title="fstream, ifstream, and ofstream classes " alt="" coords="496,631,651,672"/>
+<area shape="rect" id="node15" href="_stdio_stream_8h.html" title="StdioStream class. " alt="" coords="659,363,829,404"/>
+<area shape="rect" id="node9" href="istream_8h.html" title="istream class " alt="" coords="251,452,405,493"/>
+<area shape="rect" id="node14" href="ostream_8h.html" title="ostream class " alt="" coords="429,452,584,493"/>
+<area shape="rect" id="node10" href="iostream_8h.html" title="iostream class " alt="" coords="384,541,539,583"/>
+<area shape="rect" id="node11" href="bufstream_8h.html" title="ibufstream and obufstream classes " alt="" coords="302,631,458,672"/>
+<area shape="rect" id="node12" href="_arduino_stream_8h.html" title="ArduinoInStream and ArduinoOutStream classes. " alt="" coords="263,720,449,761"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd2_card.html">Sd2Card</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw access to SD and SDHC card using default SPI library.  <a href="class_sd2_card.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_spi_card.html">SdSpiCard</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw access to SD and SDHC flash memory cards via SPI protocol.  <a href="class_sd_spi_card.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,7 +140,7 @@ Classes</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 12 2016 13:43:49 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

@@ -32,8 +32,10 @@ extern char __bss_end;
  * \return The number of free bytes.
  */
 static int FreeStack() {
-  char top;
-  return __brkval ? &top - __brkval : &top - &__bss_end;
+  char* sp = reinterpret_cast<char*>(SP);
+  return __brkval ? sp - __brkval : sp - &__bss_end;
+//  char top;
+//  return __brkval ? &top - __brkval : &top - &__bss_end;
 }
 #elif defined(PLATFORM_ID)  // Particle board
 static int FreeStack() {
@@ -42,7 +44,7 @@ static int FreeStack() {
 #elif defined(__arm__)
 extern "C" char* sbrk(int incr);
 static int FreeStack() {
-  char top;
+  char top = 't';
   return &top - reinterpret_cast<char*>(sbrk(0));
 }
 #else

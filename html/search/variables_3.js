@@ -1,10 +1,10 @@
 var searchData=
 [
   ['c',['c',['../structsetfill.html#a42ffb4e6135c1274ae827cfed7793a82',1,'setfill']]],
-  ['cache_5ffor_5fread',['CACHE_FOR_READ',['../class_fat_cache.html#ae5ac564caf5c65f223a6f5c6adac0691',1,'FatCache']]],
-  ['cache_5ffor_5fwrite',['CACHE_FOR_WRITE',['../class_fat_cache.html#aeb3fa32ee4120404854c282f0c0e133a',1,'FatCache']]],
+  ['cache_5ffor_5fread',['CACHE_FOR_READ',['../class_fat_cache.html#ab4b446515ff9a0cebc747630ddd10c93',1,'FatCache']]],
+  ['cache_5ffor_5fwrite',['CACHE_FOR_WRITE',['../class_fat_cache.html#a81cb572f33443bd6aee9aa33ec395d0f',1,'FatCache']]],
   ['cache_5foption_5fno_5fread',['CACHE_OPTION_NO_READ',['../class_fat_cache.html#adf974f55e53ee0aaa85abb0d7d67181c',1,'FatCache']]],
-  ['cache_5freserve_5ffor_5fwrite',['CACHE_RESERVE_FOR_WRITE',['../class_fat_cache.html#a7307dd12178856bc3e823d8738856662',1,'FatCache']]],
+  ['cache_5freserve_5ffor_5fwrite',['CACHE_RESERVE_FOR_WRITE',['../class_fat_cache.html#a49d2896ff525ab77852f76df5c2a09c2',1,'FatCache']]],
   ['cache_5fstatus_5fdirty',['CACHE_STATUS_DIRTY',['../class_fat_cache.html#aac8c38e5c545d0f80b13d816117f626e',1,'FatCache']]],
   ['cache_5fstatus_5fmask',['CACHE_STATUS_MASK',['../class_fat_cache.html#ab70dc4a2e387f0e9bf392044c702ae32',1,'FatCache']]],
   ['cache_5fstatus_5fmirror_5ffat',['CACHE_STATUS_MIRROR_FAT',['../class_fat_cache.html#a45236e1c0a2a098f08d3add0e4b1467a',1,'FatCache']]],

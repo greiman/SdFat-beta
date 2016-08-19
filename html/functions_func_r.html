@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -124,17 +123,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classios.html#aacc57e1e46e23f2f54898ff6a89129a2">ios</a>
 </li>
 <li>read()
-: <a class="el" href="class_digital_pin.html#a55e344551ca86f8acd489aac277c9961">DigitalPin&lt; PinNumber &gt;</a>
-, <a class="el" href="class_fat_cache.html#ac2bb0b8f2ce3ab5cd86cf30b4a663cea">FatCache</a>
+: <a class="el" href="class_fat_cache.html#ac2bb0b8f2ce3ab5cd86cf30b4a663cea">FatCache</a>
 , <a class="el" href="class_fat_file.html#a60ae55ff6fe158c2340071d702a363c5">FatFile</a>
 , <a class="el" href="class_file.html#a4c46a1975e66c37977bf07c58ec10b4e">File</a>
 , <a class="el" href="class_minimum_serial.html#a4890dd60f2ffb61eba0821cc80d411ad">MinimumSerial</a>
 </li>
 <li>readBlock()
-: <a class="el" href="class_sd_spi_card.html#a2973091eeab7b6ba528f6442bc5df36e">SdSpiCard</a>
+: <a class="el" href="class_base_block_driver.html#a16bb3305f3130253dd7ab6e19aa1b524">BaseBlockDriver</a>
+, <a class="el" href="class_sd_block_driver.html#a5f7fdca83533c223ea1c3b9ff3a508c3">SdBlockDriver</a>
+, <a class="el" href="class_sd_block_driver_e_x.html#a2820c15543b0e1950961b72945ade853">SdBlockDriverEX</a>
+, <a class="el" href="class_sd_spi_card.html#a2973091eeab7b6ba528f6442bc5df36e">SdSpiCard</a>
 </li>
 <li>readBlocks()
-: <a class="el" href="class_sd_spi_card.html#a5a7e12a5a076cc690885378932fa289f">SdSpiCard</a>
+: <a class="el" href="class_base_block_driver.html#a3a029a2d02fc7cbdd7c15c8d622565c4">BaseBlockDriver</a>
+, <a class="el" href="class_sd_block_driver.html#a30b42e5bf98f59142bfd7a84011114d5">SdBlockDriver</a>
+, <a class="el" href="class_sd_block_driver_e_x.html#a39941dac40896a2c11e49e650d0e6057">SdBlockDriverEX</a>
+, <a class="el" href="class_sd_spi_card.html#a5a7e12a5a076cc690885378932fa289f">SdSpiCard</a>
 </li>
 <li>readCID()
 : <a class="el" href="class_sd_spi_card.html#aa073dc42828164883db1b9faeff909ea">SdSpiCard</a>
@@ -157,15 +161,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>readStart()
 : <a class="el" href="class_sd_spi_card.html#a3b1710d11496c32ba4323831e00ac6d1">SdSpiCard</a>
 </li>
+<li>readStatus()
+: <a class="el" href="class_sd_spi_card.html#a91d0413599efe0d63c8c2dfe4a12d9ae">SdSpiCard</a>
+</li>
 <li>readStop()
 : <a class="el" href="class_sd_spi_card.html#afdac7c399fa1ba3f904cf503526e007e">SdSpiCard</a>
 </li>
 <li>receive()
-: <a class="el" href="class_sd_spi.html#aa017fd1d2bd196d1cbc4b845f6a72a40">SdSpi</a>
-, <a class="el" href="class_sd_spi_base.html#a3488ab01ed4412f2c7143cfd10a7503c">SdSpiBase</a>
-, <a class="el" href="class_sd_spi_lib.html#ad835adf6990e6368ec577f00edf365b0">SdSpiLib</a>
-, <a class="el" href="class_sd_spi_soft.html#a8a004fe608a81458a1aa3a6716a80d74">SdSpiSoft&lt; MisoPin, MosiPin, SckPin &gt;</a>
-, <a class="el" href="class_soft_s_p_i.html#a30b92c11ed923e4b39bb3492c9a5428d">SoftSPI&lt; MisoPin, MosiPin, SckPin, Mode &gt;</a>
+: <a class="el" href="class_sd_spi_alt_driver.html#a639cae65cc4f66e70a39c5b3fc00aa76">SdSpiAltDriver</a>
+, <a class="el" href="class_sd_spi_base_driver.html#a5f020c62122d020e4603c0ee2c906668">SdSpiBaseDriver</a>
+, <a class="el" href="class_sd_spi_lib_driver.html#a961697c166b9965ab495e22b12f01ae9">SdSpiLibDriver</a>
+, <a class="el" href="class_sd_spi_soft_driver.html#ab068f18eeb629fe8a8fbeded9f7da760">SdSpiSoftDriver&lt; MisoPin, MosiPin, SckPin &gt;</a>
 </li>
 <li>remove()
 : <a class="el" href="class_fat_file.html#ac837a537fbcca14c7aa390c5fc9f4e7c">FatFile</a>
@@ -199,7 +205,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 12 2016 13:43:49 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

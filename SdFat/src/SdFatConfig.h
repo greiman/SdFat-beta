@@ -49,50 +49,28 @@
 #define USE_LONG_FILE_NAMES 1
 //------------------------------------------------------------------------------
 /**
- * Set ARDUINO_FILE_USES_STREAM nonzero to use Stream as the base class
- * for the Arduino File class.  If ARDUINO_FILE_USES_STREAM is zero, Print
- * will be used as the base class for the Arduino File class.
+ * If the symbol ENABLE_EXTENDED_TRANSFER_CLASS is nonzero, the class SdFatEX
+ * will be defined. If the symbol ENABLE_SOFTWARE_SPI_CLASS is also nonzero,
+ * the class SdFatSoftSpiEX will be defined.
  *
- * You can save some flash if you do not use Stream input functions such as
- * find(), findUntil(), readBytesUntil(), readString(), readStringUntil(),
- * parseInt(), and parseFloat().
+ * These classes used extended multi-block SD I/O for better performance.
+ * the SPI bus may not be shared with other devices in this mode.
  */
-#define ARDUINO_FILE_USES_STREAM 1
-//------------------------------------------------------------------------------
+#define ENABLE_EXTENDED_TRANSFER_CLASS 0
+//-----------------------------------------------------------------------------
 /**
- * The symbol SD_SPI_CONFIGURATION defines SPI access to the SD card.
- *
- * IF SD_SPI_CONFIGUTATION is define to be zero, only the SdFat class
- * is define and SdFat uses a fast custom SPI implementation if avaiable.
- * If SD_HAS_CUSTOM_SPI is zero, the standard SPI library is used.
- *
- * If SD_SPI_CONFIGURATION is define to be one, only the SdFat class is
- * define and SdFat uses the standard Arduino SPI.h library.
- *
- * If SD_SPI_CONFIGURATION is define to be two, only the SdFat class is
- * define and SdFat uses software SPI on the pins defined below.
- *
- * If SD_SPI_CONFIGURATION is define to be three, the three classes, SdFat,
- * SdFatLibSpi, and SdFatSoftSpi are defined.  SdFat uses the fast
- * custom SPI implementation. SdFatLibSpi uses the standard Arduino SPI
- * library.  SdFatSoftSpi is a template class that uses Software SPI. The
- * template parameters define the software SPI pins.  See the ThreeCard
- * example for simultaneous use of all three classes.
- */
-#define SD_SPI_CONFIGURATION 0
-//------------------------------------------------------------------------------
+ * If the symbol USE_STANDARD_SPI_LIBRARY is nonzero, the classes SdFat and
+ * SdFatEX use the standard Arduino SPI.h library. If USE_STANDARD_SPI_LIBRARY
+ * is zero, an optimized custom SPI driver is used if it exists.
+ */ 
+#define USE_STANDARD_SPI_LIBRARY 0
+//-----------------------------------------------------------------------------
 /**
- * If SD_SPI_CONFIGURATION is defined to be two, these definitions
- * will define the pins used for software SPI.
- *
- * The default definition allows Uno shields to be used on other boards.
+ * If the symbol ENABLE_SOFTWARE_SPI_CLASS is nonzero, the class SdFatSoftSpi
+ * will be defined. If ENABLE_EXTENDED_TRANSFER_CLASS is also nonzero,
+ * the class SdFatSoftSpiEX will be defined.
  */
-/** Software SPI Master Out Slave In pin */
-uint8_t const SOFT_SPI_MOSI_PIN = 11;
-/** Software SPI Master In Slave Out pin */
-uint8_t const SOFT_SPI_MISO_PIN = 12;
-/** Software SPI Clock pin */
-uint8_t const SOFT_SPI_SCK_PIN = 13;
+#define ENABLE_SOFTWARE_SPI_CLASS 0
 //------------------------------------------------------------------------------
 /** 
  * Set MAINTAIN_FREE_CLUSTER_COUNT nonzero to keep the count of free clusters
@@ -104,18 +82,13 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
 /**
  * To enable SD card CRC checking set USE_SD_CRC nonzero.
  *
- * Set USE_SD_CRC to 1 to use a smaller slower CRC-CCITT function.
+ * Set USE_SD_CRC to 1 to use a smaller CRC-CCITT function.  This function
+ * is slower for AVR but may be fast for ARM and other processors.
  *
- * Set USE_SD_CRC to 2 to used a larger faster table driven CRC-CCITT function.
+ * Set USE_SD_CRC to 2 to used a larger table driven CRC-CCITT function.  This
+ * function is faster for AVR but may be slower for ARM and other processors.
  */
 #define USE_SD_CRC 0
-//------------------------------------------------------------------------------
-/**
- * Set ENABLE_SPI_TRANSACTIONS nonzero to enable the SPI transaction feature
- * of the standard Arduino SPI library.  You must include SPI.h in your
- * programs when ENABLE_SPI_TRANSACTIONS is nonzero.
- */
-#define ENABLE_SPI_TRANSACTIONS 0
 //------------------------------------------------------------------------------
 /**
  * Handle Watchdog Timer for WiFi modules.
@@ -163,16 +136,6 @@ uint8_t const SOFT_SPI_SCK_PIN = 13;
 #define ENDL_CALLS_FLUSH 0
 //------------------------------------------------------------------------------
 /**
- * SPI SCK divisor for SD initialization commands.
- * or greater
- */
-#ifdef __AVR__
-const uint8_t SPI_SCK_INIT_DIVISOR = 64;
-#else
-const uint8_t SPI_SCK_INIT_DIVISOR = 128;
-#endif
-//------------------------------------------------------------------------------
-/**
  * Set USE_SEPARATE_FAT_CACHE nonzero to use a second 512 byte cache
  * for FAT table entries.  This improves performance for large writes
  * that are not a multiple of 512 bytes.
@@ -197,42 +160,25 @@ const uint8_t SPI_SCK_INIT_DIVISOR = 128;
 /**
  * Determine the default SPI configuration.
  */
-#if defined(__AVR__)\
+#if defined(__STM32F1__)
+// has multiple SPI ports
+#define SD_HAS_CUSTOM_SPI 2
+#elif defined(__AVR__)\
   || defined(__SAM3X8E__) || defined(__SAM3X8H__)\
   || (defined(__arm__) && defined(CORE_TEENSY))\
-  || defined(__STM32F1__)\
-  || defined(PLATFORM_ID)\
-  || defined(ESP8266)\
-  || defined(DOXYGEN)
-// Use custom fast implementation.
+  || defined(ESP8266)
 #define SD_HAS_CUSTOM_SPI 1
 #else  // SD_HAS_CUSTOM_SPI
 // Use standard SPI library.
 #define SD_HAS_CUSTOM_SPI 0
 #endif  // SD_HAS_CUSTOM_SPI
-//-----------------------------------------------------------------------------
-/**
- *  Number of hardware interfaces.
- */
-#if defined(PLATFORM_ID)
-#if Wiring_SPI1 && Wiring_SPI2
-#define SPI_INTERFACE_COUNT 3
-#elif Wiring_SPI1
-#define SPI_INTERFACE_COUNT 2
-#endif  // Wiring_SPI1 && Wiring_SPI2
-#endif  // defined(PLATFORM_ID)
-// default is one
-#ifndef SPI_INTERFACE_COUNT
-#define SPI_INTERFACE_COUNT 1
-#endif  // SPI_INTERFACE_COUNT
 //------------------------------------------------------------------------------
 /**
- * Check if API to select HW SPI interface is needed.
+ * Check if API to select HW SPI port is needed.
  */
-#if SPI_INTERFACE_COUNT > 1 && SD_HAS_CUSTOM_SPI\
-  && SD_SPI_CONFIGURATION != 1 && SD_SPI_CONFIGURATION != 2
-#define IMPLEMENT_SPI_INTERFACE_SELECTION 1
-#else  // SPI_INTERFACE_COUNT > 1
-#define IMPLEMENT_SPI_INTERFACE_SELECTION 0
-#endif  // SPI_INTERFACE_COUNT > 1
+#if (USE_STANDARD_SPI_LIBRARY || SD_HAS_CUSTOM_SPI < 2)
+#define IMPLEMENT_SPI_PORT_SELECTION 0
+#else  // USE_STANDARD_SPI_LIBRARY
+#define IMPLEMENT_SPI_PORT_SELECTION 1
+#endif  // USE_STANDARD_SPI_LIBRARY
 #endif  // SdFatConfig_h

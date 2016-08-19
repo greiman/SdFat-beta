@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -111,8 +110,14 @@ Collaboration diagram for MinimumSerial:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a2abe4370989968938b5dc4872d51c3df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_minimum_serial.html#a2abe4370989968938b5dc4872d51c3df">available</a> ()</td></tr>
+<tr class="separator:a2abe4370989968938b5dc4872d51c3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c56beb3472bb97f949defeecacda52c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_minimum_serial.html#a5c56beb3472bb97f949defeecacda52c">begin</a> (uint32_t baud)</td></tr>
 <tr class="separator:a5c56beb3472bb97f949defeecacda52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872f0ff70f0e256352004f83d13fff28"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_minimum_serial.html#a872f0ff70f0e256352004f83d13fff28">flush</a> ()</td></tr>
+<tr class="separator:a872f0ff70f0e256352004f83d13fff28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a1a2a92604ecb8507afde0022aedd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_minimum_serial.html#a73a1a2a92604ecb8507afde0022aedd8">operator bool</a> ()</td></tr>
+<tr class="separator:a73a1a2a92604ecb8507afde0022aedd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4890dd60f2ffb61eba0821cc80d411ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_minimum_serial.html#a4890dd60f2ffb61eba0821cc80d411ad">read</a> ()</td></tr>
 <tr class="separator:a4890dd60f2ffb61eba0821cc80d411ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ca1d9631fe5f2f00878bd481dbbd3aa"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_minimum_serial.html#a0ca1d9631fe5f2f00878bd481dbbd3aa">write</a> (uint8_t b)</td></tr>
@@ -121,6 +126,22 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>mini serial class for the SdFat library. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a2abe4370989968938b5dc4872d51c3df"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MinimumSerial::available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>one if data is available. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a5c56beb3472bb97f949defeecacda52c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -140,6 +161,46 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a872f0ff70f0e256352004f83d13fff28"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MinimumSerial::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Wait for write done. </p>
+
+</div>
+</div>
+<a class="anchor" id="a73a1a2a92604ecb8507afde0022aedd8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MinimumSerial::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>true for hardware serial </dd></dl>
 
 </div>
 </div>
@@ -184,13 +245,13 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Arduino/libraries/SdFat/src/MinimumSerial.h</li>
+<li>Arduino/libraries/SdFat/src/<a class="el" href="_minimum_serial_8h.html">MinimumSerial.h</a></li>
 <li>Arduino/libraries/SdFat/src/MinimumSerial.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 12 2016 13:43:49 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

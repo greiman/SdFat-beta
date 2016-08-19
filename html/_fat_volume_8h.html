@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -96,18 +95,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p><a class="el" href="class_fat_volume.html" title="Access FAT16 and FAT32 volumes on raw file devices. ">FatVolume</a> class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="_sys_call_8h.html">SysCall.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_fat_lib_config_8h.html">FatLibConfig.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_fat_structs_8h.html">FatStructs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_block_driver_8h.html">BlockDriver.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for FatVolume.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_fat_volume_8h__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2src_2_fat_lib_2_fat_volume_8h" alt=""/></div>
 <map name="_arduino_2libraries_2_sd_fat_2src_2_fat_lib_2_fat_volume_8h" id="_arduino_2libraries_2_sd_fat_2src_2_fat_lib_2_fat_volume_8h">
-<area shape="rect" id="node3" href="_sys_call_8h.html" title="SysCall class. " alt="" coords="97,95,176,121"/>
-<area shape="rect" id="node4" href="_fat_lib_config_8h.html" title="configuration definitions " alt="" coords="200,95,305,121"/>
-<area shape="rect" id="node7" href="_fat_structs_8h.html" title="FAT file structures. " alt="" coords="329,95,424,121"/>
-<area shape="rect" id="node6" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="245,169,349,196"/>
+<area shape="rect" id="node3" href="_fat_lib_config_8h.html" title="configuration definitions " alt="" coords="419,244,524,271"/>
+<area shape="rect" id="node7" href="_fat_structs_8h.html" title="FAT file structures. " alt="" coords="327,95,421,121"/>
+<area shape="rect" id="node8" href="_block_driver_8h.html" title="Define block driver. " alt="" coords="153,95,251,121"/>
+<area shape="rect" id="node5" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="330,319,434,345"/>
+<area shape="rect" id="node9" href="_sd_spi_card_8h.html" title="SdSpiCard class for V2 SD/SDHC cards. " alt="" coords="155,169,249,196"/>
+<area shape="rect" id="node10" href="_sys_call_8h.html" title="SysCall class. " alt="" coords="316,244,395,271"/>
+<area shape="rect" id="node12" href="_sd_spi_driver_8h.html" title="SpiDriver classes. " alt="" coords="97,244,197,271"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -115,17 +117,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="_fat_volume_8h__dep__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2src_2_fat_lib_2_fat_volume_8hdep" alt=""/></div>
 <map name="_arduino_2libraries_2_sd_fat_2src_2_fat_lib_2_fat_volume_8hdep" id="_arduino_2libraries_2_sd_fat_2src_2_fat_lib_2_fat_volume_8hdep">
-<area shape="rect" id="node2" href="_fat_file_8h.html" title="FatFile class. " alt="" coords="411,95,565,136"/>
-<area shape="rect" id="node4" href="_fat_file_system_8h.html" title="FatFileSystem class. " alt="" coords="652,273,836,315"/>
-<area shape="rect" id="node3" href="_arduino_files_8h.html" title="PrintFile class. " alt="" coords="659,184,829,225"/>
-<area shape="rect" id="node5" href="ios_8h.html" title="ios_base and ios classes " alt="" coords="184,184,339,225"/>
-<area shape="rect" id="node10" href="fstream_8h.html" title="fstream, ifstream, and ofstream classes " alt="" coords="299,452,453,493"/>
-<area shape="rect" id="node12" href="_stdio_stream_8h.html" title="StdioStream class. " alt="" coords="464,184,635,225"/>
-<area shape="rect" id="node6" href="istream_8h.html" title="istream class " alt="" coords="184,273,339,315"/>
-<area shape="rect" id="node11" href="ostream_8h.html" title="ostream class " alt="" coords="5,273,160,315"/>
-<area shape="rect" id="node7" href="iostream_8h.html" title="iostream class " alt="" coords="151,363,305,404"/>
-<area shape="rect" id="node8" href="bufstream_8h.html" title="ibufstream and obufstream classes " alt="" coords="118,452,274,493"/>
-<area shape="rect" id="node9" href="_arduino_stream_8h.html" title="ArduinoInStream and ArduinoOutStream classes. " alt="" coords="103,541,289,583"/>
+<area shape="rect" id="node2" href="_fat_file_8h.html" title="FatFile class. " alt="" coords="487,95,641,136"/>
+<area shape="rect" id="node4" href="_fat_file_system_8h.html" title="FatFileSystem class. " alt="" coords="192,631,376,672"/>
+<area shape="rect" id="node3" href="_arduino_files_8h.html" title="PrintFile class. " alt="" coords="5,363,176,404"/>
+<area shape="rect" id="node5" href="ios_8h.html" title="ios_base and ios classes " alt="" coords="429,184,584,225"/>
+<area shape="rect" id="node10" href="fstream_8h.html" title="fstream, ifstream, and ofstream classes " alt="" coords="496,452,651,493"/>
+<area shape="rect" id="node12" href="_stdio_stream_8h.html" title="StdioStream class. " alt="" coords="659,184,829,225"/>
+<area shape="rect" id="node6" href="istream_8h.html" title="istream class " alt="" coords="251,273,405,315"/>
+<area shape="rect" id="node11" href="ostream_8h.html" title="ostream class " alt="" coords="429,273,584,315"/>
+<area shape="rect" id="node7" href="iostream_8h.html" title="iostream class " alt="" coords="384,363,539,404"/>
+<area shape="rect" id="node8" href="bufstream_8h.html" title="ibufstream and obufstream classes " alt="" coords="302,452,458,493"/>
+<area shape="rect" id="node9" href="_arduino_stream_8h.html" title="ArduinoInStream and ArduinoOutStream classes. " alt="" coords="263,541,449,583"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -165,7 +167,7 @@ Typedefs</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 12 2016 13:43:49 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

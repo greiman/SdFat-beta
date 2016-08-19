@@ -31,7 +31,9 @@ void setup() {
                    "You can use test files located in\r\n"
                    "SdFat/examples/LongFileName/testFiles"));
 
-  if (!sd.begin(SD_CS_PIN)) {
+  // Initialize at the highest speed supported by the board that is
+  // not over 50 MHz. Try a lower speed if SPI errors occur.
+  if (!sd.begin(SD_CS_PIN, SD_SCK_MHZ(50))) {
     sd.initErrorHalt();
   }
   Serial.print(F("FreeStack: "));

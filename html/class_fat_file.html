@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -103,11 +102,12 @@ Inheritance diagram for FatFile:</div>
 <area shape="rect" id="node2" href="class_fat_stream_base.html" title="Base class for C++ style streams. " alt="" coords="72,80,185,107"/>
 <area shape="rect" id="node6" href="class_file.html" title="Arduino SD.h style File API. " alt="" coords="210,80,253,107"/>
 <area shape="rect" id="node7" href="class_print_file.html" title="FatFile with Print. " alt="" coords="277,80,348,107"/>
-<area shape="rect" id="node8" href="class_sd_base_file.html" title="Class for backward compatibility. " alt="" coords="372,80,461,107"/>
-<area shape="rect" id="node9" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. " alt="" coords="485,80,580,107"/>
+<area shape="rect" id="node9" href="class_sd_base_file.html" title="Class for backward compatibility. " alt="" coords="372,80,461,107"/>
+<area shape="rect" id="node10" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. " alt="" coords="485,80,580,107"/>
 <area shape="rect" id="node3" href="classfstream.html" title="file input/output stream. " alt="" coords="5,155,71,181"/>
 <area shape="rect" id="node4" href="classifstream.html" title="file input stream. " alt="" coords="95,155,163,181"/>
 <area shape="rect" id="node5" href="classofstream.html" title="file output stream. " alt="" coords="187,155,259,181"/>
+<area shape="rect" id="node8" href="class_sd_file.html" title="Class for backward compatibility. " alt="" coords="283,155,342,181"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -125,6 +125,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa367708bcc8bc0e0c45c0c2a812c65da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0afc2a1cffa238d1cb2049bfa2d8d199"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a0afc2a1cffa238d1cb2049bfa2d8d199">createContiguous</a> (<a class="el" href="class_fat_file.html">FatFile</a> *dirFile, const char *path, uint32_t size)</td></tr>
 <tr class="separator:a0afc2a1cffa238d1cb2049bfa2d8d199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0853fbd44aee2798d14d8e3aed78f8bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a0853fbd44aee2798d14d8e3aed78f8bf">createContiguous</a> (const char *path, uint32_t size)</td></tr>
+<tr class="separator:a0853fbd44aee2798d14d8e3aed78f8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c03e2f6729526786e6ab4a623e0339b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a4c03e2f6729526786e6ab4a623e0339b">curCluster</a> () const </td></tr>
 <tr class="separator:a4c03e2f6729526786e6ab4a623e0339b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20c55b134bfd1d287a00bf64eba9332e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a20c55b134bfd1d287a00bf64eba9332e">curPosition</a> () const </td></tr>
@@ -149,6 +151,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7e043dfb89d268bfd620bbbadacf1002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02fc3b3ca36b4745f695f3de8c8ec36d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a02fc3b3ca36b4745f695f3de8c8ec36d">fileSize</a> () const </td></tr>
 <tr class="separator:a02fc3b3ca36b4745f695f3de8c8ec36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac87b753811e540c7b799da56fa89724b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ac87b753811e540c7b799da56fa89724b">firstBlock</a> ()</td></tr>
+<tr class="separator:ac87b753811e540c7b799da56fa89724b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1057bc23b92a074539f661e896e79a09"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a1057bc23b92a074539f661e896e79a09">firstCluster</a> () const </td></tr>
 <tr class="separator:a1057bc23b92a074539f661e896e79a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0dbbd083180f44c7a3ce7124d4ce19c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ad0dbbd083180f44c7a3ce7124d4ce19c">getError</a> ()</td></tr>
@@ -518,7 +522,50 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">dirFile</td><td>The directory where the file will be created. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">path</td><td>A path with a valid DOS 8.3 file name. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">path</td><td>A path with a validfile name. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>The desired file size.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value true is returned for success and the value false, is returned for failure. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0853fbd44aee2798d14d8e3aed78f8bf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFile::createContiguous </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Create and open a new contiguous file of a specified size.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">path</td><td>A path with a validfile name. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>The desired file size.</td></tr>
   </table>
   </dd>
@@ -939,6 +986,30 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The total number of bytes in a file. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac87b753811e540c7b799da56fa89724b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t FatFile::firstBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>first block of file or zero for empty file. </dd></dl>
 
 </div>
 </div>
@@ -2910,7 +2981,7 @@ Modify and access timestamps may be overwritten if a date time callback function
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 12 2016 13:43:49 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

@@ -17,10 +17,14 @@
  * along with the Arduino SdFat Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#include "SystemInclude.h"
+#include "SysCall.h"
 #if defined(UDR0) || defined(DOXYGEN)
 #include "MinimumSerial.h"
 const uint16_t MIN_2X_BAUD = F_CPU/(4*(2*0XFFF + 1)) + 1;
+//------------------------------------------------------------------------------
+int MinimumSerial::available() {
+  return UCSR0A & (1 << RXC0) ? 1 : 0;
+}
 //------------------------------------------------------------------------------
 void MinimumSerial::begin(uint32_t baud) {
   uint16_t baud_setting;
@@ -41,6 +45,10 @@ void MinimumSerial::begin(uint32_t baud) {
   UBRR0L = baud_setting;
   // enable transmit and receive
   UCSR0B |= (1 << TXEN0) | (1 << RXEN0);
+}
+//------------------------------------------------------------------------------
+void MinimumSerial::flush() {
+  while (((1 << UDRIE0) & UCSR0B) || !(UCSR0A & (1 << UDRE0))) {}
 }
 //------------------------------------------------------------------------------
 int MinimumSerial::read() {

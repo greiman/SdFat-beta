@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="modules.html"><span>Modules</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -87,7 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#friends">Friends</a> &#124;
 <a href="class_fat_volume-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">FatVolume Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">FatVolume Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -100,11 +99,14 @@ Inheritance diagram for FatVolume:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_fat_volume__inherit__graph.png" border="0" usemap="#_fat_volume_inherit__map" alt="Inheritance graph"/></div>
 <map name="_fat_volume_inherit__map" id="_fat_volume_inherit__map">
-<area shape="rect" id="node2" href="class_fat_file_system.html" title="Integration class for the FatLib library. " alt="" coords="81,80,187,107"/>
-<area shape="rect" id="node3" href="class_sd_fat_base.html" title="Virtual base class for SdFat library. " alt="" coords="91,155,177,181"/>
-<area shape="rect" id="node4" href="class_sd_fat.html" title="Main file system class for SdFat library. " alt="" coords="5,237,63,263"/>
-<area shape="rect" id="node5" href="class_sd_fat_lib_spi.html" title="SdFat class using the standard Arduino SPI library. " alt="" coords="87,237,181,263"/>
-<area shape="rect" id="node6" href="class_sd_fat_soft_spi.html" title="SdFat class using software SPI. " alt="" coords="205,229,367,271"/>
+<area shape="rect" id="node2" href="class_fat_file_system.html" title="Integration class for the FatLib library. " alt="" coords="139,64,245,91"/>
+<area shape="rect" id="node3" href="class_sd_file_system.html" title="Virtual base class for SdFat library. " alt="" coords="301,13,511,40"/>
+<area shape="rect" id="node4" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdBlockDriver \&gt;" alt="" coords="301,64,511,91"/>
+<area shape="rect" id="node7" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdBlockDriverEX \&gt;" alt="" coords="293,123,519,149"/>
+<area shape="rect" id="node5" href="class_sd_fat.html" title="Main file system class for SdFat library. " alt="" coords="627,5,685,32"/>
+<area shape="rect" id="node6" href="class_sd_fat_soft_spi.html" title="SdFat class using software SPI. " alt="" coords="575,57,737,98"/>
+<area shape="rect" id="node8" href="class_sd_fat_e_x.html" title="SdFat class with extended SD I/O. " alt="" coords="619,123,693,149"/>
+<area shape="rect" id="node9" href="class_sd_fat_soft_spi_e_x.html" title="SdFat class using software SPI and extended SD I/O. " alt="" coords="567,174,745,215"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -155,6 +157,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>FatCache</b></td></t
 <tr class="memitem:a18fb15a715ea85037ab802286853103e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18fb15a715ea85037ab802286853103e"></a>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>FatFile</b></td></tr>
 <tr class="separator:a18fb15a715ea85037ab802286853103e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac095954ff68b78a07c0cf5fabbb2db6f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac095954ff68b78a07c0cf5fabbb2db6f"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>FatFileSystem</b></td></tr>
+<tr class="separator:ac095954ff68b78a07c0cf5fabbb2db6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Access FAT16 and FAT32 volumes on raw file devices. </p>
@@ -611,7 +616,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>FatFile</b></td></tr
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Feb 12 2016 13:43:49 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

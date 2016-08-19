@@ -1,3 +1,48 @@
+15 Aug 2016
+
+New classes SdFatEX and SdFatSoftSpiEX with Extended SD I/O.
+These classes provide higher performance but require a dedicated
+SPI port.
+
+The symbol SD_SPI_CONFIGURATION has been replaced by three symbols,
+ENABLE_EXTENDED_TRANSFER_CLASS, USE_STANDARD_SPI_LIBRARY, and
+ENABLE_SOFTWARE_SPI_CLASS to define the SPI configuration.
+
+SPI transactions are always used.
+
+The SPI divisor has been replaced by SPISettings.  A new macro
+is used to generate SPISettings. This call will use the highest
+speed supported by the board that is not over 50 MHz.
+
+ sd.begin(CS_PIN, SD_SCK_MHZ(50));
+ 
+SdFat on STM32 now supports a SdFat constructor with the SPI
+port number.  See the STM32Test example for sample use.
+
+New versions of LowLatencyLogger for ADC, ADXL345, and MPU6050.
+
+Many internal changes to simplify ports to RTOS.
+
+19 jul 2016
+
+Fix for multi-block transfers chip select.
+
+27 Apr 2016
+
+Mods for STM32F1
+
+11 Apr 2016
+
+Mods for ESP8266
+
+9 Apr 2016
+
+Fix beginTransaction call for Standard SPI library
+
+14 Feb 2016
+
+Add startMicros to LowLatencyLogger
+
 12 Feb 2016
 
 Mods for Particle.io boards.
@@ -16,7 +61,7 @@ Several bug fixes.
 
 Converted to 1.5x library format.
 
-Use standard SPI library is no custom SPI library is available for a board.
+Use standard SPI library if no custom SPI library is available for a board.
 
 Option to maintain freeClusterCount.
 

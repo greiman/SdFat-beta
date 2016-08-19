@@ -5,7 +5,7 @@
 SdFat SD;
 
 // SD card chip select pin - Modify the value of csPin for your SD module.
-const uint8_t csPin = 10;
+const uint8_t csPin = SS;
 
 File file;
 //------------------------------------------------------------------------------

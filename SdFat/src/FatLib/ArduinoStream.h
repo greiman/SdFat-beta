@@ -25,7 +25,6 @@
  */
 #include "FatLibConfig.h"
 #if ENABLE_ARDUINO_FEATURES
-#include "SysCall.h"
 #include "bufstream.h"
 //==============================================================================
 /**
@@ -51,7 +50,7 @@ class ArduinoInStream : public ibufstream {
     uint32_t t;
     m_line[0] = '\0';
     while (!m_hw->available()) {
-      SysCall::yield();
+      yield();
     }
 
     while (1) {

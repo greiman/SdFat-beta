@@ -26,9 +26,9 @@
 // Adafruit SD shields and modules: pin 10
 const uint8_t chipSelect = SS;
 
-// Change spiSpeed to SPI_FULL_SPEED for better performance
-// Use SPI_QUARTER_SPEED for even slower SPI bus speed
-const uint8_t spiSpeed = SPI_HALF_SPEED;
+// Initialize at highest supported speed not over 50 MHz.
+// Reduce max speed if errors occur.
+#define SPI_SPEED SD_SCK_MHZ(50)
 
 // Serial output stream
 ArduinoOutStream cout(Serial);
@@ -65,11 +65,9 @@ char noName[] = "NO NAME    ";
 char fat16str[] = "FAT16   ";
 char fat32str[] = "FAT32   ";
 //------------------------------------------------------------------------------
-#define sdError(msg) sdError_F(F(msg))
-
-void sdError_F(const __FlashStringHelper* str) {
-  cout << F("error: ");
-  cout << str << endl;
+#define sdError(msg) {cout << F("error: ") << F(msg) << endl; sdErrorHalt();}
+//------------------------------------------------------------------------------
+void sdErrorHalt() {
   if (card.errorCode()) {
     cout << F("SD error: ") << hex << int(card.errorCode());
     cout << ',' << int(card.errorData()) << dec << endl;
@@ -499,7 +497,7 @@ void setup() {
     return;
   }
 
-  if (!card.begin(chipSelect, spiSpeed)) {
+  if (!card.begin(chipSelect, SPI_SPEED)) {
     cout << F(
            "\nSD initialization failure!\n"
            "Is the SD card inserted correctly?\n"

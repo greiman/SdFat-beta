@@ -6,7 +6,6 @@ var searchData=
   ['name3',['name3',['../structlong_directory_entry.html#a6f14c81b7d224dc4431217f92601257a',1,'longDirectoryEntry']]],
   ['nextfree',['nextFree',['../structfat32__fsinfo.html#a539b3bb0a2ead9df417df9ac8b6b1606',1,'fat32_fsinfo']]],
   ['noboolalpha',['noboolalpha',['../ios_8h.html#aa6a1ec04992fc8090ca775a39678be01',1,'ios.h']]],
-  ['nop',['nop',['../group__soft_s_p_i.html#ga51158539d4d6022c9a445e78b0abfa94',1,'SoftSPI.h']]],
   ['noshowbase',['noshowbase',['../ios_8h.html#ab861ff5f863de0ae002b65390dde36b0',1,'ios.h']]],
   ['noshowpoint',['noshowpoint',['../ios_8h.html#ad85399d1b75151cf9e2436f2a1ccfc13',1,'ios.h']]],
   ['noshowpos',['noshowpos',['../ios_8h.html#a985805b22ffb4ce2f5298168662bd2d7',1,'ios.h']]],

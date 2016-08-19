@@ -12,8 +12,8 @@ var searchData=
   ['bootcode',['bootCode',['../structfat__boot.html#acf9f5d9f61a6e680e11849f957ecf782',1,'fat_boot::bootCode()'],['../structfat32__boot.html#a7a74880066860140386edf3d9278b9f7',1,'fat32_boot::bootCode()']]],
   ['bootsectorsig0',['bootSectorSig0',['../structfat__boot.html#a7951b888af4f357b84dd40af2ef7f29d',1,'fat_boot::bootSectorSig0()'],['../structfat32__boot.html#a1cb46a5427b641a6017a082bc56df1be',1,'fat32_boot::bootSectorSig0()']]],
   ['bootsectorsig1',['bootSectorSig1',['../structfat__boot.html#afe8f58668ff594bb2022ce7c06b7726c',1,'fat_boot::bootSectorSig1()'],['../structfat32__boot.html#a53bc302a398f02a86d3b28f25a5ec8e2',1,'fat32_boot::bootSectorSig1()']]],
-  ['bootsig0',['BOOTSIG0',['../_fat_structs_8h.html#aa1aeb3a5e2838c5c7270fa17bcc31e8e',1,'FatStructs.h']]],
-  ['bootsig1',['BOOTSIG1',['../_fat_structs_8h.html#a1b5a143c48d93d6f4e3fc1f5f3ac1dc3',1,'FatStructs.h']]],
+  ['bootsig0',['BOOTSIG0',['../_fat_structs_8h.html#acb7f0c892eb84c121c5698b2605e95e3',1,'FatStructs.h']]],
+  ['bootsig1',['BOOTSIG1',['../_fat_structs_8h.html#a52f90172e11e828b411c803f29853753',1,'FatStructs.h']]],
   ['bootsignature',['bootSignature',['../structfat__boot.html#a712dc388c530e91e4a692e7102d6bdc8',1,'fat_boot::bootSignature()'],['../structfat32__boot.html#ab79a1205277ecab05526fb0bac6e42f6',1,'fat32_boot::bootSignature()']]],
   ['bytespersector',['bytesPerSector',['../structbios_parm_block.html#aec24d316af486445d55da14cbbfa6bf4',1,'biosParmBlock::bytesPerSector()'],['../structfat__boot.html#a60b2461f8ebf0ad295a95094e1bd7d65',1,'fat_boot::bytesPerSector()'],['../structfat32__boot.html#a03c7086a8c988257a6678179a67a3fee',1,'fat32_boot::bytesPerSector()']]]
 ];

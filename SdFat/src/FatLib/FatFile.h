@@ -217,7 +217,7 @@ class FatFile {
   /** Create and open a new contiguous file of a specified size.
    *
    * \param[in] dirFile The directory where the file will be created.
-   * \param[in] path A path with a valid DOS 8.3 file name.
+   * \param[in] path A path with a validfile name.
    * \param[in] size The desired file size.
    *
    * \return The value true is returned for success and
@@ -225,6 +225,17 @@ class FatFile {
    */
   bool createContiguous(FatFile* dirFile,
                         const char* path, uint32_t size);
+  /** Create and open a new contiguous file of a specified size.
+   *
+   * \param[in] path A path with a validfile name.
+   * \param[in] size The desired file size.
+   *
+   * \return The value true is returned for success and
+   * the value false, is returned for failure.
+   */                        
+  bool createContiguous(const char* path, uint32_t size) {
+    return createContiguous(m_cwd, path, size);
+  }
   /** \return The current cluster number for a file or directory. */
   uint32_t curCluster() const {
     return m_curCluster;
@@ -801,6 +812,13 @@ class FatFile {
     m_cwd = dir;
     return true;
   }
+  /** \return first block of file or zero for empty file. */
+  uint32_t firstBlock() {
+    if (m_firstCluster) {
+    return m_vol->clusterFirstBlock(m_firstCluster);
+    }
+    return 0;
+  }
   /** The sync() call causes all modified data and directory fields
    * to be written to the storage device.
    *
@@ -956,9 +974,9 @@ class FatFile {
 
   // bits defined in m_flags
   // should be 0X0F
-  static uint8_t const F_OFLAG = (O_ACCMODE | O_APPEND | O_SYNC);
+  static const uint8_t F_OFLAG = (O_ACCMODE | O_APPEND | O_SYNC);
   // sync of directory entry required
-  static uint8_t const F_FILE_DIR_DIRTY = 0X80;
+  static const uint8_t F_FILE_DIR_DIRTY = 0X80;
 
   // global pointer to cwd dir
   static FatFile* m_cwd;

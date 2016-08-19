@@ -114,11 +114,7 @@ class PrintFile : public FatFile, public Print {
  * \class File
  * \brief Arduino SD.h style File API
  */
-#if ARDUINO_FILE_USES_STREAM
 class File : public FatFile, public Stream {
-#else  // ARDUINO_FILE_USES_STREAM
-class File : public FatFile, public Print {
-#endif  // ARDUINO_FILE_USES_STREAM
  public:
   File() {}
   /**  Create a file object and open it in the current working directory.

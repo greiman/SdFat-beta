@@ -10,7 +10,5 @@ var searchData=
   ['getsfn',['getSFN',['../class_fat_file.html#aba30e92a66f8e0d2f815c85662772a58',1,'FatFile']]],
   ['getwriteerror',['getWriteError',['../class_fat_file.html#a8062c0d3a118e8d77d0310418703d5f5',1,'FatFile']]],
   ['good',['good',['../classios.html#a5fdf9247f642a7a5c5a21323ffd45366',1,'ios']]],
-  ['goodbit',['goodbit',['../classios__base.html#a07a00996a6e525b88bdfe7935d5ead05',1,'ios_base']]],
-  ['gpio_5fpin',['GPIO_PIN',['../group__digital_pin.html#gacf92f370944e233db04f7423bde1c164',1,'DigitalPin.h']]],
-  ['gpiopinmap_5ft',['GpioPinMap_t',['../struct_gpio_pin_map__t.html',1,'']]]
+  ['goodbit',['goodbit',['../classios__base.html#a07a00996a6e525b88bdfe7935d5ead05',1,'ios_base']]]
 ];

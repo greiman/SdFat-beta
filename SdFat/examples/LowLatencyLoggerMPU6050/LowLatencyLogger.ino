@@ -50,7 +50,7 @@ const uint8_t SD_CS_PIN = SS;
 #ifdef ERROR_LED_PIN
 #undef ERROR_LED_PIN
 #endif  // ERROR_LED_PIN
-const int8_t ERROR_LED_PIN = 3;
+const int8_t ERROR_LED_PIN = -1;
 //------------------------------------------------------------------------------
 // File definitions.
 //
@@ -95,7 +95,7 @@ const uint8_t BUFFER_BLOCK_COUNT = 12;
 // Temporary log file.  Will be deleted if a reset or power failure occurs.
 #define TMP_FILE_NAME "tmp_log.bin"
 
-// Size of file base name.  Must not be larger than six.
+// Size of file base name.
 const uint8_t BASE_NAME_SIZE = sizeof(FILE_BASE_NAME) - 1;
 const uint8_t FILE_NAME_DIM  = BASE_NAME_SIZE + 7;
 char binName[FILE_NAME_DIM] = FILE_BASE_NAME "00.bin";
@@ -550,13 +550,19 @@ void setup(void) {
   if (sizeof(block_t) != 512) {
     error("Invalid block size");
   }
+  // Allow userSetup access to SPI bus.
+  pinMode(SD_CS_PIN, OUTPUT);
+  digitalWrite(SD_CS_PIN, HIGH);
+  
+  // Setup sensors.
+  userSetup();
+  
   // Initialize at the highest speed supported by the board that is
   // not over 50 MHz. Try a lower speed if SPI errors occur.
   if (!sd.begin(SD_CS_PIN, SD_SCK_MHZ(50))) {
     sd.initErrorPrint(&Serial);
     fatalBlink();
   }
-  userSetup();
 }
 //------------------------------------------------------------------------------
 void loop(void) {

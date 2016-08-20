@@ -16,10 +16,13 @@ const uint8_t DATAZ0 = 0x36; //Z-Axis Data 0
 const uint8_t DATAZ1 = 0x37; //Z-Axis Data 1
 
 void writeADXL345Register(const uint8_t registerAddress, const uint8_t value) {
+  // Max SPI clock frequency is 5 MHz with CPOL = 1 and CPHA = 1.
+  SPI.beginTransaction(SPISettings(5000000, MSBFIRST, SPI_MODE3));  
   digitalWrite(ADXL345_CS, LOW);
   SPI.transfer(registerAddress);
   SPI.transfer(value);
   digitalWrite(ADXL345_CS, HIGH);
+  SPI.endTransaction();  
 }
 
 void userSetup() {

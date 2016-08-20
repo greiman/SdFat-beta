@@ -2,7 +2,7 @@
 // User data functions.  Modify these functions for your data items.
 
 // Start time for data
-uint32_t startTime;
+static uint32_t startMicros;
 
 // Acquire a data record.
 void acquireData(data_t* data) {
@@ -14,10 +14,10 @@ void acquireData(data_t* data) {
 
 // Print a data record.
 void printData(Print* pr, data_t* data) {
-  if (startTime == 0) {
-    startTime = data->time;
+  if (startMicros == 0) {
+    startMicros = data->time;
   }
-  pr->print(data->time - startTime);
+  pr->print(data->time - startMicros);
   for (int i = 0; i < ADC_DIM; i++) {
     pr->write(',');
     pr->print(data->adc[i]);
@@ -27,7 +27,7 @@ void printData(Print* pr, data_t* data) {
 
 // Print data header.
 void printHeader(Print* pr) {
-  startTime = 0;
+  startMicros = 0;
   pr->print(F("micros"));
   for (int i = 0; i < ADC_DIM; i++) {
     pr->print(F(",adc"));

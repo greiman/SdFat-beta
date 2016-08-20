@@ -7,7 +7,7 @@
 // User data types.  Modify for your data items.
 const uint8_t ACCEL_DIM = 3;
 struct data_t {
-  unsigned long time;
+  uint32_t time;
   int16_t accel[ACCEL_DIM];
 };
 void acquireData(data_t* data);

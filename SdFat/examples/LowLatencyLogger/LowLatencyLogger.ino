@@ -93,7 +93,7 @@ const uint8_t BUFFER_BLOCK_COUNT = 12;
 // End of configuration constants.
 //==============================================================================
 // Temporary log file.  Will be deleted if a reset or power failure occurs.
-#define TMP_FILE_NAME "tmp_log.bin"
+#define TMP_FILE_NAME FILE_BASE_NAME "##.bin"
 
 // Size of file base name.
 const uint8_t BASE_NAME_SIZE = sizeof(FILE_BASE_NAME) - 1;
@@ -208,7 +208,7 @@ void binaryToCsv() {
   uint32_t tPct = millis();
   while (!Serial.available() && binFile.read(&block, 512) == 512) {
     uint16_t i;
-    if (block.count == 0) {
+    if (block.count == 0 || block.count > DATA_DIM) {
       break;
     }
     if (block.overrun) {
@@ -246,28 +246,15 @@ void createBinFile() {
   const uint32_t ERASE_SIZE = 262144L;
   uint32_t bgnBlock, endBlock;
   
-  Serial.println();
-  
-  while (sd.exists(binName)) {
-    if (binName[BASE_NAME_SIZE + 1] != '9') {
-      binName[BASE_NAME_SIZE + 1]++;
-    } else {
-      binName[BASE_NAME_SIZE + 1] = '0';
-      if (binName[BASE_NAME_SIZE] == '9') {
-        error("Can't create file name");
-      }
-      binName[BASE_NAME_SIZE]++;
-    }
-  }
   // Delete old tmp file.
   if (sd.exists(TMP_FILE_NAME)) {
-    Serial.println(F("Deleting tmp file"));
+    Serial.println(F("Deleting tmp file " TMP_FILE_NAME));
     if (!sd.remove(TMP_FILE_NAME)) {
       error("Can't remove tmp file");
     }
   }
   // Create new file.
-  Serial.println(F("Creating new file"));
+  Serial.println(F("\nCreating new file"));
   binFile.close();
   if (!binFile.createContiguous(TMP_FILE_NAME, 512 * FILE_BLOCK_COUNT)) {
     error("createContiguous failed");
@@ -339,7 +326,7 @@ void openBinFile() {
     char c = Serial.read();
     Serial.write(c);
     if (c < '0' || c > '9') {
-      Serial.println("\nInvalid digit");
+      Serial.println(F("\nInvalid digit"));
       return;
     }
     name[BASE_NAME_SIZE + i] = c;
@@ -500,18 +487,56 @@ void recordBinFile() {
     }
   }
 }
+//------------------------------------------------------------------------------
+void recoverTmpFile() {
+  uint16_t count;
+  if (!binFile.open(TMP_FILE_NAME, O_RDWR)) {
+    return;
+  }
+  if (binFile.read(&count, 2) != 2 || count != DATA_DIM) {
+    error("Please delete existing " TMP_FILE_NAME);
+  }
+  Serial.println(F("\nRecovering data in tmp file " TMP_FILE_NAME));
+  uint32_t bgnBlock = 0;
+  uint32_t endBlock = binFile.fileSize()/512 - 1;
+  // find last used block.
+  while (bgnBlock < endBlock) {
+    uint32_t midBlock = (bgnBlock + endBlock + 1)/2;
+    binFile.seekSet(512*midBlock);
+    if (binFile.read(&count, 2) != 2) error("read");
+    if (count == 0 || count > DATA_DIM) {
+      endBlock = midBlock - 1;
+    } else {          
+      bgnBlock = midBlock;
+    }
+  }
+  // truncate after last used block.
+  if (!binFile.truncate(512*(bgnBlock + 1))) {
+    error("Truncate " TMP_FILE_NAME " failed");
+  }
+  renameBinFile();
+}
 //-----------------------------------------------------------------------------
 void renameBinFile() {
+  while (sd.exists(binName)) {
+    if (binName[BASE_NAME_SIZE + 1] != '9') {
+      binName[BASE_NAME_SIZE + 1]++;
+    } else {
+      binName[BASE_NAME_SIZE + 1] = '0';
+      if (binName[BASE_NAME_SIZE] == '9') {
+        error("Can't create file name");
+      }
+      binName[BASE_NAME_SIZE]++;
+    }
+  }
   if (!binFile.rename(sd.vwd(), binName)) {
     error("Can't rename file");
     }
   Serial.print(F("File renamed: "));
   Serial.println(binName);
-  Serial.print("File size: ");
+  Serial.print(F("File size: "));
   Serial.print(binFile.fileSize()/512);
   Serial.println(F(" blocks"));
-  Serial.print(F("FreeStack: "));
-  Serial.println(FreeStack());  
 }
 //------------------------------------------------------------------------------
 void testSensor() {
@@ -543,7 +568,7 @@ void setup(void) {
   while (!Serial) {
     SysCall::yield();
   }
-  Serial.print(F("FreeStack: "));
+  Serial.print(F("\nFreeStack: "));
   Serial.println(FreeStack());
   Serial.print(F("Records/block: "));
   Serial.println(DATA_DIM);
@@ -562,6 +587,18 @@ void setup(void) {
   if (!sd.begin(SD_CS_PIN, SD_SCK_MHZ(50))) {
     sd.initErrorPrint(&Serial);
     fatalBlink();
+  }
+  // recover existing tmp file.
+  if (sd.exists(TMP_FILE_NAME)) {
+    Serial.println(F("\nType 'Y' to recover existing tmp file " TMP_FILE_NAME));
+    while (!Serial.available()) {
+      SysCall::yield();
+    }
+    if (Serial.read() == 'Y') {
+      recoverTmpFile();
+    } else {
+      error("'Y' not typed, please manually delete " TMP_FILE_NAME);
+    }
   }
 }
 //------------------------------------------------------------------------------

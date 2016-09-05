@@ -274,7 +274,7 @@ static void setSdclk(uint32_t kHzMax) {
   while ((F_CPU/(sdclkfs*dvs) > maxSdclk) && (dvs < DVS_LIMIT)) {
     dvs++;
   }
-  m_sdClkKhz = F_CPU/(sdclkfs*dvs);
+  m_sdClkKhz = F_CPU/(1000*sdclkfs*dvs);
   sdclkfs >>= 1;
   dvs--;
 
@@ -469,6 +469,10 @@ uint32_t SdioCard::errorData() {
 //-----------------------------------------------------------------------------
 uint32_t SdioCard::errorLine() {
   return m_errorLine;
+}
+//-----------------------------------------------------------------------------
+uint32_t SdioCard::kHzSdClk() {
+  return m_sdClkKhz;
 }
 //-----------------------------------------------------------------------------
 bool SdioCard::readBlock(uint32_t lba, uint8_t* buf) {

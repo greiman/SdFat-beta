@@ -102,7 +102,9 @@ void setup() {
   Serial.print("yieldCalls   ");
   Serial.println(yieldCalls);
   Serial.print("yieldMaxUsec ");
-  Serial.println(yieldMaxUsec);  
+  Serial.println(yieldMaxUsec);
+  Serial.print("kHzSdClk     ");
+  Serial.println(sd.card()->kHzSdClk());
   Serial.println("Done");
 }
 

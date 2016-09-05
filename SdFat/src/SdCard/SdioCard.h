@@ -62,6 +62,8 @@ class SdioCard : public BaseBlockDriver {
   uint32_t errorData();
   /** \return error line for last error. Tmp function for debug. */
   uint32_t errorLine();
+  /** \return the SD clock frequency in kHz. */
+  uint32_t kHzSdClk();
   /**
    * Read a 512 byte block from an SD card.
    *

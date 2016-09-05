@@ -1,5 +1,20 @@
 ### Warning: This version has major changes so it may be unstable.
 
+Teensy 3.5/3.6 SDIO support has been added.  Try the TeensySdioDemo example.
+Many other example will work with Teensy SDIO if you use the SdFatSdio classes
+and call begin with no parameters.
+
+```
+ SdFatSdio sd;
+ 
+ ....
+ 
+  if (!sd.begin()) {
+    // Handle failure.
+  }
+ 
+```
+
 Recent versions of the Arduino IDE have bugs that may cause SdFat-beta to crash.
 
 https://forum.arduino.cc/index.php?topic=419264.0
@@ -44,4 +59,4 @@ SdFile, File, StdioStream, ifstream, ofstream, and others.
  
 Please continue by reading the html documentation.
 
-Updated 19 Aug 2016
+Updated 5 Sep 2016

@@ -2,10 +2,10 @@ var searchData=
 [
   ['cacheclear',['cacheClear',['../class_fat_volume.html#aa1e3b1d0c21d202deb82668068ab00e8',1,'FatVolume']]],
   ['card',['card',['../class_sd_file_system.html#ab5dcfbeeb7caa38a38db86003341eb07',1,'SdFileSystem']]],
-  ['cardbegin',['cardBegin',['../class_sd_file_system.html#a85a595f89f612818de51a5a5c23fe0d4',1,'SdFileSystem::cardBegin()'],['../class_sd_fat.html#ae380e4572776db851b2f80a3ed143fca',1,'SdFat::cardBegin()']]],
+  ['cardbegin',['cardBegin',['../class_sd_fat.html#ae380e4572776db851b2f80a3ed143fca',1,'SdFat::cardBegin()'],['../class_sd_fat_sdio.html#ac49062cc8fb2a42564d0ff05b4c0be8b',1,'SdFatSdio::cardBegin()']]],
   ['carderrorcode',['cardErrorCode',['../class_sd_file_system.html#aedfd5a0830c955bc5514e52f2f2dd066',1,'SdFileSystem']]],
-  ['carderrordata',['cardErrorData',['../class_sd_file_system.html#a7bb044ff05e84cf9848ee78b20bd9251',1,'SdFileSystem']]],
-  ['cardsize',['cardSize',['../class_sd_spi_card.html#afca8bd6b7e465bf9c475ba375c4deec8',1,'SdSpiCard']]],
+  ['carderrordata',['cardErrorData',['../class_sd_file_system.html#a0602ab3c04ea33293649f0a15fc81e05',1,'SdFileSystem']]],
+  ['cardsize',['cardSize',['../class_sdio_card.html#a3d8f9a92f7faec77094ec65e6c41dd45',1,'SdioCard::cardSize()'],['../class_sd_spi_card.html#afca8bd6b7e465bf9c475ba375c4deec8',1,'SdSpiCard::cardSize()']]],
   ['chdir',['chdir',['../class_fat_file_system.html#a5667915e63187a43a71dfada63800865',1,'FatFileSystem::chdir(bool set_cwd=false)'],['../class_fat_file_system.html#a44af1b98e8d986d12107b654453acbc4',1,'FatFileSystem::chdir(const char *path, bool set_cwd=false)']]],
   ['chvol',['chvol',['../class_fat_file_system.html#af24917d6e00c8766dab168eb834047ec',1,'FatFileSystem']]],
   ['clear',['clear',['../classfstream.html#a682b278a6a299ffb21b8737717ff12bf',1,'fstream::clear()'],['../classofstream.html#a09edfdb3dbda20aff105e751001313f0',1,'ofstream::clear()'],['../classios.html#aa49ed6670d1743e7a373b2d915ec739a',1,'ios::clear()']]],

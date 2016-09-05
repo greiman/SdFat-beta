@@ -34,7 +34,7 @@ var searchData=
   ['fread',['fread',['../class_stdio_stream.html#a2d363b02abcef82b25ff025d50375bce',1,'StdioStream']]],
   ['freeclustercount',['freeClusterCount',['../class_fat_volume.html#a1683b063fc6202ab85470b9610f16f93',1,'FatVolume']]],
   ['freestack',['FreeStack',['../_free_stack_8h.html#a2c0121d5649d35329a8d0a71e4ffb89b',1,'FreeStack.h']]],
-  ['fsbegin',['fsBegin',['../class_sd_fat.html#add6a9a3ad07585f6e0e5c35e35cacb9a',1,'SdFat']]],
+  ['fsbegin',['fsBegin',['../class_sd_fat.html#add6a9a3ad07585f6e0e5c35e35cacb9a',1,'SdFat::fsBegin()'],['../class_sd_fat_sdio.html#aac0e8d86182a0e0566c4671c15f3df61',1,'SdFatSdio::fsBegin()']]],
   ['fseek',['fseek',['../class_stdio_stream.html#a71584fd5c5cda3c31ce6cdbcc56f104d',1,'StdioStream']]],
   ['fstream',['fstream',['../classfstream.html#aed23877c52f828cab8de7a23603b3b6c',1,'fstream']]],
   ['ftell',['ftell',['../class_stdio_stream.html#a809639fc5fb4fa5b6789dc121659f386',1,'StdioStream']]],

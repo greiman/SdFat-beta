@@ -5,6 +5,9 @@
 #include "SdFat.h"
 #include "FreeStack.h"
 
+// Set USE_SDIO to zero for SPI card access. 
+#define USE_SDIO 0
+
 // SD chip select pin
 const uint8_t chipSelect = SS;
 
@@ -28,7 +31,11 @@ const uint32_t FILE_SIZE = 1000000UL*FILE_SIZE_MB;
 uint8_t buf[BUF_SIZE];
 
 // file system
+#if USE_SDIO
+SdFatSdio sd;
+#else  // USE_SDIO
 SdFat sd;
+#endif  // USE_SDIO
 
 // Set ENABLE_EXTENDED_TRANSFER_CLASS to use extended SD I/O.
 // Requires dedicated use of the SPI bus.
@@ -102,12 +109,17 @@ void loop() {
 
   cout << F("FreeStack: ") << FreeStack() << endl;
 
+#if USE_SDIO
+  if (!sd.begin()) {
+    sd.initErrorHalt();
+  }
+#else  // USE_SDIO  
   // Initialize at the highest speed supported by the board that is
   // not over 50 MHz. Try a lower speed if SPI errors occur.
   if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
     sd.initErrorHalt();
   }
-
+#endif  // USE_SDIO  
   cout << F("Type is FAT") << int(sd.vol()->fatType()) << endl;
   cout << F("Card size: ") << sd.card()->cardSize()*512E-9;
   cout << F(" GB (GB = 1E9 bytes)") << endl;

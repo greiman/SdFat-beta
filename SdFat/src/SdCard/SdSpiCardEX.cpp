@@ -17,8 +17,8 @@
  * along with the Arduino SdFat Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#include "BlockDriver.h"
-bool SdBlockDriverEX::readBlock(uint32_t block, uint8_t* dst) {
+#include "SdSpiCard.h"
+bool SdSpiCardEX::readBlock(uint32_t block, uint8_t* dst) {
   if (m_curState != READ_STATE || block != m_curBlock) {
     if (!syncBlocks()) {
       return false;
@@ -36,7 +36,7 @@ bool SdBlockDriverEX::readBlock(uint32_t block, uint8_t* dst) {
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdBlockDriverEX::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
+bool SdSpiCardEX::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
   for (size_t i = 0; i < nb; i++) {
     if (!readBlock(block + i, dst + i*512UL)) {
       return false;
@@ -45,7 +45,7 @@ bool SdBlockDriverEX::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdBlockDriverEX::syncBlocks() {
+bool SdSpiCardEX::syncBlocks() {
   if (m_curState == READ_STATE) {
     m_curState = IDLE_STATE;
     if (!SdSpiCard::readStop()) {
@@ -60,7 +60,7 @@ bool SdBlockDriverEX::syncBlocks() {
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdBlockDriverEX::writeBlock(uint32_t block, const uint8_t* src) {
+bool SdSpiCardEX::writeBlock(uint32_t block, const uint8_t* src) {
   if (m_curState != WRITE_STATE || m_curBlock != block) {
     if (!syncBlocks()) {
       return false;
@@ -78,7 +78,7 @@ bool SdBlockDriverEX::writeBlock(uint32_t block, const uint8_t* src) {
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdBlockDriverEX::writeBlocks(uint32_t block,
+bool SdSpiCardEX::writeBlocks(uint32_t block,
                                   const uint8_t* src, size_t nb) {
   for (size_t i = 0; i < nb; i++) {
     if (!writeBlock(block + i, src + i*512UL)) {

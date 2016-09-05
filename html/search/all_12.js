@@ -9,5 +9,5 @@ var searchData=
   ['totalsectors32',['totalSectors32',['../structbios_parm_block.html#abead42e130c40e2aa535202e7cb07578',1,'biosParmBlock::totalSectors32()'],['../structfat__boot.html#addeb2dd8f78418edbf544303d44133e2',1,'fat_boot::totalSectors32()'],['../structfat32__boot.html#ab79466016103c2762c6b057dd458d434',1,'fat32_boot::totalSectors32()']]],
   ['trunc',['trunc',['../classios__base.html#ae62b8972f37509819e1384214071194b',1,'ios_base']]],
   ['truncate',['truncate',['../class_fat_file.html#aa6e663098a578635d37d92e82d18d616',1,'FatFile::truncate()'],['../class_fat_file_system.html#ad60cb13557f35578f868e03e9ccb8be1',1,'FatFileSystem::truncate()']]],
-  ['type',['type',['../structpartition_table.html#a3861cf276c728c4dd30ca04e74197ee8',1,'partitionTable::type()'],['../structlong_directory_entry.html#a9adb019dbf24cce65c8d1419cd000f91',1,'longDirectoryEntry::type()'],['../class_sd_spi_card.html#a061d92bf154a1863a6321385b7505f6e',1,'SdSpiCard::type()']]]
+  ['type',['type',['../structpartition_table.html#a3861cf276c728c4dd30ca04e74197ee8',1,'partitionTable::type()'],['../structlong_directory_entry.html#a9adb019dbf24cce65c8d1419cd000f91',1,'longDirectoryEntry::type()'],['../class_sdio_card.html#a2151106a93280ae41bab654428214661',1,'SdioCard::type()'],['../class_sd_spi_card.html#a061d92bf154a1863a6321385b7505f6e',1,'SdSpiCard::type()']]]
 ];

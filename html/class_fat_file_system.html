@@ -98,14 +98,16 @@ Inheritance diagram for FatFileSystem:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_fat_file_system__inherit__graph.png" border="0" usemap="#_fat_file_system_inherit__map" alt="Inheritance graph"/></div>
 <map name="_fat_file_system_inherit__map" id="_fat_file_system_inherit__map">
-<area shape="rect" id="node3" href="class_sd_file_system.html" title="Virtual base class for SdFat library. " alt="" coords="301,13,511,40"/>
-<area shape="rect" id="node4" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdBlockDriver \&gt;" alt="" coords="301,64,511,91"/>
-<area shape="rect" id="node7" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdBlockDriverEX \&gt;" alt="" coords="293,123,519,149"/>
-<area shape="rect" id="node2" href="class_fat_volume.html" title="Access FAT16 and FAT32 volumes on raw file devices. " alt="" coords="5,64,91,91"/>
-<area shape="rect" id="node5" href="class_sd_fat.html" title="Main file system class for SdFat library. " alt="" coords="627,5,685,32"/>
-<area shape="rect" id="node6" href="class_sd_fat_soft_spi.html" title="SdFat class using software SPI. " alt="" coords="575,57,737,98"/>
-<area shape="rect" id="node8" href="class_sd_fat_e_x.html" title="SdFat class with extended SD I/O. " alt="" coords="619,123,693,149"/>
-<area shape="rect" id="node9" href="class_sd_fat_soft_spi_e_x.html" title="SdFat class using software SPI and extended SD I/O. " alt="" coords="567,174,745,215"/>
+<area shape="rect" id="node3" href="class_sd_file_system.html" title="Virtual base class for SdFat library. " alt="" coords="293,5,503,32"/>
+<area shape="rect" id="node4" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdioCard \&gt;" alt="" coords="307,56,489,83"/>
+<area shape="rect" id="node6" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdSpiCard \&gt;" alt="" coords="303,107,493,133"/>
+<area shape="rect" id="node9" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdSpiCardEX \&gt;" alt="" coords="295,195,501,221"/>
+<area shape="rect" id="node2" href="class_fat_volume.html" title="Access FAT16 and FAT32 volumes on raw file devices. " alt="" coords="5,81,91,108"/>
+<area shape="rect" id="node5" href="class_sd_fat_sdio.html" title="SdFat class using SDIO. " alt="" coords="599,27,681,53"/>
+<area shape="rect" id="node7" href="class_sd_fat.html" title="Main file system class for SdFat library. " alt="" coords="611,77,669,104"/>
+<area shape="rect" id="node8" href="class_sd_fat_soft_spi.html" title="SdFat class using software SPI. " alt="" coords="559,129,721,170"/>
+<area shape="rect" id="node10" href="class_sd_fat_e_x.html" title="SdFat class with extended SD I/O. " alt="" coords="603,195,677,221"/>
+<area shape="rect" id="node11" href="class_sd_fat_soft_spi_e_x.html" title="SdFat class using software SPI and extended SD I/O. " alt="" coords="551,246,729,287"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -119,7 +121,7 @@ Collaboration diagram for FatFileSystem:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5dda20d3dcbfc8c641babbb2c9aac382"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a5dda20d3dcbfc8c641babbb2c9aac382">begin</a> (<a class="el" href="_block_driver_8h.html#a29e32edf30724992d0ab870a56fdde6c">BlockDriver</a> *blockDev, uint8_t part=0)</td></tr>
+<tr class="memitem:a5dda20d3dcbfc8c641babbb2c9aac382"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a5dda20d3dcbfc8c641babbb2c9aac382">begin</a> (<a class="el" href="_block_driver_8h.html#ace97f2377acdc471a01f9f7ec1fd6bbb">BlockDriver</a> *blockDev, uint8_t part=0)</td></tr>
 <tr class="separator:a5dda20d3dcbfc8c641babbb2c9aac382"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06beed4cea5e38116b58254a57125442"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a06beed4cea5e38116b58254a57125442">blocksPerCluster</a> () const </td></tr>
 <tr class="separator:a06beed4cea5e38116b58254a57125442"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,7 +205,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool FatFileSystem::begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_block_driver_8h.html#a29e32edf30724992d0ab870a56fdde6c">BlockDriver</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_block_driver_8h.html#ace97f2377acdc471a01f9f7ec1fd6bbb">BlockDriver</a> *&#160;</td>
           <td class="paramname"><em>blockDev</em>, </td>
         </tr>
         <tr>
@@ -1329,7 +1331,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 5 2016 10:18:52 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

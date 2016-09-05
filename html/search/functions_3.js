@@ -4,7 +4,6 @@ var searchData=
   ['datetimecallback',['dateTimeCallback',['../class_fat_file.html#a29a623f50df057e8b49045ba6611ec2b',1,'FatFile']]],
   ['datetimecallbackcancel',['dateTimeCallbackCancel',['../class_fat_file.html#a5df02f1d037e6091375488af25244ebc',1,'FatFile']]],
   ['dbgfat',['dbgFat',['../class_fat_volume.html#a25c6311b70fa274b3be94ff25fdebba7',1,'FatVolume']]],
-  ['deactivate',['deactivate',['../class_sd_spi_lib_driver.html#a120d6b78f9dad6837d10b45b76d32c82',1,'SdSpiLibDriver::deactivate()'],['../class_sd_spi_alt_driver.html#ae6ce25d124e31a8762375ae548a92818',1,'SdSpiAltDriver::deactivate()'],['../class_sd_spi_soft_driver.html#a03b5da2d9d0196212f17afbbc9bf784a',1,'SdSpiSoftDriver::deactivate()'],['../class_sd_spi_base_driver.html#a1768309c7ba4f8d78c2ba62383462de2',1,'SdSpiBaseDriver::deactivate()']]],
   ['dec',['dec',['../ios_8h.html#ada38ab90e22f0ebb638cb864a35c562d',1,'ios.h']]],
   ['dir_5fis_5ffile',['DIR_IS_FILE',['../_fat_structs_8h.html#a5ce8bde4d6ff3950df951e84c7bb8d58',1,'FatStructs.h']]],
   ['dir_5fis_5ffile_5for_5fsubdir',['DIR_IS_FILE_OR_SUBDIR',['../_fat_structs_8h.html#a9d99b04fa090825a9b9c2468fa81e627',1,'FatStructs.h']]],
@@ -17,5 +16,6 @@ var searchData=
   ['dirname',['dirName',['../class_fat_file.html#a648461081fe07578780f4cd3f246cb66',1,'FatFile']]],
   ['dirsize',['dirSize',['../class_fat_file.html#ae2ed15f05c9ccbce355e7a8d3ce8382d',1,'FatFile']]],
   ['dirty',['dirty',['../class_fat_cache.html#ab4d3b0c16bb6a116c7d01afff2dcb307',1,'FatCache']]],
+  ['dmabusy',['dmaBusy',['../class_sdio_card.html#a9781b9b4f91366a69dd077ad8fb364c5',1,'SdioCard']]],
   ['dmpfile',['dmpFile',['../class_fat_file.html#a4f01d27954ae49aeb6888ac7302f55d9',1,'FatFile']]]
 ];

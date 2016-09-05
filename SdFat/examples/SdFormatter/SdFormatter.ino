@@ -11,13 +11,9 @@
  * For smaller cards this program uses FAT16
  * and SDFormatter uses FAT12.
  */
-// Print extra info for debug if DEBUG_PRINT is nonzero
-#define DEBUG_PRINT 0
-#include <SPI.h>
-#include "SdFat.h"
-#if DEBUG_PRINT
-#include "FreeStack.h"
-#endif  // DEBUG_PRINT
+
+// Set USE_SDIO to zero for SPI card access. 
+#define USE_SDIO 0
 //
 // Change the value of chipSelect if your hardware does
 // not use the default value, SS.  Common values are:
@@ -30,12 +26,25 @@ const uint8_t chipSelect = SS;
 // Reduce max speed if errors occur.
 #define SPI_SPEED SD_SCK_MHZ(50)
 
+// Print extra info for debug if DEBUG_PRINT is nonzero
+#define DEBUG_PRINT 0
+#include <SPI.h>
+#include "SdFat.h"
+#if DEBUG_PRINT
+#include "FreeStack.h"
+#endif  // DEBUG_PRINT
+
 // Serial output stream
 ArduinoOutStream cout(Serial);
 
+#if USE_SDIO
+SdioCard card;
+#else  // USE_SDIO
 Sd2Card card;
+#endif  // USE_SDIO
+ 
 uint32_t cardSizeBlocks;
-uint16_t cardCapacityMB;
+uint32_t cardCapacityMB;
 
 // cache for SD block
 cache_t cache;
@@ -155,6 +164,16 @@ void clearCache(uint8_t addSig) {
 // zero FAT and root dir area on SD
 void clearFatDir(uint32_t bgn, uint32_t count) {
   clearCache(false);
+#if USE_SDIO
+  for (uint32_t i = 0; i < count; i++) {
+    if (!card.writeBlock(bgn + i, cache.data)) {
+       sdError("Clear FAT/DIR writeBlock failed");
+    }     
+    if ((i & 0XFF) == 0) {
+      cout << '.';
+    }    
+  }
+#else  // USE_SDIO
   if (!card.writeStart(bgn, count)) {
     sdError("Clear FAT/DIR writeStart failed");
   }
@@ -169,6 +188,7 @@ void clearFatDir(uint32_t bgn, uint32_t count) {
   if (!card.writeStop()) {
     sdError("Clear FAT/DIR writeStop failed");
   }
+#endif  // USE_SDIO
   cout << endl;
 }
 //------------------------------------------------------------------------------
@@ -496,7 +516,11 @@ void setup() {
     cout << F("Quiting, invalid option entered.") << endl;
     return;
   }
-
+#if USE_SDIO
+  if (!card.begin()) {
+    sdError("card.begin failed");  
+  }
+#else  // USE_SDIO
   if (!card.begin(chipSelect, SPI_SPEED)) {
     cout << F(
            "\nSD initialization failure!\n"
@@ -504,6 +528,7 @@ void setup() {
            "Is chip select correct at the top of this program?\n");
     sdError("card.begin failed");
   }
+#endif  
   cardSizeBlocks = card.cardSize();
   if (cardSizeBlocks == 0) {
     sdError("cardSize");

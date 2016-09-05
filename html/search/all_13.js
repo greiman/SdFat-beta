@@ -2,7 +2,6 @@ var searchData=
 [
   ['ungetc',['ungetc',['../class_stdio_stream.html#ac00e0dd906c2e857ece53794c6c92786',1,'StdioStream']]],
   ['ungetc_5fbuf_5fsize',['UNGETC_BUF_SIZE',['../_stdio_stream_8h.html#a785dd413c0d7b05f95df82d3453ecacd',1,'StdioStream.h']]],
-  ['unselect',['unselect',['../class_sd_spi_lib_driver.html#a593b443dca85fe4de76ab06547233429',1,'SdSpiLibDriver::unselect()'],['../class_sd_spi_alt_driver.html#a731497cc1efc4bd0875d61b0d84979ff',1,'SdSpiAltDriver::unselect()'],['../class_sd_spi_soft_driver.html#ab2eaea746989c3762e64bb3ef4faeee9',1,'SdSpiSoftDriver::unselect()'],['../class_sd_spi_base_driver.html#a5210d976ca6b1ef50619cb29054eae71',1,'SdSpiBaseDriver::unselect()']]],
   ['unsetf',['unsetf',['../classios__base.html#a3bf7d054a433ed15e8b984e16f630fa4',1,'ios_base']]],
   ['uppercase',['uppercase',['../classios__base.html#ade3db1fe3249e87f4c47a9a8916793d9',1,'ios_base::uppercase()'],['../ios_8h.html#af5d5e1a0effa1b500bb882feed5a2061',1,'uppercase():&#160;ios.h']]],
   ['use_5flong_5ffile_5fnames',['USE_LONG_FILE_NAMES',['../_sd_fat_config_8h.html#a2536b194b3b007604a39e8526e108b52',1,'USE_LONG_FILE_NAMES():&#160;SdFatConfig.h'],['../_fat_lib_config_8h.html#a2536b194b3b007604a39e8526e108b52',1,'USE_LONG_FILE_NAMES():&#160;FatLibConfig.h']]],

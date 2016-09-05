@@ -1,4 +1,4 @@
-/* Arduino SdSpiCard Library
+/* Arduino SdCard Library
  * Copyright (C) 2016 by William Greiman
  *
  * This file is part of the Arduino SdSpiCard Library
@@ -17,7 +17,6 @@
  * along with the Arduino SdSpiCard Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-
 #ifndef SdSpiBaseDriver_h
 #define SdSpiBaseDriver_h
 /**

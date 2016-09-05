@@ -98,9 +98,9 @@ Inheritance diagram for SdFatEX:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_sd_fat_e_x__inherit__graph.png" border="0" usemap="#_sd_fat_e_x_inherit__map" alt="Inheritance graph"/></div>
 <map name="_sd_fat_e_x_inherit__map" id="_sd_fat_e_x_inherit__map">
-<area shape="rect" id="node2" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdBlockDriverEX \&gt;" alt="" coords="5,155,231,181"/>
-<area shape="rect" id="node3" href="class_fat_file_system.html" title="Integration class for the FatLib library. " alt="" coords="65,80,171,107"/>
-<area shape="rect" id="node4" href="class_fat_volume.html" title="Access FAT16 and FAT32 volumes on raw file devices. " alt="" coords="75,5,161,32"/>
+<area shape="rect" id="node2" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdSpiCardEX \&gt;" alt="" coords="5,155,212,181"/>
+<area shape="rect" id="node3" href="class_fat_file_system.html" title="Integration class for the FatLib library. " alt="" coords="55,80,162,107"/>
+<area shape="rect" id="node4" href="class_fat_volume.html" title="Access FAT16 and FAT32 volumes on raw file devices. " alt="" coords="66,5,151,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -108,18 +108,18 @@ Collaboration diagram for SdFatEX:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_sd_fat_e_x__coll__graph.png" border="0" usemap="#_sd_fat_e_x_coll__map" alt="Collaboration graph"/></div>
 <map name="_sd_fat_e_x_coll__map" id="_sd_fat_e_x_coll__map">
-<area shape="rect" id="node2" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdBlockDriverEX \&gt;" alt="" coords="5,155,231,181"/>
-<area shape="rect" id="node3" href="class_fat_file_system.html" title="Integration class for the FatLib library. " alt="" coords="65,80,171,107"/>
-<area shape="rect" id="node4" href="class_fat_volume.html" title="Access FAT16 and FAT32 volumes on raw file devices. " alt="" coords="75,5,161,32"/>
+<area shape="rect" id="node2" href="class_sd_file_system.html" title="SdFileSystem\&lt; SdSpiCardEX \&gt;" alt="" coords="5,155,212,181"/>
+<area shape="rect" id="node3" href="class_fat_file_system.html" title="Integration class for the FatLib library. " alt="" coords="55,80,162,107"/>
+<area shape="rect" id="node4" href="class_fat_volume.html" title="Access FAT16 and FAT32 volumes on raw file devices. " alt="" coords="66,5,151,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5dda20d3dcbfc8c641babbb2c9aac382"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a5dda20d3dcbfc8c641babbb2c9aac382">begin</a> (<a class="el" href="_block_driver_8h.html#a29e32edf30724992d0ab870a56fdde6c">BlockDriver</a> *blockDev, uint8_t part=0)</td></tr>
+<tr class="memitem:a5dda20d3dcbfc8c641babbb2c9aac382"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a5dda20d3dcbfc8c641babbb2c9aac382">begin</a> (<a class="el" href="_block_driver_8h.html#ace97f2377acdc471a01f9f7ec1fd6bbb">BlockDriver</a> *blockDev, uint8_t part=0)</td></tr>
 <tr class="separator:a5dda20d3dcbfc8c641babbb2c9aac382"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8af43bd882cc5189217ee4d75b55274e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin</a> (<a class="el" href="_sd_spi_driver_8h.html#abf391604c1ecfed19cdcb6c8bd626972">SdSpiDriver</a> *spi, uint8_t csPin, SPISettings spiSettings)</td></tr>
-<tr class="separator:a8af43bd882cc5189217ee4d75b55274e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad94237ef45c52698e97b04e8c131f21e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin</a> ()</td></tr>
+<tr class="separator:ad94237ef45c52698e97b04e8c131f21e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25acc97272c6004a6a4118bacef07467"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_e_x.html#a25acc97272c6004a6a4118bacef07467">begin</a> (uint8_t csPin=SS, SPISettings spiSettings=SPI_FULL_SPEED)</td></tr>
 <tr class="separator:a25acc97272c6004a6a4118bacef07467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06beed4cea5e38116b58254a57125442"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#a06beed4cea5e38116b58254a57125442">blocksPerCluster</a> () const </td></tr>
@@ -128,14 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abc66d856d05198d9ebe7104c8c4155d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1e3b1d0c21d202deb82668068ab00e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unioncache__t.html">cache_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_volume.html#aa1e3b1d0c21d202deb82668068ab00e8">cacheClear</a> ()</td></tr>
 <tr class="separator:aa1e3b1d0c21d202deb82668068ab00e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5dcfbeeb7caa38a38db86003341eb07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#ab5dcfbeeb7caa38a38db86003341eb07">card</a> ()</td></tr>
+<tr class="memitem:ab5dcfbeeb7caa38a38db86003341eb07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#ab5dcfbeeb7caa38a38db86003341eb07">card</a> ()</td></tr>
 <tr class="separator:ab5dcfbeeb7caa38a38db86003341eb07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85a595f89f612818de51a5a5c23fe0d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#a85a595f89f612818de51a5a5c23fe0d4">cardBegin</a> (<a class="el" href="_sd_spi_driver_8h.html#abf391604c1ecfed19cdcb6c8bd626972">SdSpiDriver</a> *spi, uint8_t csPin, SPISettings spiSettings)</td></tr>
-<tr class="separator:a85a595f89f612818de51a5a5c23fe0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedfd5a0830c955bc5514e52f2f2dd066"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#aedfd5a0830c955bc5514e52f2f2dd066">cardErrorCode</a> ()</td></tr>
 <tr class="separator:aedfd5a0830c955bc5514e52f2f2dd066"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bb044ff05e84cf9848ee78b20bd9251"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#a7bb044ff05e84cf9848ee78b20bd9251">cardErrorData</a> ()</td></tr>
-<tr class="separator:a7bb044ff05e84cf9848ee78b20bd9251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0602ab3c04ea33293649f0a15fc81e05"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_file_system.html#a0602ab3c04ea33293649f0a15fc81e05">cardErrorData</a> ()</td></tr>
+<tr class="separator:a0602ab3c04ea33293649f0a15fc81e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5667915e63187a43a71dfada63800865"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a5667915e63187a43a71dfada63800865">chdir</a> (bool set_cwd=false)</td></tr>
 <tr class="separator:a5667915e63187a43a71dfada63800865"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44af1b98e8d986d12107b654453acbc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file_system.html#a44af1b98e8d986d12107b654453acbc4">chdir</a> (const char *path, bool set_cwd=false)</td></tr>
@@ -293,7 +291,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool FatFileSystem::begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_block_driver_8h.html#a29e32edf30724992d0ab870a56fdde6c">BlockDriver</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_block_driver_8h.html#ace97f2377acdc471a01f9f7ec1fd6bbb">BlockDriver</a> *&#160;</td>
           <td class="paramname"><em>blockDev</em>, </td>
         </tr>
         <tr>
@@ -325,7 +323,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8af43bd882cc5189217ee4d75b55274e"></a>
+<a class="anchor" id="ad94237ef45c52698e97b04e8c131f21e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -333,27 +331,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::begin </td>
+          <td class="memname">bool <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::begin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sd_spi_driver_8h.html#abf391604c1ecfed19cdcb6c8bd626972">SdSpiDriver</a> *&#160;</td>
-          <td class="paramname"><em>spi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>csPin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SPISettings&#160;</td>
-          <td class="paramname"><em>spiSettings</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -362,15 +343,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Initialize SD card and file system. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">spi</td><td>SPI object for the card. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">csPin</td><td>SD card chip select pin. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">spiSettings</td><td>SPI speed, mode, and bit order. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
+<p>Initialize file system. </p><dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
 
 </div>
 </div>
@@ -497,7 +470,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a> * <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::card </td>
+          <td class="memname"><a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a> * <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::card </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -513,55 +486,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a85a595f89f612818de51a5a5c23fe0d4"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::cardBegin </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="_sd_spi_driver_8h.html#abf391604c1ecfed19cdcb6c8bd626972">SdSpiDriver</a> *&#160;</td>
-          <td class="paramname"><em>spi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>csPin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SPISettings&#160;</td>
-          <td class="paramname"><em>spiSettings</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Initialize SD card for diagnostic use. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">spi</td><td>SPI object for the card. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">csPin</td><td>SD card chip select pin. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">spiSettings</td><td>SPI speed, mode, and bit order. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true for success else false. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="aedfd5a0830c955bc5514e52f2f2dd066"></a>
 <div class="memitem">
 <div class="memproto">
@@ -570,7 +494,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::cardErrorCode </td>
+          <td class="memname">uint8_t <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::cardErrorCode </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -586,7 +510,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7bb044ff05e84cf9848ee78b20bd9251"></a>
+<a class="anchor" id="a0602ab3c04ea33293649f0a15fc81e05"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -594,7 +518,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::cardErrorData </td>
+          <td class="memname">uint32_t <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::cardErrorData </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -839,7 +763,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorHalt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -863,7 +787,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorHalt </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
@@ -894,7 +818,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorHalt </td>
           <td>(</td>
           <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -925,7 +849,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorHalt </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -967,7 +891,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorHalt </td>
           <td>(</td>
           <td class="paramtype">const __FlashStringHelper *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -998,7 +922,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorHalt </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -1040,7 +964,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorPrint </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1064,7 +988,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorPrint </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
@@ -1094,7 +1018,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorPrint </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -1125,7 +1049,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorPrint </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -1167,7 +1091,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorPrint </td>
           <td>(</td>
           <td class="paramtype">const __FlashStringHelper *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -1198,7 +1122,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::errorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::errorPrint </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -1426,7 +1350,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorHalt </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1450,7 +1374,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorHalt </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
@@ -1481,7 +1405,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorHalt </td>
           <td>(</td>
           <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -1494,7 +1418,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails.</p>
+<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>Message to print. </td></tr>
@@ -1512,7 +1436,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorHalt </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -1535,7 +1459,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>Print device. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>Message to print. </td></tr>
@@ -1553,7 +1477,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorHalt </td>
           <td>(</td>
           <td class="paramtype">const __FlashStringHelper *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -1566,7 +1490,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails.</p>
+<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>Message to print. </td></tr>
@@ -1584,7 +1508,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorHalt </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorHalt </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -1607,7 +1531,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Print message, error details, and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>Print device for message. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>Message to print. </td></tr>
@@ -1625,7 +1549,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorPrint </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1637,7 +1561,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print error details after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails. </p>
+<p>Print error details after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails. </p>
 
 </div>
 </div>
@@ -1649,7 +1573,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorPrint </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
@@ -1662,7 +1586,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print error details after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails.</p>
+<p>Print error details after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>Print destination. </td></tr>
@@ -1680,7 +1604,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorPrint </td>
           <td>(</td>
           <td class="paramtype">char const *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -1693,7 +1617,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails.</p>
+<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>Message to print. </td></tr>
@@ -1711,7 +1635,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorPrint </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -1734,7 +1658,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails.</p>
+<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>Print destination. </td></tr>
@@ -1753,7 +1677,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorPrint </td>
           <td>(</td>
           <td class="paramtype">const __FlashStringHelper *&#160;</td>
           <td class="paramname"><em>msg</em></td><td>)</td>
@@ -1766,7 +1690,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails.</p>
+<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">msg</td><td>Message to print. </td></tr>
@@ -1784,7 +1708,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_block_driver_e_x.html">SdBlockDriverEX</a>  &gt;::initErrorPrint </td>
+          <td class="memname">void <a class="el" href="class_sd_file_system.html">SdFileSystem</a>&lt; <a class="el" href="class_sd_spi_card_e_x.html">SdSpiCardEX</a>  &gt;::initErrorPrint </td>
           <td>(</td>
           <td class="paramtype">Print *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
@@ -1807,7 +1731,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#a8af43bd882cc5189217ee4d75b55274e">begin()</a> fails.</p>
+<p>Print message and error details and halt after <a class="el" href="class_sd_file_system.html#ad94237ef45c52698e97b04e8c131f21e">begin()</a> fails.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">pr</td><td>Print destination. </td></tr>
@@ -2433,7 +2357,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 5 2016 10:18:53 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

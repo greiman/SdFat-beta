@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['activate',['activate',['../class_sd_spi_lib_driver.html#aeb8263fb0eaca724af90830e90ddd044',1,'SdSpiLibDriver::activate()'],['../class_sd_spi_alt_driver.html#a53cb88d35df119828ec3702a39552e93',1,'SdSpiAltDriver::activate()'],['../class_sd_spi_soft_driver.html#a10c2eb17cb8b467067bc767a1e59859f',1,'SdSpiSoftDriver::activate()'],['../class_sd_spi_base_driver.html#ab7e6974c19d1b1543e242c8a717cfd8f',1,'SdSpiBaseDriver::activate()']]],
   ['adjustfield',['adjustfield',['../classios__base.html#adaaf735381254aa096ebe3605e8bbd0a',1,'ios_base']]],
   ['app',['app',['../classios__base.html#a8380aac3c405730708888fdc68905820',1,'ios_base']]],
   ['arduinofiles_2eh',['ArduinoFiles.h',['../_arduino_files_8h.html',1,'']]],

@@ -3,6 +3,9 @@
  */
 #include <SPI.h>
 #include "SdFat.h"
+
+// Set USE_SDIO to zero for SPI card access. 
+#define USE_SDIO 0
 /*
  * SD chip select pin.  Common values are:
  *
@@ -18,7 +21,12 @@ const uint8_t SD_CHIP_SELECT = SS;
  * to 10 to disable the Ethernet controller.
  */
 const int8_t DISABLE_CHIP_SELECT = -1;
+
+#if USE_SDIO
+SdFatSdio sd;
+#else // USE_SDIO
 SdFat sd;
+#endif  // USE_SDIO
 
 // serial output steam
 ArduinoOutStream cout(Serial);
@@ -170,12 +178,19 @@ void loop() {
   }
 
   uint32_t t = millis();
+#if USE_SDIO
+  if (!sd.cardBegin()) {
+    sdErrorMsg("\ncardBegin failed");
+    return;
+  }
+#else  // USE_SDIO
   // Initialize at the highest speed supported by the board that is
   // not over 50 MHz. Try a lower speed if SPI errors occur.
   if (!sd.cardBegin(SD_CHIP_SELECT, SD_SCK_MHZ(50))) {
     sdErrorMsg("\ncardBegin failed");
     return;
   }
+ #endif  // USE_SDIO 
   t = millis() - t;
 
   cardSize = sd.card()->cardSize();

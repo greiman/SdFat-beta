@@ -1,5 +1,5 @@
-/* Arduino SdSpiCard Library
- * Copyright (C) 2012 by William Greiman
+/* Arduino SdCard Library
+ * Copyright (C) 2016 by William Greiman
  *
  * This file is part of the Arduino SdSpiCard Library
  *
@@ -114,13 +114,16 @@ static uint16_t CRC_CCITT(const uint8_t* data, size_t n) {
 //==============================================================================
 // SdSpiCard member functions
 //------------------------------------------------------------------------------
-bool SdSpiCard::begin(SdSpiDriver* spiDriver) {
+bool SdSpiCard::begin(SdSpiDriver* spi, uint8_t csPin, SPISettings settings) {
   m_spiActive = false;
-  m_errorCode = m_type = 0;
-  m_spiDriver = spiDriver;
+  m_errorCode = SD_CARD_ERROR_NONE;
+  m_type = 0;
+  m_spiDriver = spi;
   uint16_t t0 = curTimeMS();
   uint32_t arg;
 
+  m_spiDriver->begin(csPin);
+  m_spiDriver->setSpiSettings(SD_SCK_HZ(250000));
   spiStart();
 
   // must supply min of 74 clock cycles with CS high.
@@ -185,6 +188,7 @@ bool SdSpiCard::begin(SdSpiDriver* spiDriver) {
     }
   }
   spiStop();
+  m_spiDriver->setSpiSettings(settings);
   return true;
 
 fail:
@@ -242,24 +246,7 @@ uint8_t SdSpiCard::cardCommand(uint8_t cmd, uint32_t arg) {
 //------------------------------------------------------------------------------
 uint32_t SdSpiCard::cardSize() {
   csd_t csd;
-  if (!readCSD(&csd)) {
-    return 0;
-  }
-  if (csd.v1.csd_ver == 0) {
-    uint8_t read_bl_len = csd.v1.read_bl_len;
-    uint16_t c_size = (csd.v1.c_size_high << 10)
-                      | (csd.v1.c_size_mid << 2) | csd.v1.c_size_low;
-    uint8_t c_size_mult = (csd.v1.c_size_mult_high << 1)
-                          | csd.v1.c_size_mult_low;
-    return (uint32_t)(c_size + 1) << (c_size_mult + read_bl_len - 7);
-  } else if (csd.v2.csd_ver == 1) {
-    uint32_t c_size = 0X10000L * csd.v2.c_size_high + 0X100L
-                      * (uint32_t)csd.v2.c_size_mid + csd.v2.c_size_low;
-    return (c_size + 1) << 10;
-  } else {
-    error(SD_CARD_ERROR_BAD_CSD);
-    return 0;
-  }
+  return readCSD(&csd) ? sdCardCapacity(&csd) : 0;
 }
 //------------------------------------------------------------------------------
 bool SdSpiCard::erase(uint32_t firstBlock, uint32_t lastBlock) {
@@ -388,7 +375,7 @@ bool SdSpiCard::readData(uint8_t* dst, size_t count) {
   }
   // transfer data
   if ((m_status = spiReceive(dst, count))) {
-    error(SD_CARD_ERROR_SPI_DMA);
+    error(SD_CARD_ERROR_DMA);
     goto fail;
   }
 
@@ -556,7 +543,7 @@ bool SdSpiCard::writeBlock(uint32_t blockNumber, const uint8_t* src) {
   }
   // response is r2 so get and check two bytes for nonzero
   if (cardCommand(CMD13, 0) || spiReceive()) {
-    error(SD_CARD_ERROR_WRITE_PROGRAMMING);
+    error(SD_CARD_ERROR_CMD13);
     goto fail;
   }
 #endif  // CHECK_PROGRAMMING

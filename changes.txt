@@ -1,3 +1,11 @@
+5 Sep 2016
+
+Restructured classes to support SPI and SDIO controllers. 
+
+Support for Teensy 3.5/3.6 SDIO.
+
+Added TeensySdioDemo example.
+
 15 Aug 2016
 
 New classes SdFatEX and SdFatSoftSpiEX with Extended SD I/O.

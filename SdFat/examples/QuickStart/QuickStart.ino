@@ -1,4 +1,4 @@
-// Quick hardware test.
+// Quick hardware test for SPI card access.
 //
 #include <SPI.h>
 #include "SdFat.h"

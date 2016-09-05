@@ -96,17 +96,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_sys_call_8h.html">SysCall.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_block_driver_8h.html">BlockDriver.h</a>&quot;</code><br />
-<code>#include &quot;FatLib.h&quot;</code><br />
+<code>#include &quot;FatLib/FatLib.h&quot;</code><br />
+<code>#include &quot;SdCard/SdioCard.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SdFat.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_sd_fat_8h__incl.png" border="0" usemap="#_arduino_2libraries_2_sd_fat_2src_2_sd_fat_8h" alt=""/></div>
 <map name="_arduino_2libraries_2_sd_fat_2src_2_sd_fat_8h" id="_arduino_2libraries_2_sd_fat_2src_2_sd_fat_8h">
-<area shape="rect" id="node2" href="_sys_call_8h.html" title="SysCall class. " alt="" coords="5,244,84,271"/>
-<area shape="rect" id="node3" href="_block_driver_8h.html" title="Define block driver. " alt="" coords="90,95,189,121"/>
-<area shape="rect" id="node4" href="_sd_spi_card_8h.html" title="SdSpiCard class for V2 SD/SDHC cards. " alt="" coords="95,169,189,196"/>
-<area shape="rect" id="node7" href="_sd_spi_driver_8h.html" title="SpiDriver classes. " alt="" coords="295,244,395,271"/>
-<area shape="rect" id="node10" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="397,319,501,345"/>
+<area shape="rect" id="node2" href="_sys_call_8h.html" title="SysCall class. " alt="" coords="5,273,84,300"/>
+<area shape="rect" id="node3" href="_block_driver_8h.html" title="Define block driver. " alt="" coords="329,95,427,121"/>
+<area shape="rect" id="node4" href="_sd_spi_card_8h.html" title="SdSpiCard class for V2 SD/SDHC cards. " alt="" coords="83,184,225,211"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -124,6 +123,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_e_x.html">SdFatEX</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> class with extended SD I/O.  <a href="class_sd_fat_e_x.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_sdio.html">SdFatSdio</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> class using SDIO.  <a href="class_sd_fat_sdio.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sd_fat_soft_spi.html">SdFatSoftSpi&lt; MisoPin, MosiPin, SckPin &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sd_fat.html" title="Main file system class for SdFat library. ">SdFat</a> class using software SPI.  <a href="class_sd_fat_soft_spi.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,7 +141,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aca25ecce379f446043bdee2c55304210"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#aca25ecce379f446043bdee2c55304210">SD_FAT_VERSION</a>&#160;&#160;&#160;20160801</td></tr>
+<tr class="memitem:aca25ecce379f446043bdee2c55304210"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#aca25ecce379f446043bdee2c55304210">SD_FAT_VERSION</a>&#160;&#160;&#160;20160905</td></tr>
 <tr class="separator:aca25ecce379f446043bdee2c55304210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -150,7 +152,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SD_FAT_VERSION&#160;&#160;&#160;20160801</td>
+          <td class="memname">#define SD_FAT_VERSION&#160;&#160;&#160;20160905</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -161,7 +163,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 19 2016 08:28:00 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 5 2016 10:18:52 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.10
 </small></address>

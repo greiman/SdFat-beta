@@ -86,7 +86,7 @@ var searchData=
   ['freecount',['freeCount',['../structfat32__fsinfo.html#a6c2d84388c0a38a74f7682fd602492c7',1,'fat32_fsinfo']]],
   ['freestack',['FreeStack',['../_free_stack_8h.html#a2c0121d5649d35329a8d0a71e4ffb89b',1,'FreeStack.h']]],
   ['freestack_2eh',['FreeStack.h',['../_free_stack_8h.html',1,'']]],
-  ['fsbegin',['fsBegin',['../class_sd_fat.html#add6a9a3ad07585f6e0e5c35e35cacb9a',1,'SdFat']]],
+  ['fsbegin',['fsBegin',['../class_sd_fat.html#add6a9a3ad07585f6e0e5c35e35cacb9a',1,'SdFat::fsBegin()'],['../class_sd_fat_sdio.html#aac0e8d86182a0e0566c4671c15f3df61',1,'SdFatSdio::fsBegin()']]],
   ['fseek',['fseek',['../class_stdio_stream.html#a71584fd5c5cda3c31ce6cdbcc56f104d',1,'StdioStream']]],
   ['fsinfo',['fsinfo',['../unioncache__t.html#a46c7b14586a6248824a97101111cbae1',1,'cache_t']]],
   ['fsinfo_5flead_5fsig',['FSINFO_LEAD_SIG',['../_fat_structs_8h.html#a7a7a74a7315ad523e3b0c9dbd44d9a32',1,'FatStructs.h']]],

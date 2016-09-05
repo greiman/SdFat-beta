@@ -156,6 +156,13 @@
 #else  // RAMEND
 #define USE_MULTI_BLOCK_IO 1
 #endif  // RAMEND
+//-----------------------------------------------------------------------------
+/** Enable SDIO driver if available. */
+#if defined(__MK64FX512__) || defined(__MK66FX1M0__)
+#define ENABLE_SDIO_CLASS 1
+#else  // ENABLE_SDIO_CLASS
+#define ENABLE_SDIO_CLASS 0
+#endif  // ENABLE_SDIO_CLASS
 //------------------------------------------------------------------------------
 /**
  * Determine the default SPI configuration.

@@ -32,7 +32,10 @@ uint8_t buf[BUF_SIZE];
 
 // file system
 #if USE_SDIO
-SdFatSdio sd;
+// Traditional DMA version.
+// SdFatSdio sd;
+// Faster version.
+SdFatSdioEX sd;
 #else  // USE_SDIO
 SdFat sd;
 #endif  // USE_SDIO

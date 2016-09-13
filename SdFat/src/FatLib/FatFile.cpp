@@ -774,10 +774,10 @@ int FatFile::read(void* buf, size_t nbyte) {
         }
       }
       n = 512*nb;
-      if (m_vol->cacheBlockNumber() <= block
+      if (block <= m_vol->cacheBlockNumber()
           && block < (m_vol->cacheBlockNumber() + nb)) {
         // flush cache if a block is in the cache
-        if (!m_vol->cacheSync()) {
+        if (!m_vol->cacheSyncData()) {
           DBG_FAIL_MACRO;
           goto fail;
         }
@@ -1160,7 +1160,6 @@ bool FatFile::sync() {
   if (!isOpen()) {
     return true;
   }
-
   if (m_flags & F_FILE_DIR_DIRTY) {
     dir_t* dir = cacheDirEntry(FatCache::CACHE_FOR_WRITE);
     // check for deleted by another open file object
@@ -1445,7 +1444,7 @@ int FatFile::write(const void* buf, size_t nbyte) {
         nBlock = maxBlocks;
       }
       n = 512*nBlock;
-      if (m_vol->cacheBlockNumber() <= block
+      if (block <= m_vol->cacheBlockNumber()
           && block < (m_vol->cacheBlockNumber() + nBlock)) {
         // invalidate cache if block is in cache
         m_vol->cacheInvalidate();

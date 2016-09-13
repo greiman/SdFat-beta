@@ -23,7 +23,9 @@ const uint8_t SD_CHIP_SELECT = SS;
 const int8_t DISABLE_CHIP_SELECT = -1;
 
 #if USE_SDIO
-SdFatSdio sd;
+// Use faster SdioCardEX
+SdFatSdioEX sd;
+// SdFatSdio sd;
 #else // USE_SDIO
 SdFat sd;
 #endif  // USE_SDIO
@@ -151,6 +153,7 @@ void setup() {
 
   // F stores strings in flash to save RAM
   cout << F("SdFat version: ") << SD_FAT_VERSION << endl;
+#if !USE_SDIO  
   if (DISABLE_CHIP_SELECT < 0) {
     cout << F(
            "\nAssuming the SD is the only SPI device.\n"
@@ -163,6 +166,7 @@ void setup() {
   }
   cout << F("\nAssuming the SD chip select pin is: ") <<int(SD_CHIP_SELECT);
   cout << F("\nEdit SD_CHIP_SELECT to change the SD chip select pin.\n");
+#endif  // !USE_SDIO  
 }
 //------------------------------------------------------------------------------
 void loop() {
@@ -187,7 +191,7 @@ void loop() {
   // Initialize at the highest speed supported by the board that is
   // not over 50 MHz. Try a lower speed if SPI errors occur.
   if (!sd.cardBegin(SD_CHIP_SELECT, SD_SCK_MHZ(50))) {
-    sdErrorMsg("\ncardBegin failed");
+    sdErrorMsg("cardBegin failed");
     return;
   }
  #endif  // USE_SDIO 

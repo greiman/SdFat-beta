@@ -1,3 +1,7 @@
+13 Sep 2016
+
+Added SdFatSdioEX class with Extended SD I/O.  
+
 5 Sep 2016
 
 Restructured classes to support SPI and SDIO controllers. 

@@ -1,6 +1,10 @@
 // Simple performance test for Teensy 3.5/3.6 SDHC.
 // Demonstrates yield() efficiency.
 
+// Warning SdFatSdio and SdFatSdioEX normally should 
+// not both be used in a program.
+// Each has its own cache and member variables.
+
 #include "SdFat.h"
 
 // 32 KiB buffer.
@@ -10,6 +14,8 @@ const size_t BUF_DIM = 32768;
 const uint32_t FILE_SIZE = 256UL*BUF_DIM;
 
 SdFatSdio sd;
+
+SdFatSdioEX sdEx;
 
 File file;
 
@@ -25,17 +31,35 @@ uint32_t yieldMicros = 0;
 // Number of yield calls.
 uint32_t yieldCalls = 0;
 // Max busy time for single yield call.
-uint32_t yieldMaxUsec = 0; 
+uint32_t yieldMaxUsec = 0;
+// Control access to the two versions of SdFat.
+bool useEx = false;
 //-----------------------------------------------------------------------------
+bool sdBusy() {
+  return useEx ? sdEx.card()->isBusy() : sd.card()->isBusy();
+}
+//-----------------------------------------------------------------------------
+void errorHalt(const char* msg) {
+  if (useEx) {
+    sdEx.errorHalt(msg);
+  } else {
+    sd.errorHalt(msg);
+  }
+}
+//------------------------------------------------------------------------------
+uint32_t kHzSdClk() {
+  return useEx ? sdEx.card()->kHzSdClk() : sd.card()->kHzSdClk(); 
+}  
+//------------------------------------------------------------------------------
 // Replace "weak" system yield() function.
 void yield() {
   // Only count cardBusy time.
-  if (!sd.card()->dmaBusy()) {
+  if (!sdBusy()) {
     return;
- }
+  }
   uint32_t m = micros();
   yieldCalls++;
-  while (sd.card()->dmaBusy()) {
+  while (sdBusy()) {
     // Do something here.
   }
   m = micros() - m;
@@ -45,18 +69,14 @@ void yield() {
   yieldMicros += m;
 }
 //-----------------------------------------------------------------------------
-void setup() {
-  Serial.begin(9600);
-  while (!Serial) {
-  }
-  Serial.println("Type any character to begin");
-  while (!Serial.available()) {
-  }
-  if (!sd.begin()) {
-    sd.initErrorHalt();
-  }
+void runTest() {
+  // Zero Stats
+  totalMicros = 0;
+  yieldMicros = 0;
+  yieldCalls = 0;
+  yieldMaxUsec = 0; 
   if (!file.open("TeensyDemo.bin", O_RDWR | O_CREAT)) {
-    sd.errorHalt("open failed");
+    errorHalt("open failed");
   }
   Serial.println("\nsize,write,read");
   Serial.println("bytes,KB/sec,KB/sec");
@@ -71,7 +91,7 @@ void setup() {
       buf32[0] = n;
       buf32[nb/4 - 1] = n;
       if (nb != file.write(buf, nb)) {
-        sd.errorHalt("write failed");
+        errorHalt("write failed");
       }
     }
     t = micros() - t;
@@ -83,11 +103,11 @@ void setup() {
     
     for (uint32_t n = 0; n < nRdWr; n++) {
       if ((int)nb != file.read(buf, nb)) {
-        sd.errorHalt("read failed");
+        errorHalt("read failed");
       }
       // crude check of data.     
       if (buf32[0] != n || buf32[nb/4 - 1] != n) {
-        sd.errorHalt("data check");
+        errorHalt("data check");
       }
     }
     t = micros() - t;
@@ -102,11 +122,48 @@ void setup() {
   Serial.print("yieldCalls   ");
   Serial.println(yieldCalls);
   Serial.print("yieldMaxUsec ");
-  Serial.println(yieldMaxUsec);
+  Serial.println(yieldMaxUsec); 
   Serial.print("kHzSdClk     ");
-  Serial.println(sd.card()->kHzSdClk());
+  Serial.println(kHzSdClk());
   Serial.println("Done");
 }
-
+//-----------------------------------------------------------------------------
+void setup() {
+  Serial.begin(9600);
+  while (!Serial) {
+  }
+  Serial.println("SdFatSdioEX uses extended multi-block transfers without DMA.");
+  Serial.println("SdFatSdio uses a traditional DMA SDIO implementation."); 
+  Serial.println("Note the difference is speed and busy yield time.\n"); 
+}
+//-----------------------------------------------------------------------------
 void loop() {
+  do {
+    delay(10);
+  } while (Serial.available() && Serial.read());
+
+  Serial.println("Type '1' for SdFatSdioEX or '2' for SdFatSdio");
+  while (!Serial.available()) {
+  }
+  char c = Serial.read();
+  if (c != '1' && c != '2') {
+    Serial.println("Invalid input");
+    return;
+  }
+  if (c =='1') {
+    useEx = true;
+    if (!sdEx.begin()) {
+      sd.initErrorHalt("SdFatSdioEX begin() failed");
+    }
+    // make sdEx the current volume.
+    sdEx.chvol();
+  } else {
+    useEx = false;
+    if (!sd.begin()) {
+      sd.initErrorHalt("SdFatSdio begin() failed");
+    }
+    // make sd the current volume.
+    sd.chvol();  
+  }
+  runTest();
 }

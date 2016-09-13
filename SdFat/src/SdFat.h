@@ -29,7 +29,7 @@
 #include "SdCard/SdioCard.h"
 //------------------------------------------------------------------------------
 /** SdFat version YYYYMMDD */
-#define SD_FAT_VERSION 20160905
+#define SD_FAT_VERSION 20160913
 //==============================================================================
 /**
  * \class SdBaseFile
@@ -317,7 +317,7 @@ class SdFat : public SdFileSystem<SdSpiCard> {
    * \param[in] csPin SD card chip select pin.
    * \param[in] spiSettings SPI speed, mode, and bit order.
    * \return true for success else false.
-   */ 
+   */
   bool begin(uint8_t csPin = SS, SPISettings spiSettings = SPI_FULL_SPEED) {
     return m_card.begin(&m_spi, csPin, spiSettings) &&
            SdFileSystem::begin();
@@ -327,13 +327,13 @@ class SdFat : public SdFileSystem<SdSpiCard> {
    * \param[in] csPin SD card chip select pin.
    * \param[in] settings SPI speed, mode, and bit order.
    * \return true for success else false.
-   */   
+   */
   bool cardBegin(uint8_t csPin = SS, SPISettings settings = SPI_FULL_SPEED) {
     return m_card.begin(&m_spi, csPin, settings);
   }
   /** Initialize file system for diagnostic use only.
    * \return true for success else false.
-   */   
+   */
   bool fsBegin() {
     return FatFileSystem::begin(card());
   }
@@ -351,26 +351,59 @@ class SdFatSdio : public SdFileSystem<SdioCard> {
  public:
   /** Initialize SD card and file system.
    * \return true for success else false.
-   */  
+   */
   bool begin() {
     return m_card.begin() && SdFileSystem::begin();
   }
   /** Initialize SD card for diagnostic use only.
    *
    * \return true for success else false.
-   */     
+   */
   bool cardBegin() {
     return m_card.begin();
   }
   /** Initialize file system for diagnostic use only.
    * \return true for success else false.
-   */     
+   */
   bool fsBegin() {
     return SdFileSystem::begin();
   }
 };
+#if ENABLE_SDIOEX_CLASS || defined(DOXYGEN)
+//-----------------------------------------------------------------------------
+/**
+ * \class SdFatSdioEX
+ * \brief SdFat class using SDIO.
+ */
+class SdFatSdioEX : public SdFileSystem<SdioCardEX> {
+ public:
+  /** Initialize SD card and file system.
+   * \return true for success else false.
+   */
+  bool begin() {
+    return m_card.begin() && SdFileSystem::begin();
+  }
+  /** \return Pointer to SD card object */
+  SdioCardEX* card() {
+    return &m_card;
+  }
+  /** Initialize SD card for diagnostic use only.
+   *
+   * \return true for success else false.
+   */
+  bool cardBegin() {
+    return m_card.begin();
+  }
+  /** Initialize file system for diagnostic use only.
+   * \return true for success else false.
+   */
+  bool fsBegin() {
+    return SdFileSystem::begin();
+  }
+};
+#endif  // ENABLE_SDIOEX_CLASS || defined(DOXYGEN)
 #endif  // ENABLE_SDIO_CLASS || defined(DOXYGEN)
-//==============================================================================
+//=============================================================================
 #if ENABLE_SOFTWARE_SPI_CLASS || defined(DOXYGEN)
 /**
  * \class SdFatSoftSpi
@@ -407,7 +440,7 @@ class SdFatEX : public SdFileSystem<SdSpiCardEX> {
   }
   /** Constructor with SPI port selection.
    * \param[in] spiPort SPI port number.
-   */  
+   */
   explicit SdFatEX(uint8_t spiPort) {
     m_spi.setPort(spiPort);
   }
@@ -417,7 +450,7 @@ class SdFatEX : public SdFileSystem<SdSpiCardEX> {
   * \param[in] csPin SD card chip select pin.
   * \param[in] spiSettings SPI speed, mode, and bit order.
   * \return true for success else false.
-  */ 
+  */
   bool begin(uint8_t csPin = SS, SPISettings spiSettings = SPI_FULL_SPEED) {
     return m_card.begin(&m_spi, csPin, spiSettings) &&
            SdFileSystem::begin();

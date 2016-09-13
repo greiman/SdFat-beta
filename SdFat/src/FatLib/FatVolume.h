@@ -126,6 +126,10 @@ class FatCache {
     m_status = 0;
     m_lbn = 0XFFFFFFFF;
   }
+  /** \return dirty status */
+  bool isDirty() {
+    return m_status & CACHE_STATUS_DIRTY;
+  }
   /** \return Logical block number for cached block. */
   uint32_t lbn() {
     return m_lbn;

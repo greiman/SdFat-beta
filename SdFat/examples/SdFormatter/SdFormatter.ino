@@ -38,7 +38,9 @@ const uint8_t chipSelect = SS;
 ArduinoOutStream cout(Serial);
 
 #if USE_SDIO
-SdioCard card;
+// Use faster SdioCardEX
+SdioCardEX card;
+// SdioCard card;
 #else  // USE_SDIO
 Sd2Card card;
 #endif  // USE_SDIO

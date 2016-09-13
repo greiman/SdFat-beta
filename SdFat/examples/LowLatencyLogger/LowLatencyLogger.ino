@@ -377,7 +377,7 @@ void recordBinFile() {
   
   // Start a multiple block write.
   if (!sd.card()->writeStart(binFile.firstBlock())) {
-    error("writeBStart failed");
+    error("writeStart failed");
   }
   Serial.print(F("FreeStack: "));
   Serial.println(FreeStack());

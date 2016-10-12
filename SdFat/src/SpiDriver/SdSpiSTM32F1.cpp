@@ -26,7 +26,7 @@ static SPIClass m_SPI1(1);
 static SPIClass m_SPI2(2);
 #endif  // BOARD_NR_SPI > 1
 #if BOARD_NR_SPI > 2
-static SPIClass m_SPI2(3);
+static SPIClass m_SPI3(3);
 #endif  // BOARD_NR_SPI > 2
 //
 static SPIClass* pSpi[] =

@@ -1,4 +1,4 @@
-### Warning: This version has major changes so it may be unstable.
+### Warning: This beta version is now out of date. Use standard version of SdFat.
 
 Teensy 3.5/3.6 SDIO support has been added.  Try the TeensySdioDemo example.
 Many other example will work with Teensy SDIO if you use the SdFatSdio classes

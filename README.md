@@ -3,7 +3,7 @@
 This version of SdFat has been modified to use standard POSIX/Linux 
 definitions of open flags from fcntl.h.
 
-Open flags are include access modes, O_RDONLY, O_RDWR, O_WRONLY, and modifiers
+Open flags are access modes, O_RDONLY, O_RDWR, O_WRONLY, and modifiers
 O_APPEND, O_CREAT, O_EXCL, O_SYNC, O_TRUNC.
 
 Rename this folder SdFat and place it in the standard place for libraries.

@@ -37,7 +37,7 @@
 #endif  // INCLUDE_SDIOS
 //------------------------------------------------------------------------------
 /** SdFat version */
-#define SD_FAT_VERSION "1.0.9"
+#define SD_FAT_VERSION "1.0.10"
 //==============================================================================
 /**
  * \class SdBaseFile
@@ -311,13 +311,13 @@ class SdFat : public SdFileSystem<SdSpiCard> {
  public:
 #if IMPLEMENT_SPI_PORT_SELECTION || defined(DOXYGEN)
   SdFat() {
-    m_spi.setPortNumber(0);
+    m_spi.setPort(nullptr);
   }
   /** Constructor with SPI port selection.
    * \param[in] spiPort SPI port number.
    */
-  explicit SdFat(uint8_t spiPort) {
-    m_spi.setPortNumber(spiPort);
+  explicit SdFat(SPIClass* spiPort) {
+    m_spi.setPort(spiPort);
   }
 #endif  // IMPLEMENT_SPI_PORT_SELECTION
   /** Initialize SD card and file system.
@@ -444,13 +444,13 @@ class SdFatEX : public SdFileSystem<SdSpiCardEX> {
  public:
 #if IMPLEMENT_SPI_PORT_SELECTION  || defined(DOXYGEN)
   SdFatEX() {
-    m_spi.setPortNumber(0);
+    m_spi.setPort(nullptr);
   }
   /** Constructor with SPI port selection.
    * \param[in] spiPort SPI port number.
    */
-  explicit SdFatEX(uint8_t spiPort) {
-    m_spi.setPortNumber(spiPort);
+  explicit SdFatEX(SPIClass* spiPort) {
+    m_spi.setPort(spiPort);
   }
 #endif  // IMPLEMENT_SPI_PORT_SELECTION
   /** Initialize SD card and file system.

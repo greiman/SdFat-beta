@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 20011-2017 Bill Greiman
+ * Copyright (c) 20011-2018 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -24,7 +24,7 @@
  */
 /**
 \mainpage Arduino %SdFat Library
-<CENTER>Copyright &copy; 2012, 2013, 2014, 2015, 2016 by William Greiman
+<CENTER>Copyright &copy 2012-2018 by William Greiman
 </CENTER>
 
 \section Intro Introduction

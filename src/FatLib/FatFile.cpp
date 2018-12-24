@@ -505,36 +505,36 @@ bool FatFile::openCachedEntry(FatFile* dirFile, uint16_t dirIndex,
     m_attr |= FILE_ATTR_FILE;
   }
   m_lfnOrd = lfnOrd;
- 
-  switch(oflag & O_ACCMODE){
+
+  switch (oflag & O_ACCMODE) {
     case O_RDONLY:
       if (oflag & O_TRUNC) {
         DBG_FAIL_MACRO;
-        goto fail;   
+        goto fail;
       }
       m_flags = F_READ;
       break;
-      
+
     case O_RDWR:
       m_flags = F_READ | F_WRITE;
       break;
-      
+
     case O_WRONLY:
-      m_flags = F_WRITE;  
+      m_flags = F_WRITE;
       break;
-      
+
     default:
       DBG_FAIL_MACRO;
       goto fail;
   }
-  
+
   if (m_flags & F_WRITE) {
     if (isSubDir() || isReadOnly()) {
       DBG_FAIL_MACRO;
       goto fail;
     }
   }
-    
+
   m_flags |= (oflag & O_APPEND ? F_APPEND : 0) | (oflag & O_SYNC ? F_SYNC : 0);
 
   m_dirBlock = m_vol->cacheBlockNumber();

@@ -110,7 +110,7 @@ void loop() {
   while (!Serial.available()) {
     SysCall::yield();
   }
-
+  cout << F("chipSelect: ") << int(chipSelect) << endl;
   cout << F("FreeStack: ") << FreeStack() << endl;
 
 #if USE_SDIO

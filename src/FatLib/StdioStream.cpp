@@ -101,19 +101,19 @@ bool StdioStream::fopen(const char* path, const char* mode) {
   case 'a':
     m = O_WRONLY;
     oflag = O_CREAT | O_APPEND;
-    m_status = S_SWR;    
+    m_status = S_SWR;
     break;
 
   case 'r':
     m = O_RDONLY;
     oflag = 0;
-    m_status = S_SRD;    
+    m_status = S_SRD;
     break;
 
   case 'w':
     m = O_WRONLY;
     oflag = O_CREAT | O_TRUNC;
-    m_status = S_SWR;    
+    m_status = S_SWR;
     break;
 
   default:
@@ -236,28 +236,6 @@ int32_t StdioStream::ftell() {
 //------------------------------------------------------------------------------
 size_t StdioStream::fwrite(const void* ptr, size_t size, size_t count) {
   return write(ptr, count*size) < 0 ? EOF : count;
-#if 0  ////////////////////////////////////////////////////////////////////////////////////
-  const uint8_t* src = static_cast<const uint8_t*>(ptr);
-  size_t total = count*size;
-  if (total == 0) {
-    return 0;
-  }
-  size_t todo = total;
-
-  while (todo > m_w) {
-    memcpy(m_p, src, m_w);
-    m_p += m_w;
-    src += m_w;
-    todo -= m_w;
-    if (!flushBuf()) {
-      return (total - todo)/size;
-    }
-  }
-  memcpy(m_p, src, todo);
-  m_p += todo;
-  m_w -= todo;
-  return count;
-#endif  //////////////////////////////////////////////////////////////////////////////////
 }
 //------------------------------------------------------------------------------
 int StdioStream::write(const void* buf, size_t count) {

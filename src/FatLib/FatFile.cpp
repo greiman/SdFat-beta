@@ -138,7 +138,7 @@ bool FatFile::createContiguous(FatFile* dirFile,
     DBG_FAIL_MACRO;
     goto fail;
   }
-  if (!open(dirFile, path, O_CREAT | O_EXCL | O_RDWR)) {
+  if (!open(dirFile, path, O_RDWR | O_CREAT | O_EXCL)) {
     DBG_FAIL_MACRO;
     goto fail;
   }
@@ -311,12 +311,12 @@ bool FatFile::mkdir(FatFile* parent, fname_t* fname) {
     goto fail;
   }
   // create a normal file
-  if (!open(parent, fname, O_CREAT | O_EXCL | O_RDWR)) {
+  if (!open(parent, fname, O_RDWR | O_CREAT | O_EXCL)) {
     DBG_FAIL_MACRO;
     goto fail;
   }
   // convert file to directory
-  m_flags = O_RDONLY;
+  m_flags = F_READ;
   m_attr = FILE_ATTR_SUBDIR;
 
   // allocate and zero first cluster
@@ -1387,7 +1387,7 @@ int FatFile::write(const void* buf, size_t nbyte) {
     goto fail;
   }
   // seek to end of file if append flag
-  if ((m_flags & O_APPEND)) {
+  if ((m_flags & F_APPEND)) {
     if (!seekSet(m_fileSize)) {
       DBG_FAIL_MACRO;
       goto fail;
@@ -1505,7 +1505,7 @@ int FatFile::write(const void* buf, size_t nbyte) {
     m_flags |= F_FILE_DIR_DIRTY;
   }
 
-  if (m_flags & O_SYNC) {
+  if (m_flags & F_SYNC) {
     if (!sync()) {
       DBG_FAIL_MACRO;
       goto fail;

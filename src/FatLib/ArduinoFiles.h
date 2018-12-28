@@ -182,12 +182,12 @@ class File : public FatFile, public Stream {
   }
   /** Opens the next file or folder in a directory.
    *
-   * \param[in] mode open mode flags.
+   * \param[in] oflag open oflag flags.
    * \return a File object.
    */
-  File openNextFile(uint8_t mode = O_RDONLY) {
+  File openNextFile(oflag_t oflag = O_RDONLY) {
     File tmpFile;
-    tmpFile.openNext(this, mode);
+    tmpFile.openNext(this, oflag);
     return tmpFile;
   }
   /** Read the next byte from a file.

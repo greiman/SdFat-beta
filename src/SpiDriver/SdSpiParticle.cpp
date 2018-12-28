@@ -44,9 +44,10 @@ void SdSpiAltDriver::activate() {
  */
 void SdSpiAltDriver::begin(uint8_t csPin) {
   m_csPin = csPin;
+  m_spi->begin(m_csPin);
+  // Next line is redundant - begin(m_csPin) sets csPin to output mode.
   pinMode(m_csPin, OUTPUT);
   digitalWrite(m_csPin, HIGH);
-  m_spi->begin();
 }
 //------------------------------------------------------------------------------
 /**
@@ -73,9 +74,9 @@ uint8_t SdSpiAltDriver::receive() {
  */
 uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
   SPI_DMA_TransferCompleted = false;
-  m_spi->transfer(0, buf, n, SD_SPI_DMA_TransferComplete_Callback);
+  m_spi->transfer(nullptr, buf, n, SD_SPI_DMA_TransferComplete_Callback);
   while (!SPI_DMA_TransferCompleted) {}
-  return 0;  
+  return 0;
 }
 //------------------------------------------------------------------------------
 /** Send a byte.
@@ -94,7 +95,7 @@ void SdSpiAltDriver::send(uint8_t b) {
 void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
   SPI_DMA_TransferCompleted = false;
 
-  m_spi->transfer(const_cast<uint8_t*>(buf), 0, n,
+  m_spi->transfer(const_cast<uint8_t*>(buf), nullptr, n,
                             SD_SPI_DMA_TransferComplete_Callback);
 
   while (!SPI_DMA_TransferCompleted) {}

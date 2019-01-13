@@ -1,38 +1,10 @@
-### Warning: This beta is for testing with Particle IoT mesh devices.
+### Warning: This beta is no longer up to date with the release SdFat.
 
-Rename this folder SdFat and place it in the standard place for libraries.
+### Please use the current version of SdFat.
 
-I tested with a particle CLI project with a SdFat in a lib
+Changes Version 1.0.10:
 
-```
- \Users\bill\Documents\Particle\projects\SdFatMod>ls *
-README.md  argon_firmware_1545324931631.bin  project.properties
-
-lib:
-SdFat
-
-src:
-SdFatMod.ino
-```
-Changess Version 1.0.10:
-
-Added custom Particle driver to use DMA and allow use of SPI1.
-
-To use SPI1 declare SdFat/SdFatEX class like this:
-
-```
-SdFat sd1(&SPI1);
-// or
-SdFatEX sd1(&SPI1);
-```
-Changed STM32 use of SPI ports.  See STM32Test example.
-
-To use second SPI port:
-```
-// Use second SPI port
-SPIClass SPI_2(2);
-SdFat sd2(&SPI_2);
-```
+Initial test version for Particle Gen3 mesh.
 
 Changes Version 1.0.9:
 

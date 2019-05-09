@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['f',['F',['../_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b',1,'SysCall.h']]],
-  ['fat12_5fsupport',['FAT12_SUPPORT',['../_sd_fat_config_8h.html#a28998c5daf4bd038f4f93172698320b1',1,'FAT12_SUPPORT():&#160;SdFatConfig.h'],['../_fat_lib_config_8h.html#a28998c5daf4bd038f4f93172698320b1',1,'FAT12_SUPPORT():&#160;FatLibConfig.h']]],
-  ['file_5fread',['FILE_READ',['../_arduino_files_8h.html#ad52d51659a75e25d96fb04d22ff718cb',1,'ArduinoFiles.h']]],
-  ['file_5fwrite',['FILE_WRITE',['../_arduino_files_8h.html#ace34e503254fa9004599ddf122264c8f',1,'ArduinoFiles.h']]]
+  ['enable_5farduino_5ffeatures',['ENABLE_ARDUINO_FEATURES',['../_sd_fat_config_8h.html#a9a8c1ea8596f35f7f33a24b642567206',1,'SdFatConfig.h']]],
+  ['enable_5farduino_5fserial',['ENABLE_ARDUINO_SERIAL',['../_sd_fat_config_8h.html#aa0a95c918e41f5cb3850231fc41fdcd0',1,'SdFatConfig.h']]],
+  ['enable_5farduino_5fstring',['ENABLE_ARDUINO_STRING',['../_sd_fat_config_8h.html#aae353ccb45df7772d8022763a57410d9',1,'SdFatConfig.h']]],
+  ['enable_5fdedicated_5fspi',['ENABLE_DEDICATED_SPI',['../_sd_fat_config_8h.html#a3ceb23f14263a17c56eac40e484cbbbb',1,'SdFatConfig.h']]],
+  ['endl_5fcalls_5fflush',['ENDL_CALLS_FLUSH',['../_sd_fat_config_8h.html#a270eefdaec4778f2a491658f34f61b17',1,'SdFatConfig.h']]],
+  ['eof',['EOF',['../_stdio_stream_8h.html#a59adc4c82490d23754cd39c2fb99b0da',1,'StdioStream.h']]]
 ];

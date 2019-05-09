@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2018 Bill Greiman
+ * Copyright (c) 2011-2019 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -23,181 +23,43 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include "SdSpiDriver.h"
-#if defined(__arm__) && defined(CORE_TEENSY)
-// SPI definitions
-#include "kinetis.h"
-
+#if defined(SD_ALT_SPI_DRIVER) &&  defined(__arm__) && defined(CORE_TEENSY)
+#define USE_BLOCK_TRANSFER 1
 //------------------------------------------------------------------------------
-void SdSpiAltDriver::activate() {
-  SPI.beginTransaction(m_spiSettings);
+void SdAltSpiDriver::activate() {
+  m_spi->beginTransaction(m_spiSettings);
 }
 //------------------------------------------------------------------------------
-void SdSpiAltDriver::begin(uint8_t chipSelectPin) {
-  m_csPin = chipSelectPin;
+void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
+  m_csPin = spiConfig.csPin;
+  m_spiSettings = SPI_LOW_SPEED;
+  if (spiConfig.spiPort) {
+    m_spi = spiConfig.spiPort;
+#if defined(SDCARD_SPI) && defined(SDCARD_SS_PIN)
+  } else if (m_csPin == SDCARD_SS_PIN) {
+    m_spi = &SDCARD_SPI;
+    m_spi->setMISO(SDCARD_MISO_PIN);
+    m_spi->setMOSI(SDCARD_MOSI_PIN);
+    m_spi->setSCK(SDCARD_SCK_PIN);
+#endif  // defined(SDCARD_SPI) && defined(SDCARD_SS_PIN)
+  } else {
+    m_spi = &SPI;
+  }
   pinMode(m_csPin, OUTPUT);
   digitalWrite(m_csPin, HIGH);
-  SPI.begin();
+  m_spi->begin();
 }
 //------------------------------------------------------------------------------
-void SdSpiAltDriver::deactivate() {
-  SPI.endTransaction();
+void SdAltSpiDriver::deactivate() {
+  m_spi->endTransaction();
 }
-//==============================================================================
-#ifdef KINETISK
-
-// use 16-bit frame if SPI_USE_8BIT_FRAME is zero
-#define SPI_USE_8BIT_FRAME 0
-// Limit initial fifo to three entries to avoid fifo overrun
-#define SPI_INITIAL_FIFO_DEPTH 3
-// define some symbols that are not in mk20dx128.h
-#ifndef SPI_SR_RXCTR
-#define SPI_SR_RXCTR 0XF0
-#endif  // SPI_SR_RXCTR
-#ifndef SPI_PUSHR_CONT
-#define SPI_PUSHR_CONT 0X80000000
-#endif   // SPI_PUSHR_CONT
-#ifndef SPI_PUSHR_CTAS
-#define SPI_PUSHR_CTAS(n) (((n) & 7) << 28)
-#endif  // SPI_PUSHR_CTAS
-//------------------------------------------------------------------------------
-/** SPI receive a byte */
-uint8_t SdSpiAltDriver::receive() {
-  SPI0_MCR |= SPI_MCR_CLR_RXF;
-  SPI0_SR = SPI_SR_TCF;
-  SPI0_PUSHR = 0xFF;
-  while (!(SPI0_SR & SPI_SR_TCF)) {}
-  return SPI0_POPR;
-}
-//------------------------------------------------------------------------------
-/** SPI receive multiple bytes */
-uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
-  // clear any data in RX FIFO
-  SPI0_MCR = SPI_MCR_MSTR | SPI_MCR_CLR_RXF | SPI_MCR_PCSIS(0x1F);
-#if SPI_USE_8BIT_FRAME
-  // initial number of bytes to push into TX FIFO
-  int nf = n < SPI_INITIAL_FIFO_DEPTH ? n : SPI_INITIAL_FIFO_DEPTH;
-  for (int i = 0; i < nf; i++) {
-    SPI0_PUSHR = 0XFF;
-  }
-  // limit for pushing dummy data into TX FIFO
-  uint8_t* limit = buf + n - nf;
-  while (buf < limit) {
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    SPI0_PUSHR = 0XFF;
-    *buf++ = SPI0_POPR;
-  }
-  // limit for rest of RX data
-  limit += nf;
-  while (buf < limit) {
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    *buf++ = SPI0_POPR;
-  }
-#else  // SPI_USE_8BIT_FRAME
-  // use 16 bit frame to avoid TD delay between frames
-  // get one byte if n is odd
-  if (n & 1) {
-    *buf++ = receive();
-    n--;
-  }
-  // initial number of words to push into TX FIFO
-  int nf = n/2 < SPI_INITIAL_FIFO_DEPTH ? n/2 : SPI_INITIAL_FIFO_DEPTH;
-  for (int i = 0; i < nf; i++) {
-    SPI0_PUSHR = SPI_PUSHR_CONT | SPI_PUSHR_CTAS(1) | 0XFFFF;
-  }
-  uint8_t* limit = buf + n - 2*nf;
-  while (buf < limit) {
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    SPI0_PUSHR = SPI_PUSHR_CONT | SPI_PUSHR_CTAS(1) | 0XFFFF;
-    uint16_t w = SPI0_POPR;
-    *buf++ = w >> 8;
-    *buf++ = w & 0XFF;
-  }
-  // limit for rest of RX data
-  limit += 2*nf;
-  while (buf < limit) {
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    uint16_t w = SPI0_POPR;
-    *buf++ = w >> 8;
-    *buf++ = w & 0XFF;
-  }
-#endif  // SPI_USE_8BIT_FRAME
-  return 0;
-}
-//------------------------------------------------------------------------------
-/** SPI send a byte */
-void SdSpiAltDriver::send(uint8_t b) {
-  SPI0_MCR |= SPI_MCR_CLR_RXF;
-  SPI0_SR = SPI_SR_TCF;
-  SPI0_PUSHR = b;
-  while (!(SPI0_SR & SPI_SR_TCF)) {}
-}
-//------------------------------------------------------------------------------
-/** SPI send multiple bytes */
-void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
-  // clear any data in RX FIFO
-  SPI0_MCR = SPI_MCR_MSTR | SPI_MCR_CLR_RXF | SPI_MCR_PCSIS(0x1F);
-#if SPI_USE_8BIT_FRAME
-  // initial number of bytes to push into TX FIFO
-  int nf = n < SPI_INITIAL_FIFO_DEPTH ? n : SPI_INITIAL_FIFO_DEPTH;
-  // limit for pushing data into TX fifo
-  const uint8_t* limit = buf + n;
-  for (int i = 0; i < nf; i++) {
-    SPI0_PUSHR = *buf++;
-  }
-  // write data to TX FIFO
-  while (buf < limit) {
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    SPI0_PUSHR = *buf++;
-    SPI0_POPR;
-  }
-  // wait for data to be sent
-  while (nf) {
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    SPI0_POPR;
-    nf--;
-  }
-#else  // SPI_USE_8BIT_FRAME
-  // use 16 bit frame to avoid TD delay between frames
-  // send one byte if n is odd
-  if (n & 1) {
-    send(*buf++);
-    n--;
-  }
-  // initial number of words to push into TX FIFO
-  int nf = n/2 < SPI_INITIAL_FIFO_DEPTH ? n/2 : SPI_INITIAL_FIFO_DEPTH;
-  // limit for pushing data into TX fifo
-  const uint8_t* limit = buf + n;
-  for (int i = 0; i < nf; i++) {
-    uint16_t w = (*buf++) << 8;
-    w |= *buf++;
-    SPI0_PUSHR = SPI_PUSHR_CONT | SPI_PUSHR_CTAS(1) | w;
-  }
-  // write data to TX FIFO
-  while (buf < limit) {
-    uint16_t w = *buf++ << 8;
-    w |= *buf++;
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    SPI0_PUSHR = SPI_PUSHR_CONT | SPI_PUSHR_CTAS(1) | w;
-    SPI0_POPR;
-  }
-  // wait for data to be sent
-  while (nf) {
-    while (!(SPI0_SR & SPI_SR_RXCTR)) {}
-    SPI0_POPR;
-    nf--;
-  }
-#endif  // SPI_USE_8BIT_FRAME
-}
-#else  // KINETISK
-//==============================================================================
-// Use standard SPI library if not KINETISK
 //------------------------------------------------------------------------------
 /** Receive a byte.
  *
  * \return The byte.
  */
-uint8_t SdSpiAltDriver::receive() {
-  return SPI.transfer(0XFF);
+uint8_t SdAltSpiDriver::receive() {
+  return m_spi->transfer(0XFF);
 }
 /** Receive multiple bytes.
  *
@@ -206,28 +68,40 @@ uint8_t SdSpiAltDriver::receive() {
  *
  * \return Zero for no error or nonzero error code.
  */
-uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
+uint8_t SdAltSpiDriver::receive(uint8_t* buf, size_t n) {
+#if USE_BLOCK_TRANSFER
+  memset(buf, 0XFF, n);
+  m_spi->transfer(buf, n);
+#else  // USE_BLOCK_TRANSFER
   for (size_t i = 0; i < n; i++) {
-    buf[i] = SPI.transfer(0XFF);
+    buf[i] = m_spi->transfer(0XFF);
   }
+#endif  // USE_BLOCK_TRANSFER
   return 0;
 }
 /** Send a byte.
  *
  * \param[in] b Byte to send
  */
-void SdSpiAltDriver::send(uint8_t b) {
-  SPI.transfer(b);
+void SdAltSpiDriver::send(uint8_t b) {
+  m_spi->transfer(b);
 }
 /** Send multiple bytes.
  *
  * \param[in] buf Buffer for data to be sent.
  * \param[in] n Number of bytes to send.
  */
-void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
+void SdAltSpiDriver::send(const uint8_t* buf , size_t n) {
+#if USE_BLOCK_TRANSFER
+  uint32_t tmp[128];
+  if (0 < n && n <= 512) {
+    memcpy(tmp, buf, n);
+    m_spi->transfer(tmp, n);
+    return;
+  }
+#endif  // USE_BLOCK_TRANSFER
   for (size_t i = 0; i < n; i++) {
-    SPI.transfer(buf[i]);
+    m_spi->transfer(buf[i]);
   }
 }
-#endif  // KINETISK
-#endif  // defined(__arm__) && defined(CORE_TEENSY)
+#endif  // defined(SD_ALT_SPI_DRIVER) && defined(__arm__) &&defined(CORE_TEENSY)

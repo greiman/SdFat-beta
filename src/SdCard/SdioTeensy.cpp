@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2018 Bill Greiman
+ * Copyright (c) 2011-2019 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -23,12 +23,18 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #if defined(__MK64FX512__) || defined(__MK66FX1M0__)
+#include "SdCardInfo.h"
 #include "SdioCard.h"
+// limit of K66 due to errata KINETIS_K_0N65N.
+const uint32_t MAX_SDHC_COUNT = 0XFFFF;
+
+// Max RU is 1024 sectors.
+const uint32_t RU_MASK = 0X03FF;
 //==============================================================================
 #define SDHC_PROCTL_DTW_4BIT 0x01
 const uint32_t FIFO_WML = 16;
 const uint32_t CMD8_RETRIES = 10;
-const uint32_t BUSY_TIMEOUT_MICROS = 500000;
+const uint32_t BUSY_TIMEOUT_MICROS = 1000000;
 //==============================================================================
 const uint32_t SDHC_IRQSTATEN_MASK =
                SDHC_IRQSTATEN_DMAESEN | SDHC_IRQSTATEN_AC12ESEN |
@@ -250,14 +256,15 @@ static bool cardCMD6(uint32_t arg, uint8_t* status) {
 //-----------------------------------------------------------------------------
 static void enableGPIO(bool enable) {
   const uint32_t PORT_CLK = PORT_PCR_MUX(4) | PORT_PCR_DSE;
-  const uint32_t PORT_CMD_DATA = PORT_CLK | PORT_PCR_PS | PORT_PCR_PE;
+  const uint32_t PORT_CMD_DATA = PORT_CLK   | PORT_PCR_PE | PORT_PCR_PS;
+  const uint32_t PORT_PUP = PORT_PCR_MUX(1) | PORT_PCR_PE | PORT_PCR_PS;
 
-  PORTE_PCR0 = enable ? PORT_CMD_DATA : 0;  // SDHC_D1
-  PORTE_PCR1 = enable ? PORT_CMD_DATA : 0;  // SDHC_D0
-  PORTE_PCR2 = enable ? PORT_CLK : 0;       // SDHC_CLK
-  PORTE_PCR3 = enable ? PORT_CMD_DATA : 0;  // SDHC_CMD
-  PORTE_PCR4 = enable ? PORT_CMD_DATA : 0;  // SDHC_D3
-  PORTE_PCR5 = enable ? PORT_CMD_DATA : 0;  // SDHC_D2
+  PORTE_PCR0 = enable ? PORT_CMD_DATA : PORT_PUP;  // SDHC_D1
+  PORTE_PCR1 = enable ? PORT_CMD_DATA : PORT_PUP;  // SDHC_D0
+  PORTE_PCR2 = enable ? PORT_CLK      : PORT_PUP;  // SDHC_CLK
+  PORTE_PCR3 = enable ? PORT_CMD_DATA : PORT_PUP;  // SDHC_CMD
+  PORTE_PCR4 = enable ? PORT_CMD_DATA : PORT_PUP;  // SDHC_D3
+  PORTE_PCR5 = enable ? PORT_CMD_DATA : PORT_PUP;  // SDHC_D2
 }
 //-----------------------------------------------------------------------------
 static void enableDmaIrs() {
@@ -269,7 +276,7 @@ static void initSDHC() {
 #ifdef HAS_KINETIS_MPU
   // Allow SDHC Bus Master access.
   MPU_RGDAAC0 |= 0x0C000000;
-#endif
+#endif  // HAS_KINETIS_MPU
   // Enable SDHC clock.
   SIM_SCGC3 |= SIM_SCGC3_SDHC;
 
@@ -295,6 +302,10 @@ static void initSDHC() {
   SDHC_SYSCTL |= SDHC_SYSCTL_INITA;
   while (SDHC_SYSCTL & SDHC_SYSCTL_INITA) {
   }
+}
+//-----------------------------------------------------------------------------
+static uint32_t statusCMD13() {
+  return cardCommand(CMD13_XFERTYP, m_rca) ? SDHC_CMDRSP0 : 0;
 }
 //-----------------------------------------------------------------------------
 static bool isBusyCMD13() {
@@ -329,8 +340,8 @@ static bool isBusyTransferComplete() {
   return !(SDHC_IRQSTAT & (SDHC_IRQSTAT_TC | SDHC_IRQSTAT_ERROR));
 }
 //-----------------------------------------------------------------------------
-static bool rdWrBlocks(uint32_t xfertyp,
-                       uint32_t lba, uint8_t* buf, size_t n) {
+static bool rdWrSectors(uint32_t xfertyp,
+                       uint32_t sector, uint8_t* buf, size_t n) {
   if ((3 & (uint32_t)buf) || n == 0) {
     return sdError(SD_CARD_ERROR_DMA);
   }
@@ -339,7 +350,7 @@ static bool rdWrBlocks(uint32_t xfertyp,
   }
   enableDmaIrs();
   SDHC_DSADDR  = (uint32_t)buf;
-  SDHC_CMDARG = m_highCapacity ? lba : 512*lba;
+  SDHC_CMDARG = m_highCapacity ? sector : 512*sector;
   SDHC_BLKATTR = SDHC_BLKATTR_BLKCNT(n) | SDHC_BLKATTR_BLKSIZE(512);
   SDHC_IRQSIGEN = SDHC_IRQSIGEN_MASK;
   SDHC_XFERTYP = xfertyp;
@@ -427,7 +438,7 @@ static bool yieldTimeout(bool (*fcn)()) {
       m_busyFcn = 0;
       return true;
     }
-    yield();
+    SysCall::yield();
   }
   m_busyFcn = 0;
   return false;  // Caller will set errorCode.
@@ -451,9 +462,11 @@ static bool waitTimeout(bool (*fcn)()) {
   return false;  // Caller will set errorCode.
 }
 //=============================================================================
-bool SdioCard::begin() {
+bool SdioCard::begin(SdioConfig sdioConfig) {
   uint32_t kHzSdClk;
   uint32_t arg;
+  m_sdioConfig = sdioConfig;
+  m_curState = IDLE_STATE;
   m_initDone = false;
   m_errorCode = SD_CARD_ERROR_NONE;
   m_highCapacity = false;
@@ -536,28 +549,28 @@ bool SdioCard::begin() {
   return true;
 }
 //-----------------------------------------------------------------------------
-uint32_t SdioCard::cardSize() {
+uint32_t SdioCard::sectorCount() {
   return sdCardCapacity(&m_csd);
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::erase(uint32_t firstBlock, uint32_t lastBlock) {
-  // check for single block erase
+bool SdioCard::erase(uint32_t firstSector, uint32_t lastSector) {
+  // check for single sector erase
   if (!m_csd.v1.erase_blk_en) {
     // erase size mask
     uint8_t m = (m_csd.v1.sector_size_high << 1) | m_csd.v1.sector_size_low;
-    if ((firstBlock & m) != 0 || ((lastBlock + 1) & m) != 0) {
+    if ((firstSector & m) != 0 || ((lastSector + 1) & m) != 0) {
       // error card can't erase specified area
-      return sdError(SD_CARD_ERROR_ERASE_SINGLE_BLOCK);
+      return sdError(SD_CARD_ERROR_ERASE_SINGLE_SECTOR);
     }
   }
   if (!m_highCapacity) {
-    firstBlock <<= 9;
-    lastBlock <<= 9;
+    firstSector <<= 9;
+    lastSector <<= 9;
   }
-  if (!cardCommand(CMD32_XFERTYP, firstBlock)) {
+  if (!cardCommand(CMD32_XFERTYP, firstSector)) {
     return sdError(SD_CARD_ERROR_CMD32);
   }
-  if (!cardCommand(CMD33_XFERTYP, lastBlock)) {
+  if (!cardCommand(CMD33_XFERTYP, lastSector)) {
      return sdError(SD_CARD_ERROR_CMD33);
   }
   if (!cardCommand(CMD38_XFERTYP, 0)) {
@@ -569,15 +582,15 @@ bool SdioCard::erase(uint32_t firstBlock, uint32_t lastBlock) {
   return true;
 }
 //-----------------------------------------------------------------------------
-uint8_t SdioCard::errorCode() {
+uint8_t SdioCard::errorCode() const {
   return m_errorCode;
 }
 //-----------------------------------------------------------------------------
-uint32_t SdioCard::errorData() {
+uint32_t SdioCard::errorData() const {
   return m_irqstat;
 }
 //-----------------------------------------------------------------------------
-uint32_t SdioCard::errorLine() {
+uint32_t SdioCard::errorLine() const {
   return m_errorLine;
 }
 //-----------------------------------------------------------------------------
@@ -589,41 +602,70 @@ uint32_t SdioCard::kHzSdClk() {
   return m_sdClkKhz;
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::readBlock(uint32_t lba, uint8_t* buf) {
-  uint8_t aligned[512];
+bool SdioCard::readSector(uint32_t sector, uint8_t* dst) {
+  if (m_sdioConfig.useDma()) {
+    uint8_t aligned[512];
 
-  uint8_t* ptr = (uint32_t)buf & 3 ? aligned : buf;
+    uint8_t* ptr = (uint32_t)dst & 3 ? aligned : dst;
 
-  if (!rdWrBlocks(CMD17_DMA_XFERTYP, lba, ptr, 1)) {
-    return sdError(SD_CARD_ERROR_CMD18);
-  }
-  if (ptr != buf) {
-    memcpy(buf, aligned, 512);
+    if (!rdWrSectors(CMD17_DMA_XFERTYP, sector, ptr, 1)) {
+      return sdError(SD_CARD_ERROR_CMD18);
+    }
+    if (ptr != dst) {
+      memcpy(dst, aligned, 512);
+    }
+  } else {
+    if (m_curState != READ_STATE || sector != m_curSector) {
+      if (!syncDevice()) {
+        return false;
+      }
+      m_limitSector = (sector + MAX_SDHC_COUNT) & ~RU_MASK;
+      if (!SdioCard::readStart(sector, m_limitSector - sector)) {
+        return false;
+      }
+      m_curSector = sector;
+      m_curState = READ_STATE;
+    }
+    if (!SdioCard::readData(dst)) {
+      return false;
+    }
+    m_curSector++;
+    if (m_curSector >= m_limitSector) {
+      m_curState = IDLE_STATE;
+    }
   }
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::readBlocks(uint32_t lba, uint8_t* buf, size_t n) {
-  if ((uint32_t)buf & 3) {
-    for (size_t i = 0; i < n; i++, lba++, buf += 512) {
-      if (!readBlock(lba, buf)) {
-        return false;  // readBlock will set errorCode.
+bool SdioCard::readSectors(uint32_t sector, uint8_t* dst, size_t n) {
+  if (m_sdioConfig.useDma()) {
+    if ((uint32_t)dst & 3) {
+      for (size_t i = 0; i < n; i++, sector++, dst += 512) {
+        if (!readSector(sector, dst)) {
+          return false;  // readSector will set errorCode.
+        }
+      }
+      return true;
+    }
+    if (!rdWrSectors(CMD18_DMA_XFERTYP, sector, dst, n)) {
+      return sdError(SD_CARD_ERROR_CMD18);
+    }
+  } else {
+    for (size_t i = 0; i < n; i++) {
+      if (!readSector(sector + i, dst + i*512UL)) {
+        return false;
       }
     }
-    return true;
-  }
-  if (!rdWrBlocks(CMD18_DMA_XFERTYP, lba, buf, n)) {
-    return sdError(SD_CARD_ERROR_CMD18);
   }
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::readCID(void* cid) {
+bool SdioCard::readCID(cid_t* cid) {
   memcpy(cid, &m_cid, 16);
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::readCSD(void* csd) {
+bool SdioCard::readCSD(csd_t* csd) {
   memcpy(csd, &m_csd, 16);
   return true;
 }
@@ -635,7 +677,7 @@ bool SdioCard::readData(uint8_t *dst) {
   if (!(SDHC_PRSSTAT & SDHC_PRSSTAT_RTA)) {
     SDHC_PROCTL &= ~SDHC_PROCTL_SABGREQ;
     if ((SDHC_BLKATTR & 0XFFFF0000) == 0X10000) {
-    // Don't stop at block gap if last block.  Allows auto CMD12.
+    // Don't stop at sector gap if last sector.  Allows auto CMD12.
       SDHC_PROCTL |= SDHC_PROCTL_CREQ;
     } else {
       noInterrupts();
@@ -668,13 +710,13 @@ bool SdioCard::readOCR(uint32_t* ocr) {
   return true;
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::readStart(uint32_t lba) {
-  // K66/K65 Errata - SDHC: Does not support Infinite Block Transfer Mode.
+bool SdioCard::readStart(uint32_t sector) {
+  // K66/K65 Errata - SDHC: Does not support Infinite Sector Transfer Mode.
   return sdError(SD_CARD_ERROR_FUNCTION_NOT_SUPPORTED);
 }
 //-----------------------------------------------------------------------------
-// SDHC will do Auto CMD12 after count blocks.
-bool SdioCard::readStart(uint32_t lba, uint32_t count) {
+// SDHC will do Auto CMD12 after count sectors.
+bool SdioCard::readStart(uint32_t sector, uint32_t count) {
   DBG_IRQSTAT();
   if (count > 0XFFFF) {
     return sdError(SD_CARD_ERROR_READ_START);
@@ -686,7 +728,7 @@ bool SdioCard::readStart(uint32_t lba, uint32_t count) {
     SDHC_PROCTL |= SDHC_PROCTL_SABGREQ;
   }
   SDHC_BLKATTR = SDHC_BLKATTR_BLKCNT(count) | SDHC_BLKATTR_BLKSIZE(512);
-  if (!cardCommand(CMD18_PGM_XFERTYP, m_highCapacity ? lba : 512*lba)) {
+  if (!cardCommand(CMD18_PGM_XFERTYP, m_highCapacity ? sector : 512*sector)) {
     return sdError(SD_CARD_ERROR_CMD18);
   }
   return true;
@@ -696,53 +738,97 @@ bool SdioCard::readStop() {
   return transferStop();
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::syncBlocks() {
-  return true;
+uint32_t SdioCard::status() {
+  return statusCMD13();
 }
 //-----------------------------------------------------------------------------
-uint8_t SdioCard::type() {
+bool SdioCard::syncDevice() {
+  if (m_curState == READ_STATE) {
+    m_curState = IDLE_STATE;
+    if (!SdioCard::readStop()) {
+      return false;
+    }
+  } else if (m_curState == WRITE_STATE) {
+    m_curState = IDLE_STATE;
+    if (!SdioCard::writeStop()) {
+      return false;
+    }
+  }
+  return true;
+}
+//------------------------------------------------------------------------------
+uint8_t SdioCard::type() const {
   return  m_version2 ? m_highCapacity ?
           SD_CARD_TYPE_SDHC : SD_CARD_TYPE_SD2 : SD_CARD_TYPE_SD1;
 }
-//-----------------------------------------------------------------------------
-bool SdioCard::writeBlock(uint32_t lba, const uint8_t* buf) {
-  uint8_t *ptr;
-  uint8_t aligned[512];
-  if (3 & (uint32_t)buf) {
-    ptr = aligned;
-    memcpy(aligned, buf, 512);
-  } else {
-    ptr = const_cast<uint8_t*>(buf);
-  }
-  if (!rdWrBlocks(CMD24_DMA_XFERTYP, lba, ptr, 1)) {
-    return sdError(SD_CARD_ERROR_CMD24);
-  }
-  return true;
-}
-//-----------------------------------------------------------------------------
-bool SdioCard::writeBlocks(uint32_t lba, const uint8_t* buf, size_t n) {
-  uint8_t* ptr = const_cast<uint8_t*>(buf);
-  if (3 & (uint32_t)ptr) {
-    for (size_t i = 0; i < n; i++, lba++, ptr += 512) {
-      if (!writeBlock(lba, ptr)) {
-        return false;  // writeBlock will set errorCode.
-      }
+//------------------------------------------------------------------------------
+bool SdioCard::writeSector(uint32_t sector, const uint8_t* src) {
+  if (m_sdioConfig.useDma()) {
+    uint8_t *ptr;
+    uint8_t aligned[512];
+    if (3 & (uint32_t)src) {
+      ptr = aligned;
+      memcpy(aligned, src, 512);
+    } else {
+      ptr = const_cast<uint8_t*>(src);
     }
-    return true;
-  }
-  if (!rdWrBlocks(CMD25_DMA_XFERTYP, lba, ptr, n)) {
-    return sdError(SD_CARD_ERROR_CMD25);
+    if (!rdWrSectors(CMD24_DMA_XFERTYP, sector, ptr, 1)) {
+      return sdError(SD_CARD_ERROR_CMD24);
+    }
+  } else {
+    if (m_curState != WRITE_STATE || m_curSector != sector) {
+      if (!syncDevice()) {
+        return false;
+      }
+      m_limitSector = (sector + MAX_SDHC_COUNT) & ~RU_MASK;
+      if (!SdioCard::writeStart(sector , m_limitSector - sector)) {
+        return false;
+      }
+      m_curSector = sector;
+      m_curState = WRITE_STATE;
+    }
+    if (!SdioCard::writeData(src)) {
+      return false;
+    }
+    m_curSector++;
+    if (m_curSector >= m_limitSector) {
+      m_curState = IDLE_STATE;
+    }
   }
   return true;
 }
-//-----------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+bool SdioCard::writeSectors(uint32_t sector, const uint8_t* src, size_t n) {
+  if (m_sdioConfig.useDma()) {
+    uint8_t* ptr = const_cast<uint8_t*>(src);
+    if (3 & (uint32_t)ptr) {
+      for (size_t i = 0; i < n; i++, sector++, ptr += 512) {
+        if (!writeSector(sector, ptr)) {
+          return false;  // writeSector will set errorCode.
+        }
+      }
+      return true;
+    }
+    if (!rdWrSectors(CMD25_DMA_XFERTYP, sector, ptr, n)) {
+      return sdError(SD_CARD_ERROR_CMD25);
+    }
+  } else {
+  for (size_t i = 0; i < n; i++) {
+    if (!writeSector(sector + i, src + i*512UL)) {
+      return false;
+    }
+  }
+  }
+  return true;
+}
+//------------------------------------------------------------------------------
 bool SdioCard::writeData(const uint8_t* src) {
   DBG_IRQSTAT();
   const uint32_t* p32 = reinterpret_cast<const uint32_t*>(src);
 
   if (!(SDHC_PRSSTAT & SDHC_PRSSTAT_WTA)) {
     SDHC_PROCTL &= ~SDHC_PROCTL_SABGREQ;
-    // Don't stop at block gap if last block.  Allows auto CMD12.
+    // Don't stop at sector gap if last sector.  Allows auto CMD12.
     if ((SDHC_BLKATTR & 0XFFFF0000) == 0X10000) {
       SDHC_PROCTL |= SDHC_PROCTL_CREQ;
     } else {
@@ -769,13 +855,13 @@ bool SdioCard::writeData(const uint8_t* src) {
   return (m_irqstat & SDHC_IRQSTAT_TC) && !(m_irqstat & SDHC_IRQSTAT_ERROR);
 }
 //-----------------------------------------------------------------------------
-bool SdioCard::writeStart(uint32_t lba) {
-  // K66/K65 Errata - SDHC: Does not support Infinite Block Transfer Mode.
+bool SdioCard::writeStart(uint32_t sector) {
+  // K66/K65 Errata - SDHC: Does not support Infinite Sector Transfer Mode.
   return sdError(SD_CARD_ERROR_FUNCTION_NOT_SUPPORTED);
 }
 //-----------------------------------------------------------------------------
-// SDHC will do Auto CMD12 after count blocks.
-bool SdioCard::writeStart(uint32_t lba, uint32_t count) {
+// SDHC will do Auto CMD12 after count sectors.
+bool SdioCard::writeStart(uint32_t sector, uint32_t count) {
   if (count > 0XFFFF) {
     return sdError(SD_CARD_ERROR_WRITE_START);
   }
@@ -788,7 +874,7 @@ bool SdioCard::writeStart(uint32_t lba, uint32_t count) {
   }
   SDHC_BLKATTR = SDHC_BLKATTR_BLKCNT(count) | SDHC_BLKATTR_BLKSIZE(512);
 
-  if (!cardCommand(CMD25_PGM_XFERTYP, m_highCapacity ? lba : 512*lba)) {
+  if (!cardCommand(CMD25_PGM_XFERTYP, m_highCapacity ? sector : 512*sector)) {
     return sdError(SD_CARD_ERROR_CMD25);
   }
   return true;

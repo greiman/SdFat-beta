@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['name',['name',['../class_file.html#a7ca23d8d3997c10c221977c64736f575',1,'File']]],
-  ['noboolalpha',['noboolalpha',['../ios_8h.html#aa6a1ec04992fc8090ca775a39678be01',1,'ios.h']]],
-  ['noshowbase',['noshowbase',['../ios_8h.html#ab861ff5f863de0ae002b65390dde36b0',1,'ios.h']]],
-  ['noshowpoint',['noshowpoint',['../ios_8h.html#ad85399d1b75151cf9e2436f2a1ccfc13',1,'ios.h']]],
-  ['noshowpos',['noshowpos',['../ios_8h.html#a985805b22ffb4ce2f5298168662bd2d7',1,'ios.h']]],
-  ['noskipws',['noskipws',['../ios_8h.html#a773b847300db776fde08a0b562792131',1,'ios.h']]],
-  ['nouppercase',['nouppercase',['../ios_8h.html#a24b96fb317e056b34aa84c4bb965a79a',1,'ios.h']]]
+  ['mkdir',['mkdir',['../class_ex_fat_file.html#a3a393624d52854e74bf385c9e513a86d',1,'ExFatFile::mkdir()'],['../class_ex_fat_volume.html#a407b93b16554b26ff52f7b762a9217aa',1,'ExFatVolume::mkdir()'],['../class_fat_file.html#abab5b9f72cc796388dd4eed01d13d90d',1,'FatFile::mkdir()'],['../class_fat_volume.html#ad80bccf8f24ff001a7b9277effc2cc52',1,'FatVolume::mkdir()'],['../class_fs_base_file.html#a8b7aa7f2c63882e483336dfe12ef6800',1,'FsBaseFile::mkdir()'],['../class_fs_volume.html#a9d38c297dccceeb5f48dceb17232368d',1,'FsVolume::mkdir()']]],
+  ['mprintf',['mprintf',['../_print_templates_8h.html#afceda1e76dbfc91ef2d06925a10eaea9',1,'mprintf(T *file, const char *fmt,...):&#160;PrintTemplates.h'],['../_print_templates_8h.html#a5893e928fd47234a7a69049f9e769359',1,'mprintf(F *file, const __FlashStringHelper *ifsh,...):&#160;PrintTemplates.h']]]
 ];

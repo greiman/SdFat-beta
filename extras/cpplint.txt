@@ -1,0 +1,3 @@
+Ignoring ../src/DigitalIO/readme.txt; not a valid file name (cc, h, cpp, cu, cuh)
+Ignoring ../src/common/CPPLINT.cfg; not a valid file name (cc, h, cpp, cu, cuh)
+Ignoring "../src/common/PrintTemplates.h": file excluded by "C:\Users\bill\Documents\ArduinoSdFat\libraries\SdFat\src\common\CPPLINT.cfg". File path component "PrintTemplates.h" matches pattern "PrintTemplates.h"

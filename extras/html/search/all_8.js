@@ -1,7 +1,8 @@
 var searchData=
 [
   ['halt',['halt',['../class_sys_call.html#a9b1ef8900e97f572ca561760b4dd4191',1,'SysCall']]],
-  ['headcount',['headCount',['../structbios_parm_block.html#a2324ca82e2a7da4d91f458fa32a6e239',1,'biosParmBlock::headCount()'],['../structfat__boot.html#ae31da876cd9f48de5268a129218df2c2',1,'fat_boot::headCount()'],['../structfat32__boot.html#a1a5298db692526bc64243766d6b54181',1,'fat32_boot::headCount()']]],
+  ['has_5fsdio_5fclass',['HAS_SDIO_CLASS',['../_sd_fat_config_8h.html#a356309f8e0bad852d7a07ad0b9326a27',1,'SdFatConfig.h']]],
+  ['has_5funused_5fstack',['HAS_UNUSED_STACK',['../_free_stack_8h.html#acd5a8222ee7af79faab74b1df412d600',1,'FreeStack.h']]],
   ['hex',['hex',['../classios__base.html#a3608e51eb0a80ea94ddadd5b713a3750',1,'ios_base::hex()'],['../ios_8h.html#ace2036d970905192360d622140bfe336',1,'hex():&#160;ios.h']]],
-  ['hidddensectors',['hidddenSectors',['../structbios_parm_block.html#a9413199be8525190d40589f60c22bcab',1,'biosParmBlock::hidddenSectors()'],['../structfat__boot.html#a18f1b4c245fe7bd09f5a9430c005e23a',1,'fat_boot::hidddenSectors()'],['../structfat32__boot.html#ab10224aa4bba42b262fcd3479e279e1f',1,'fat32_boot::hidddenSectors()']]]
+  ['hssettings',['hsSettings',['../class_sd_spi_config.html#a08fb8580affc2bbbfd3ebfccbf8c4a7d',1,'SdSpiConfig']]]
 ];

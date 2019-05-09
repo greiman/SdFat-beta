@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2018 Bill Greiman
+ * Copyright (c) 2011-2019 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -22,7 +22,10 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
+#define DBG_FILE "FatFileLFN.cpp"
+#include "../common/DebugMacros.h"
 #include "FatFile.h"
+#include "FatVolume.h"
 //------------------------------------------------------------------------------
 //
 uint8_t FatFile::lfnChecksum(uint8_t* name) {
@@ -57,19 +60,19 @@ static uint16_t Bernstein(uint16_t hash, const char *str, size_t len) {
  * \return The 16-bit character.
  */
 static uint16_t lfnGetChar(ldir_t *ldir, uint8_t i) {
-  if (i < LDIR_NAME1_DIM) {
-    return ldir->name1[i];
-  } else if (i < (LDIR_NAME1_DIM + LDIR_NAME2_DIM)) {
-    return ldir->name2[i - LDIR_NAME1_DIM];
-  } else if (i < (LDIR_NAME1_DIM + LDIR_NAME2_DIM + LDIR_NAME2_DIM)) {
-    return ldir->name3[i - LDIR_NAME1_DIM - LDIR_NAME2_DIM];
+  if (i < 5) {
+    return getLe16(ldir->unicode1 + 2*i);
+  } else if (i < 11) {
+    return getLe16(ldir->unicode2 + 2*i - 10);
+  } else if (i < 13) {
+    return getLe16(ldir->unicode3 + 2*i - 22);
   }
   return 0;
 }
 //------------------------------------------------------------------------------
 static bool lfnGetName(ldir_t *ldir, char* name, size_t n) {
   uint8_t i;
-  size_t k = 13*((ldir->ord & 0X1F) - 1);
+  size_t k = 13*((ldir->order & 0X1F) - 1);
   for (i = 0; i < 13; i++) {
     uint16_t c = lfnGetChar(ldir, i);
     if (c == 0 || k >= n) {
@@ -78,7 +81,7 @@ static bool lfnGetName(ldir_t *ldir, char* name, size_t n) {
     name[k++] = c >= 0X7F ? '?' : c;
   }
   // Terminate with zero byte if name fits.
-  if (k < n && (ldir->ord & LDIR_ORD_LAST_LONG_ENTRY)) {
+  if (k < n && (ldir->order & FAT_ORDER_LAST_LONG_ENTRY)) {
     name[k] = 0;
   }
   // Truncate if name is too long.
@@ -102,17 +105,17 @@ inline bool lfnLegalChar(char c) {
  * \param[in] c  The 16-bit character.
  */
 static void lfnPutChar(ldir_t *ldir, uint8_t i, uint16_t c) {
-  if (i < LDIR_NAME1_DIM) {
-    ldir->name1[i] = c;
-  } else if (i < (LDIR_NAME1_DIM + LDIR_NAME2_DIM)) {
-    ldir->name2[i - LDIR_NAME1_DIM] = c;
-  } else if (i < (LDIR_NAME1_DIM + LDIR_NAME2_DIM + LDIR_NAME2_DIM)) {
-    ldir->name3[i - LDIR_NAME1_DIM - LDIR_NAME2_DIM] = c;
+  if (i < 5) {
+    setLe16(ldir->unicode1 + 2*i, c);
+  } else if (i < 11) {
+    setLe16(ldir->unicode2 + 2*i -10, c);
+  } else if (i < 13) {
+    setLe16(ldir->unicode3 + 2*i - 22, c);
   }
 }
 //------------------------------------------------------------------------------
 static void lfnPutName(ldir_t *ldir, const char* name, size_t n) {
-  size_t k = 13*((ldir->ord & 0X1F) - 1);
+  size_t k = 13*((ldir->order & 0X1F) - 1);
   for (uint8_t i = 0; i < 13; i++, k++) {
     uint16_t c = k < n ? name[k] : k == n ? 0 : 0XFFFF;
     lfnPutChar(ldir, i, c);
@@ -133,8 +136,8 @@ bool FatFile::getName(char* name, size_t size) {
     DBG_FAIL_MACRO;
     goto fail;
   }
-  for (uint8_t ord = 1; ord <= m_lfnOrd; ord++) {
-    if (!dirFile.seekSet(32UL*(m_dirIndex - ord))) {
+  for (uint8_t order = 1; order <= m_lfnOrd; order++) {
+    if (!dirFile.seekSet(32UL*(m_dirIndex - order))) {
       DBG_FAIL_MACRO;
       goto fail;
     }
@@ -143,11 +146,11 @@ bool FatFile::getName(char* name, size_t size) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    if (ldir->attr != DIR_ATT_LONG_NAME) {
+    if (ldir->attributes != FAT_ATTRIB_LONG_NAME) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    if (ord != (ldir->ord & 0X1F)) {
+    if (order != (ldir->order & 0X1F)) {
       DBG_FAIL_MACRO;
       goto fail;
     }
@@ -155,7 +158,7 @@ bool FatFile::getName(char* name, size_t size) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    if (ldir->ord & LDIR_ORD_LAST_LONG_ENTRY) {
+    if (ldir->order & FAT_ORDER_LAST_LONG_ENTRY) {
       return true;
     }
   }
@@ -172,8 +175,8 @@ bool FatFile::openCluster(FatFile* file) {
     return openRoot(file->m_vol);
   }
   memset(this, 0, sizeof(FatFile));
-  m_attr = FILE_ATTR_SUBDIR;
-  m_flags = F_READ;
+  m_attributes = FILE_ATTR_SUBDIR;
+  m_flags = FILE_FLAG_READ;
   m_vol = file->m_vol;
   m_firstCluster = file->m_dirCluster;
   return true;
@@ -183,7 +186,7 @@ bool FatFile::parsePathName(const char* path,
                             fname_t* fname, const char** ptr) {
   char c;
   bool is83;
-  uint8_t bit = DIR_NT_LC_BASE;
+  uint8_t bit = FAT_CASE_LC_BASE;
   uint8_t lc = 0;
   uint8_t uc = 0;
   uint8_t i = 0;
@@ -262,7 +265,7 @@ bool FatFile::parsePathName(const char* path,
       si = dot;
       in = 10;  // Max index for full 8.3 name.
       i = 8;    // Place for extension.
-      bit = DIR_NT_LC_EXT;  // bit for extension.
+      bit = FAT_CASE_LC_EXT;  // bit for extension.
     } else {
       if ('a' <= c && c <= 'z') {
         c += 'A' - 'a';
@@ -295,10 +298,13 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
   uint8_t lfnOrd = 0;
   uint8_t freeNeed;
   uint8_t freeFound = 0;
-  uint8_t ord = 0;
-  uint8_t chksum = 0;
+  uint8_t order = 0;
+  uint8_t checksum = 0;
+  uint8_t ms10;
   uint16_t freeIndex = 0;
   uint16_t curIndex;
+  uint16_t date;
+  uint16_t time;
   dir_t* dir;
   ldir_t* ldir;
   size_t len = fname->len;
@@ -322,14 +328,14 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
       // At EOF
       goto create;
     }
-    if (dir->name[0] == DIR_NAME_DELETED || dir->name[0] == DIR_NAME_FREE) {
+    if (dir->name[0] == FAT_NAME_DELETED || dir->name[0] == FAT_NAME_FREE) {
       if (freeFound == 0) {
         freeIndex = curIndex;
       }
       if (freeFound < freeNeed) {
         freeFound++;
       }
-      if (dir->name[0] == DIR_NAME_FREE) {
+      if (dir->name[0] == FAT_NAME_FREE) {
         goto create;
       }
     } else {
@@ -338,21 +344,21 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
       }
     }
     // skip empty slot or '.' or '..'
-    if (dir->name[0] == DIR_NAME_DELETED || dir->name[0] == '.') {
+    if (dir->name[0] == FAT_NAME_DELETED || dir->name[0] == '.') {
       lfnOrd = 0;
-    } else if (DIR_IS_LONG_NAME(dir)) {
-      ldir_t *ldir = reinterpret_cast<ldir_t*>(dir);
+    } else if (isLongName(dir)) {
+      ldir = reinterpret_cast<ldir_t*>(dir);
       if (!lfnOrd) {
-        if ((ldir->ord & LDIR_ORD_LAST_LONG_ENTRY) == 0) {
+        if ((ldir->order & FAT_ORDER_LAST_LONG_ENTRY) == 0) {
           continue;
         }
-        lfnOrd = ord = ldir->ord & 0X1F;
-        chksum = ldir->chksum;
-      } else if (ldir->ord != --ord || chksum != ldir->chksum) {
+        lfnOrd = order = ldir->order & 0X1F;
+        checksum = ldir->checksum;
+      } else if (ldir->order != --order || checksum != ldir->checksum) {
         lfnOrd = 0;
         continue;
       }
-      size_t k = 13*(ord - 1);
+      size_t k = 13*(order - 1);
       if (k >= len) {
         // Not found.
         lfnOrd = 0;
@@ -373,9 +379,9 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
           break;
         }
       }
-    } else if (DIR_IS_FILE_OR_SUBDIR(dir)) {
+    } else if (isFileOrSubdir(dir)) {
       if (lfnOrd) {
-        if (1 == ord && lfnChecksum(dir->name) == chksum) {
+        if (1 == order && lfnChecksum(dir->name) == checksum) {
           goto found;
         }
         DBG_FAIL_MACRO;
@@ -401,7 +407,7 @@ found:
   goto open;
 
 create:
-  // don't create unless O_CREAT and write mode.
+  // don't create unless O_CREAT and write mode
   if (!(oflag & O_CREAT) || !isWriteMode(oflag)) {
     DBG_FAIL_MACRO;
     goto fail;
@@ -429,8 +435,8 @@ create:
       DBG_FAIL_MACRO;
       goto fail;
     }
-    // Done if more than one block per cluster.  Max freeNeed is 21.
-    if (dirFile->m_vol->blocksPerCluster() > 1) {
+    // Done if more than one sector per cluster.  Max freeNeed is 21.
+    if (dirFile->m_vol->sectorsPerCluster() > 1) {
       break;
     }
     freeFound += 16;
@@ -445,18 +451,18 @@ create:
     goto fail;
   }
   lfnOrd = freeNeed - 1;
-  for (uint8_t ord = lfnOrd ; ord ; ord--) {
+  for (order = lfnOrd ; order ; order--) {
     ldir = reinterpret_cast<ldir_t*>(dirFile->readDirCache());
     if (!ldir) {
       DBG_FAIL_MACRO;
       goto fail;
     }
     dirFile->m_vol->cacheDirty();
-    ldir->ord = ord == lfnOrd ? LDIR_ORD_LAST_LONG_ENTRY | ord : ord;
-    ldir->attr = DIR_ATT_LONG_NAME;
-    ldir->type = 0;
-    ldir->chksum = lfnChecksum(fname->sfn);
-    ldir->mustBeZero = 0;
+    ldir->order = order == lfnOrd ? FAT_ORDER_LAST_LONG_ENTRY | order : order;
+    ldir->attributes = FAT_ATTRIB_LONG_NAME;
+    ldir->mustBeZero1 = 0;
+    ldir->checksum = lfnChecksum(fname->sfn);
+    setLe16(ldir->mustBeZero2, 0);
     lfnPutName(ldir, fname->lfn, len);
   }
   curIndex = dirFile->m_curPosition/32;
@@ -470,21 +476,19 @@ create:
   memcpy(dir->name, fname->sfn, 11);
 
   // Set base-name and extension lower case bits.
-  dir->reservedNT =  (DIR_NT_LC_BASE | DIR_NT_LC_EXT) & fname->flags;
+  dir->caseFlags =  (FAT_CASE_LC_BASE | FAT_CASE_LC_EXT) & fname->flags;
 
   // set timestamps
-  if (m_dateTime) {
+  if (FsDateTime::callback) {
     // call user date/time function
-    m_dateTime(&dir->creationDate, &dir->creationTime);
-  } else {
-    // use default date/time
-    dir->creationDate = FAT_DEFAULT_DATE;
-    dir->creationTime = FAT_DEFAULT_TIME;
+    FsDateTime::callback(&date, &time, &ms10);
+    dir->createTimeMs = ms10;
+    setLe16(dir->createDate, date);
+    setLe16(dir->createTime, time);
+    setLe16(dir->accessDate, date);
+    setLe16(dir->modifyDate, date);
+    setLe16(dir->modifyTime, time);;
   }
-  dir->lastAccessDate = dir->creationDate;
-  dir->lastWriteDate = dir->creationDate;
-  dir->lastWriteTime = dir->creationTime;
-
   // Force write of entry to device.
   dirFile->m_vol->cacheDirty();
 
@@ -513,8 +517,8 @@ size_t FatFile::printName(print_t* pr) {
     DBG_FAIL_MACRO;
     goto fail;
   }
-  for (uint8_t ord = 1; ord <= m_lfnOrd; ord++) {
-    if (!dirFile.seekSet(32UL*(m_dirIndex - ord))) {
+  for (uint8_t order = 1; order <= m_lfnOrd; order++) {
+    if (!dirFile.seekSet(32UL*(m_dirIndex - order))) {
       DBG_FAIL_MACRO;
       goto fail;
     }
@@ -523,8 +527,8 @@ size_t FatFile::printName(print_t* pr) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    if (ldir->attr != DIR_ATT_LONG_NAME ||
-        ord != (ldir->ord & 0X1F)) {
+    if (ldir->attributes != FAT_ATTRIB_LONG_NAME ||
+        order != (ldir->order & 0X1F)) {
       DBG_FAIL_MACRO;
       goto fail;
     }
@@ -540,7 +544,7 @@ size_t FatFile::printName(print_t* pr) {
       pr->write(static_cast<char>(u));
       n++;
     }
-    if (ldir->ord & LDIR_ORD_LAST_LONG_ENTRY) {
+    if (ldir->order & FAT_ORDER_LAST_LONG_ENTRY) {
       return n;
     }
   }
@@ -553,14 +557,14 @@ fail:
 //------------------------------------------------------------------------------
 bool FatFile::remove() {
   bool last;
-  uint8_t chksum;
-  uint8_t ord;
+  uint8_t checksum;
+  uint8_t order;
   FatFile dirFile;
   dir_t* dir;
   ldir_t* ldir;
 
   // Cant' remove not open for write.
-  if (!isFile() || !(m_flags & F_WRITE)) {
+  if (!isWritable()) {
     DBG_FAIL_MACRO;
     goto fail;
   }
@@ -575,13 +579,14 @@ bool FatFile::remove() {
     DBG_FAIL_MACRO;
     goto fail;
   }
-  chksum = lfnChecksum(dir->name);
+  checksum = lfnChecksum(dir->name);
 
   // Mark entry deleted.
-  dir->name[0] = DIR_NAME_DELETED;
+  dir->name[0] = FAT_NAME_DELETED;
 
   // Set this file closed.
-  m_attr = FILE_ATTR_CLOSED;
+  m_attributes = FILE_ATTR_CLOSED;
+  m_flags = 0;
 
   // Write entry to device.
   if (!m_vol->cacheSync()) {
@@ -596,8 +601,8 @@ bool FatFile::remove() {
     DBG_FAIL_MACRO;
     goto fail;
   }
-  for (ord = 1; ord <= m_lfnOrd; ord++) {
-    if (!dirFile.seekSet(32UL*(m_dirIndex - ord))) {
+  for (order = 1; order <= m_lfnOrd; order++) {
+    if (!dirFile.seekSet(32UL*(m_dirIndex - order))) {
       DBG_FAIL_MACRO;
       goto fail;
     }
@@ -606,14 +611,14 @@ bool FatFile::remove() {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    if (ldir->attr != DIR_ATT_LONG_NAME ||
-        ord != (ldir->ord & 0X1F) ||
-        chksum != ldir->chksum) {
+    if (ldir->attributes != FAT_ATTRIB_LONG_NAME ||
+        order != (ldir->order & 0X1F) ||
+        checksum != ldir->checksum) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    last = ldir->ord & LDIR_ORD_LAST_LONG_ENTRY;
-    ldir->ord = DIR_NAME_DELETED;
+    last = ldir->order & FAT_ORDER_LAST_LONG_ENTRY;
+    ldir->order = FAT_NAME_DELETED;
     m_vol->cacheDirty();
     if (last) {
       if (!m_vol->cacheSync()) {
@@ -667,10 +672,10 @@ bool FatFile::lfnUniqueSfn(fname_t* fname) {
         DBG_FAIL_MACRO;
         goto fail;
       }
-      if (dir->name[0] == DIR_NAME_FREE) {
+      if (dir->name[0] == FAT_NAME_FREE) {
         goto done;
       }
-      if (DIR_IS_FILE_OR_SUBDIR(dir) && !memcmp(fname->sfn, dir->name, 11)) {
+      if (isFileOrSubdir(dir) && !memcmp(fname->sfn, dir->name, 11)) {
         // Name found - try another.
         break;
       }

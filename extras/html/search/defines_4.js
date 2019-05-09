@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['maintain_5ffree_5fcluster_5fcount',['MAINTAIN_FREE_CLUSTER_COUNT',['../_sd_fat_config_8h.html#ac2865dac8fdbb4fff47105db32ddf05b',1,'MAINTAIN_FREE_CLUSTER_COUNT():&#160;SdFatConfig.h'],['../_fat_lib_config_8h.html#ac2865dac8fdbb4fff47105db32ddf05b',1,'MAINTAIN_FREE_CLUSTER_COUNT():&#160;FatLibConfig.h']]]
+  ['has_5fsdio_5fclass',['HAS_SDIO_CLASS',['../_sd_fat_config_8h.html#a356309f8e0bad852d7a07ad0b9326a27',1,'SdFatConfig.h']]],
+  ['has_5funused_5fstack',['HAS_UNUSED_STACK',['../_free_stack_8h.html#acd5a8222ee7af79faab74b1df412d600',1,'FreeStack.h']]]
 ];

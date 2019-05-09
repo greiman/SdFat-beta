@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2018 Bill Greiman
+ * Copyright (c) 2011-2019 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -23,11 +23,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include "SdSpiDriver.h"
-#if defined(__SAM3X8E__) || defined(__SAM3X8H__)
+#if defined(SD_ALT_SPI_DRIVER) && defined(ARDUINO_SAM_DUE)
 /** Use SAM3X DMAC if nonzero */
 #define USE_SAM3X_DMAC 1
 /** Use extra Bus Matrix arbitration fix if nonzero */
-#define USE_SAM3X_BUS_MATRIX_FIX 0
+#define USE_SAM3X_BUS_MATRIX_FIX 1
 /** Time in ms for DMA receive timeout */
 #define SAM3X_DMA_TIMEOUT 100
 /** chip select register number */
@@ -62,11 +62,12 @@ static bool dmac_channel_transfer_done(uint32_t ul_num) {
   return (DMAC->DMAC_CHSR & (DMAC_CHSR_ENA0 << ul_num)) ? false : true;
 }
 //------------------------------------------------------------------------------
-void SdSpiAltDriver::begin(uint8_t csPin) {
-  m_csPin = csPin;
+void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
+  m_csPin = spiConfig.csPin;
+  m_spiSettings = SPI_LOW_SPEED;
   pinMode(m_csPin, OUTPUT);
   digitalWrite(m_csPin, HIGH);
-SPI.begin();
+  SPI.begin();
 #if USE_SAM3X_DMAC
   pmc_enable_periph_clk(ID_DMAC);
   dmac_disable();
@@ -125,7 +126,7 @@ static void spiDmaTX(const uint8_t* src, uint16_t count) {
 }
 //------------------------------------------------------------------------------
 //  initialize SPI controller
-void SdSpiAltDriver::activate() {
+void SdAltSpiDriver::activate() {
   SPI.beginTransaction(m_spiSettings);
 
   Spi* pSpi = SPI0;
@@ -143,7 +144,7 @@ void SdSpiAltDriver::activate() {
   pSpi->SPI_CR |= SPI_CR_SPIEN;
 }
 //------------------------------------------------------------------------------
-void SdSpiAltDriver::deactivate() {
+void SdAltSpiDriver::deactivate() {
   SPI.endTransaction();
 }
 //------------------------------------------------------------------------------
@@ -157,18 +158,17 @@ static inline uint8_t spiTransfer(uint8_t b) {
 }
 //------------------------------------------------------------------------------
 /** SPI receive a byte */
-uint8_t SdSpiAltDriver::receive() {
+uint8_t SdAltSpiDriver::receive() {
   return spiTransfer(0XFF);
 }
 //------------------------------------------------------------------------------
 /** SPI receive multiple bytes */
-uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
+uint8_t SdAltSpiDriver::receive(uint8_t* buf, size_t n) {
   Spi* pSpi = SPI0;
   int rtn = 0;
 #if USE_SAM3X_DMAC
   // clear overrun error
-  pSpi->SPI_SR;
-
+  while (pSpi->SPI_SR & (SPI_SR_OVRES | SPI_SR_RDRF)) {pSpi->SPI_RDR;}
   spiDmaRX(buf, n);
   spiDmaTX(0, n);
 
@@ -195,11 +195,11 @@ uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
 }
 //------------------------------------------------------------------------------
 /** SPI send a byte */
-void SdSpiAltDriver::send(uint8_t b) {
+void SdAltSpiDriver::send(uint8_t b) {
   spiTransfer(b);
 }
 //------------------------------------------------------------------------------
-void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
+void SdAltSpiDriver::send(const uint8_t* buf , size_t n) {
   Spi* pSpi = SPI0;
 #if USE_SAM3X_DMAC
   spiDmaTX(buf, n);
@@ -213,6 +213,6 @@ void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
 #endif  // #if USE_SAM3X_DMAC
   while ((pSpi->SPI_SR & SPI_SR_TXEMPTY) == 0) {}
   // leave RDR empty
-  pSpi->SPI_RDR;
+  while (pSpi->SPI_SR & (SPI_SR_OVRES | SPI_SR_RDRF)) {pSpi->SPI_RDR;}
 }
-#endif  // defined(__SAM3X8E__) || defined(__SAM3X8H__)
+#endif  // defined(SD_ALT_SPI_DRIVER) && defined(ARDUINO_SAM_DUE)

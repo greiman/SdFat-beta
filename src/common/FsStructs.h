@@ -236,7 +236,6 @@ typedef struct {
   uint8_t  firstClusterLow[2];
   uint8_t  fileSize[4];
 } DirFat_t;
-typedef DirFat_t dir_t;
 
 static inline bool isFileDir(const DirFat_t* dir) {
   return (dir->attributes & (FAT_ATTRIB_DIRECTORY | FAT_ATTRIB_LABEL)) == 0;
@@ -269,7 +268,6 @@ typedef struct {
   uint8_t  mustBeZero2[2];
   uint8_t  unicode3[4];
 } DirLfn_t;
-typedef DirLfn_t ldir_t;
 //=============================================================================
 inline uint32_t exFatChecksum(uint32_t sum, uint8_t data) {
   return (sum << 31) + (sum >> 1) + data;

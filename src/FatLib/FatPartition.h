@@ -58,7 +58,7 @@ union cache_t {
   /** Used to access cached FAT32 entries. */
   uint32_t fat32[128];
   /** Used to access cached directory entries. */
-  dir_t    dir[16];
+  DirFat_t    dir[16];
 };
 //==============================================================================
 /**

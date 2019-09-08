@@ -40,6 +40,8 @@
  */
 #if HAS_SDIO_CLASS
 class SdSpiCard : public SdCardInterface {
+#elif USE_BLOCK_DEVICE_INTERFACE
+class SdSpiCard : public BlockDeviceInterface {
 #else  // HAS_SDIO_CLASS
 class SdSpiCard {
 #endif  // HAS_SDIO_CLASS

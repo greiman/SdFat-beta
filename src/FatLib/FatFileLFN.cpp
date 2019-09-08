@@ -59,7 +59,7 @@ static uint16_t Bernstein(uint16_t hash, const char *str, size_t len) {
  * \param[in] i Index of character.
  * \return The 16-bit character.
  */
-static uint16_t lfnGetChar(ldir_t *ldir, uint8_t i) {
+static uint16_t lfnGetChar(DirLfn_t *ldir, uint8_t i) {
   if (i < 5) {
     return getLe16(ldir->unicode1 + 2*i);
   } else if (i < 11) {
@@ -70,7 +70,7 @@ static uint16_t lfnGetChar(ldir_t *ldir, uint8_t i) {
   return 0;
 }
 //------------------------------------------------------------------------------
-static bool lfnGetName(ldir_t *ldir, char* name, size_t n) {
+static bool lfnGetName(DirLfn_t *ldir, char* name, size_t n) {
   uint8_t i;
   size_t k = 13*((ldir->order & 0X1F) - 1);
   for (i = 0; i < 13; i++) {
@@ -104,7 +104,7 @@ inline bool lfnLegalChar(char c) {
  * \param[in] i Index of character.
  * \param[in] c  The 16-bit character.
  */
-static void lfnPutChar(ldir_t *ldir, uint8_t i, uint16_t c) {
+static void lfnPutChar(DirLfn_t *ldir, uint8_t i, uint16_t c) {
   if (i < 5) {
     setLe16(ldir->unicode1 + 2*i, c);
   } else if (i < 11) {
@@ -114,7 +114,7 @@ static void lfnPutChar(ldir_t *ldir, uint8_t i, uint16_t c) {
   }
 }
 //------------------------------------------------------------------------------
-static void lfnPutName(ldir_t *ldir, const char* name, size_t n) {
+static void lfnPutName(DirLfn_t *ldir, const char* name, size_t n) {
   size_t k = 13*((ldir->order & 0X1F) - 1);
   for (uint8_t i = 0; i < 13; i++, k++) {
     uint16_t c = k < n ? name[k] : k == n ? 0 : 0XFFFF;
@@ -124,7 +124,7 @@ static void lfnPutName(ldir_t *ldir, const char* name, size_t n) {
 //==============================================================================
 bool FatFile::getName(char* name, size_t size) {
   FatFile dirFile;
-  ldir_t* ldir;
+  DirLfn_t* ldir;
   if (!isOpen() || size < 13) {
     DBG_FAIL_MACRO;
     goto fail;
@@ -141,7 +141,7 @@ bool FatFile::getName(char* name, size_t size) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    ldir = reinterpret_cast<ldir_t*>(dirFile.readDirCache());
+    ldir = reinterpret_cast<DirLfn_t*>(dirFile.readDirCache());
     if (!ldir) {
       DBG_FAIL_MACRO;
       goto fail;
@@ -305,8 +305,8 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
   uint16_t curIndex;
   uint16_t date;
   uint16_t time;
-  dir_t* dir;
-  ldir_t* ldir;
+  DirFat_t* dir;
+  DirLfn_t* ldir;
   size_t len = fname->len;
 
   if (!dirFile->isDir() || isOpen()) {
@@ -347,7 +347,7 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
     if (dir->name[0] == FAT_NAME_DELETED || dir->name[0] == '.') {
       lfnOrd = 0;
     } else if (isLongName(dir)) {
-      ldir = reinterpret_cast<ldir_t*>(dir);
+      ldir = reinterpret_cast<DirLfn_t*>(dir);
       if (!lfnOrd) {
         if ((ldir->order & FAT_ORDER_LAST_LONG_ENTRY) == 0) {
           continue;
@@ -452,7 +452,7 @@ create:
   }
   lfnOrd = freeNeed - 1;
   for (order = lfnOrd ; order ; order--) {
-    ldir = reinterpret_cast<ldir_t*>(dirFile->readDirCache());
+    ldir = reinterpret_cast<DirLfn_t*>(dirFile->readDirCache());
     if (!ldir) {
       DBG_FAIL_MACRO;
       goto fail;
@@ -472,7 +472,7 @@ create:
     goto fail;
   }
   // initialize as empty file
-  memset(dir, 0, sizeof(dir_t));
+  memset(dir, 0, sizeof(DirFat_t));
   memcpy(dir->name, fname->sfn, 11);
 
   // Set base-name and extension lower case bits.
@@ -508,7 +508,7 @@ size_t FatFile::printName(print_t* pr) {
   FatFile dirFile;
   uint16_t u;
   size_t n = 0;
-  ldir_t* ldir;
+  DirLfn_t* ldir;
 
   if (!isLFN()) {
     return printSFN(pr);
@@ -522,7 +522,7 @@ size_t FatFile::printName(print_t* pr) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    ldir = reinterpret_cast<ldir_t*>(dirFile.readDirCache());
+    ldir = reinterpret_cast<DirLfn_t*>(dirFile.readDirCache());
     if (!ldir) {
       DBG_FAIL_MACRO;
       goto fail;
@@ -560,8 +560,8 @@ bool FatFile::remove() {
   uint8_t checksum;
   uint8_t order;
   FatFile dirFile;
-  dir_t* dir;
-  ldir_t* ldir;
+  DirFat_t* dir;
+  DirLfn_t* ldir;
 
   // Cant' remove not open for write.
   if (!isWritable()) {
@@ -606,7 +606,7 @@ bool FatFile::remove() {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    ldir = reinterpret_cast<ldir_t*>(dirFile.readDirCache());
+    ldir = reinterpret_cast<DirLfn_t*>(dirFile.readDirCache());
     if (!ldir) {
       DBG_FAIL_MACRO;
       goto fail;
@@ -638,7 +638,7 @@ fail:
 bool FatFile::lfnUniqueSfn(fname_t* fname) {
   const uint8_t FIRST_HASH_SEQ = 2;  // min value is 2
   uint8_t pos = fname->seqPos;;
-  dir_t *dir;
+  DirFat_t *dir;
   uint16_t hex;
 
   DBG_HALT_IF(!(fname->flags & FNAME_FLAG_LOST_CHARS));

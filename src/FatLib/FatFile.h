@@ -233,7 +233,7 @@ class FatFile {
    *
    * \return true for success or false for failure.
    */
-  bool dirEntry(dir_t* dir);
+  bool dirEntry(DirFat_t* dir);
   /** \return The number of bytes allocated to a directory or zero
    *         if an error occurs.
    */
@@ -679,7 +679,7 @@ class FatFile {
   int read(void* buf, size_t count);
   /** Read the next directory entry from a directory file.
    *
-   * \param[out] dir The dir_t struct that will receive the data.
+   * \param[out] dir The DirFat_t struct that will receive the data.
    *
    * \return For success readDir() returns the number of bytes read.
    * A value of zero will be returned if end of file is reached.
@@ -687,7 +687,7 @@ class FatFile {
    * readDir() called before a directory has been opened, this is not
    * a directory file or an I/O error occurred.
    */
-  int8_t readDir(dir_t* dir);
+  int8_t readDir(DirFat_t* dir);
   /** Remove a file.
    *
    * The directory entry and all data for the file are deleted.
@@ -936,7 +936,7 @@ class FatFile {
   // private functions
   bool addCluster();
   bool addDirCluster();
-  dir_t* cacheDirEntry(uint8_t action);
+  DirFat_t* cacheDirEntry(uint8_t action);
   static uint8_t lfnChecksum(uint8_t* name);
   bool lfnUniqueSfn(fname_t* fname);
   bool openCluster(FatFile* file);
@@ -945,7 +945,7 @@ class FatFile {
   bool open(FatFile* dirFile, fname_t* fname, oflag_t oflag);
   bool openCachedEntry(FatFile* dirFile, uint16_t cacheIndex, oflag_t oflag,
                        uint8_t lfnOrd);
-  dir_t* readDirCache(bool skipReadOk = false);
+  DirFat_t* readDirCache(bool skipReadOk = false);
 
   // bits defined in m_flags
   static const uint8_t FILE_FLAG_READ = 0X01;

@@ -38,6 +38,8 @@
 #define ENABLE_ARDUINO_SERIAL 1
 /** For Debug - must be one */
 #define ENABLE_ARDUINO_STRING 1
+/** Set USE_BLOCK_DEVICE_INTERFACE nonzero to use generic of block device */
+#define USE_BLOCK_DEVICE_INTERFACE 0
 //------------------------------------------------------------------------------
 #if ENABLE_ARDUINO_FEATURES
 #include "Arduino.h"

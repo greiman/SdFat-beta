@@ -64,7 +64,7 @@ static void printHex(print_t* pr, uint32_t val) {
   }
 }
 //------------------------------------------------------------------------------
-static void printDir(print_t* pr, dir_t* dir) {
+static void printDir(print_t* pr, DirFat_t* dir) {
   if (!dir->name[0] || dir->name[0] == FAT_NAME_DELETED) {
     pr->println(F("Not Used"));
   } else if (isFileOrSubdir(dir)) {
@@ -85,7 +85,7 @@ static void printDir(print_t* pr, dir_t* dir) {
 }
 //------------------------------------------------------------------------------
 void FatPartition::dmpDirSector(print_t* pr, uint32_t sector) {
-  dir_t dir[16];
+  DirFat_t dir[16];
   if (!readSector(sector, reinterpret_cast<uint8_t*>(dir))) {
     pr->println(F("dmpDir failed"));
     return;

@@ -94,7 +94,7 @@ fail:
 //------------------------------------------------------------------------------
 // cache a file's directory entry
 // return pointer to cached entry or null for failure
-dir_t* FatFile::cacheDirEntry(uint8_t action) {
+DirFat_t* FatFile::cacheDirEntry(uint8_t action) {
   cache_t* pc;
   pc = m_vol->cacheFetchData(m_dirSector, action);
   if (!pc) {
@@ -206,8 +206,8 @@ bool FatFile::preAllocate(uint32_t length) {
   return false;
 }
 //------------------------------------------------------------------------------
-bool FatFile::dirEntry(dir_t* dst) {
-  dir_t* dir;
+bool FatFile::dirEntry(DirFat_t* dst) {
+  DirFat_t* dir;
   // Make sure fields on device are correct.
   if (!sync()) {
     DBG_FAIL_MACRO;
@@ -220,7 +220,7 @@ bool FatFile::dirEntry(dir_t* dst) {
     goto fail;
   }
   // copy to caller's struct
-  memcpy(dst, dir, sizeof(dir_t));
+  memcpy(dst, dir, sizeof(DirFat_t));
   return true;
 
 fail:
@@ -333,8 +333,8 @@ fail:
 //------------------------------------------------------------------------------
 bool FatFile::mkdir(FatFile* parent, fname_t* fname) {
   uint32_t sector;
-  dir_t dot;
-  dir_t* dir;
+  DirFat_t dot;
+  DirFat_t* dir;
   cache_t* pc;
 
   if (!parent->isDir()) {
@@ -473,7 +473,7 @@ bool FatFile::openCachedEntry(FatFile* dirFile, uint16_t dirIndex,
   m_vol = dirFile->m_vol;
   m_dirIndex = dirIndex;
   m_dirCluster = dirFile->m_firstCluster;
-  dir_t* dir = reinterpret_cast<dir_t*>(m_vol->cacheAddress());
+  DirFat_t* dir = reinterpret_cast<DirFat_t*>(m_vol->cacheAddress());
   dir += 0XF & dirIndex;
 
   // Must be file or subdirectory.
@@ -549,7 +549,7 @@ fail:
 //------------------------------------------------------------------------------
 bool FatFile::openNext(FatFile* dirFile, oflag_t oflag) {
   uint8_t checksum = 0;
-  ldir_t* ldir;
+  DirLfn_t* ldir;
   uint8_t lfnOrd = 0;
   uint16_t index;
 
@@ -561,7 +561,7 @@ bool FatFile::openNext(FatFile* dirFile, oflag_t oflag) {
   while (1) {
     // read entry into cache
     index = dirFile->curPosition()/32;
-    dir_t* dir = dirFile->readDirCache();
+    DirFat_t* dir = dirFile->readDirCache();
     if (!dir) {
       if (dirFile->getError()) {
         DBG_FAIL_MACRO;
@@ -586,7 +586,7 @@ bool FatFile::openNext(FatFile* dirFile, oflag_t oflag) {
       }
       return true;
     } else if (isLongName(dir)) {
-      ldir = reinterpret_cast<ldir_t*>(dir);
+      ldir = reinterpret_cast<DirLfn_t*>(dir);
       if (ldir->order & FAT_ORDER_LAST_LONG_ENTRY) {
         lfnOrd = ldir->order & 0X1F;
         checksum = ldir->checksum;
@@ -761,7 +761,7 @@ fail:
   return -1;
 }
 //------------------------------------------------------------------------------
-int8_t FatFile::readDir(dir_t* dir) {
+int8_t FatFile::readDir(DirFat_t* dir) {
   int16_t n;
   // if not a directory file or miss-positioned return an error
   if (!isDir() || (0X1F & m_curPosition)) {
@@ -769,8 +769,8 @@ int8_t FatFile::readDir(dir_t* dir) {
   }
 
   while (1) {
-    n = read(dir, sizeof(dir_t));
-    if (n != sizeof(dir_t)) {
+    n = read(dir, sizeof(DirFat_t));
+    if (n != sizeof(DirFat_t)) {
       return n == 0 ? 0 : -1;
     }
     // last entry if FAT_NAME_FREE
@@ -790,7 +790,7 @@ int8_t FatFile::readDir(dir_t* dir) {
 //------------------------------------------------------------------------------
 // Read next directory entry into the cache
 // Assumes file is correctly positioned
-dir_t* FatFile::readDirCache(bool skipReadOk) {
+DirFat_t* FatFile::readDirCache(bool skipReadOk) {
   uint8_t i = (m_curPosition >> 5) & 0XF;
 
   if (i == 0 || !skipReadOk) {
@@ -806,7 +806,7 @@ dir_t* FatFile::readDirCache(bool skipReadOk) {
     m_curPosition += 32;
   }
   // return pointer to entry
-  return reinterpret_cast<dir_t*>(m_vol->cacheAddress()) + i;
+  return reinterpret_cast<DirFat_t*>(m_vol->cacheAddress()) + i;
 
 fail:
   return nullptr;
@@ -829,12 +829,12 @@ bool FatFile::rename(const char* newPath) {
 }
 //------------------------------------------------------------------------------
 bool FatFile::rename(FatFile* dirFile, const char* newPath) {
-  dir_t entry;
+  DirFat_t entry;
   uint32_t dirCluster = 0;
   FatFile file;
   FatFile oldFile;
   cache_t* pc;
-  dir_t* dir;
+  DirFat_t* dir;
 
   // Must be an open file or subdirectory.
   if (!(isFile() || isSubDir())) {
@@ -946,7 +946,7 @@ bool FatFile::rmdir() {
 
   // make sure directory is empty
   while (1) {
-    dir_t* dir = readDirCache(true);
+    DirFat_t* dir = readDirCache(true);
     if (!dir) {
       // EOF if no error.
       if (!getError()) {
@@ -990,7 +990,7 @@ bool FatFile::rmRfStar() {
     // remember position
     index = m_curPosition/32;
 
-    dir_t* dir = readDirCache();
+    DirFat_t* dir = readDirCache();
     if (!dir) {
       // At EOF if no error.
       if (!getError()) {
@@ -1118,7 +1118,7 @@ bool FatFile::sync() {
     return true;
   }
   if (m_flags & FILE_FLAG_DIR_DIRTY) {
-    dir_t* dir = cacheDirEntry(FatCache::CACHE_FOR_WRITE);
+    DirFat_t* dir = cacheDirEntry(FatCache::CACHE_FOR_WRITE);
     // check for deleted by another open file object
     if (!dir || dir->name[0] == FAT_NAME_DELETED) {
       DBG_FAIL_MACRO;
@@ -1157,7 +1157,7 @@ bool FatFile::timestamp(uint8_t flags, uint16_t year, uint8_t month,
                    uint8_t day, uint8_t hour, uint8_t minute, uint8_t second) {
   uint16_t dirDate;
   uint16_t dirTime;
-  dir_t* dir;
+  DirFat_t* dir;
 
   if (!isFile()
       || year < 1980

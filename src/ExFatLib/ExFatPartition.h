@@ -236,15 +236,17 @@ class ExFatPartition {
   bool readSector(uint32_t sector, uint8_t* dst) {
     return m_blockDev->readSector(sector, dst);
   }
-  bool readSectors(uint32_t sector, uint8_t* dst, size_t count) {
-    return m_blockDev->readSectors(sector, dst, count);
-  }
   bool writeSector(uint32_t sector, const uint8_t* src) {
     return m_blockDev->writeSector(sector, src);
+  }
+#if USE_MULTI_SECTOR_IO
+  bool readSectors(uint32_t sector, uint8_t* dst, size_t count) {
+    return m_blockDev->readSectors(sector, dst, count);
   }
   bool writeSectors(uint32_t sector, const uint8_t* src, size_t count) {
     return m_blockDev->writeSectors(sector, src, count);
   }
+#endif  // USE_MULTI_SECTOR_IO
   //----------------------------------------------------------------------------
   static const uint8_t  m_bytesPerSectorShift = 9;
   static const uint16_t m_bytesPerSector = 512;

@@ -34,7 +34,7 @@ KB/Sec,usec,usec,usec
 3965.11,16733,110,127
 ```
 The default version of SdFatConfig.h enables support for dedicated SPI and
-optimized access to contiguous files.  This make SdFat Version 2 slightly
+optimized access to contiguous files.  This makes SdFat Version 2 slightly
 larger than Version 1.  If these features are disabled, Version 2 is smaller
 than Version 1.
 

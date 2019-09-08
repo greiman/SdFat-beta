@@ -121,7 +121,7 @@ bool FatFile::ls(print_t* pr, uint8_t flags, uint8_t indent) {
 }
 //------------------------------------------------------------------------------
 size_t FatFile::printAccessDate(print_t* pr) {
-  dir_t dir;
+  DirFat_t dir;
   if (!dirEntry(&dir)) {
     DBG_FAIL_MACRO;
     goto fail;
@@ -133,7 +133,7 @@ fail:
 }
 //------------------------------------------------------------------------------
 size_t FatFile::printCreateDateTime(print_t* pr) {
-  dir_t dir;
+  DirFat_t dir;
   if (!dirEntry(&dir)) {
     DBG_FAIL_MACRO;
     goto fail;
@@ -145,7 +145,7 @@ fail:
 }
 //------------------------------------------------------------------------------
 size_t FatFile::printModifyDateTime(print_t* pr) {
-  dir_t dir;
+  DirFat_t dir;
   if (!dirEntry(&dir)) {
     DBG_FAIL_MACRO;
     goto fail;

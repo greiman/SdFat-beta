@@ -31,7 +31,7 @@
 #include "Arduino.h"
 #ifndef DBG_FILE
 #error DBG_FILE not defined
-  #endif  // DBG_FILE
+#endif  // DBG_FILE
 static void dbgPrint(uint16_t line) {
   Serial.print(F("DBG_FAIL: "));
   Serial.print(F(DBG_FILE));

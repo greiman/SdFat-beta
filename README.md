@@ -1,5 +1,7 @@
 ### Warning: This is an early beta version of SdFat Version 2.
 
+September 19, 2019 - added support for Teensy 4.0 SDIO.
+
 This library is in early development and features may change.
 It will clearly have bugs. I am posting this version to get comments and
 help finding bugs/compatibility problems.

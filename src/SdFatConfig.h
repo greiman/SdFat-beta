@@ -277,6 +277,9 @@
 #endif  // SDCARD_SPI
 #define HAS_SDIO_CLASS 1
 #endif  // defined(__MK64FX512__) || defined(__MK66FX1M0__)
+#if defined(__IMXRT1062__)
+#define HAS_SDIO_CLASS 1
+#endif  // defined(__IMXRT1062__)
 //------------------------------------------------------------------------------
 /**
  * Determine the default SPI configuration.

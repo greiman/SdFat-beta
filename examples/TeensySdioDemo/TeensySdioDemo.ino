@@ -1,7 +1,16 @@
-// Simple performance test for Teensy 3.5/3.6 SDHC.
+// Simple performance test for Teensy 3.5/3.6 4.0 SDHC.
 // Demonstrates yield() efficiency for SDIO modes.
-// Uses built-in SD for SPI modes. 
 #include "SdFat.h"
+
+// Use built-in SD for SPI modes on Teensy 3.5/3.6.
+// Teensy 4.0 use first SPI port.
+// SDCARD_SS_PIN is defined for the built-in SD on some boards.
+#ifndef SDCARD_SS_PIN
+const uint8_t SD_CS_PIN = SS;
+#else  // SDCARD_SS_PIN
+// Assume built-in SD is used.
+const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
+#endif  // SDCARD_SS_PIN
 
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,
 // 1 for FAT16/FAT32, 2 for exFAT, 3 for FAT16/FAT32 and exFAT.
@@ -181,12 +190,12 @@ void loop() {
     }
     Serial.println("\nDMA SDIO mode - slow for small transfers.");
   } else if (c == '3') {
-    if (!sd.begin(SdSpiConfig(SDCARD_SS_PIN, DEDICATED_SPI, SD_SCK_MHZ(50)))) {
+    if (!sd.begin(SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SD_SCK_MHZ(50)))) {
       errorHalt("begin failed");
     }
     Serial.println("\nDedicated SPI mode.");
   } else if (c == '4') {
-    if (!sd.begin(SdSpiConfig(SDCARD_SS_PIN, SHARED_SPI, SD_SCK_MHZ(50)))) {
+    if (!sd.begin(SdSpiConfig(SD_CS_PIN, SHARED_SPI, SD_SCK_MHZ(50)))) {
       errorHalt("begin failed");
     }
     Serial.println("\nShared SPI mode - slow for small transfers.");    

@@ -1,4 +1,4 @@
-// Test of time-stamp callback with Teensy3.
+// Test of time-stamp callback with Teensy 3/4.
 // The upload time will be used to set the RTC.
 // You must arrange for syncing the RTC.
 #include "SdFat.h"

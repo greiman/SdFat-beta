@@ -49,7 +49,7 @@ inline int FreeStack() {
 inline int FreeStack() {
   return System.freeMemory();
 }
-#elif defined(__arm__)
+#elif defined(__arm__)  && !defined(__IMXRT1062__)
 #define HAS_UNUSED_STACK 1
 extern "C" char* sbrk(int incr);
 inline int FreeStack() {
@@ -57,7 +57,9 @@ inline int FreeStack() {
   return reinterpret_cast<char*>(sp) - reinterpret_cast<char*>(sbrk(0));
 }
 #else  // defined(__AVR__) || defined(DOXYGEN)
+#ifndef FREE_STACK_CPP
 #warning FreeStack is not defined for this system.
+#endif  // FREE_STACK_CPP
 inline int FreeStack() {
   return 0;
 }

@@ -240,7 +240,6 @@ class SdioCard : public SdCardInterface {
   static const uint8_t READ_STATE = 1;
   static const uint8_t WRITE_STATE = 2;
   uint32_t m_curSector;
-  uint32_t m_limitSector;
   SdioConfig m_sdioConfig;
   uint8_t m_curState;
 };

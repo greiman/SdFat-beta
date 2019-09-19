@@ -142,8 +142,9 @@ void loop() {
   while (!Serial.available()) {
     SysCall::yield();
   }
-
+#if HAS_UNUSED_STACK  
   cout << F("FreeStack: ") << FreeStack() << endl;
+#endif  // HAS_UNUSED_STACK 
 
   if (!sd.begin(SD_CONFIG)) {
     sd.initErrorHalt(&Serial);

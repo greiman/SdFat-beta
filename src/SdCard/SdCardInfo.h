@@ -133,6 +133,8 @@ const uint8_t CMD8 = 0X08;
 const uint8_t CMD9 = 0X09;
 /** SEND_CID - read the card identification information (CID register) */
 const uint8_t CMD10 = 0X0A;
+/** VOLTAGE_SWITCH -Switch to 1.8V bus signaling level. */
+const uint8_t CMD11 = 0X0B;
 /** STOP_TRANSMISSION - end multiple sector read sequence */
 const uint8_t CMD12 = 0X0C;
 /** SEND_STATUS - read the card status register */

@@ -602,17 +602,17 @@ int ExFatFile::read(void* buf, size_t count) {
 #if USE_MULTI_SECTOR_IO
     } else if (toRead >= 2*m_vol->bytesPerSector()) {
       uint32_t ns = toRead >> m_vol->bytesPerSectorShift();
-      if (!isContiguous()) {
-        uint32_t maxNs = m_vol->sectorsPerCluster()
-                         - (clusterOffset >> m_vol->bytesPerSectorShift());
-        if (ns > maxNs) {
-          ns = maxNs;
-        }
+      // Limit writes to current cluster.
+      uint32_t maxNs = m_vol->sectorsPerCluster()
+                       - (clusterOffset >> m_vol->bytesPerSectorShift());
+      if (ns > maxNs) {
+        ns = maxNs;
       }
       n = ns << m_vol->bytesPerSectorShift();
-      if (m_vol->dataCacheSector() <= sector
+      // Check for cache sector in read range.
+      if (sector <= m_vol->dataCacheSector()
           && m_vol->dataCacheSector() < (sector + ns)) {
-        // flush cache if a sector is in the cache
+        // Flush cache if a cache sector is in the range.
         if (!m_vol->dataCacheSync()) {
           DBG_FAIL_MACRO;
           goto fail;

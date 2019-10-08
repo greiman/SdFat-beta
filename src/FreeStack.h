@@ -49,7 +49,14 @@ inline int FreeStack() {
 inline int FreeStack() {
   return System.freeMemory();
 }
-#elif defined(__arm__)  && !defined(__IMXRT1062__)
+#elif defined(__IMXRT1062__)
+#define HAS_UNUSED_STACK 1
+extern uint8_t _ebss;
+inline int FreeStack() {
+  register uint32_t sp asm("sp");
+  return reinterpret_cast<char*>(sp) - reinterpret_cast<char*>(&_ebss);
+}
+#elif defined(__arm__)
 #define HAS_UNUSED_STACK 1
 extern "C" char* sbrk(int incr);
 inline int FreeStack() {
@@ -64,7 +71,7 @@ inline int FreeStack() {
   return 0;
 }
 #endif  // defined(__AVR__) || defined(DOXYGEN)
-#ifdef HAS_UNUSED_STACK
+#if defined(HAS_UNUSED_STACK) || defined(DOXYGEN)
 /** Fill stack with 0x55 pattern */
 void FillStack();
 /**
@@ -81,5 +88,5 @@ int UnusedStack();
 #define HAS_UNUSED_STACK 0
 inline void FillStack() {}
 inline int UnusedStack() {return 0;}
-#endif  // HAS_UNUSED_STACK
+#endif  // defined(HAS_UNUSED_STACK)
 #endif  // FreeStack_h

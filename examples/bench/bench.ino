@@ -166,12 +166,14 @@ void loop() {
   }
 
   // fill buf with known data
-  for (uint16_t i = 0; i < (BUF_SIZE-2); i++) {
-    buf[i] = 'A' + (i % 26);
+  if (BUF_SIZE > 1) {
+    for (size_t i = 0; i < (BUF_SIZE - 2); i++) {
+      buf[i] = 'A' + (i % 26);
+    }
+    buf[BUF_SIZE-2] = '\r';
   }
-  buf[BUF_SIZE-2] = '\r';
   buf[BUF_SIZE-1] = '\n';
-
+  
   cout << F("FILE_SIZE_MB = ") << FILE_SIZE_MB << endl;
   cout << F("BUF_SIZE = ") << BUF_SIZE << F(" bytes\n");
   cout << F("Starting write test, please wait.") << endl << endl;
@@ -241,6 +243,7 @@ void loop() {
       m = micros() - m;
       totalLatency += m;
       if (buf[BUF_SIZE-1] != '\n') {
+
         error("data check error");
       }
       if (skipLatency) {

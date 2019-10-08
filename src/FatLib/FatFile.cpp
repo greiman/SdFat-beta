@@ -721,17 +721,18 @@ int FatFile::read(void* buf, size_t nbyte) {
       memcpy(dst, src, n);
 #if USE_MULTI_SECTOR_IO
     } else if (toRead >= 2*m_vol->bytesPerSector()) {
-      uint8_t ns = toRead >> m_vol->bytesPerSectorShift();
+      uint32_t ns = toRead >> m_vol->bytesPerSectorShift();
       if (!isRootFixed()) {
-        uint8_t mb = m_vol->sectorsPerCluster() - sectorOfCluster;
+        uint32_t mb = m_vol->sectorsPerCluster() - sectorOfCluster;
         if (mb < ns) {
           ns = mb;
         }
       }
       n = ns << m_vol->bytesPerSectorShift();
-      if (m_vol->cacheSectorNumber() <= sector
+      // Check for cache sector in read range.
+      if (sector <= m_vol->cacheSectorNumber()
           && sector < (m_vol->cacheSectorNumber() + ns)) {
-        // flush cache if a sector is in the cache
+        // Flush cache if a cache sector is in the range.
         if (!m_vol->cacheSyncData()) {
           DBG_FAIL_MACRO;
           goto fail;
@@ -1360,15 +1361,16 @@ size_t FatFile::write(const void* buf, size_t nbyte) {
 #if USE_MULTI_SECTOR_IO
     } else if (nToWrite >= 2*m_vol->bytesPerSector()) {
       // use multiple sector write command
-      uint8_t maxSectors = m_vol->sectorsPerCluster() - sectorOfCluster;
-      uint8_t nSector = nToWrite >> m_vol->bytesPerSectorShift();
+      uint32_t maxSectors = m_vol->sectorsPerCluster() - sectorOfCluster;
+      uint32_t nSector = nToWrite >> m_vol->bytesPerSectorShift();
       if (nSector > maxSectors) {
         nSector = maxSectors;
       }
       n = nSector << m_vol->bytesPerSectorShift();
-      if (m_vol->cacheSectorNumber() <= sector
+      // Check for cache sector in write range.
+      if (sector <= m_vol->cacheSectorNumber()
           && sector < (m_vol->cacheSectorNumber() + nSector)) {
-        // invalidate cache if sector is in cache
+        // Invalidate cache if cache sector is in the range.
         m_vol->cacheInvalidate();
       }
       if (!m_vol->writeSectors(sector, src, nSector)) {

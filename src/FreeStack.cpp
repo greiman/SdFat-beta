@@ -24,28 +24,35 @@
  */
 #define FREE_STACK_CPP
 #include "FreeStack.h"
-#if HAS_UNUSED_STACK
-#ifdef __AVR__
-inline char* heapEnd() {
+#if defined(HAS_UNUSED_STACK) && HAS_UNUSED_STACK
+//------------------------------------------------------------------------------
+inline char* stackBegin() {
+#if defined(__AVR__)
   return __brkval ? __brkval : &__bss_end;
-}
-inline char* stackPointer() {
-  return reinterpret_cast<char*>(SP);
-}
+#elif defined(__IMXRT1062__)
+  return reinterpret_cast<char*>(&_ebss);
 #elif defined(__arm__)
-inline char* heapEnd() {
   return reinterpret_cast<char*>(sbrk(0));
+#else  // defined(__AVR__)
+#error "undefined stackBegin"
+#endif  // defined(__AVR__)
 }
+//------------------------------------------------------------------------------
 inline char* stackPointer() {
+#if  defined(__AVR__)
+  return reinterpret_cast<char*>(SP);
+#elif defined(__arm__)
   register uint32_t sp asm("sp");
   return reinterpret_cast<char*>(sp);
+#else  // defined(__AVR__)
+#error "undefined stackPointer"
+#endif  // defined(__AVR__)
 }
-#endif  // #elif define(__arm__)
 //------------------------------------------------------------------------------
 /** Stack fill pattern. */
 const char FILL = 0x55;
 void FillStack() {
-  char* p = heapEnd();
+  char* p = stackBegin();
   char* top = stackPointer();
   while (p < top) {
     *p++ = FILL;
@@ -54,7 +61,7 @@ void FillStack() {
 //------------------------------------------------------------------------------
 // May fail if malloc or new is used.
 int UnusedStack() {
-  char* h = heapEnd();
+  char* h = stackBegin();
   char* top = stackPointer();
   int n;
 
@@ -70,4 +77,4 @@ int UnusedStack() {
   }
   return n;
 }
-#endif  // HAS_UNUSED_STACK
+#endif  // defined(HAS_UNUSED_STACK) && HAS_UNUSED_STACK

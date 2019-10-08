@@ -16,7 +16,7 @@ const uint8_t BUF_DIM = 100;
 uint8_t buf[BUF_DIM];
 
 const uint32_t FILE_SIZE = 1000000;
-const uint16_t NWRITE = FILE_SIZE/BUF_DIM;
+const uint32_t NWRITE = FILE_SIZE/BUF_DIM;
 //------------------------------------------------------------------------------
 // print error msg, any SD error codes, and halt.
 // store messages in flash
@@ -107,7 +107,7 @@ void setup() {
   Serial.println(F("Writing test.bin to sd1"));
 
   // write data to /Dir1/test.bin on sd1
-  for (uint16_t i = 0; i < NWRITE; i++) {
+  for (uint32_t i = 0; i < NWRITE; i++) {
     if (file1.write(buf, sizeof(buf)) != sizeof(buf)) {
       sd1.errorExit("sd1.write");
     }

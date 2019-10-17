@@ -558,7 +558,6 @@ fail:
 bool FatFile::remove() {
   bool last;
   uint8_t checksum;
-  uint8_t order;
   FatFile dirFile;
   DirFat_t* dir;
   DirLfn_t* ldir;
@@ -601,7 +600,7 @@ bool FatFile::remove() {
     DBG_FAIL_MACRO;
     goto fail;
   }
-  for (order = 1; order <= m_lfnOrd; order++) {
+  for (uint8_t order = 1; order <= m_lfnOrd; order++) {
     if (!dirFile.seekSet(32UL*(m_dirIndex - order))) {
       DBG_FAIL_MACRO;
       goto fail;

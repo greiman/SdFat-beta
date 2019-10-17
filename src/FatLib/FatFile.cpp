@@ -454,13 +454,46 @@ fail:
 }
 //------------------------------------------------------------------------------
 bool FatFile::open(FatFile* dirFile, uint16_t index, oflag_t oflag) {
-  if (dirFile->seekSet(32*index) && openNext(dirFile, oflag)) {
-    if (dirIndex() == index) {
-      return true;
+  if (index) {
+    // Find start of LFN.
+    DirLfn_t* ldir;
+    uint8_t n = index < 20 ? index : 20;
+    for (uint8_t i = 1; i <= n; i++) {
+      if (!dirFile->seekSet(32UL*(index - i))) {
+        DBG_FAIL_MACRO;
+        goto fail;
+      }
+      ldir = reinterpret_cast<DirLfn_t*>(dirFile->readDirCache());
+      if (!ldir) {
+        DBG_FAIL_MACRO;
+        goto fail;
+      }
+      if (ldir->attributes != FAT_ATTRIB_LONG_NAME) {
+        break;
+      }
+      if (ldir->order & FAT_ORDER_LAST_LONG_ENTRY) {
+        if (!dirFile->seekSet(32UL*(index - i))) {
+          DBG_FAIL_MACRO;
+          goto fail;
+        }
+        break;
+      }
     }
+  } else {
+    dirFile->rewind();
+  }
+  if (!openNext(dirFile, oflag)) {
+    DBG_FAIL_MACRO;
+    goto fail;
+  }
+  if(dirIndex() != index) {
     close();
     DBG_FAIL_MACRO;
+    goto fail;
   }
+  return true;
+
+ fail:
   return false;
 }
 //------------------------------------------------------------------------------
@@ -732,7 +765,7 @@ int FatFile::read(void* buf, size_t nbyte) {
       // Check for cache sector in read range.
       if (sector <= m_vol->cacheSectorNumber()
           && sector < (m_vol->cacheSectorNumber() + ns)) {
-        // Flush cache if a cache sector is in the range.
+        // Flush cache if cache sector is in the range.
         if (!m_vol->cacheSyncData()) {
           DBG_FAIL_MACRO;
           goto fail;

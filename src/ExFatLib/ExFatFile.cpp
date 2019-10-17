@@ -612,7 +612,7 @@ int ExFatFile::read(void* buf, size_t count) {
       // Check for cache sector in read range.
       if (sector <= m_vol->dataCacheSector()
           && m_vol->dataCacheSector() < (sector + ns)) {
-        // Flush cache if a cache sector is in the range.
+        // Flush cache if cache sector is in the range.
         if (!m_vol->dataCacheSync()) {
           DBG_FAIL_MACRO;
           goto fail;

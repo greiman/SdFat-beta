@@ -80,8 +80,15 @@ Inheritance diagram for FatFile:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_fat_file__inherit__graph.png" border="0" usemap="#_fat_file_inherit__map" alt="Inheritance graph"/></div>
 <map name="_fat_file_inherit__map" id="_fat_file_inherit__map">
-<area shape="rect" id="node2" href="class_stream_file.html" title="StreamFile\&lt; FatFile,\l uint32_t \&gt;" alt="" coords="5,80,147,121"/>
-<area shape="rect" id="node3" href="class_file32.html" title="FAT16/FAT32 file with Arduino Stream. " alt="" coords="47,169,105,196"/>
+<area shape="rect" id="node2" href="class_print_file.html" title="PrintFile\&lt; SdBaseFile \&gt;" alt="" coords="5,87,167,114"/>
+<area shape="rect" id="node4" href="class_stdio_stream.html" title="StdioStream implements a minimal stdio stream. " alt="" coords="191,87,285,114"/>
+<area shape="rect" id="node5" href="class_stream_base_class.html" title="base type for FAT and exFAT streams " alt="" coords="309,87,436,114"/>
+<area shape="rect" id="node9" href="class_stream_file.html" title="StreamFile\&lt; FatFile,\l uint32_t \&gt;" alt="" coords="467,80,609,121"/>
+<area shape="rect" id="node3" href="class_sd_file.html" title="FAT16/FAT32 file with Print. " alt="" coords="57,169,115,196"/>
+<area shape="rect" id="node6" href="classfstream.html" title="file input/output stream. " alt="" coords="243,169,308,196"/>
+<area shape="rect" id="node7" href="classifstream.html" title="file input stream. " alt="" coords="332,169,400,196"/>
+<area shape="rect" id="node8" href="classofstream.html" title="file output stream. " alt="" coords="425,169,497,196"/>
+<area shape="rect" id="node10" href="class_file32.html" title="FAT16/FAT32 file with Arduino Stream. " alt="" coords="521,169,579,196"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -107,13 +114,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a526f3dd56ce205690e45ffc86ef6f891"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97e0620949f97e9b9c91ed1094d728aa"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a97e0620949f97e9b9c91ed1094d728aa">curPosition</a> () const</td></tr>
 <tr class="separator:a97e0620949f97e9b9c91ed1094d728aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6858d18c807411a071fd6d1b39d50087"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a6858d18c807411a071fd6d1b39d50087">dirEntry</a> (dir_t *dir)</td></tr>
-<tr class="separator:a6858d18c807411a071fd6d1b39d50087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f4e9ab3056125b07f15d14ca26d5346"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a2f4e9ab3056125b07f15d14ca26d5346">dirEntry</a> (DirFat_t *dir)</td></tr>
+<tr class="separator:a2f4e9ab3056125b07f15d14ca26d5346"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5ec24d4a94d3780384d3f2b731c7eb9"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ae5ec24d4a94d3780384d3f2b731c7eb9">dirIndex</a> ()</td></tr>
 <tr class="separator:ae5ec24d4a94d3780384d3f2b731c7eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2ed15f05c9ccbce355e7a8d3ce8382d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ae2ed15f05c9ccbce355e7a8d3ce8382d">dirSize</a> ()</td></tr>
 <tr class="separator:ae2ed15f05c9ccbce355e7a8d3ce8382d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f01d27954ae49aeb6888ac7302f55d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a4f01d27954ae49aeb6888ac7302f55d9">dmpFile</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr, uint32_t pos, size_t n)</td></tr>
+<tr class="memitem:a4f01d27954ae49aeb6888ac7302f55d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a4f01d27954ae49aeb6888ac7302f55d9">dmpFile</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint32_t pos, size_t n)</td></tr>
 <tr class="separator:a4f01d27954ae49aeb6888ac7302f55d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50242f98dea0d4488ce4039a279f2a57"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a50242f98dea0d4488ce4039a279f2a57">exists</a> (const char *path)</td></tr>
 <tr class="separator:a50242f98dea0d4488ce4039a279f2a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +150,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aba30e92a66f8e0d2f815c85662772a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8062c0d3a118e8d77d0310418703d5f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a8062c0d3a118e8d77d0310418703d5f5">getWriteError</a> ()</td></tr>
 <tr class="separator:a8062c0d3a118e8d77d0310418703d5f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16478eafdb731e867fb627d19091c3ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a16478eafdb731e867fb627d19091c3ce">isContiguous</a> () const</td></tr>
+<tr class="separator:a16478eafdb731e867fb627d19091c3ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a933360b20b496421b2bd9ee7a95563a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a933360b20b496421b2bd9ee7a95563a6">isDir</a> () const</td></tr>
 <tr class="separator:a933360b20b496421b2bd9ee7a95563a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc5a87da1a5c8cb9758bfeaa7ae47b57"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#acc5a87da1a5c8cb9758bfeaa7ae47b57">isFile</a> () const</td></tr>
@@ -169,8 +178,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a48087bdeb6b94fc27e0f74c3d90af5a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa484d5b2b147c5f3fe0e26b6eaf11ffc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aa484d5b2b147c5f3fe0e26b6eaf11ffc">isWritable</a> () const</td></tr>
 <tr class="separator:aa484d5b2b147c5f3fe0e26b6eaf11ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60ab9d16bcc778150a364c26de467de1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a60ab9d16bcc778150a364c26de467de1">ls</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr, uint8_t flags=0, uint8_t indent=0)</td></tr>
+<tr class="memitem:a60ab9d16bcc778150a364c26de467de1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a60ab9d16bcc778150a364c26de467de1">ls</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint8_t flags=0, uint8_t indent=0)</td></tr>
 <tr class="separator:a60ab9d16bcc778150a364c26de467de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a11f3307da6232b5f2d11812832d93a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a6a11f3307da6232b5f2d11812832d93a">ls</a> (uint8_t flags=0)</td></tr>
+<tr class="separator:a6a11f3307da6232b5f2d11812832d93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abab5b9f72cc796388dd4eed01d13d90d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#abab5b9f72cc796388dd4eed01d13d90d">mkdir</a> (<a class="el" href="class_fat_file.html">FatFile</a> *dir, const char *path, bool pFlag=true)</td></tr>
 <tr class="separator:abab5b9f72cc796388dd4eed01d13d90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af49a42dc64cd954debb271eae5639059"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#af49a42dc64cd954debb271eae5639059">open</a> (<a class="el" href="class_fat_volume.html">FatVolume</a> *vol, const char *path, oflag_t oflag)</td></tr>
@@ -191,11 +202,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac05b7136b887539426856c623869aa3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeeb13b9de68bf9097c863c41d655ee83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aeeb13b9de68bf9097c863c41d655ee83">preAllocate</a> (uint32_t length)</td></tr>
 <tr class="separator:aeeb13b9de68bf9097c863c41d655ee83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22be4c339d0bfa331f75415b74dd4f37"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a22be4c339d0bfa331f75415b74dd4f37">printAccessDate</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr)</td></tr>
+<tr class="memitem:a22be4c339d0bfa331f75415b74dd4f37"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a22be4c339d0bfa331f75415b74dd4f37">printAccessDate</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a22be4c339d0bfa331f75415b74dd4f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19b3196bb1f6a68a2447e53b09369aef"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a19b3196bb1f6a68a2447e53b09369aef">printAccessDateTime</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr)</td></tr>
+<tr class="memitem:a19b3196bb1f6a68a2447e53b09369aef"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a19b3196bb1f6a68a2447e53b09369aef">printAccessDateTime</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a19b3196bb1f6a68a2447e53b09369aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab22396a285e27b53501a0047ddd97f59"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ab22396a285e27b53501a0047ddd97f59">printCreateDateTime</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr)</td></tr>
+<tr class="memitem:ab22396a285e27b53501a0047ddd97f59"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ab22396a285e27b53501a0047ddd97f59">printCreateDateTime</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:ab22396a285e27b53501a0047ddd97f59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4a61a0cca1813d2ad0f6fe99cc4e41d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aa4a61a0cca1813d2ad0f6fe99cc4e41d">printField</a> (double value, char term, uint8_t prec=2)</td></tr>
 <tr class="separator:aa4a61a0cca1813d2ad0f6fe99cc4e41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,20 +215,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f906be79086f38943cb0911310d67bf"><td class="memTemplParams" colspan="2">template&lt;typename Type &gt; </td></tr>
 <tr class="memitem:a8f906be79086f38943cb0911310d67bf"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a8f906be79086f38943cb0911310d67bf">printField</a> (Type value, char term)</td></tr>
 <tr class="separator:a8f906be79086f38943cb0911310d67bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12a5d2de2737c201aa39ca1bd2ab9c47"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a12a5d2de2737c201aa39ca1bd2ab9c47">printFileSize</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr)</td></tr>
+<tr class="memitem:a12a5d2de2737c201aa39ca1bd2ab9c47"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a12a5d2de2737c201aa39ca1bd2ab9c47">printFileSize</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a12a5d2de2737c201aa39ca1bd2ab9c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43c8a1cabcae673e43c590f5db44c65a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a43c8a1cabcae673e43c590f5db44c65a">printModifyDateTime</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr)</td></tr>
+<tr class="memitem:a43c8a1cabcae673e43c590f5db44c65a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a43c8a1cabcae673e43c590f5db44c65a">printModifyDateTime</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a43c8a1cabcae673e43c590f5db44c65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe18a787fb8640e2d2483370c770f82f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#afe18a787fb8640e2d2483370c770f82f">printName</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr)</td></tr>
+<tr class="memitem:afe18a787fb8640e2d2483370c770f82f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#afe18a787fb8640e2d2483370c770f82f">printName</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:afe18a787fb8640e2d2483370c770f82f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a791cd7aade71f609aab62ec018aea3c0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a791cd7aade71f609aab62ec018aea3c0">printSFN</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr)</td></tr>
+<tr class="memitem:ad1cbc3aeb0f5193b7a26595966da9621"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ad1cbc3aeb0f5193b7a26595966da9621">printName</a> ()</td></tr>
+<tr class="separator:ad1cbc3aeb0f5193b7a26595966da9621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a791cd7aade71f609aab62ec018aea3c0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a791cd7aade71f609aab62ec018aea3c0">printSFN</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr)</td></tr>
 <tr class="separator:a791cd7aade71f609aab62ec018aea3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60ae55ff6fe158c2340071d702a363c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a60ae55ff6fe158c2340071d702a363c5">read</a> ()</td></tr>
 <tr class="separator:a60ae55ff6fe158c2340071d702a363c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba893af8107a18017482d2311b066187"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aba893af8107a18017482d2311b066187">read</a> (void *buf, size_t count)</td></tr>
 <tr class="separator:aba893af8107a18017482d2311b066187"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1325afe074c3efecff666678cd9f116a"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a1325afe074c3efecff666678cd9f116a">readDir</a> (dir_t *dir)</td></tr>
-<tr class="separator:a1325afe074c3efecff666678cd9f116a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29502cd34ef186763d2196daef27df1f"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a29502cd34ef186763d2196daef27df1f">readDir</a> (DirFat_t *dir)</td></tr>
+<tr class="separator:a29502cd34ef186763d2196daef27df1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac837a537fbcca14c7aa390c5fc9f4e7c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#ac837a537fbcca14c7aa390c5fc9f4e7c">remove</a> ()</td></tr>
 <tr class="separator:ac837a537fbcca14c7aa390c5fc9f4e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75d3276f0b02b03e863afafe5731fedb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a75d3276f0b02b03e863afafe5731fedb">remove</a> (const char *path)</td></tr>
@@ -257,9 +270,9 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a94df8090f16e9666cdc53ca20f6aff90"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a94df8090f16e9666cdc53ca20f6aff90">legal83Char</a> (uint8_t c)</td></tr>
 <tr class="separator:a94df8090f16e9666cdc53ca20f6aff90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabcd863883bfcfb37b63dbd6021f7eb8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aabcd863883bfcfb37b63dbd6021f7eb8">printFatDate</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr, uint16_t fatDate)</td></tr>
+<tr class="memitem:aabcd863883bfcfb37b63dbd6021f7eb8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#aabcd863883bfcfb37b63dbd6021f7eb8">printFatDate</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint16_t fatDate)</td></tr>
 <tr class="separator:aabcd863883bfcfb37b63dbd6021f7eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f84d953190ea94710dad9ebb897b957"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a7f84d953190ea94710dad9ebb897b957">printFatTime</a> (<a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *pr, uint16_t fatTime)</td></tr>
+<tr class="memitem:a7f84d953190ea94710dad9ebb897b957"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fat_file.html#a7f84d953190ea94710dad9ebb897b957">printFatTime</a> (<a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *pr, uint16_t fatTime)</td></tr>
 <tr class="separator:a7f84d953190ea94710dad9ebb897b957"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -636,8 +649,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a6858d18c807411a071fd6d1b39d50087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6858d18c807411a071fd6d1b39d50087">&#9670;&nbsp;</a></span>dirEntry()</h2>
+<a id="a2f4e9ab3056125b07f15d14ca26d5346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f4e9ab3056125b07f15d14ca26d5346">&#9670;&nbsp;</a></span>dirEntry()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -645,7 +658,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">bool FatFile::dirEntry </td>
           <td>(</td>
-          <td class="paramtype">dir_t *&#160;</td>
+          <td class="paramtype">DirFat_t *&#160;</td>
           <td class="paramname"><em>dir</em></td><td>)</td>
           <td></td>
         </tr>
@@ -715,7 +728,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">void FatFile::dmpFile </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -1086,6 +1099,32 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>value of writeError </dd></dl>
+
+</div>
+</div>
+<a id="a16478eafdb731e867fb627d19091c3ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16478eafdb731e867fb627d19091c3ce">&#9670;&nbsp;</a></span>isContiguous()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFile::isContiguous </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>True if the file is contiguous. </dd></dl>
 
 </div>
 </div>
@@ -1461,7 +1500,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a60ab9d16bcc778150a364c26de467de1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60ab9d16bcc778150a364c26de467de1">&#9670;&nbsp;</a></span>ls()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a60ab9d16bcc778150a364c26de467de1">&#9670;&nbsp;</a></span>ls() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1469,7 +1508,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">bool FatFile::ls </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -1508,6 +1547,43 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true for success or false for failure. </dd></dl>
+
+</div>
+</div>
+<a id="a6a11f3307da6232b5f2d11812832d93a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a11f3307da6232b5f2d11812832d93a">&#9670;&nbsp;</a></span>ls() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FatFile::ls </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>flags</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>List directory contents.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">flags</td><td>The inclusive OR of</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>LS_DATE - Print file modification date</p>
+<p>LS_SIZE - Print file size.</p>
+<p>LS_R - Recursive list of subdirectories.</p>
 <dl class="section return"><dt>Returns</dt><dd>true for success or false for failure. </dd></dl>
 
 </div>
@@ -1883,7 +1959,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">size_t FatFile::printAccessDate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1912,7 +1988,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">size_t FatFile::printAccessDateTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1943,7 +2019,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">size_t FatFile::printCreateDateTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1972,7 +2048,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">static void FatFile::printFatDate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -2017,7 +2093,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">static void FatFile::printFatTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em>, </td>
         </tr>
         <tr>
@@ -2207,7 +2283,7 @@ template&lt;typename Type &gt; </div>
         <tr>
           <td class="memname">size_t FatFile::printFileSize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2233,7 +2309,7 @@ template&lt;typename Type &gt; </div>
         <tr>
           <td class="memname">size_t FatFile::printModifyDateTime </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2251,7 +2327,7 @@ template&lt;typename Type &gt; </div>
 </div>
 </div>
 <a id="afe18a787fb8640e2d2483370c770f82f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe18a787fb8640e2d2483370c770f82f">&#9670;&nbsp;</a></span>printName()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afe18a787fb8640e2d2483370c770f82f">&#9670;&nbsp;</a></span>printName() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2259,7 +2335,7 @@ template&lt;typename Type &gt; </div>
         <tr>
           <td class="memname">size_t FatFile::printName </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2276,6 +2352,33 @@ template&lt;typename Type &gt; </div>
 
 </div>
 </div>
+<a id="ad1cbc3aeb0f5193b7a26595966da9621"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1cbc3aeb0f5193b7a26595966da9621">&#9670;&nbsp;</a></span>printName() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t FatFile::printName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Print a file's name.</p>
+<dl class="section return"><dt>Returns</dt><dd>true for success or false for failure. </dd></dl>
+
+</div>
+</div>
 <a id="a791cd7aade71f609aab62ec018aea3c0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a791cd7aade71f609aab62ec018aea3c0">&#9670;&nbsp;</a></span>printSFN()</h2>
 
@@ -2285,7 +2388,7 @@ template&lt;typename Type &gt; </div>
         <tr>
           <td class="memname">size_t FatFile::printSFN </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a> *&#160;</td>
           <td class="paramname"><em>pr</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2366,8 +2469,8 @@ template&lt;typename Type &gt; </div>
 
 </div>
 </div>
-<a id="a1325afe074c3efecff666678cd9f116a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1325afe074c3efecff666678cd9f116a">&#9670;&nbsp;</a></span>readDir()</h2>
+<a id="a29502cd34ef186763d2196daef27df1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29502cd34ef186763d2196daef27df1f">&#9670;&nbsp;</a></span>readDir()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2375,7 +2478,7 @@ template&lt;typename Type &gt; </div>
         <tr>
           <td class="memname">int8_t FatFile::readDir </td>
           <td>(</td>
-          <td class="paramtype">dir_t *&#160;</td>
+          <td class="paramtype">DirFat_t *&#160;</td>
           <td class="paramname"><em>dir</em></td><td>)</td>
           <td></td>
         </tr>
@@ -2384,11 +2487,11 @@ template&lt;typename Type &gt; </div>
 <p>Read the next directory entry from a directory file.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">dir</td><td>The dir_t struct that will receive the data.</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">dir</td><td>The DirFat_t struct that will receive the data.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>For success <a class="el" href="class_fat_file.html#a1325afe074c3efecff666678cd9f116a">readDir()</a> returns the number of bytes read. A value of zero will be returned if end of file is reached. If an error occurs, <a class="el" href="class_fat_file.html#a1325afe074c3efecff666678cd9f116a">readDir()</a> returns -1. Possible errors include <a class="el" href="class_fat_file.html#a1325afe074c3efecff666678cd9f116a">readDir()</a> called before a directory has been opened, this is not a directory file or an I/O error occurred. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>For success <a class="el" href="class_fat_file.html#a29502cd34ef186763d2196daef27df1f">readDir()</a> returns the number of bytes read. A value of zero will be returned if end of file is reached. If an error occurs, <a class="el" href="class_fat_file.html#a29502cd34ef186763d2196daef27df1f">readDir()</a> returns -1. Possible errors include <a class="el" href="class_fat_file.html#a29502cd34ef186763d2196daef27df1f">readDir()</a> called before a directory has been opened, this is not a directory file or an I/O error occurred. </dd></dl>
 
 </div>
 </div>
@@ -2959,7 +3062,7 @@ Modify and access timestamps may be overwritten if a date time callback function
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 9 2019 06:51:28 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 18 2019 08:14:17 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

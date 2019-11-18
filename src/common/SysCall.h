@@ -30,7 +30,7 @@
 #define SysCall_h
 #include <stdint.h>
 #include <stddef.h>
-#include "SdFatConfig.h"
+#include "../SdFatConfig.h"
 #if __cplusplus < 201103
 #warning nullptr defined
 /** Define nullptr if not C++11 */
@@ -54,11 +54,11 @@ class SysCall {
   /** Yield to other threads. */
   static void yield();
 };
-
 #if ENABLE_ARDUINO_FEATURES
 #if defined(ARDUINO)
-#include <SPI.h>
+/** Use Arduino Print. */
 typedef Print print_t;
+/** Use Arduino Stream. */
 typedef Stream stream_t;
 #else  // defined(ARDUINO)
 #error "Unknown system"

@@ -29,11 +29,23 @@
 #ifndef SdSpArduinoDriver_h
 #define SdSpArduinoDriver_h
 #include "../common/SysCall.h"
+
+#if SPI_DRIVER_SELECT < 2
+#include "SPI.h"
+/** SPISettings for SD initialization. */
+#define LOW_SPEED_SPI_SETTINGS SPISettings(250000UL, MSBFIRST, SPI_MODE0)
+/** Port type for SPI hardware driver. */
+typedef SPIClass SpiPort_t;
+#else  // SPI_DRIVER_SELECT
+class SoftSPIClass;
+/** Port type for software SPI driver. */
+typedef SoftSPIClass SpiPort_t;
+#endif  // SPI_DRIVER_SELECT
 //------------------------------------------------------------------------------
 /** SPISettings for SCK frequency in Hz. */
-#define SD_SCK_HZ(maxSpeed) SPISettings(maxSpeed, MSBFIRST, SPI_MODE0)
+#define SD_SCK_HZ(maxSpeed) maxSpeed
 /** SPISettings for SCK frequency in MHz. */
-#define SD_SCK_MHZ(maxMhz) SPISettings(1000000UL*maxMhz, MSBFIRST, SPI_MODE0)
+#define SD_SCK_MHZ(maxMhz) (1000000UL*maxMhz)
 // SPI divisor constants
 /** Set SCK to max rate. */
 #define SPI_FULL_SPEED SD_SCK_MHZ(50)
@@ -49,17 +61,7 @@
 #define SPI_EIGHTH_SPEED SD_SCK_HZ(F_CPU/16)
 /** Set SCK rate to F_CPU/32. */
 #define SPI_SIXTEENTH_SPEED SD_SCK_HZ(F_CPU/32)
-/** Set SCK for SD initialization - only needed for very old cards. */
-#define SPI_LOW_SPEED SD_SCK_HZ(250000)
 //------------------------------------------------------------------------------
-#if SPI_DRIVER_SELECT == 2
-class SoftSPIClass;
-/** Port type for software SPI driver. */
-typedef SoftSPIClass SpiPort_t;
-#else  // SPI_DRIVER_SELECT
-/** Port type for SPI hardware driver. */
-typedef SPIClass SpiPort_t;
-#endif  // SPI_DRIVER_SELECT
 /**
  * \class SdSpiConfig
  * \brief SPI card configuration.
@@ -70,41 +72,40 @@ class SdSpiConfig {
    *
    * \param[in] cs Chip select pin.
    * \param[in] opt Options.
-   * \param[in] settings SPISettings.
+   * \param[in] maxSpeed Maximum SCK frequency.
    * \param[in] port The SPI port to use.
    */
-  SdSpiConfig(uint8_t cs, uint8_t opt, SPISettings settings, SpiPort_t* port) :
-    hsSettings(settings), csPin(cs), options(opt), spiPort(port) {}
+  SdSpiConfig(uint8_t cs, uint8_t opt, uint32_t maxSpeed, SpiPort_t* port) :
+    csPin(cs), options(opt), maxSck(maxSpeed), spiPort(port) {}
 
   /** SdSpiConfig constructor.
    *
    * \param[in] cs Chip select pin.
    * \param[in] opt Options.
-   * \param[in] settings SPISettings.
+   * \param[in] maxSpeed Maximum SCK frequency.
    */
-  SdSpiConfig(uint8_t cs, uint8_t opt, SPISettings settings) :
-    hsSettings(settings), csPin(cs), options(opt), spiPort(nullptr) {}
+  SdSpiConfig(uint8_t cs, uint8_t opt, uint32_t maxSpeed) :
+    csPin(cs), options(opt), maxSck(maxSpeed), spiPort(nullptr) {}
   /** SdSpiConfig constructor.
    *
    * \param[in] cs Chip select pin.
    * \param[in] opt Options.
    */
   SdSpiConfig(uint8_t cs, uint8_t opt) :
-    hsSettings(SPI_FULL_SPEED), csPin(cs), options(opt), spiPort(nullptr)  {}
+    csPin(cs), options(opt), maxSck(SPI_FULL_SPEED), spiPort(nullptr)  {}
   /** SdSpiConfig constructor.
    *
    * \param[in] cs Chip select pin.
    */
-  explicit SdSpiConfig(uint8_t cs) : hsSettings(SPI_FULL_SPEED), csPin(cs),
-                                     options(SHARED_SPI), spiPort(nullptr) {}
-
-  /** SPISettings after initialization. */
-  const SPISettings hsSettings;
+  explicit SdSpiConfig(uint8_t cs) : csPin(cs), options(SHARED_SPI),
+                                     maxSck(SPI_FULL_SPEED), spiPort(nullptr) {}
 
   /** Chip select pin. */
   const uint8_t csPin;
   /** Options */
   const uint8_t options;
+  /** Max SCK frequency */
+  const uint32_t maxSck;
   /** SPI port */
   SpiPort_t* spiPort;
 };
@@ -164,7 +165,7 @@ class SdAltSpiDriver {
    * \param[in] spiConfig SPI options.
    */
   void setHighSpeed(SdSpiConfig spiConfig) {
-    m_spiSettings = spiConfig.hsSettings;
+    m_spiSettings = SPISettings(spiConfig.maxSck, MSBFIRST, SPI_MODE0);
   }
   /** Set CS high. */
   void unselect() {
@@ -189,7 +190,7 @@ inline void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
   pinMode(m_csPin, OUTPUT);
   digitalWrite(m_csPin, HIGH);
   SPI.begin();
-  m_spiSettings = SPI_LOW_SPEED;
+  m_spiSettings = LOW_SPEED_SPI_SETTINGS;
 }
 //------------------------------------------------------------------------------
 inline void SdAltSpiDriver::activate() {
@@ -262,7 +263,7 @@ class SdLibSpiDriver {
    */
   void begin(SdSpiConfig spiConfig) {
     m_csPin = spiConfig.csPin;
-    m_spiSettings = SPI_LOW_SPEED;
+    m_spiSettings = LOW_SPEED_SPI_SETTINGS;
 
     if (spiConfig.spiPort) {
       m_spi = spiConfig.spiPort;
@@ -327,7 +328,7 @@ class SdLibSpiDriver {
    * \param[in] spiConfig SPI options.
    */
   void setHighSpeed(SdSpiConfig spiConfig) {
-    m_spiSettings = spiConfig.hsSettings;
+    m_spiSettings = SPISettings(spiConfig.maxSck, MSBFIRST, SPI_MODE0);
   }
   /** Set CS high. */
   void unselect() {

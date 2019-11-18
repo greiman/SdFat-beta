@@ -205,7 +205,6 @@ class SdSpiDriverBareUno {
   void setHighSpeed(SdSpiConfig spiConfig) {
     (void)spiConfig;
     SPSR |= 1 << SPI2X;
-//    m_spiSettings = spiConfig.hsSettings;
   }
   static uint8_t transfer(uint8_t data) {
     SPDR = data;

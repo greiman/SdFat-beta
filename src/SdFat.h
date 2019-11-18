@@ -62,18 +62,16 @@ class SdBase : public Vol {
 #endif  // BUILTIN_SDCARD
     return begin(SdSpiConfig(csPin, SHARED_SPI));
   }
-#if ENABLE_ARDUINO_FEATURES
   //----------------------------------------------------------------------------
   /** Initialize SD card and file system.
    *
    * \param[in] csPin SD card chip select pin.
-   * \param[in] spiSettings SPI speed, mode, and bit order.
+   * \param[in] maxSck Maximum SCK frequency.
    * \return true for success or false for failure.
    */
-  bool begin(uint8_t csPin, SPISettings spiSettings) {
-    return begin(SdSpiConfig(csPin, SHARED_SPI, spiSettings));
+  bool begin(uint8_t csPin, uint32_t maxSck) {
+    return begin(SdSpiConfig(csPin, SHARED_SPI, maxSck));
   }
-#endif  // ENABLE_ARDUINO_FEATURES
   //----------------------------------------------------------------------------
   /** Initialize SD card and file system for SPI mode.
    *
@@ -326,7 +324,16 @@ class SdBase : public Vol {
    */
   void errorPrint(const __FlashStringHelper* msg) {errorPrint(&Serial, msg);}
   //----------------------------------------------------------------------------
+  /** %Print error info and halt.
+   *
+   * \param[in] msg Message to print.
+   */
   void initErrorHalt(const char* msg) {initErrorHalt(&Serial, msg);}
+  //----------------------------------------------------------------------------
+  /** %Print error info and halt.
+   *
+   * \param[in] msg Message to print.
+   */
   void initErrorHalt(const __FlashStringHelper* msg) {
     initErrorHalt(&Serial, msg);
   }
@@ -387,8 +394,11 @@ class SdFs : public SdBase<FsVolume> {
 };
 //------------------------------------------------------------------------------
 #if SDFAT_FILE_TYPE == 1
+/** Select type for SdFat. */
 typedef SdFat32 SdFat;
+/** Select type for File. */
 typedef File32 File;
+/** Select type for SdBaseFile. */
 typedef FatFile SdBaseFile;
 #elif SDFAT_FILE_TYPE == 2
 typedef SdExFat SdFat;

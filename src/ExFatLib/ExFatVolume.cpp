@@ -25,7 +25,7 @@
 #include "ExFatVolume.h"
 ExFatVolume* ExFatVolume::m_cwv = nullptr;
 //----------------------------------------------------------------------------
-bool ExFatVolume::chdir(const char *path) {
+bool ExFatVolume::chdir(const ExChar_t* path) {
   ExFatFile dir;
   if (!dir.open(vwd(), path, O_RDONLY)) {
     goto fail;

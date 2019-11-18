@@ -6,6 +6,7 @@ var searchData=
   ['unsetf',['unsetf',['../classios__base.html#a3bf7d054a433ed15e8b984e16f630fa4',1,'ios_base']]],
   ['unusedstack',['UnusedStack',['../_free_stack_8h.html#a0a6400cf785c9647c0bacb76b15851de',1,'FreeStack.cpp']]],
   ['uppercase',['uppercase',['../classios__base.html#ade3db1fe3249e87f4c47a9a8916793d9',1,'ios_base::uppercase()'],['../ios_8h.html#af5d5e1a0effa1b500bb882feed5a2061',1,'uppercase():&#160;ios.h']]],
+  ['use_5fblock_5fdevice_5finterface',['USE_BLOCK_DEVICE_INTERFACE',['../_sd_fat_config_8h.html#ae92cc0fb2a31925cfc5694feb048dca2',1,'SdFatConfig.h']]],
   ['use_5fexfat_5fbitmap_5fcache',['USE_EXFAT_BITMAP_CACHE',['../_sd_fat_config_8h.html#a8d3fca2607182c1ba389dd61c283a3e2',1,'SdFatConfig.h']]],
   ['use_5ffat_5ffile_5fflag_5fcontiguous',['USE_FAT_FILE_FLAG_CONTIGUOUS',['../_sd_fat_config_8h.html#ad42a354208ecb245adfc238266a612e5',1,'SdFatConfig.h']]],
   ['use_5ffcntl_5fh',['USE_FCNTL_H',['../_sd_fat_config_8h.html#ab4b7255422e65730612f1f6af1a26752',1,'SdFatConfig.h']]],

@@ -44,7 +44,7 @@ void SdAltSpiDriver::activate() {
  */
 void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
   m_csPin = spiConfig.csPin;
-  m_spiSettings = SPI_LOW_SPEED;
+  m_spiSettings = LOW_SPEED_SPI_SETTINGS;
   if (spiConfig.spiPort) {
     m_spi = spiConfig.spiPort;
   } else {

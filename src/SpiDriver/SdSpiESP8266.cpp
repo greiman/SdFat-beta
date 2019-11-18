@@ -32,7 +32,7 @@
  */
 void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
   m_csPin = spiConfig.csPin;
-  m_spiSettings = SPI_LOW_SPEED;
+  m_spiSettings = LOW_SPEED_SPI_SETTINGS;
   pinMode(m_csPin, OUTPUT);
   digitalWrite(m_csPin, HIGH);
   SPI.begin();

@@ -3,7 +3,6 @@
 // Software SPI is required on Mega since this shield connects to pins 10-13.
 // This example will also run on an Uno and other boards using software SPI.
 //
-#include <SPI.h>
 #include "SdFat.h"
 #if SPI_DRIVER_SELECT == 2  // Must be set in SdFat/SdFatConfig.h
 

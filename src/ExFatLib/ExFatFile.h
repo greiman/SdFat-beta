@@ -55,11 +55,11 @@ inline bool lfnLegalChar(ExChar_t c) {
       c == ':' || c == '<' || c == '>' || c == '?' || c == '|') {
     return false;
   }
-#if USE_UNICODE_NAMES
+#if USE_EXFAT_UNICODE_NAMES
   return 0X1F < c;
-#else  // USE_UNICODE_NAMES
+#else  // USE_EXFAT_UNICODE_NAMES
   return 0X1F < c && c < 0X7F;
-#endif  // USE_UNICODE_NAMES
+#endif  // USE_EXFAT_UNICODE_NAMES
 }
 //------------------------------------------------------------------------------
 /**
@@ -665,7 +665,7 @@ class ExFatFile {
    */
   size_t write(const void* buf, size_t count);
   //============================================================================
-#if USE_UNICODE_NAMES
+#if USE_EXFAT_UNICODE_NAMES
   // Not Implemented when Unicode is selected.
   bool exists(const char* path);
   size_t getName(char *name, size_t size);
@@ -676,7 +676,7 @@ class ExFatFile {
   bool remove(const char* path);
   bool rename(const char* newPath);
   bool rename(ExFatFile* dirFile, const char* newPath);
-#endif  // USE_UNICODE_NAMES
+#endif  // USE_EXFAT_UNICODE_NAMES
 
  private:
   /** ExFatVolume allowed access to private members. */

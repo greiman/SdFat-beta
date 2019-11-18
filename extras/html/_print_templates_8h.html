@@ -101,13 +101,13 @@ Functions</h2></td></tr>
 <tr class="memitem:afceda1e76dbfc91ef2d06925a10eaea9"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_print_templates_8h.html#afceda1e76dbfc91ef2d06925a10eaea9">mprintf</a> (T *file, const char *fmt,...)</td></tr>
 <tr class="separator:afceda1e76dbfc91ef2d06925a10eaea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5893e928fd47234a7a69049f9e769359"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:a5893e928fd47234a7a69049f9e769359"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_print_templates_8h.html#a5893e928fd47234a7a69049f9e769359">mprintf</a> (F *file, const __FlashStringHelper *ifsh,...)</td></tr>
+<tr class="memitem:a5893e928fd47234a7a69049f9e769359"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_print_templates_8h.html#a5893e928fd47234a7a69049f9e769359">mprintf</a> (<a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F</a> *file, const __FlashStringHelper *ifsh,...)</td></tr>
 <tr class="separator:a5893e928fd47234a7a69049f9e769359"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3bc14da82a850b0f8ce848a6d54045f"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:aa3bc14da82a850b0f8ce848a6d54045f"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_print_templates_8h.html#aa3bc14da82a850b0f8ce848a6d54045f">vfprintf</a> (F *file, const char *fmt, va_list ap)</td></tr>
+<tr class="memitem:aa3bc14da82a850b0f8ce848a6d54045f"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_print_templates_8h.html#aa3bc14da82a850b0f8ce848a6d54045f">vfprintf</a> (<a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F</a> *file, const char *fmt, va_list ap)</td></tr>
 <tr class="separator:aa3bc14da82a850b0f8ce848a6d54045f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad139f8bf9b6ead8bd28abf1dd412a8a4"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:ad139f8bf9b6ead8bd28abf1dd412a8a4"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_print_templates_8h.html#ad139f8bf9b6ead8bd28abf1dd412a8a4">vmprintf</a> (F *file, const char *fmt, va_list ap)</td></tr>
+<tr class="memitem:ad139f8bf9b6ead8bd28abf1dd412a8a4"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_print_templates_8h.html#ad139f8bf9b6ead8bd28abf1dd412a8a4">vmprintf</a> (<a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F</a> *file, const char *fmt, va_list ap)</td></tr>
 <tr class="separator:ad139f8bf9b6ead8bd28abf1dd412a8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -254,7 +254,7 @@ template&lt;typename F &gt; </div>
         <tr>
           <td class="memname">int mprintf </td>
           <td>(</td>
-          <td class="paramtype">F *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F</a> *&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
@@ -280,7 +280,7 @@ template&lt;typename F &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">file</td><td>destination file or device. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ifsh</td><td>format string using F() macro.</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ifsh</td><td>format string using <a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F()</a> macro.</td></tr>
   </table>
   </dd>
 </dl>
@@ -299,7 +299,7 @@ template&lt;typename F &gt; </div>
         <tr>
           <td class="memname">int vfprintf </td>
           <td>(</td>
-          <td class="paramtype">F *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F</a> *&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
@@ -345,7 +345,7 @@ template&lt;typename F &gt; </div>
         <tr>
           <td class="memname">int vmprintf </td>
           <td>(</td>
-          <td class="paramtype">F *&#160;</td>
+          <td class="paramtype"><a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F</a> *&#160;</td>
           <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
@@ -383,7 +383,7 @@ template&lt;typename F &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 9 2019 06:51:28 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 18 2019 08:14:17 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

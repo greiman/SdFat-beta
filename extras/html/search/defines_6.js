@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['maintain_5ffree_5fcluster_5fcount',['MAINTAIN_FREE_CLUSTER_COUNT',['../_sd_fat_config_8h.html#ac2865dac8fdbb4fff47105db32ddf05b',1,'SdFatConfig.h']]]
+  ['low_5fspeed_5fspi_5fsettings',['LOW_SPEED_SPI_SETTINGS',['../_sd_spi_arduino_driver_8h.html#ab26819fe8caf1fb3479a671b7d18b57e',1,'SdSpiArduinoDriver.h']]]
 ];

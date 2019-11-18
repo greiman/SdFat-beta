@@ -24,7 +24,11 @@
  */
 #ifndef ExFatConfig_h
 #define ExFatConfig_h
-#include "SdFatConfig.h"
-#define USE_UNICODE_NAMES 0
+#include "../SdFatConfig.h"
+#ifndef USE_EXFAT_UNICODE_NAMES
+#define USE_EXFAT_UNICODE_NAMES 0
+#endif  // USE_EXFAT_UNICODE_NAMES
+#ifndef READ_ONLY
 #define READ_ONLY 0
+#endif  // READ_ONLY
 #endif  // ExFatConfig_h

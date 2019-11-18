@@ -486,7 +486,7 @@ bool FatFile::open(FatFile* dirFile, uint16_t index, oflag_t oflag) {
     DBG_FAIL_MACRO;
     goto fail;
   }
-  if(dirIndex() != index) {
+  if (dirIndex() != index) {
     close();
     DBG_FAIL_MACRO;
     goto fail;

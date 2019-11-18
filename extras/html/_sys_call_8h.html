@@ -78,14 +78,13 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="_sd_fat_config_8h.html">SdFatConfig.h</a>&quot;</code><br />
-<code>#include &quot;PrintBasic.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_sd_fat_config_8h.html">../SdFatConfig.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SysCall.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_sys_call_8h__incl.png" border="0" usemap="#_arduino_sd_fat_2libraries_2_sd_fat_2src_2common_2_sys_call_8h" alt=""/></div>
 <map name="_arduino_sd_fat_2libraries_2_sd_fat_2src_2common_2_sys_call_8h" id="_arduino_sd_fat_2libraries_2_sd_fat_2src_2common_2_sys_call_8h">
-<area shape="rect" id="node4" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="126,95,230,121"/>
+<area shape="rect" id="node4" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="162,95,278,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -114,15 +113,17 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a0e3009529aac180ed5f48296d6670d6b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b">F</a>(str)&#160;&#160;&#160;(str)</td></tr>
+<tr class="separator:a0e3009529aac180ed5f48296d6670d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab979d9d4b4923f7c54d6caa6e1a61936"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sys_call_8h.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>&#160;&#160;&#160;<a class="el" href="_stdio_stream_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
 <tr class="separator:ab979d9d4b4923f7c54d6caa6e1a61936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ab4f210a7e2149c6c531486f1713c647b"><td class="memItemLeft" align="right" valign="top">typedef PrintBasic&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a></td></tr>
-<tr class="separator:ab4f210a7e2149c6c531486f1713c647b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1b23f27ced3c86c519d99a7709a58bb"><td class="memItemLeft" align="right" valign="top">typedef PrintBasic&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sys_call_8h.html#af1b23f27ced3c86c519d99a7709a58bb">stream_t</a></td></tr>
-<tr class="separator:af1b23f27ced3c86c519d99a7709a58bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62f6449331cfe1a71f29be30efe7890"><td class="memItemLeft" align="right" valign="top">typedef Print&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a></td></tr>
+<tr class="separator:ac62f6449331cfe1a71f29be30efe7890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a708fe172ce8f40fdb50a2df8c567d07a"><td class="memItemLeft" align="right" valign="top">typedef Stream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sys_call_8h.html#a708fe172ce8f40fdb50a2df8c567d07a">stream_t</a></td></tr>
+<tr class="separator:a708fe172ce8f40fdb50a2df8c567d07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_sys_call.html" title="SysCall - Class to wrap system calls. ">SysCall</a> class. </p>
@@ -132,6 +133,25 @@ Typedefs</h2></td></tr>
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a0e3009529aac180ed5f48296d6670d6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e3009529aac180ed5f48296d6670d6b">&#9670;&nbsp;</a></span>F</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define F</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">str</td><td>)</td>
+          <td>&#160;&#160;&#160;(str)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Define macro for strings stored in flash. </p>
+
+</div>
+</div>
 <a id="ab979d9d4b4923f7c54d6caa6e1a61936"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab979d9d4b4923f7c54d6caa6e1a61936">&#9670;&nbsp;</a></span>nullptr</h2>
 
@@ -148,40 +168,40 @@ Typedefs</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="ab4f210a7e2149c6c531486f1713c647b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4f210a7e2149c6c531486f1713c647b">&#9670;&nbsp;</a></span>print_t</h2>
+<a id="ac62f6449331cfe1a71f29be30efe7890"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac62f6449331cfe1a71f29be30efe7890">&#9670;&nbsp;</a></span>print_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef PrintBasic <a class="el" href="_sys_call_8h.html#ab4f210a7e2149c6c531486f1713c647b">print_t</a></td>
+          <td class="memname">typedef Print <a class="el" href="_sys_call_8h.html#ac62f6449331cfe1a71f29be30efe7890">print_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>If not Arduino </p>
+<p>Use Arduino Print. </p>
 
 </div>
 </div>
-<a id="af1b23f27ced3c86c519d99a7709a58bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1b23f27ced3c86c519d99a7709a58bb">&#9670;&nbsp;</a></span>stream_t</h2>
+<a id="a708fe172ce8f40fdb50a2df8c567d07a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a708fe172ce8f40fdb50a2df8c567d07a">&#9670;&nbsp;</a></span>stream_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef PrintBasic <a class="el" href="_sys_call_8h.html#af1b23f27ced3c86c519d99a7709a58bb">stream_t</a></td>
+          <td class="memname">typedef Stream <a class="el" href="_sys_call_8h.html#a708fe172ce8f40fdb50a2df8c567d07a">stream_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>If not Arduino </p>
+<p>Use Arduino Stream. </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 9 2019 06:51:28 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 18 2019 08:14:17 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

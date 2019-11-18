@@ -9,7 +9,7 @@ var searchData=
   ['dbgprintstats',['dbgPrintStats',['../class_sd_spi_card.html#abdb02df511072aefb465a22858d92e06',1,'SdSpiCard']]],
   ['deactivate',['deactivate',['../class_sd_lib_spi_driver.html#a4347a13e11e1fe5760f11f3bf229d3ce',1,'SdLibSpiDriver']]],
   ['dec',['dec',['../ios_8h.html#ada38ab90e22f0ebb638cb864a35c562d',1,'ios.h']]],
-  ['direntry',['dirEntry',['../class_fat_file.html#a6858d18c807411a071fd6d1b39d50087',1,'FatFile']]],
+  ['direntry',['dirEntry',['../class_fat_file.html#a2f4e9ab3056125b07f15d14ca26d5346',1,'FatFile']]],
   ['dirindex',['dirIndex',['../class_ex_fat_file.html#a5e3baa5d5269c2948cfaf604c42f6a16',1,'ExFatFile::dirIndex()'],['../class_fat_file.html#ae5ec24d4a94d3780384d3f2b731c7eb9',1,'FatFile::dirIndex()'],['../class_fs_base_file.html#ac05660570595552c72164a61001899d5',1,'FsBaseFile::dirIndex()']]],
   ['dirsize',['dirSize',['../class_fat_file.html#ae2ed15f05c9ccbce355e7a8d3ce8382d',1,'FatFile']]],
   ['dirty',['dirty',['../class_fs_cache.html#af50f564561a2db190280769d4641147b',1,'FsCache::dirty()'],['../class_fat_cache.html#ab4d3b0c16bb6a116c7d01afff2dcb307',1,'FatCache::dirty()']]],

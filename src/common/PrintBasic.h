@@ -87,9 +87,21 @@ class PrintBasic {
   size_t print(double n, uint8_t prec = 2) {
     return printDouble(n, prec);
   }
-  template<typename T>
-  size_t print(T n, uint8_t base = 10) {
-    return n < 0 && base == 10 ? printNeg(n, base) : printNum(n, base);
+  size_t print(signed char n, uint8_t base = 10) {
+    return print((long)n, base);
+  }
+  size_t print(unsigned char n, uint8_t base = 10) {
+    return print((unsigned long)n, base);
+  }
+  size_t print(int n, uint8_t base = 10) {
+    return print((long)n, base);
+  }
+  size_t print(unsigned int n, uint8_t base = 10) {
+    return print((unsigned long)n, base);
+  }
+  size_t print(long n, uint8_t base = 10);
+  size_t print(unsigned long n, uint8_t base = 10) {
+    return printNum(n, base);
   }
   size_t println() {
     return write("\r\n");
@@ -100,17 +112,30 @@ class PrintBasic {
   size_t println(const char* str) {
     return print(str) + println();
   }
-  size_t write(const char *str) {
-    return write(str, strlen(str));
-  }
   size_t println(double n, uint8_t prec = 2) {
     return print(n, prec) + println();
   }
-  template<typename T>
-  size_t println(T n, uint8_t base = 10) {
+  size_t println(signed char n, uint8_t base = 10) {
     return print(n, base) + println();
   }
-
+  size_t println(unsigned char n, uint8_t base = 10) {
+    return print(n, base) + println();
+  }
+  size_t println(int n, uint8_t base = 10) {
+    return print(n, base) + println();
+  }
+  size_t println(unsigned int n, uint8_t base = 10) {
+    return print(n, base) + println();
+  }
+  size_t println(long n, uint8_t base = 10) {
+    return print(n, base) + println();
+  }
+  size_t println(unsigned long n, uint8_t base = 10) {
+    return print(n, base) + println();
+  }
+  size_t write(const char *str) {
+    return write(str, strlen(str));
+  }
   virtual size_t write(uint8_t b) = 0;
 
   virtual size_t write(const uint8_t *buffer, size_t size) {
@@ -131,12 +156,7 @@ class PrintBasic {
 
  private:
   size_t printDouble(double n, uint8_t prec);
-
-  size_t printNeg(int32_t n, uint8_t base) {
-    return print('-') + printNum(-n, base);
-  }
-  size_t printNum(uint32_t n, uint8_t base);
-
+  size_t printNum(unsigned long n, uint8_t base);
   int m_error;
 };
 //------------------------------------------------------------------------------

@@ -67,7 +67,7 @@ class ExFatVolume : public ExFatPartition {
    * \param[in] path Path for volume working directory.
    * \return true for success or false for failure.
    */
-  bool chdir(const char *path);
+  bool chdir(const ExChar_t* path);
   /** \return current working volume. */
   static ExFatVolume* cwv() {return m_cwv;}
   /** Change global working volume to this volume. */
@@ -204,6 +204,7 @@ class ExFatVolume : public ExFatPartition {
 #if ENABLE_ARDUINO_SERIAL
   /** List the directory contents of the root directory to Serial.
    *
+   * \return true for success or false for failure.
    */
   bool ls() {
     return ls(&Serial);
@@ -217,6 +218,8 @@ class ExFatVolume : public ExFatPartition {
    * LS_SIZE - %Print file size.
    *
    * LS_R - Recursive list of subdirectories.
+   *
+   * \return true for success or false for failure.
    */
   bool ls(uint8_t flags) {
     return ls(&Serial, flags);
@@ -232,12 +235,42 @@ class ExFatVolume : public ExFatPartition {
    * LS_SIZE - %Print file size.
    *
    * LS_R - Recursive list of subdirectories.
+   *
+   * \return true for success or false for failure.
    */
   bool ls(const ExChar_t* path, uint8_t flags = 0) {
     return ls(&Serial, path, flags);
   }
 #endif  // ENABLE_ARDUINO_SERIAL
 #if ENABLE_ARDUINO_STRING
+  /**
+   * Set volume working directory.
+   * \param[in] path Path for volume working directory.
+   * \return true for success or false for failure.
+   */
+  bool chdir(const String& path) {
+    return chdir(path.c_str());
+  }
+  /** Test for the existence of a file in a directory
+   *
+   * \param[in] path Path of the file to be tested for.
+   *
+   * \return true if the file exists else false.
+   */
+  bool exists(const String &path) {
+    return exists(path.c_str());
+  }
+  /** Make a subdirectory in the volume root directory.
+   *
+   * \param[in] path A path with a valid 8.3 DOS name for the subdirectory.
+   *
+   * \param[in] pFlag Create missing parent directories if true.
+   *
+   * \return true for success or false for failure.
+   */
+  bool mkdir(const String &path, bool pFlag = true) {
+    return mkdir(path.c_str(), pFlag);
+  }
   /** open a file
    *
    * \param[in] path location of file to be opened.
@@ -247,16 +280,64 @@ class ExFatVolume : public ExFatPartition {
   ExFile open(const String &path, oflag_t oflag = O_RDONLY) {
     return open(path.c_str(), oflag);
   }
+  /** Remove a file from the volume root directory.
+   *
+   * \param[in] path A path with a valid name for the file.
+   *
+   * \return true for success or false for failure.
+   */
+  bool remove(const String& path) {
+    return remove(path.c_str());
+  }
+  /** Rename a file or subdirectory.
+   *
+   * \param[in] oldPath Path name to the file or subdirectory to be renamed.
+   *
+   * \param[in] newPath New path name of the file or subdirectory.
+   *
+   * The \a newPath object must not exist before the rename call.
+   *
+   * The file to be renamed must not be open.  The directory entry may be
+   * moved and file system corruption could occur if the file is accessed by
+   * a file object that was opened before the rename() call.
+   *
+   * \return true for success or false for failure.
+   */
+  bool rename(const String& oldPath, const String& newPath) {
+    return rename(oldPath.c_str(), newPath.c_str());
+  }
+  /** Remove a subdirectory from the volume's working directory.
+   *
+   * \param[in] path A path with a valid name for the subdirectory.
+   *
+   * The subdirectory file will be removed only if it is empty.
+   *
+   * \return true for success or false for failure.
+   */
+  bool rmdir(const String& path) {
+    return rmdir(path.c_str());
+  }
+  /** Truncate a file to a specified length.  The current file position
+   * will be at the new EOF.
+   *
+   * \param[in] path A path with a valid name for the file.
+   * \param[in] length The desired length for the file.
+   *
+   * \return true for success or false for failure.
+   */
+  bool truncate(const String& path, uint64_t length) {
+    return truncate(path.c_str(), length);
+  }
 #endif  // ENABLE_ARDUINO_STRING
   //============================================================================
-#if  USE_UNICODE_NAMES
+#if  USE_EXFAT_UNICODE_NAMES
   // Not implemented when Unicode is selected.
   bool exists(const char* path);
   bool mkdir(const char* path, bool pFlag = true);
   bool remove(const char* path);
   bool rename(const char* oldPath, const char* newPath);
   bool rmdir(const char* path);
-#endif  //  USE_UNICODE_NAMES
+#endif  //  USE_EXFAT_UNICODE_NAMES
 
  private:
   friend ExFatFile;

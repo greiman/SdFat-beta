@@ -24,7 +24,7 @@
  */
 #ifndef ArduinoFiles_h
 #define ArduinoFiles_h
-#include "SdFatConfig.h"
+#include "../SdFatConfig.h"
 //------------------------------------------------------------------------------
 /** Arduino SD.h style flag for open for read. */
 #ifndef FILE_READ

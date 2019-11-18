@@ -34,13 +34,13 @@ typedef uint16_t ExChar16_t;
 typedef char16_t ExChar16_t;
 #endif  // __cplusplus < 201103
 
-#if USE_UNICODE_NAMES
+#if USE_EXFAT_UNICODE_NAMES
 /** exFAT API character type */
 typedef ExChar16_t ExChar_t;
-#else  // USE_UNICODE_NAMES
+#else  // USE_EXFAT_UNICODE_NAMES
 /** exFAT API character type */
 typedef char ExChar_t;
-#endif  // USE_UNICODE_NAMES
+#endif  // USE_EXFAT_UNICODE_NAMES
 /**
  * \struct DirPos_t
  * \brief Internal type for position in directory file.

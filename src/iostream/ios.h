@@ -34,6 +34,7 @@
 typedef fspos_t pos_t;
 //==============================================================================
 #if SDFAT_FILE_TYPE == 1
+/** Set File type for iostreams. */
 typedef FatFile StreamBaseFile;
 #elif SDFAT_FILE_TYPE == 2
 typedef ExFatFile StreamBaseFile;

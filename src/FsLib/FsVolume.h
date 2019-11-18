@@ -230,7 +230,9 @@ class FsVolume {
            m_xVol ? m_xVol->rmdir(path) : false;
   }
 #if ENABLE_ARDUINO_SERIAL
-  /** List directory contents. */
+  /** List directory contents. 
+   * \return true for success or false for failure.
+   */
   bool ls() {
     return ls(&Serial);
   }
@@ -270,6 +272,14 @@ class FsVolume {
   }
 #endif  // ENABLE_ARDUINO_SERIAL
 #if ENABLE_ARDUINO_STRING
+  /**
+   * Set volume working directory.
+   * \param[in] path Path for volume working directory.
+   * \return true for success or false for failure.
+   */
+  bool chdir(const String& path) {
+    return chdir(path.c_str());
+  }
   /** Test for the existence of a file in a directory
    *
    * \param[in] path Path of the file to be tested for.
@@ -306,6 +316,23 @@ class FsVolume {
   bool remove(const String &path) {
     return remove(path.c_str());
   }
+  /** Rename a file or subdirectory.
+   *
+   * \param[in] oldPath Path name to the file or subdirectory to be renamed.
+   *
+   * \param[in] newPath New path name of the file or subdirectory.
+   *
+   * The \a newPath object must not exist before the rename call.
+   *
+   * The file to be renamed must not be open.  The directory entry may be
+   * moved and file system corruption could occur if the file is accessed by
+   * a file object that was opened before the rename() call.
+   *
+   * \return true for success or false for failure.
+   */
+  bool rename(const String& oldPath, const String& newPath) {
+    return rename(oldPath.c_str(), newPath.c_str());
+  }
   /** Remove a subdirectory from the volume's root directory.
    *
    * \param[in] path A path with a valid 8.3 DOS name for the subdirectory.
@@ -317,6 +344,20 @@ class FsVolume {
   bool rmdir(const String &path) {
     return rmdir(path.c_str());
   }
+  /** Rename a file or subdirectory.
+   *
+   * \param[in] oldPath Path name to the file or subdirectory to be renamed.
+   *
+   * \param[in] newPath New path name of the file or subdirectory.
+   *
+   * The \a newPath object must not exist before the rename call.
+   *
+   * The file to be renamed must not be open.  The directory entry may be
+   * moved and file system corruption could occur if the file is accessed by
+   * a file object that was opened before the rename() call.
+   *
+   * \return true for success or false for failure.
+   */
 #endif  // ENABLE_ARDUINO_STRING
 
  private:

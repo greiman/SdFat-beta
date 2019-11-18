@@ -25,8 +25,14 @@
 #include "PrintBasic.h"
 #include <math.h>
 
-size_t PrintBasic::printNum(uint32_t n, uint8_t base) {
-  const uint8_t DIM = 32;
+size_t PrintBasic::print(long n, uint8_t base) {
+  if (n < 0 && base == 10) {
+    return print('-') + printNum(-n, base);
+  }
+  return printNum(n, base);
+}
+size_t PrintBasic::printNum(unsigned long n, uint8_t base) {
+  const uint8_t DIM = 8*sizeof(long);
   char buf[DIM];
   char *str = &buf[DIM];
 

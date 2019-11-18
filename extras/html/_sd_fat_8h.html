@@ -67,7 +67,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">SdFat.h File Reference</div>  </div>
 </div><!--header-->
@@ -85,11 +86,11 @@ Include dependency graph for SdFat.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="_sd_fat_8h__incl.png" border="0" usemap="#_arduino_sd_fat_2libraries_2_sd_fat_2src_2_sd_fat_8h" alt=""/></div>
 <map name="_arduino_sd_fat_2libraries_2_sd_fat_2src_2_sd_fat_8h" id="_arduino_sd_fat_2libraries_2_sd_fat_2src_2_sd_fat_8h">
-<area shape="rect" id="node2" href="_sys_call_8h.html" title="SysCall class. " alt="" coords="120,95,252,121"/>
-<area shape="rect" id="node8" href="_fs_lib_8h.html" title="FsLib include file. " alt="" coords="414,95,515,121"/>
-<area shape="rect" id="node5" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="79,169,183,196"/>
-<area shape="rect" id="node9" href="_fs_volume_8h.html" title="FsVolume include file. " alt="" coords="419,169,511,196"/>
-<area shape="rect" id="node10" href="_fs_file_8h.html" title="FsBaseFile include file. " alt="" coords="535,169,605,196"/>
+<area shape="rect" id="node2" href="_sys_call_8h.html" title="SysCall class. " alt="" coords="67,95,199,121"/>
+<area shape="rect" id="node7" href="_fs_lib_8h.html" title="FsLib include file. " alt="" coords="306,95,408,121"/>
+<area shape="rect" id="node5" href="_sd_fat_config_8h.html" title="configuration definitions " alt="" coords="171,169,287,196"/>
+<area shape="rect" id="node8" href="_fs_volume_8h.html" title="FsVolume include file. " alt="" coords="311,169,403,196"/>
+<area shape="rect" id="node9" href="_fs_file_8h.html" title="FsBaseFile include file. " alt="" coords="428,169,497,196"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -115,6 +116,15 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:aca25ecce379f446043bdee2c55304210"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#aca25ecce379f446043bdee2c55304210">SD_FAT_VERSION</a>&#160;&#160;&#160;&quot;2.0.0&quot;</td></tr>
 <tr class="separator:aca25ecce379f446043bdee2c55304210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aa0ffd23c3e43af0bcbd2fb4d62f3286d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_file32.html">File32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#aa0ffd23c3e43af0bcbd2fb4d62f3286d">File</a></td></tr>
+<tr class="separator:aa0ffd23c3e43af0bcbd2fb4d62f3286d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3991b0f70199d1a17dbb837bb041e89c"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_fat_file.html">FatFile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#a3991b0f70199d1a17dbb837bb041e89c">SdBaseFile</a></td></tr>
+<tr class="separator:a3991b0f70199d1a17dbb837bb041e89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e295d38f798fdc044c3282818cdb064"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_sd_fat32.html">SdFat32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_sd_fat_8h.html#a6e295d38f798fdc044c3282818cdb064">SdFat</a></td></tr>
+<tr class="separator:a6e295d38f798fdc044c3282818cdb064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>main <a class="el" href="class_sd_fs.html" title="SD file system class for FAT16, FAT32, and exFAT volumes. ">SdFs</a> include file. </p>
@@ -139,10 +149,56 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="aa0ffd23c3e43af0bcbd2fb4d62f3286d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ffd23c3e43af0bcbd2fb4d62f3286d">&#9670;&nbsp;</a></span>File</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_file32.html">File32</a> <a class="el" href="_sd_fat_8h.html#aa0ffd23c3e43af0bcbd2fb4d62f3286d">File</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Select type for File. </p>
+
+</div>
+</div>
+<a id="a3991b0f70199d1a17dbb837bb041e89c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3991b0f70199d1a17dbb837bb041e89c">&#9670;&nbsp;</a></span>SdBaseFile</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_fat_file.html">FatFile</a> <a class="el" href="_sd_fat_8h.html#a3991b0f70199d1a17dbb837bb041e89c">SdBaseFile</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Select type for SdBaseFile. </p>
+
+</div>
+</div>
+<a id="a6e295d38f798fdc044c3282818cdb064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e295d38f798fdc044c3282818cdb064">&#9670;&nbsp;</a></span>SdFat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_sd_fat32.html">SdFat32</a> <a class="el" href="_sd_fat_8h.html#a6e295d38f798fdc044c3282818cdb064">SdFat</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Select type for SdFat. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 9 2019 06:51:28 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 18 2019 08:14:17 for SdFat by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

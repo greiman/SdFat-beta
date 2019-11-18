@@ -85,6 +85,16 @@ class ostream : public virtual ios {
     putStr((const char*)arg);
     return *this;
   }
+#if ENABLE_ARDUINO_STRING
+  /** Output string
+   * \param[in] arg string to output
+   * \return the stream
+   */
+  ostream &operator<< (const String& arg) {
+    putStr(arg.c_str());
+    return *this;
+  }
+#endif  // ENABLE_ARDUINO_STRING
   /** Output character
    * \param[in] arg character to output
    * \return the stream

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['f',['F',['../_sys_call_8h.html#a0e3009529aac180ed5f48296d6670d6b',1,'SysCall.h']]],
   ['fail',['fail',['../classios.html#a15269e67d05d4fe83a6cf344d542f8ae',1,'ios']]],
   ['failbit',['failbit',['../classios__base.html#a36157154001bcce17827db6786e35efd',1,'ios_base']]],
   ['fat12_5fsupport',['FAT12_SUPPORT',['../_sd_fat_config_8h.html#a28998c5daf4bd038f4f93172698320b1',1,'SdFatConfig.h']]],
@@ -30,6 +31,7 @@ var searchData=
   ['fgetc',['fgetc',['../class_stdio_stream.html#a160bd2828cb7e7370cffe1046eff8899',1,'StdioStream']]],
   ['fgetpos',['fgetpos',['../class_ex_fat_file.html#a8614bcbf04b7bbfc70fe36d2fa7f70c1',1,'ExFatFile::fgetpos()'],['../class_fat_file.html#a33e0b0a8a342047f29ab8e8aae9cae14',1,'FatFile::fgetpos()'],['../class_fs_base_file.html#adda345ec539688e40e279a4e3020d208',1,'FsBaseFile::fgetpos()']]],
   ['fgets',['fgets',['../class_ex_fat_file.html#abc69c9dfc8fdb4ebf9db3bc37c879dc6',1,'ExFatFile::fgets()'],['../class_fat_file.html#a9e05a51767f7c8f70c6f337eecbdca03',1,'FatFile::fgets()'],['../class_stdio_stream.html#aa240c1021a1aad1cc57f63a483541dc7',1,'StdioStream::fgets()'],['../class_fs_base_file.html#ab6b6b97a6382a763d6de882252412727',1,'FsBaseFile::fgets()']]],
+  ['file',['File',['../_sd_fat_8h.html#aa0ffd23c3e43af0bcbd2fb4d62f3286d',1,'SdFat.h']]],
   ['file32',['File32',['../class_file32.html',1,'']]],
   ['filesize',['fileSize',['../class_ex_fat_file.html#af2c08909b62b01f3edc4ee0c51ea7435',1,'ExFatFile::fileSize()'],['../class_fat_file.html#a874940574b9c99e763526465adf8dc28',1,'FatFile::fileSize()'],['../class_fs_base_file.html#aef21ae3af496d80f214918bb40b5b3ba',1,'FsBaseFile::fileSize()']]],
   ['fill',['fill',['../classios__base.html#ade5bd46462e075999c3a5c2cff2015f1',1,'ios_base::fill()'],['../classios__base.html#aa5683f9bdf295311bd5a6d3cdc2fedd5',1,'ios_base::fill(char c)']]],

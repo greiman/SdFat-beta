@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['null',['NULL',['../_stdio_stream_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4',1,'StdioStream.h']]],
-  ['nullptr',['nullptr',['../_sys_call_8h.html#ab979d9d4b4923f7c54d6caa6e1a61936',1,'SysCall.h']]]
+  ['maintain_5ffree_5fcluster_5fcount',['MAINTAIN_FREE_CLUSTER_COUNT',['../_sd_fat_config_8h.html#ac2865dac8fdbb4fff47105db32ddf05b',1,'SdFatConfig.h']]]
 ];

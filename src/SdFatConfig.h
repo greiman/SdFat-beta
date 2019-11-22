@@ -284,7 +284,8 @@
 /**
  * Determine the default SPI configuration.
  */
-#if defined(__STM32F1__)\
+#if defined(ARDUINO_ARCH_APOLLO3)\
+  || defined(__STM32F1__)\
   || (defined(__arm__) && defined(CORE_TEENSY))\
   || defined(PLATFORM_ID)
 // has multiple SPI ports

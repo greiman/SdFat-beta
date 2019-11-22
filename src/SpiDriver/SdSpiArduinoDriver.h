@@ -26,8 +26,8 @@
  * \file
  * \brief SpiDriver classes for Arduino compatible systems.
  */
-#ifndef SdSpArduinoDriver_h
-#define SdSpArduinoDriver_h
+#ifndef SdSpiArduinoDriver_h
+#define SdSpiArduinoDriver_h
 #include "../common/SysCall.h"
 
 #if SPI_DRIVER_SELECT < 2
@@ -407,4 +407,4 @@ typedef SdSoftSpiDriver SdSpiDriver;
 #else  // SPI_DRIVER_SELECT
 #error invalid SPI_DRIVER_SELECT
 #endif  // SPI_DRIVER_SELECT
-#endif  // SdSpArduinoDriver_h
+#endif  // SdSpiArduinoDriver_h

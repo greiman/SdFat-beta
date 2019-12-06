@@ -223,8 +223,13 @@ static uint16_t CRC_CCITT(const uint8_t* data, size_t n) {
 bool SdSpiCard::begin(SdSpiDriver* spi, SdSpiConfig spiConfig) {
   m_errorCode = SD_CARD_ERROR_NONE;
   m_type = 0;
+  m_csPin = spiConfig.csPin;
+  sdCsInit(m_csPin);
+  spiUnselect();
   m_spiDriver = spi;
-  uint16_t t0 = SysCall::curTimeMS();
+  m_spiDriver->setSckSpeed(1000UL*SD_MAX_INIT_RATE_KHZ);
+  m_spiDriver->begin(spiConfig);
+  SdMillis_t t0 = SysCall::curTimeMS();
   uint32_t arg;
 #if ENABLE_DEDICATED_SPI
   m_sharedSpi = !(spiConfig.options & DEDICATED_SPI);
@@ -232,8 +237,8 @@ bool SdSpiCard::begin(SdSpiDriver* spi, SdSpiConfig spiConfig) {
   m_curState = IDLE_STATE;
 #else  // ENABLE_DEDICATED_SPI
   if (spiConfig.options & DEDICATED_SPI) {
-      error(SD_CARD_ERROR_INVALID_CARD_CONFIG);
-      goto fail;
+    error(SD_CARD_ERROR_INVALID_CARD_CONFIG);
+    goto fail;
   }
 #endif  // ENABLE_DEDICATED_SPI
 
@@ -312,7 +317,7 @@ bool SdSpiCard::begin(SdSpiDriver* spi, SdSpiConfig spiConfig) {
     }
   }
   spiStop();
-  m_spiDriver->setHighSpeed(spiConfig);
+  m_spiDriver->setSckSpeed(spiConfig.maxSck);
   return true;
 
 fail:
@@ -436,14 +441,14 @@ bool SdSpiCard::isBusy() {
   return rtn;
 }
 //------------------------------------------------------------------------------
-bool SdSpiCard::isTimedOut(uint16_t startMS, uint16_t timeoutMS) {
-#if WDT_YIELD_TIME_MICROS
-  static uint32_t last;
-  if ((micros() - last) > WDT_YIELD_TIME_MICROS) {
+bool SdSpiCard::isTimedOut(SdMillis_t startMS, SdMillis_t timeoutMS) {
+#if WDT_YIELD_TIME_MILLIS
+  static SdMillis_t last;
+  if ((SysCall::curTimeMS() - last) > WDT_YIELD_TIME_MILLIS) {
     SysCall::yield();
-    last = micros();
+    last = SysCall::curTimeMS();
   }
-#endif  // WDT_YIELD_TIME_MICROS
+#endif  // WDT_YIELD_TIME_MILLIS
   return (SysCall::curTimeMS() - startMS) > timeoutMS;
 }
 //------------------------------------------------------------------------------
@@ -458,7 +463,7 @@ bool SdSpiCard::readData(uint8_t* dst, size_t count) {
 
   DBG_BEGIN_TIME(DBG_WAIT_READ);
   // wait for start sector token
-  uint16_t t0 = SysCall::curTimeMS();
+  SdMillis_t t0 = SysCall::curTimeMS();
   while ((m_status = spiReceive()) == 0XFF) {
     if (isTimedOut(t0, SD_READ_TIMEOUT)) {
       error(SD_CARD_ERROR_READ_TIMEOUT);
@@ -622,9 +627,9 @@ void SdSpiCard::spiStop() {
 }
 //------------------------------------------------------------------------------
 // wait for card to go not busy
-bool SdSpiCard::waitNotBusy(uint16_t timeoutMS) {
-  uint16_t t0 = SysCall::curTimeMS();
-#if WDT_YIELD_TIME_MICROS
+bool SdSpiCard::waitNotBusy(SdMillis_t timeoutMS) {
+  SdMillis_t t0 = SysCall::curTimeMS();
+#if WDT_YIELD_TIME_MILLIS
   // Call isTimedOut first to insure yield is called.
   while (!isTimedOut(t0, timeoutMS)) {
     if (spiReceive() == 0XFF) {
@@ -632,7 +637,7 @@ bool SdSpiCard::waitNotBusy(uint16_t timeoutMS) {
     }
   }
   return false;
-#else  // WDT_YIELD_TIME_MICROS
+#else  // WDT_YIELD_TIME_MILLIS
   // Check not busy first since yield is not called in isTimedOut.
   while (spiReceive() != 0XFF) {
     if (isTimedOut(t0, timeoutMS)) {
@@ -640,7 +645,7 @@ bool SdSpiCard::waitNotBusy(uint16_t timeoutMS) {
     }
   }
   return true;
-#endif  // WDT_YIELD_TIME_MICROS
+#endif  // WDT_YIELD_TIME_MILLIS
 }
 //------------------------------------------------------------------------------
 bool SdSpiCard::writeSingle(uint32_t sector, const uint8_t* src) {

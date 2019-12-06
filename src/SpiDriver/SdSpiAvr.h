@@ -22,85 +22,65 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-
-#include "SdSpiDriver.h"
-#if defined(SD_ALT_SPI_DRIVER) && defined(ESP8266)
+#ifndef SdSpiAvr_h
+#define SdSpiAvr_h
+// Use of in-line for AVR to save flash.
+#define nop asm volatile ("nop\n\t")
 //------------------------------------------------------------------------------
-/** Initialize the SPI bus.
- *
- * \param[in] chipSelectPin SD card chip select pin.
- */
-void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
-  m_csPin = spiConfig.csPin;
-  m_spiSettings = LOW_SPEED_SPI_SETTINGS;
-  pinMode(m_csPin, OUTPUT);
-  digitalWrite(m_csPin, HIGH);
+inline void SdSpiArduinoDriver::begin(SdSpiConfig spiConfig) {
+  (void)spiConfig;
   SPI.begin();
 }
 //------------------------------------------------------------------------------
-/** Set SPI options for access to SD/SDHC cards.
- *
- */
-void SdAltSpiDriver::activate() {
+inline void SdSpiArduinoDriver::activate() {
   SPI.beginTransaction(m_spiSettings);
 }
 //------------------------------------------------------------------------------
-void SdAltSpiDriver::deactivate() {
-  // Note: endTransaction is an empty function on ESP8266.
+inline void SdSpiArduinoDriver::deactivate() {
   SPI.endTransaction();
 }
 //------------------------------------------------------------------------------
-/** Receive a byte.
- *
- * \return The byte.
- */
-uint8_t SdAltSpiDriver::receive() {
+inline uint8_t SdSpiArduinoDriver::receive() {
   return SPI.transfer(0XFF);
 }
 //------------------------------------------------------------------------------
-/** Receive multiple bytes.
- *
- * \param[out] buf Buffer to receive the data.
- * \param[in] n Number of bytes to receive.
- *
- * \return Zero for no error or nonzero error code.
- */
-uint8_t SdAltSpiDriver::receive(uint8_t* buf, size_t n) {
-  // Adjust to 32-bit alignment.
-  while ((reinterpret_cast<uintptr_t>(buf) & 0X3) && n) {
-    *buf++ = SPI.transfer(0xff);
-    n--;
+inline uint8_t SdSpiArduinoDriver::receive(uint8_t* buf, size_t count) {
+  if (count == 0) {
+    return 0;
   }
-  // Do multiple of four byte transfers.
-  size_t n4 = 4*(n/4);
-  SPI.transferBytes(0, buf, n4);
-
-  // Transfer up to three remaining bytes.
-  for (buf += n4, n -= n4; n; n--) {
-    *buf++ = SPI.transfer(0xff);
+  uint8_t* pr = buf;
+  SPDR = 0XFF;
+  while (--count > 0) {
+    while (!(SPSR & _BV(SPIF))) {}
+    uint8_t in = SPDR;
+    SPDR = 0XFF;
+    *pr++ = in;
+    // nops to optimize loop for 16MHz CPU 8 MHz SPI
+    nop;
+    nop;
   }
+  while (!(SPSR & _BV(SPIF))) {}
+  *pr = SPDR;
   return 0;
 }
 //------------------------------------------------------------------------------
-/** Send a byte.
- *
- * \param[in] b Byte to send
- */
-void SdAltSpiDriver::send(uint8_t b) {
-  SPI.transfer(b);
+inline void SdSpiArduinoDriver::send(uint8_t data) {
+  SPI.transfer(data);
 }
 //------------------------------------------------------------------------------
-/** Send multiple bytes.
- *
- * \param[in] buf Buffer for data to be sent.
- * \param[in] n Number of bytes to send.
- */
-void SdAltSpiDriver::send(const uint8_t* buf , size_t n) {
-  // Adjust to 32-bit alignment.
-  while ((reinterpret_cast<uintptr_t>(buf) & 0X3) && n) {
-    SPI.transfer(*buf++);
-    n--;
+inline void SdSpiArduinoDriver::send(const uint8_t* buf , size_t count) {
+  if (count == 0) {
+    return;
   }
-  SPI.transferBytes(const_cast<uint8_t*>(buf), 0, n);
+  SPDR = *buf++;
+  while (--count > 0) {
+    uint8_t b = *buf++;
+    while (!(SPSR & (1 << SPIF))) {}
+    SPDR = b;
+    // nops to optimize loop for 16MHz CPU 8 MHz SPI
+    nop;
+    nop;
+  }
+  while (!(SPSR & (1 << SPIF))) {}
 }
-#endif  // defined(SD_ALT_SPI_DRIVER) && defined(ESP8266)
+#endif  // SdSpiAvr_h

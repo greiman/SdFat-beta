@@ -66,6 +66,9 @@ void setup() {
   cout << F("MOSI: ") << int(MOSI) << endl;
   cout << F("SCK:  ") << int(SCK) << endl;
   cout << F("SS:   ") << int(SS) << endl;
+#ifdef SDCARD_SS_PIN
+  cout << F("SDCARD_SS_PIN:   ") << int(SDCARD_SS_PIN) << endl;
+#endif  // SDCARD_SS_PIN
 
   if (DISABLE_CHIP_SELECT < 0) {
     cout << F(

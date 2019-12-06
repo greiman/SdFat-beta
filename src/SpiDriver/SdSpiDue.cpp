@@ -23,50 +23,47 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include "SdSpiDriver.h"
-#if defined(SD_ALT_SPI_DRIVER) && defined(ARDUINO_SAM_DUE)
-/** Use SAM3X DMAC if nonzero */
+#if defined(SD_USE_CUSTOM_SPI) && defined(ARDUINO_SAM_DUE)
+/* Use SAM3X DMAC if nonzero */
 #define USE_SAM3X_DMAC 1
-/** Use extra Bus Matrix arbitration fix if nonzero */
+/* Use extra Bus Matrix arbitration fix if nonzero */
 #define USE_SAM3X_BUS_MATRIX_FIX 1
-/** Time in ms for DMA receive timeout */
+/* Time in ms for DMA receive timeout */
 #define SAM3X_DMA_TIMEOUT 100
-/** chip select register number */
+/* chip select register number */
 #define SPI_CHIP_SEL 3
-/** DMAC receive channel */
+/* DMAC receive channel */
 #define SPI_DMAC_RX_CH  1
-/** DMAC transmit channel */
+/* DMAC transmit channel */
 #define SPI_DMAC_TX_CH  0
-/** DMAC Channel HW Interface Number for SPI TX. */
+/* DMAC Channel HW Interface Number for SPI TX. */
 #define SPI_TX_IDX  1
-/** DMAC Channel HW Interface Number for SPI RX. */
+/* DMAC Channel HW Interface Number for SPI RX. */
 #define SPI_RX_IDX  2
 //------------------------------------------------------------------------------
-/** Disable DMA Controller. */
+/* Disable DMA Controller. */
 static void dmac_disable() {
   DMAC->DMAC_EN &= (~DMAC_EN_ENABLE);
 }
-/** Enable DMA Controller. */
+/* Enable DMA Controller. */
 static void dmac_enable() {
   DMAC->DMAC_EN = DMAC_EN_ENABLE;
 }
-/** Disable DMA Channel. */
+/* Disable DMA Channel. */
 static void dmac_channel_disable(uint32_t ul_num) {
   DMAC->DMAC_CHDR = DMAC_CHDR_DIS0 << ul_num;
 }
-/** Enable DMA Channel. */
+/* Enable DMA Channel. */
 static void dmac_channel_enable(uint32_t ul_num) {
   DMAC->DMAC_CHER = DMAC_CHER_ENA0 << ul_num;
 }
-/** Poll for transfer complete. */
+/* Poll for transfer complete. */
 static bool dmac_channel_transfer_done(uint32_t ul_num) {
   return (DMAC->DMAC_CHSR & (DMAC_CHSR_ENA0 << ul_num)) ? false : true;
 }
 //------------------------------------------------------------------------------
-void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
-  m_csPin = spiConfig.csPin;
-  m_spiSettings = LOW_SPEED_SPI_SETTINGS;
-  pinMode(m_csPin, OUTPUT);
-  digitalWrite(m_csPin, HIGH);
+void SdSpiArduinoDriver::begin(SdSpiConfig spiConfig) {
+  (void)spiConfig;
   SPI.begin();
 #if USE_SAM3X_DMAC
   pmc_enable_periph_clk(ID_DMAC);
@@ -126,7 +123,7 @@ static void spiDmaTX(const uint8_t* src, uint16_t count) {
 }
 //------------------------------------------------------------------------------
 //  initialize SPI controller
-void SdAltSpiDriver::activate() {
+void SdSpiArduinoDriver::activate() {
   SPI.beginTransaction(m_spiSettings);
 
   Spi* pSpi = SPI0;
@@ -144,7 +141,7 @@ void SdAltSpiDriver::activate() {
   pSpi->SPI_CR |= SPI_CR_SPIEN;
 }
 //------------------------------------------------------------------------------
-void SdAltSpiDriver::deactivate() {
+void SdSpiArduinoDriver::deactivate() {
   SPI.endTransaction();
 }
 //------------------------------------------------------------------------------
@@ -157,20 +154,18 @@ static inline uint8_t spiTransfer(uint8_t b) {
   return b;
 }
 //------------------------------------------------------------------------------
-/** SPI receive a byte */
-uint8_t SdAltSpiDriver::receive() {
+uint8_t SdSpiArduinoDriver::receive() {
   return spiTransfer(0XFF);
 }
 //------------------------------------------------------------------------------
-/** SPI receive multiple bytes */
-uint8_t SdAltSpiDriver::receive(uint8_t* buf, size_t n) {
+uint8_t SdSpiArduinoDriver::receive(uint8_t* buf, size_t count) {
   Spi* pSpi = SPI0;
   int rtn = 0;
 #if USE_SAM3X_DMAC
   // clear overrun error
   while (pSpi->SPI_SR & (SPI_SR_OVRES | SPI_SR_RDRF)) {pSpi->SPI_RDR;}
-  spiDmaRX(buf, n);
-  spiDmaTX(0, n);
+  spiDmaRX(buf, count);
+  spiDmaTX(0, count);
 
   uint32_t m = millis();
   while (!dmac_channel_transfer_done(SPI_DMAC_RX_CH)) {
@@ -185,7 +180,7 @@ uint8_t SdAltSpiDriver::receive(uint8_t* buf, size_t n) {
     rtn |= 1;
   }
 #else  // USE_SAM3X_DMAC
-  for (size_t i = 0; i < n; i++) {
+  for (size_t i = 0; i < count; i++) {
     pSpi->SPI_TDR = 0XFF;
     while ((pSpi->SPI_SR & SPI_SR_RDRF) == 0) {}
     buf[i] = pSpi->SPI_RDR;
@@ -194,19 +189,18 @@ uint8_t SdAltSpiDriver::receive(uint8_t* buf, size_t n) {
   return rtn;
 }
 //------------------------------------------------------------------------------
-/** SPI send a byte */
-void SdAltSpiDriver::send(uint8_t b) {
-  spiTransfer(b);
+void SdSpiArduinoDriver::send(uint8_t data) {
+  spiTransfer(data);
 }
 //------------------------------------------------------------------------------
-void SdAltSpiDriver::send(const uint8_t* buf , size_t n) {
+void SdSpiArduinoDriver::send(const uint8_t* buf , size_t count) {
   Spi* pSpi = SPI0;
 #if USE_SAM3X_DMAC
-  spiDmaTX(buf, n);
+  spiDmaTX(buf, count);
   while (!dmac_channel_transfer_done(SPI_DMAC_TX_CH)) {}
 #else  // #if USE_SAM3X_DMAC
   while ((pSpi->SPI_SR & SPI_SR_TXEMPTY) == 0) {}
-  for (size_t i = 0; i < n; i++) {
+  for (size_t i = 0; i < count; i++) {
     pSpi->SPI_TDR = buf[i];
     while ((pSpi->SPI_SR & SPI_SR_TDRE) == 0) {}
   }
@@ -215,4 +209,4 @@ void SdAltSpiDriver::send(const uint8_t* buf , size_t n) {
   // leave RDR empty
   while (pSpi->SPI_SR & (SPI_SR_OVRES | SPI_SR_RDRF)) {pSpi->SPI_RDR;}
 }
-#endif  // defined(SD_ALT_SPI_DRIVER) && defined(ARDUINO_SAM_DUE)
+#endif  // defined(SD_USE_CUSTOM_SPI) && defined(ARDUINO_SAM_DUE)

@@ -22,12 +22,12 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-#ifndef SdSpiCard_h
-#define SdSpiCard_h
 /**
  * \file
  * \brief SdSpiCard class for V2 SD/SDHC cards
  */
+#ifndef SdSpiCard_h
+#define SdSpiCard_h
 #include <stddef.h>
 #include "../common/SysCall.h"
 #include "SdCardInfo.h"
@@ -282,7 +282,7 @@ class SdSpiCard {
     return cardCommand(cmd, arg);
   }
   uint8_t cardCommand(uint8_t cmd, uint32_t arg);
-  bool isTimedOut(uint16_t startMS, uint16_t timeoutMS);
+  bool isTimedOut(SdMillis_t startMS, SdMillis_t timeoutMS);
   bool readData(uint8_t* dst, size_t count);
   bool readRegister(uint8_t cmd, void* buf);
 
@@ -290,7 +290,7 @@ class SdSpiCard {
     m_type = value;
   }
 
-  bool waitNotBusy(uint16_t timeoutMS);
+  bool waitNotBusy(SdMillis_t timeoutMS);
   bool writeData(uint8_t token, const uint8_t* src);
 
   //---------------------------------------------------------------------------
@@ -314,10 +314,10 @@ class SdSpiCard {
     m_spiDriver->send(buf, n);
   }
   void spiSelect() {
-    m_spiDriver->select();
+    sdCsWrite(m_csPin, false);
   }
   void spiUnselect() {
-    m_spiDriver->unselect();
+    sdCsWrite(m_csPin, true);
   }
 #if ENABLE_DEDICATED_SPI
   static const uint8_t IDLE_STATE = 0;
@@ -328,6 +328,7 @@ class SdSpiCard {
   bool    m_sharedSpi;
 #endif  // ENABLE_DEDICATED_SPI
   SdSpiDriver *m_spiDriver;
+  SdCsPin_t m_csPin;
   uint8_t m_errorCode;
   bool    m_spiActive;
   uint8_t m_status;

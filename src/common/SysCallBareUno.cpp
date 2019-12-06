@@ -23,7 +23,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include "SysCall.h"
-#if defined(__AVR_ATmega328P__) && !ENABLE_ARDUINO_FEATURES
+#if 0  // defined(__AVR_ATmega328P__) && !ENABLE_ARDUINO_FEATURES
 #include <avr/interrupt.h>
 
 // ISR for timer 2 Compare A interrupt
@@ -31,7 +31,7 @@ volatile uint16_t timer2 = 0;
 ISR(TIMER2_COMPA_vect) {
   timer2++;
 }
-uint16_t SysCall::curTimeMS() {
+SdMillis_t SysCall::curTimeMS() {
   if (TIMSK2 != (1 << OCIE2A)) {
     // use system clock (clkI/O).
     ASSR &= ~(1 << AS2);

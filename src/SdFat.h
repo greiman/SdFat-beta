@@ -54,7 +54,7 @@ class SdBase : public Vol {
    * \param[in] csPin SD card chip select pin.
    * \return true for success or false for failure.
    */
-  bool begin(uint8_t csPin = SS) {
+  bool begin(SdCsPin_t csPin = SS) {
 #ifdef BUILTIN_SDCARD
     if (csPin == BUILTIN_SDCARD) {
       return begin(SdioConfig(FIFO_SDIO));
@@ -69,7 +69,7 @@ class SdBase : public Vol {
    * \param[in] maxSck Maximum SCK frequency.
    * \return true for success or false for failure.
    */
-  bool begin(uint8_t csPin, uint32_t maxSck) {
+  bool begin(SdCsPin_t csPin, uint32_t maxSck) {
     return begin(SdSpiConfig(csPin, SHARED_SPI, maxSck));
   }
   //----------------------------------------------------------------------------

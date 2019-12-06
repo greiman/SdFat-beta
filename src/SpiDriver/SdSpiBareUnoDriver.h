@@ -79,28 +79,6 @@ inline void unoPinMode(uint8_t pin, uint8_t mode) {
   sei();
 }
 
-class SdSpiConfig {
- public:
-  /** SdSpiConfig constructor.
-   *
-   * \param[in] cs Chip select pin.
-   * \param[in] opt Options.
-   */
-  SdSpiConfig(uint8_t cs, uint8_t opt) :
-    csPin(cs), options(opt) {}
-  /** SdSpiConfig constructor.
-   *
-   * \param[in] cs Chip select pin.
-   */
-  explicit SdSpiConfig(uint8_t cs) :
-    csPin(cs), options(SHARED_SPI) {}
-
-  /** Chip select pin. */
-  const uint8_t csPin;
-  /** Options */
-  const uint8_t options;
-};
-
 #define UNO_SS   10
 #define UNO_MOSI 11
 #define UNO_MISO 12
@@ -144,17 +122,17 @@ class SdSpiDriverBareUno {
   /** Receive multiple bytes.
   *
   * \param[out] buf Buffer to receive the data.
-  * \param[in] n Number of bytes to receive.
+  * \param[in] count Number of bytes to receive.
   *
   * \return Zero for no error or nonzero error code.
   */
-  uint8_t receive(uint8_t* buf, size_t n) {
-    if (n == 0) {
+  uint8_t receive(uint8_t* buf, size_t count) {
+    if (count == 0) {
       return 0;
     }
     uint8_t* pr = buf;
     SPDR = 0XFF;
-    while (--n > 0) {
+    while (--count > 0) {
       while (!(SPSR & _BV(SPIF))) {}
       uint8_t in = SPDR;
       SPDR = 0XFF;
@@ -177,14 +155,14 @@ class SdSpiDriverBareUno {
   /** Send multiple bytes.
    *
    * \param[in] buf Buffer for data to be sent.
-   * \param[in] n Number of bytes to send.
+   * \param[in] count Number of bytes to send.
    */
-  void send(const uint8_t* buf, size_t n) {
-    if (n == 0) {
+  void send(const uint8_t* buf, size_t count) {
+    if (count == 0) {
       return;
     }
     SPDR = *buf++;
-    while (--n > 0) {
+    while (--count > 0) {
       uint8_t b = *buf++;
       while (!(SPSR & (1 << SPIF))) {}
       SPDR = b;
@@ -202,8 +180,8 @@ class SdSpiDriverBareUno {
    *
    * \param[in] spiConfig SPI options.
    */
-  void setHighSpeed(SdSpiConfig spiConfig) {
-    (void)spiConfig;
+  void setSckSpeed(uint32_t maxSck) {
+    (void)maxSck;
     SPSR |= 1 << SPI2X;
   }
   static uint8_t transfer(uint8_t data) {
@@ -217,6 +195,6 @@ class SdSpiDriverBareUno {
   }
 
  private:
-  uint8_t m_csPin;
+  SdCsPin_t m_csPin;
 };
 #endif  // SdSpiBareUnoDriver_h

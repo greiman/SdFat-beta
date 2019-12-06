@@ -23,20 +23,18 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include "SdSpiDriver.h"
-#if defined(SD_ALT_SPI_DRIVER) &&  defined(__arm__) && defined(CORE_TEENSY)
+#if defined(SD_USE_CUSTOM_SPI) &&  defined(__arm__) && defined(CORE_TEENSY)
 #define USE_BLOCK_TRANSFER 1
 //------------------------------------------------------------------------------
-void SdAltSpiDriver::activate() {
+void SdSpiArduinoDriver::activate() {
   m_spi->beginTransaction(m_spiSettings);
 }
 //------------------------------------------------------------------------------
-void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
-  m_csPin = spiConfig.csPin;
-  m_spiSettings = LOW_SPEED_SPI_SETTINGS;
+void SdSpiArduinoDriver::begin(SdSpiConfig spiConfig) {
   if (spiConfig.spiPort) {
     m_spi = spiConfig.spiPort;
 #if defined(SDCARD_SPI) && defined(SDCARD_SS_PIN)
-  } else if (m_csPin == SDCARD_SS_PIN) {
+  } else if (spiConfig.csPin == SDCARD_SS_PIN) {
     m_spi = &SDCARD_SPI;
     m_spi->setMISO(SDCARD_MISO_PIN);
     m_spi->setMOSI(SDCARD_MOSI_PIN);
@@ -45,63 +43,44 @@ void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
   } else {
     m_spi = &SPI;
   }
-  pinMode(m_csPin, OUTPUT);
-  digitalWrite(m_csPin, HIGH);
   m_spi->begin();
 }
 //------------------------------------------------------------------------------
-void SdAltSpiDriver::deactivate() {
+void SdSpiArduinoDriver::deactivate() {
   m_spi->endTransaction();
 }
 //------------------------------------------------------------------------------
-/** Receive a byte.
- *
- * \return The byte.
- */
-uint8_t SdAltSpiDriver::receive() {
+uint8_t SdSpiArduinoDriver::receive() {
   return m_spi->transfer(0XFF);
 }
-/** Receive multiple bytes.
- *
- * \param[out] buf Buffer to receive the data.
- * \param[in] n Number of bytes to receive.
- *
- * \return Zero for no error or nonzero error code.
- */
-uint8_t SdAltSpiDriver::receive(uint8_t* buf, size_t n) {
+//------------------------------------------------------------------------------
+uint8_t SdSpiArduinoDriver::receive(uint8_t* buf, size_t count) {
 #if USE_BLOCK_TRANSFER
-  memset(buf, 0XFF, n);
-  m_spi->transfer(buf, n);
+  memset(buf, 0XFF, count);
+  m_spi->transfer(buf, count);
 #else  // USE_BLOCK_TRANSFER
-  for (size_t i = 0; i < n; i++) {
+  for (size_t i = 0; i < count; i++) {
     buf[i] = m_spi->transfer(0XFF);
   }
 #endif  // USE_BLOCK_TRANSFER
   return 0;
 }
-/** Send a byte.
- *
- * \param[in] b Byte to send
- */
-void SdAltSpiDriver::send(uint8_t b) {
-  m_spi->transfer(b);
+//------------------------------------------------------------------------------
+void SdSpiArduinoDriver::send(uint8_t data) {
+  m_spi->transfer(data);
 }
-/** Send multiple bytes.
- *
- * \param[in] buf Buffer for data to be sent.
- * \param[in] n Number of bytes to send.
- */
-void SdAltSpiDriver::send(const uint8_t* buf , size_t n) {
+//------------------------------------------------------------------------------
+void SdSpiArduinoDriver::send(const uint8_t* buf , size_t count) {
 #if USE_BLOCK_TRANSFER
   uint32_t tmp[128];
-  if (0 < n && n <= 512) {
-    memcpy(tmp, buf, n);
-    m_spi->transfer(tmp, n);
+  if (0 < count && count <= 512) {
+    memcpy(tmp, buf, count);
+    m_spi->transfer(tmp, count);
     return;
   }
 #endif  // USE_BLOCK_TRANSFER
-  for (size_t i = 0; i < n; i++) {
+  for (size_t i = 0; i < count; i++) {
     m_spi->transfer(buf[i]);
   }
 }
-#endif  // defined(SD_ALT_SPI_DRIVER) && defined(__arm__) &&defined(CORE_TEENSY)
+#endif  // defined(SD_USE_CUSTOM_SPI) && defined(__arm__) &&defined(CORE_TEENSY)

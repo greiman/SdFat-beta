@@ -205,7 +205,6 @@ class ios_base {
   }
   /** clear format flags
    * \param[in] fl flags to be cleared
-   * \return old flags
    */
   void unsetf(fmtflags fl) {
     m_fmtflags &= ~fl;

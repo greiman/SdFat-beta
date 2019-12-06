@@ -24,13 +24,16 @@ const uint8_t SD_CS_PIN = SS;
 const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #endif  // SDCARD_SS_PIN
 
+// Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur.
+#define SPI_CLOCK SD_SCK_MHZ(50)
+
 // Try to select the best SD card configuration.
 #if HAS_SDIO_CLASS
 #define SD_CONFIG SdioConfig(FIFO_SDIO)
 #elif ENABLE_DEDICATED_SPI
-#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI)
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK)
 #else  // HAS_SDIO_CLASS
-#define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI)
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI, SPI_CLOCK)
 #endif  // HAS_SDIO_CLASS
 
 // Set PRE_ALLOCATE true to pre-allocate file clusters.
@@ -142,9 +145,9 @@ void loop() {
   while (!Serial.available()) {
     SysCall::yield();
   }
-#if HAS_UNUSED_STACK  
+#if HAS_UNUSED_STACK
   cout << F("FreeStack: ") << FreeStack() << endl;
-#endif  // HAS_UNUSED_STACK 
+#endif  // HAS_UNUSED_STACK
 
   if (!sd.begin(SD_CONFIG)) {
     sd.initErrorHalt(&Serial);
@@ -173,7 +176,7 @@ void loop() {
     buf[BUF_SIZE-2] = '\r';
   }
   buf[BUF_SIZE-1] = '\n';
-  
+
   cout << F("FILE_SIZE_MB = ") << FILE_SIZE_MB << endl;
   cout << F("BUF_SIZE = ") << BUF_SIZE << F(" bytes\n");
   cout << F("Starting write test, please wait.") << endl << endl;

@@ -408,7 +408,7 @@ static void initSDHC() {
   }
 
   // Set initial SCK rate.
-  setSdclk(400);
+  setSdclk(SD_MAX_INIT_RATE_KHZ);
 
   enableGPIO(true);
 

@@ -23,85 +23,47 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #include "SdSpiDriver.h"
-#if defined(SD_ALT_SPI_DRIVER) && defined(ARDUINO_ARCH_APOLLO3)
-
-
+#if defined(SD_USE_CUSTOM_SPI) && defined(ARDUINO_ARCH_APOLLO3)
 //------------------------------------------------------------------------------
-/** Set SPI options for access to SD/SDHC cards.
- *
- * \param[in] divisor SCK clock divider relative to the APB1 or APB2 clock.
- */
-void SdAltSpiDriver::activate() {
+void SdSpiArduinoDriver::activate() {
   m_spi->beginTransaction(m_spiSettings);
 }
 //------------------------------------------------------------------------------
-/** Initialize the SPI bus.
- *
- * \param[in] chipSelectPin SD card chip select pin.
- */
-void SdAltSpiDriver::begin(SdSpiConfig spiConfig) {
-  m_csPin = spiConfig.csPin;
-  m_spiSettings = LOW_SPEED_SPI_SETTINGS;
+void SdSpiArduinoDriver::begin(SdSpiConfig spiConfig) {
   if (spiConfig.spiPort) {
     m_spi = spiConfig.spiPort;
   } else {
     m_spi = &SPI;
-  }  
-  m_spi->begin();  
-  pinMode(m_csPin, OUTPUT);
-  digitalWrite(m_csPin, HIGH);
+  }
+  m_spi->begin();
 }
 //------------------------------------------------------------------------------
-/**
- * End SPI transaction.
- */
-void SdAltSpiDriver::deactivate() {
+void SdSpiArduinoDriver::deactivate() {
   m_spi->endTransaction();
 }
 //------------------------------------------------------------------------------
-/** Receive a byte.
- *
- * \return The byte.
- */
-uint8_t SdAltSpiDriver::receive() {
+uint8_t SdSpiArduinoDriver::receive() {
   return m_spi->transfer(0XFF);
 }
 //------------------------------------------------------------------------------
-/** Receive multiple bytes.
- *
- * \param[out] buf Buffer to receive the data.
- * \param[in] n Number of bytes to receive.
- *
- * \return Zero for no error or nonzero error code.
- */
-uint8_t SdAltSpiDriver::receive(uint8_t *buf, size_t n) {
-  m_spi->transferIn(buf, n);
+uint8_t SdSpiArduinoDriver::receive(uint8_t *buf, size_t count) {
+  m_spi->transferIn(buf, count);
   return 0;
 }
 //------------------------------------------------------------------------------
-/** Send a byte.
- *
- * \param[in] b Byte to send
- */
-void SdAltSpiDriver::send(uint8_t b) {
-  m_spi->transfer(b);
+void SdSpiArduinoDriver::send(uint8_t data) {
+  m_spi->transfer(data);
 }
 //------------------------------------------------------------------------------
-/** Send multiple bytes.
- *
- * \param[in] buf Buffer for data to be sent.
- * \param[in] n Number of bytes to send.
- */
-void SdAltSpiDriver::send(const uint8_t *buf, size_t n) {
-  //Convert byte array to 4 byte array
-  uint32_t myArray[n / 4];
-  for (int x = 0; x < n / 4; x++)
-  {
+void SdSpiArduinoDriver::send(const uint8_t *buf, size_t count) {
+  // Convert byte array to 4 byte array
+  uint32_t myArray[count/4]; // NOLINT
+  for (int x = 0; x < count/4; x++) {
     myArray[x] = ((uint32_t)buf[(x * 4) + 3] << (8 * 3)) |
                  ((uint32_t)buf[(x * 4) + 2] << (8 * 2)) |
                  ((uint32_t)buf[(x * 4) + 1] << (8 * 1)) |
                  ((uint32_t)buf[(x * 4) + 0] << (8 * 0));
   }
-  m_spi->transfer((void *)myArray, n);
+  m_spi->transfer(reinterpret_cast<void *>(myArray), count);
 }
-#endif // defined(ARDUINO_ARCH_APOLLO3)
+#endif  // defined(SD_USE_CUSTOM_SPI) && defined(ARDUINO_ARCH_APOLLO3)

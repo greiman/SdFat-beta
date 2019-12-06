@@ -37,6 +37,9 @@
 #define nullptr NULL
 #endif  // __cplusplus < 201103
 //------------------------------------------------------------------------------
+/** Type for millis. */
+typedef uint16_t SdMillis_t;
+//------------------------------------------------------------------------------
 /**
  * \class SysCall
  * \brief SysCall - Class to wrap system calls.
@@ -44,7 +47,7 @@
 class SysCall {
  public:
   /** \return the time in milliseconds. */
-  static uint16_t curTimeMS();
+  static SdMillis_t curTimeMS();
   /** Halt execution of this thread. */
   static void halt() {
     while (1) {
@@ -64,26 +67,17 @@ typedef Stream stream_t;
 #error "Unknown system"
 #endif  // defined(ARDUINO)
 //------------------------------------------------------------------------------
-#ifdef ESP8266
-// undefine F macro if ESP8266.
-#undef F
-#endif  // ESP8266
-//------------------------------------------------------------------------------
 #ifndef F
 /** Define macro for strings stored in flash. */
 #define F(str) (str)
 #endif  // F
 //------------------------------------------------------------------------------
 /** \return the time in milliseconds. */
-inline uint16_t SysCall::curTimeMS() {
+inline SdMillis_t SysCall::curTimeMS() {
   return millis();
 }
-#if defined(ESP8266)
-inline void SysCall::yield() {
-  // Avoid ESP8266 bug
-  delay(0);
-}
-#elif defined(PLATFORM_ID)  // Only defined if a Particle device
+//------------------------------------------------------------------------------
+#if defined(PLATFORM_ID)  // Only defined if a Particle device
 inline void SysCall::yield() {
   Particle.process();
 }
@@ -92,9 +86,9 @@ inline void SysCall::yield() {
   // Use the external Arduino yield() function.
   ::yield();
 }
-#else  // ESP8266
+#else  // defined(PLATFORM_ID)
 inline void SysCall::yield() {}
-#endif  // ESP8266
+#endif  // defined(PLATFORM_ID)
 //------------------------------------------------------------------------------
 #else  // ENABLE_ARDUINO_FEATURES
 #include "PrintBasic.h"

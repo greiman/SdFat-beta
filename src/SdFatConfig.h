@@ -102,8 +102,32 @@
  * 1 - The standard library driver is always used.
  *
  * 2 - The software SPI driver is always used.
+ *
+ * 3 - Experimental external SPI driver hook.
  */
 #define SPI_DRIVER_SELECT 0
+//------------------------------------------------------------------------------
+/**
+ * SD_CHIP_SELECT_MODE defines how the functions
+ * void sdCsInit(SdCsPin_t pin) {pinMode(pin, OUTPUT);}
+ * and
+ * void sdCsWrite(SdCsPin_t pin, bool level) {digitalWrite(pin, level);}
+ * are defined.
+ *
+ * 0 - Internal definition is a strong symbol and can't be replaced.
+ *
+ * 1 - Internal definition is a weak symbol and can be replaced.
+ *
+ * 2 - No internal definition and must be defined in the application.
+ */
+#define SD_CHIP_SELECT_MODE 0
+/** Type for card chip select pin. */
+typedef uint8_t SdCsPin_t;
+//------------------------------------------------------------------------------
+/**
+ * SD maximum initialization clock rate.
+ */
+#define SD_MAX_INIT_RATE_KHZ 400
 //------------------------------------------------------------------------------
 /**
  * Set USE_LONG_FILE_NAMES nonzero to use long file names (LFN) in FAT16/FAT32.
@@ -176,13 +200,13 @@
  * Handle Watchdog Timer for WiFi modules.
  *
  * Yield will be called before accessing the SPI bus if it has been more
- * than WDT_YIELD_TIME_MICROS microseconds since the last yield call by SdFat.
+ * than WDT_YIELD_TIME_MILLIS milliseconds since the last yield call by SdFat.
  */
 #if defined(PLATFORM_ID) || defined(ESP8266)
 // If Particle device or ESP8266 call yield.
-#define WDT_YIELD_TIME_MICROS 100000
+#define WDT_YIELD_TIME_MILLIS 100
 #else  // defined(PLATFORM_ID) || defined(ESP8266)
-#define WDT_YIELD_TIME_MICROS 0
+#define WDT_YIELD_TIME_MILLIS 0
 #endif  // defined(PLATFORM_ID) || defined(ESP8266)
 //------------------------------------------------------------------------------
 /**
@@ -285,27 +309,17 @@
  * Determine the default SPI configuration.
  */
 #if defined(ARDUINO_ARCH_APOLLO3)\
-  || defined(__STM32F1__)\
-  || (defined(__arm__) && defined(CORE_TEENSY))\
-  || defined(PLATFORM_ID)
-// has multiple SPI ports
-#define SD_HAS_CUSTOM_SPI 2
-#elif defined(__AVR__) || defined(__SAM3X8E__)\
-  || defined(__SAM3X8H__) || defined(ESP8266)
+  || defined(__AVR__)\
+  || defined(ESP8266) || defined(ESP32)\
+  || defined(PLATFORM_ID)\
+  || defined(ARDUINO_SAM_DUE)\
+  || defined(__STM32F1__) || defined(__STM32F4__)\
+  || (defined(CORE_TEENSY) && defined(__arm__))
 #define SD_HAS_CUSTOM_SPI 1
 #else  // SD_HAS_CUSTOM_SPI
 // Use standard SPI library.
 #define SD_HAS_CUSTOM_SPI 0
 #endif  // SD_HAS_CUSTOM_SPI
-//------------------------------------------------------------------------------
-/**
- * Check if API to select HW SPI port is needed.
- */
-#if SD_HAS_CUSTOM_SPI < 2
-#define IMPLEMENT_SPI_PORT_SELECTION 0
-#else  // SD_HAS_CUSTOM_SPI < 2
-#define IMPLEMENT_SPI_PORT_SELECTION 1
-#endif  // SD_HAS_CUSTOM_SPI < 2
 //------------------------------------------------------------------------------
 #ifndef HAS_SDIO_CLASS
 /** Default is no SDIO. */

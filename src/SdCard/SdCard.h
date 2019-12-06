@@ -55,7 +55,6 @@ class SdCardFactory {
    * \return generic card pointer.
    */
   SdCard* newCard(SdSpiConfig config) {
-    m_spi.begin(config);
     m_spiCard.begin(&m_spi, config);
     return &m_spiCard;
   }

@@ -25,7 +25,8 @@
 #include "FsLib.h"
 //------------------------------------------------------------------------------
 FsBaseFile::FsBaseFile(const FsBaseFile& from) {
-  close();
+  m_fFile = nullptr;
+  m_xFile = nullptr;
   if (from.m_fFile) {
     m_fFile = new (m_fileMem) FatFile;
     *m_fFile = *from.m_fFile;

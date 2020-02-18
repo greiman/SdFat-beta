@@ -506,9 +506,11 @@ fail:
 //------------------------------------------------------------------------------
 size_t FatFile::printName(print_t* pr) {
   FatFile dirFile;
-  uint16_t u;
-  size_t n = 0;
   DirLfn_t* ldir;
+  size_t n = 0;
+  uint16_t u;
+  uint8_t buf[13];
+  uint8_t i;
 
   if (!isLFN()) {
     return printSFN(pr);
@@ -532,24 +534,18 @@ size_t FatFile::printName(print_t* pr) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    for (uint8_t i = 0; i < 13; i++) {
+    for (i = 0; i < 13; i++) {
       u = lfnGetChar(ldir, i);
       if (u == 0) {
         // End of name.
         break;
       }
-      if (u > 0X7E) {
-        u = '?';
-      }
-      pr->write(static_cast<char>(u));
+      buf[i] = u < 0X7F ? u : '?';
       n++;
     }
-    if (ldir->order & FAT_ORDER_LAST_LONG_ENTRY) {
-      return n;
-    }
+    pr->write(buf, i);
   }
-  // Fall into fail;
-  DBG_FAIL_MACRO;
+  return n;
 
 fail:
   return 0;

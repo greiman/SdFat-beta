@@ -38,13 +38,13 @@
 #define ENABLE_ARDUINO_SERIAL 1
 /** For Debug - must be one */
 #define ENABLE_ARDUINO_STRING 1
-/** Set USE_BLOCK_DEVICE_INTERFACE nonzero to use generic of block device */
+/** Set USE_BLOCK_DEVICE_INTERFACE nonzero to use generic block device */
 #define USE_BLOCK_DEVICE_INTERFACE 0
 //------------------------------------------------------------------------------
 #if ENABLE_ARDUINO_FEATURES
 #include "Arduino.h"
 #ifdef PLATFORM_ID
-// Only defined if a Particle device
+// Only defined if a Particle device.
 #include "application.h"
 #endif  // PLATFORM_ID
 #endif  // ENABLE_ARDUINO_FEATURES
@@ -56,8 +56,8 @@
 #define INCLUDE_SDIOS 0
 //------------------------------------------------------------------------------
 /**
- * Optimize access to contiguous files.
- * Experimental - set nonzero to enable.
+ * Set USE_FAT_FILE_FLAG_CONTIGUOUS nonzero to optimize access to 
+ * contiguous files.
  */
 #define USE_FAT_FILE_FLAG_CONTIGUOUS 1
 //------------------------------------------------------------------------------
@@ -101,9 +101,9 @@
  *
  * 1 - The standard library driver is always used.
  *
- * 2 - The software SPI driver is always used.
+ * 2 - An external SPI driver of SoftSpiDriver template class is always used.
  *
- * 3 - Experimental external SPI driver hook.
+ * 3 - An external SPI driver derived from SdSpiBaseClass is always used.
  */
 #define SPI_DRIVER_SELECT 0
 //------------------------------------------------------------------------------

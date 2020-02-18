@@ -56,7 +56,12 @@ void SdSpiArduinoDriver::send(uint8_t data) {
 }
 //------------------------------------------------------------------------------
 void SdSpiArduinoDriver::send(const uint8_t *buf, size_t count) {
-  // Convert byte array to 4 byte array
+  // If not a multiple of four.  Command with CRC used six byte send.
+  while (count%4) {
+    send(*buf++);
+    count--;
+  }
+  // Convert byte array to 4 byte array.
   uint32_t myArray[count/4]; // NOLINT
   for (int x = 0; x < count/4; x++) {
     myArray[x] = ((uint32_t)buf[(x * 4) + 3] << (8 * 3)) |

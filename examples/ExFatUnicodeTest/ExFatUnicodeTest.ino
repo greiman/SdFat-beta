@@ -13,7 +13,7 @@ const uint8_t SD_CS_PIN = SS;
 const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #endif  // SDCARD_SS_PIN
 
-// Use SPI, SD_CS_PIN, SHARED_SPI, FULL_SPEED.
+// Use SPI, SD_CS_PIN, SHARED_SPI, 50 MHz.
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN)
 
 SdExFat sd;

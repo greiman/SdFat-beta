@@ -53,7 +53,7 @@ class SdSpiCard {
    * \param[in] spiConfig SPI card configuration.
    * \return true for success or false for failure.
    */
-  bool begin(SdSpiDriver* spi, SdSpiConfig spiConfig);
+  bool begin(SdSpiConfig spiConfig);
   /** Clear debug stats. */
   void dbgClearStats();
   /** Print debug stats. */
@@ -285,40 +285,71 @@ class SdSpiCard {
   bool isTimedOut(SdMillis_t startMS, SdMillis_t timeoutMS);
   bool readData(uint8_t* dst, size_t count);
   bool readRegister(uint8_t cmd, void* buf);
-
-  void type(uint8_t value) {
-    m_type = value;
-  }
-
-  bool waitNotBusy(SdMillis_t timeoutMS);
-  bool writeData(uint8_t token, const uint8_t* src);
-
-  //---------------------------------------------------------------------------
-  // functions defined in SdSpiDriver.h
-  void spiActivate() {
-    m_spiDriver->activate();
-  }
-  void spiDeactivate() {
-    m_spiDriver->deactivate();
-  }
-  uint8_t spiReceive() {
-    return m_spiDriver->receive();
-  }
-  uint8_t spiReceive(uint8_t* buf, size_t n) {
-    return  m_spiDriver->receive(buf, n);
-  }
-  void spiSend(uint8_t data) {
-     m_spiDriver->send(data);
-  }
-  void spiSend(const uint8_t* buf, size_t n) {
-    m_spiDriver->send(buf, n);
-  }
   void spiSelect() {
     sdCsWrite(m_csPin, false);
+  }
+  void type(uint8_t value) {
+    m_type = value;
   }
   void spiUnselect() {
     sdCsWrite(m_csPin, true);
   }
+  bool waitNotBusy(SdMillis_t timeoutMS);
+  bool writeData(uint8_t token, const uint8_t* src);
+
+#if SPI_DRIVER_SELECT < 2
+  void spiActivate() {
+    m_spiDriver.activate();
+  }
+  void spiBegin(SdSpiConfig spiConfig) {
+    m_spiDriver.begin(spiConfig);
+  }
+  void spiDeactivate() {
+    m_spiDriver.deactivate();
+  }
+  uint8_t spiReceive() {
+    return m_spiDriver.receive();
+  }
+  uint8_t spiReceive(uint8_t* buf, size_t n) {
+    return  m_spiDriver.receive(buf, n);
+  }
+  void spiSend(uint8_t data) {
+    m_spiDriver.send(data);
+  }
+  void spiSend(const uint8_t* buf, size_t n) {
+    m_spiDriver.send(buf, n);
+  }
+  void spiSetSckSpeed(uint32_t maxSck) {
+    m_spiDriver.setSckSpeed(maxSck);
+  }
+  SdSpiDriver m_spiDriver;
+#else  // SPI_DRIVER_SELECT < 2
+  void spiActivate() {
+    m_spiDriverPtr->activate();
+  }
+  void spiBegin(SdSpiConfig spiConfig) {
+    m_spiDriverPtr->begin(spiConfig);
+  }
+  void spiDeactivate() {
+    m_spiDriverPtr->deactivate();
+  }
+  uint8_t spiReceive() {
+    return m_spiDriverPtr->receive();
+  }
+  uint8_t spiReceive(uint8_t* buf, size_t n) {
+    return  m_spiDriverPtr->receive(buf, n);
+  }
+  void spiSend(uint8_t data) {
+    m_spiDriverPtr->send(data);
+  }
+  void spiSend(const uint8_t* buf, size_t n) {
+    m_spiDriverPtr->send(buf, n);
+  }
+  void spiSetSckSpeed(uint32_t maxSck) {
+    m_spiDriverPtr->setSckSpeed(maxSck);
+  }
+  SdSpiDriver* m_spiDriverPtr;
+#endif  // SPI_DRIVER_SELECT < 2
 #if ENABLE_DEDICATED_SPI
   static const uint8_t IDLE_STATE = 0;
   static const uint8_t READ_STATE = 1;
@@ -327,7 +358,6 @@ class SdSpiCard {
   uint8_t m_curState;
   bool    m_sharedSpi;
 #endif  // ENABLE_DEDICATED_SPI
-  SdSpiDriver *m_spiDriver;
   SdCsPin_t m_csPin;
   uint8_t m_errorCode;
   bool    m_spiActive;

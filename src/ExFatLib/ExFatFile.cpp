@@ -508,6 +508,8 @@ size_t ExFatFile::printName(print_t* pr) {
   DirName_t* dn;
   DirPos_t pos = m_dirPos;
   size_t n = 0;
+  uint8_t in;
+  uint8_t buf[15];
   if (!isOpen()) {
       DBG_FAIL_MACRO;
       goto fail;
@@ -523,16 +525,16 @@ size_t ExFatFile::printName(print_t* pr) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    for (uint8_t in = 0; in < 15; in++) {
+    for (in = 0; in < 15; in++) {
       uint16_t c = getLe16(dn->unicode + 2*in);
       if (!c) {
-        goto done;
+        break;;
       }
-      pr->write(c < 0X7f ? c : '?');
+      buf[in] = c < 0X7f ? c : '?';
       n++;
     }
+    pr->write(buf, in);
   }
- done:
   return n;
 
  fail:

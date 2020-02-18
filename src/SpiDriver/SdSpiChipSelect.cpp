@@ -33,8 +33,8 @@ void sdCsInit(SdCsPin_t pin) {
 void sdCsWrite(SdCsPin_t pin, bool level) {
   digitalWrite(pin, level);
 }
-//------------------------------------------------------------------------------
 #elif SD_CHIP_SELECT_MODE == 1
+//------------------------------------------------------------------------------
 __attribute__((weak))
 void sdCsInit(SdCsPin_t pin) {
   pinMode(pin, OUTPUT);

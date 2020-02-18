@@ -62,7 +62,7 @@ void setup() {
   delay(200);  // Catch Due reset problem
   
   // initialize the SD card at SPI_FULL_SPEED for best performance.
-  // try SPI_HALF_SPEED if bus errors occur.
+  // try lower speed if bus errors occur.
   if (!sd.begin(SD_CHIP_SELECT, SPI_FULL_SPEED)) {
     sd.initErrorHalt(&Serial);
   }

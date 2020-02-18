@@ -55,7 +55,7 @@ class SdCardFactory {
    * \return generic card pointer.
    */
   SdCard* newCard(SdSpiConfig config) {
-    m_spiCard.begin(&m_spi, config);
+    m_spiCard.begin(config);
     return &m_spiCard;
   }
   /** Initialize SDIO card.
@@ -78,6 +78,5 @@ class SdCardFactory {
   SdioCard m_sdioCard;
 #endif  // HAS_SDIO_CLASS
   SdSpiCard m_spiCard;
-  SdSpiDriver m_spi;
 };
 #endif  // SdCard_h

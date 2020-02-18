@@ -220,16 +220,22 @@ static uint16_t CRC_CCITT(const uint8_t* data, size_t n) {
 //==============================================================================
 // SdSpiCard member functions
 //------------------------------------------------------------------------------
-bool SdSpiCard::begin(SdSpiDriver* spi, SdSpiConfig spiConfig) {
+bool SdSpiCard::begin(SdSpiConfig spiConfig) {
+  SdMillis_t t0 = SysCall::curTimeMS();
   m_errorCode = SD_CARD_ERROR_NONE;
   m_type = 0;
   m_csPin = spiConfig.csPin;
+#if SPI_DRIVER_SELECT >= 2
+  m_spiDriverPtr = spiConfig.spiPort;
+  if (!m_spiDriverPtr) {
+    error(SD_CARD_ERROR_INVALID_CARD_CONFIG);
+    goto fail;
+  }
+#endif  // SPI_DRIVER_SELECT
   sdCsInit(m_csPin);
   spiUnselect();
-  m_spiDriver = spi;
-  m_spiDriver->setSckSpeed(1000UL*SD_MAX_INIT_RATE_KHZ);
-  m_spiDriver->begin(spiConfig);
-  SdMillis_t t0 = SysCall::curTimeMS();
+  spiSetSckSpeed(1000UL*SD_MAX_INIT_RATE_KHZ);
+  spiBegin(spiConfig);
   uint32_t arg;
 #if ENABLE_DEDICATED_SPI
   m_sharedSpi = !(spiConfig.options & DEDICATED_SPI);
@@ -317,7 +323,7 @@ bool SdSpiCard::begin(SdSpiDriver* spi, SdSpiConfig spiConfig) {
     }
   }
   spiStop();
-  m_spiDriver->setSckSpeed(spiConfig.maxSck);
+  spiSetSckSpeed(spiConfig.maxSck);
   return true;
 
 fail:

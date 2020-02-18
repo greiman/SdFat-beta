@@ -30,64 +30,22 @@
 #define SdSpiSoftDriver_h
 #include "../DigitalIO/SoftSPI.h"
 /**
- * \class SoftSPIClass
+ * \class SdSpiSoftDriver
  * \brief Base class for external soft SPI.
  */
-class SoftSPIClass {
- public:
-  /** Initialize the SPI bus. */
-  virtual void begin() = 0;
-  /** Receive a byte.
-   *
-   * \return The byte.
-   */
-  virtual uint8_t receive() = 0;
-  /** Send a byte.
-   *
-   * \param[in] data Byte to send
-   */
-  virtual void send(uint8_t data) = 0;
-};
-//------------------------------------------------------------------------------
-/**
- * \class SoftSpiDriver
- * \brief Class for external soft SPI.
- */
-template<uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin>
-class SoftSpiDriver : public SoftSPIClass {
- public:
-  /** Initialize the SPI bus. */
-  void begin() {m_spi.begin();}
-  /** Receive a byte.
-   *
-   * \return The byte.
-   */
-  uint8_t receive() {return m_spi.receive();}
-  /** Send a byte.
-   *
-   * \param[in] data Byte to send
-   */
-  void send(uint8_t data) {m_spi.send(data);}
- private:
-  SoftSPI<MisoPin, MosiPin, SckPin, 0> m_spi;
-};
-
-//------------------------------------------------------------------------------
-/**
- * \class SdSoftSpiDriver
- * \brief Class for SdSoftSpiDriver.
- */
-class SdSoftSpiDriver {
+class SdSpiSoftDriver {
  public:
   /** Activate SPI hardware. */
   void activate() {}
+  /** Initialize the SPI bus. */
+  virtual void begin() = 0;
   /** Initialize the SPI bus.
    *
    * \param[in] spiConfig SD card configuration.
    */
   void begin(SdSpiConfig spiConfig) {
-    m_spi = spiConfig.spiPort;
-    if (m_spi) m_spi->begin();
+    (void)spiConfig;
+    begin();
   }
   /** Deactivate SPI hardware. */
   void deactivate() {}
@@ -95,14 +53,14 @@ class SdSoftSpiDriver {
    *
    * \return The byte.
    */
-  uint8_t receive() {return m_spi ? m_spi->receive() : 0XFF;}
+  virtual uint8_t receive() = 0;
   /** Receive multiple bytes.
-  *
-  * \param[out] buf Buffer to receive the data.
-  * \param[in] count Number of bytes to receive.
-  *
-  * \return Zero for no error or nonzero error code.
-  */
+   *
+   * \param[out] buf Buffer to receive the data.
+   * \param[in] count Number of bytes to receive.
+   *
+   * \return Zero for no error or nonzero error code.
+   */
   uint8_t receive(uint8_t* buf, size_t count) {
     for (size_t i = 0; i < count; i++) {
       buf[i] = receive();
@@ -113,7 +71,7 @@ class SdSoftSpiDriver {
    *
    * \param[in] data Byte to send
    */
-  void send(uint8_t data) {if (m_spi) m_spi->send(data);}
+  virtual void send(uint8_t data) = 0;
   /** Send multiple bytes.
    *
    * \param[in] buf Buffer for data to be sent.
@@ -131,10 +89,31 @@ class SdSoftSpiDriver {
   void setSckSpeed(uint32_t maxSck) {
     (void)maxSck;
   }
-
- private:
-  SoftSPIClass* m_spi;
 };
+//------------------------------------------------------------------------------
+/**
+ * \class SoftSpiDriver
+ * \brief Class for external soft SPI.
+ */
+template<uint8_t MisoPin, uint8_t MosiPin, uint8_t SckPin>
+class SoftSpiDriver : public SdSpiSoftDriver {
+ public:
+  /** Initialize the SPI bus. */
+  void begin() {m_spi.begin();}
+  /** Receive a byte.
+   *
+   * \return The byte.
+   */
+  uint8_t receive() {return m_spi.receive();}
+  /** Send a byte.
+   *
+   * \param[in] data Byte to send
+   */
+  void send(uint8_t data) {m_spi.send(data);}
+ private:
+  SoftSPI<MisoPin, MosiPin, SckPin, 0> m_spi;
+};
+
 /** Typedef for use of SdSoftSpiDriver */
-typedef SdSoftSpiDriver SdSpiDriver;
+typedef SdSpiSoftDriver SdSpiDriver;
 #endif  // SdSpiSoftDriver_h

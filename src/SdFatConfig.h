@@ -38,6 +38,7 @@
 #define ENABLE_ARDUINO_SERIAL 1
 /** For Debug - must be one */
 #define ENABLE_ARDUINO_STRING 1
+//------------------------------------------------------------------------------
 /** Set USE_BLOCK_DEVICE_INTERFACE nonzero to use generic block device */
 #define USE_BLOCK_DEVICE_INTERFACE 0
 //------------------------------------------------------------------------------
@@ -191,6 +192,8 @@ typedef uint8_t SdCsPin_t;
 #define USE_FCNTL_H 1
 #elif defined(__arm__)
 // ARM gcc defines open flags.
+#define USE_FCNTL_H 1
+#elif defined(ESP32)
 #define USE_FCNTL_H 1
 #else  // defined(__AVR__)
 #define USE_FCNTL_H 0

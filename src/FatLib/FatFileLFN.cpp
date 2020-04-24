@@ -89,7 +89,7 @@ static bool lfnGetName(DirLfn_t *ldir, char* name, size_t n) {
   return true;
 }
 //------------------------------------------------------------------------------
-inline bool lfnLegalChar(char c) {
+inline bool lfnLegalChar(uint8_t c) {
   if (c == '/' || c == '\\' || c == '"' || c == '*' ||
       c == ':' || c == '<' || c == '>' || c == '?' || c == '|') {
     return false;
@@ -208,7 +208,8 @@ bool FatFile::parsePathName(const char* path,
       break;
     }
     if (!lfnLegalChar(c)) {
-      return false;
+      DBG_FAIL_MACRO;
+      goto fail;
     }
   }
   // Advance to next path component.
@@ -225,7 +226,8 @@ bool FatFile::parsePathName(const char* path,
   }
   // Max length of LFN is 255.
   if (len > 255) {
-    return false;
+    DBG_FAIL_MACRO;
+    goto fail;
   }
   fname->len = len;
   // Blank file short name.
@@ -280,7 +282,8 @@ bool FatFile::parsePathName(const char* path,
     }
   }
   if (fname->sfn[0] == ' ') {
-    return false;
+    DBG_FAIL_MACRO;
+    goto fail;
   }
 
   if (is83) {
@@ -291,6 +294,9 @@ bool FatFile::parsePathName(const char* path,
     fname->sfn[fname->seqPos + 1] = '1';
   }
   return true;
+  
+ fail:
+  return false;
 }
 //------------------------------------------------------------------------------
 bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {

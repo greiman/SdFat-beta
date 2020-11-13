@@ -73,6 +73,9 @@
 #if defined(__AVR__) && FLASHEND < 0X8000
 // 32K AVR boards.
 #define SDFAT_FILE_TYPE 1
+#elif defined(__arm__)
+// ARM boards usually have plenty of memory
+#define SDFAT_FILE_TYPE 3
 #else  // defined(__AVR__) && FLASHEND < 0X8000
 // All other boards.
 #define SDFAT_FILE_TYPE 1

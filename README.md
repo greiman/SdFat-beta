@@ -1,9 +1,7 @@
-### Warning: This is an early beta version of SdFat Version 2.
+### Warning: This is a beta version of SdFat Version 2.
 
-September 19, 2019 - added support for Teensy 4.0 SDIO.
-
-This library is in early development and features may change.
-It will clearly have bugs. I am posting this version to get comments and
+This library is in development, features may change and
+it may have bugs. I am posting this version to get comments and
 help finding bugs/compatibility problems.
 
 You can help by posting issues for problems you find.  I am doing a great deal
@@ -93,11 +91,11 @@ http://arduino.cc/en/Guide/Libraries
 A number of configuration options can be set by editing SdFatConfig.h
 define macros.  See the html documentation File tab for details.
 
-Please read the html documentation for this library in SdFat/extras/SdFat.html.
+Please read the html documentation for this library in SdFat/doc/SdFat.html.
 Start with the  Main Page.  Next go to the Classes tab and read the
 documentation for the classes SdFat32, SdExFat, SdFs, File32, ExFile, FsFile.
 
 The SdFat and File classes are defined in terms of the above classes by
 typedefs. Edit SdFatConfig.h to select class options.
 
-Please continue by reading the html documentation in the SdFat/extras folder.
+Please continue by reading the html documentation in the SdFat/doc folder.

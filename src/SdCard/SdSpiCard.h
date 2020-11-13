@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2019 Bill Greiman
+ * Copyright (c) 2011-2020 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -49,7 +49,6 @@ class SdSpiCard {
   /** Construct an instance of SdSpiCard. */
   SdSpiCard() : m_errorCode(SD_CARD_ERROR_INIT_NOT_CALLED), m_type(0) {}
   /** Initialize the SD card.
-   * \param[in] spi SPI driver for card.
    * \param[in] spiConfig SPI card configuration.
    * \return true for success or false for failure.
    */

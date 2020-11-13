@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2019 Bill Greiman
+ * Copyright (c) 2011-2020 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -39,7 +39,7 @@
 
 //------------------------------------------------------------------------------
 /** SdFat version */
-#define SD_FAT_VERSION "2.0.0"
+#define SD_FAT_VERSION "2.0.2-beta.1"
 //==============================================================================
 /**
  * \class SdBase
@@ -397,16 +397,22 @@ class SdFs : public SdBase<FsVolume> {
 /** Select type for SdFat. */
 typedef SdFat32 SdFat;
 /** Select type for File. */
+#if !defined(__has_include) || !__has_include(<FS.h>)
 typedef File32 File;
+#endif
 /** Select type for SdBaseFile. */
 typedef FatFile SdBaseFile;
 #elif SDFAT_FILE_TYPE == 2
 typedef SdExFat SdFat;
+#if !defined(__has_include) || !__has_include(<FS.h>)
 typedef ExFile File;
+#endif
 typedef ExFatFile SdBaseFile;
 #elif SDFAT_FILE_TYPE == 3
 typedef SdFs SdFat;
+#if !defined(__has_include) || !__has_include(<FS.h>)
 typedef FsFile File;
+#endif
 typedef FsBaseFile SdBaseFile;
 #else  // SDFAT_FILE_TYPE
 #error Invalid SDFAT_FILE_TYPE

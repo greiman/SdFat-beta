@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2019 Bill Greiman
+ * Copyright (c) 2011-2020 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -298,9 +298,9 @@ static void gpioMux(uint8_t mode) {
 // add speed strength args?
 static void enableGPIO(bool enable) {
   const uint32_t CLOCK_MASK = IOMUXC_SW_PAD_CTL_PAD_PKE |
-#if defined(ARDUINO_TEENSY41)  
+#if defined(ARDUINO_TEENSY41)
                               IOMUXC_SW_PAD_CTL_PAD_DSE(1) |
-#else  // defined(ARDUINO_TEENSY41)                            
+#else  // defined(ARDUINO_TEENSY41)
                               IOMUXC_SW_PAD_CTL_PAD_DSE(4) |  ///// WHG
 #endif  // defined(ARDUINO_TEENSY41)
                               IOMUXC_SW_PAD_CTL_PAD_SPEED(2);

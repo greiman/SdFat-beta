@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2019 Bill Greiman
+ * Copyright (c) 2011-2020 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -294,7 +294,7 @@ bool FatFile::parsePathName(const char* path,
     fname->sfn[fname->seqPos + 1] = '1';
   }
   return true;
-  
+
  fail:
   return false;
 }

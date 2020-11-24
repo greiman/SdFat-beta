@@ -1,5 +1,9 @@
 ### Warning: This is a beta version of SdFat Version 2.
 
+The release version of SdFat Version 2 is here:
+
+https://github.com/greiman/SdFat
+
 This library is in development, features may change and
 it may have bugs. I am posting this version to get comments and
 help finding bugs/compatibility problems.

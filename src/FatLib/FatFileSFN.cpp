@@ -31,7 +31,7 @@
 bool FatFile::getSFN(char* name) {
   uint8_t j = 0;
   uint8_t lcBit = FAT_CASE_LC_BASE;
-  DirFat_t *dir;
+  DirFat_t* dir;
 
   if (!isOpen()) {
     DBG_FAIL_MACRO;
@@ -67,7 +67,7 @@ bool FatFile::getSFN(char* name) {
   name[j] = 0;
   return true;
 
-fail:
+ fail:
   return false;
 }
 //------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ size_t FatFile::printSFN(print_t* pr) {
   }
   return pr->write(name);
 
-fail:
+ fail:
   return 0;
 }
 #if !USE_LONG_FILE_NAMES
@@ -138,7 +138,7 @@ bool FatFile::parsePathName(const char* path, fname_t* fname,
   *ptr = path;
   return true;
 
-fail:
+ fail:
   return false;
 }
 //------------------------------------------------------------------------------
@@ -259,7 +259,7 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
   // open entry in cache.
   return openCachedEntry(dirFile, index, oflag, 0);
 
-fail:
+ fail:
   return false;
 }
 //------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ bool FatFile::remove() {
   // Write entry to device.
   return m_vol->cacheSync();
 
-fail:
+ fail:
   return false;
 }
 #endif  // !USE_LONG_FILE_NAMES

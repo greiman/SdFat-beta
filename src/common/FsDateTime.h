@@ -95,7 +95,7 @@ namespace FsDateTime {
    *
    */
   void setCallback(
-    void (*dateTime)(uint16_t* date, uint16_t* time, uint8_t *ms10));
+    void (*dateTime)(uint16_t* date, uint16_t* time, uint8_t* ms10));
 }  // namespace FsDateTime
 /** date field for directory entry
  * \param[in] year [1980,2107]

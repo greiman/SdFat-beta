@@ -223,8 +223,12 @@ class FsBaseFile {
   }
   /** \return True if the file is contiguous. */
   bool isContiguous() {
+#if USE_FAT_FILE_FLAG_CONTIGUOUS    
     return m_fFile ? m_fFile->isContiguous() :
            m_xFile ? m_xFile->isContiguous() : false;
+#else  // USE_FAT_FILE_FLAG_CONTIGUOUS
+    return m_xFile ? m_xFile->isContiguous() : false;
+#endif  // USE_FAT_FILE_FLAG_CONTIGUOUS
   }
   /** \return True if this is a directory else false. */
   bool isDir() {

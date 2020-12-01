@@ -419,7 +419,6 @@ bool ExFatFile::syncDir() {
         setCount = df->setCount;
         setLe16(df->attributes, m_attributes & FILE_ATTR_COPY);
         if (FsDateTime::callback) {
-          m_vol->dataCacheDirty();
           uint16_t date, time;
           uint8_t ms10;
           FsDateTime::callback(&date, &time, &ms10);
@@ -429,6 +428,7 @@ bool ExFatFile::syncDir() {
           setLe16(df->accessTime, time);
           setLe16(df->accessDate, date);
         }
+        m_vol->dataCacheDirty();
         break;
 
       case EXFAT_TYPE_STREAM:
@@ -777,10 +777,9 @@ size_t ExFatFile::write(const void* buf, size_t nbyte) {
       m_validLength = m_curPosition;
     }
   }
-
   if (m_curPosition > m_dataLength) {
     m_dataLength = m_curPosition;
-    // update fileSize and insure sync will update dir entr
+    // update fileSize and insure sync will update dir entry
     m_flags |= FILE_FLAG_DIR_DIRTY;
   } else if (FsDateTime::callback) {
     // insure sync will update modified date and time

@@ -625,7 +625,7 @@ class ExFatFile {
    */
   /** Set a file's timestamps in its directory entry.
    *
-   * \param[in] flags Values for \a flags are constructed by a 
+   * \param[in] flags Values for \a flags are constructed by a
    * bitwise-inclusive OR of flags from the following list
    *
    * T_ACCESS - Set the file's last access date and time.

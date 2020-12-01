@@ -463,13 +463,23 @@ bool ExFatFile::openRootFile(ExFatFile* dir, const ExChar_t* name,
       dirFile->type = EXFAT_TYPE_FILE;
       m_setCount = freeNeed - 1;
       dirFile->setCount = m_setCount;
+
       if (FsDateTime::callback) {
         uint16_t date, time;
         uint8_t ms10;
         FsDateTime::callback(&date, &time, &ms10);
-        dirFile->createTimeMs = ms10;
-        setLe16(dirFile->createTime, time);
         setLe16(dirFile->createDate, date);
+        setLe16(dirFile->createTime, time);
+        dirFile->createTimeMs = ms10;
+      } else {
+        setLe16(dirFile->createDate, FS_DEFAULT_DATE);
+        setLe16(dirFile->modifyDate, FS_DEFAULT_DATE);
+        setLe16(dirFile->accessDate, FS_DEFAULT_DATE);
+       if (FS_DEFAULT_TIME) {
+         setLe16(dirFile->createTime, FS_DEFAULT_TIME);
+         setLe16(dirFile->modifyTime, FS_DEFAULT_TIME);
+         setLe16(dirFile->accessTime, FS_DEFAULT_TIME);
+       }
       }
     } else if (i == 1) {
       dirStream = reinterpret_cast<DirStream_t*>(cache);

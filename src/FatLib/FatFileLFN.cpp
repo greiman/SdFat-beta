@@ -484,16 +484,21 @@ bool FatFile::open(FatFile* dirFile, fname_t* fname, oflag_t oflag) {
   // Set base-name and extension lower case bits.
   dir->caseFlags =  (FAT_CASE_LC_BASE | FAT_CASE_LC_EXT) & fname->flags;
 
-  // set timestamps
+  // Set timestamps.
   if (FsDateTime::callback) {
     // call user date/time function
     FsDateTime::callback(&date, &time, &ms10);
-    dir->createTimeMs = ms10;
     setLe16(dir->createDate, date);
     setLe16(dir->createTime, time);
-    setLe16(dir->accessDate, date);
-    setLe16(dir->modifyDate, date);
-    setLe16(dir->modifyTime, time);;
+    dir->createTimeMs = ms10;
+  } else {
+    setLe16(dir->createDate, FS_DEFAULT_DATE);
+    setLe16(dir->modifyDate, FS_DEFAULT_DATE);
+    setLe16(dir->accessDate, FS_DEFAULT_DATE);
+    if (FS_DEFAULT_TIME) {
+      setLe16(dir->createTime, FS_DEFAULT_TIME);
+      setLe16(dir->modifyTime, FS_DEFAULT_TIME);
+    }
   }
   // Force write of entry to device.
   dirFile->m_vol->cacheDirty();

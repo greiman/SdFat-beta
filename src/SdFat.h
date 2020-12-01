@@ -39,7 +39,7 @@
 
 //------------------------------------------------------------------------------
 /** SdFat version */
-#define SD_FAT_VERSION "2.0.2-beta.2"
+#define SD_FAT_VERSION "2.0.2-beta.3"
 //==============================================================================
 /**
  * \class SdBase
@@ -443,11 +443,11 @@ class SdFile : public PrintFile<SdBaseFile> {
    *
    *   // User gets date and time from GPS or real-time clock here
    *
-   *   // return date using FAT_DATE macro to format fields
-   *   *date = FAT_DATE(year, month, day);
+   *   // return date using FS_DATE macro to format fields
+   *   *date = FS_DATE(year, month, day);
    *
-   *   // return time using FAT_TIME macro to format fields
-   *   *time = FAT_TIME(hour, minute, second);
+   *   // return time using FS_TIME macro to format fields
+   *   *time = FS_TIME(hour, minute, second);
    * }
    * \endcode
    *

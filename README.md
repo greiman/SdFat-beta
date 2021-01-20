@@ -1,4 +1,6 @@
-### Warning: This is a beta version of SdFat Version 2.
+### Warning: This version, 2.0.5-beta.1, has many internal changes so may be unstable.
+
+### There are major changes to Teensy SDIO.  See examples TeensyDmaAdcLogger and TeensySdioLogger.
 
 The release version of SdFat Version 2 is here:
 

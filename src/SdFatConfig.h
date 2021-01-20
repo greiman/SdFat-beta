@@ -39,6 +39,9 @@
 /** For Debug - must be one */
 #define ENABLE_ARDUINO_STRING 1
 //------------------------------------------------------------------------------
+/** Set zero to disable mod for non-blocking write. */
+#define ENABLE_TEENSY_SDIO_MOD 1
+//------------------------------------------------------------------------------
 /** Set USE_BLOCK_DEVICE_INTERFACE nonzero to use generic block device */
 #define USE_BLOCK_DEVICE_INTERFACE 0
 //------------------------------------------------------------------------------
@@ -82,7 +85,7 @@
 #endif  // defined(__AVR__) && FLASHEND < 0X8000
 //------------------------------------------------------------------------------
 /**
- * Set ENABLE_DEDICATED_SPI to enable dedicated use of the SPI bus.
+ * Set ENABLE_DEDICATED_SPI non-zero to enable dedicated use of the SPI bus.
  * Selecting dedicated SPI in SdSpiConfig() will produce better
  * performance by using very large multi-block transfers to and
  * from the SD card.
@@ -96,7 +99,7 @@
 // All other boards.
 #define ENABLE_DEDICATED_SPI 1
 #endif  // defined(__AVR__) && FLASHEND < 0X8000
-//-----------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 /**
  * If the symbol SPI_DRIVER_SELECT is:
  *
@@ -181,7 +184,7 @@ typedef uint8_t SdCsPin_t;
  * Some cards will not sleep in low power mode unless CHECK_FLASH_PROGRAMMING
  * is non-zero.
  */
-#define CHECK_FLASH_PROGRAMMING 1
+#define CHECK_FLASH_PROGRAMMING 0
 //------------------------------------------------------------------------------
 /**
  * Set MAINTAIN_FREE_CLUSTER_COUNT nonzero to keep the count of free clusters

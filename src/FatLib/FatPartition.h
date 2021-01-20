@@ -67,26 +67,26 @@ class FatPartition {
  public:
   /** Create an instance of FatPartition
    */
-  FatPartition() : m_fatType(0) {}
+  FatPartition() {}
 
   /** \return The shift count required to multiply by bytesPerCluster. */
-  uint8_t bytesPerClusterShift() {
+  uint8_t bytesPerClusterShift() const {
     return m_sectorsPerClusterShift + m_bytesPerSectorShift;
   }
   /** \return Number of bytes in a cluster. */
-  uint16_t bytesPerCluster() {
+  uint16_t bytesPerCluster() const {
     return m_bytesPerSector << m_sectorsPerClusterShift;
   }
   /** \return Number of bytes per sector. */
-  uint16_t bytesPerSector() {
+  uint16_t bytesPerSector() const {
     return m_bytesPerSector;
   }
   /** \return The shift count required to multiply by bytesPerCluster. */
-  uint8_t bytesPerSectorShift() {
+  uint8_t bytesPerSectorShift() const {
     return m_bytesPerSectorShift;
   }
   /** \return Mask for sector offset. */
-  uint16_t sectorMask() {
+  uint16_t sectorMask() const {
     return m_sectorMask;
   }
   /** \return The volume's cluster size in sectors. */
@@ -120,7 +120,7 @@ class FatPartition {
     return m_dataStartSector;
   }
   /** \return The number of File Allocation Tables. */
-  uint8_t fatCount() {
+  uint8_t fatCount() const {
     return 2;
   }
   /** \return The logical sector number for the start of the first FAT. */
@@ -169,6 +169,12 @@ class FatPartition {
   int8_t dbgFat(uint32_t n, uint32_t* v) {
     return fatGet(n, v);
   }
+  /**
+   * Check for BlockDevice busy.
+   *
+   * \return true if busy else false.
+   */
+  bool isBusy() {return m_blockDev->isBusy();}
   //----------------------------------------------------------------------------
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
   void dmpDirSector(print_t* pr, uint32_t sector);
@@ -189,7 +195,7 @@ class FatPartition {
   uint8_t  m_sectorsPerCluster;       // Cluster size in sectors.
   uint8_t  m_clusterSectorMask;       // Mask to extract sector of cluster.
   uint8_t  m_sectorsPerClusterShift;  // Cluster count to sector count shift.
-  uint8_t  m_fatType;                 // Volume type (12, 16, OR 32).
+  uint8_t  m_fatType = 0;             // Volume type (12, 16, OR 32).
   uint16_t m_rootDirEntryCount;       // Number of entries in FAT16 root dir.
   uint32_t m_allocSearchStart;        // Start cluster for alloc search.
   uint32_t m_sectorsPerFat;           // FAT size in sectors

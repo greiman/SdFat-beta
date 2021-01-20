@@ -37,7 +37,18 @@
  */
 class FsBaseFile {
  public:
-  FsBaseFile() : m_fFile(nullptr), m_xFile(nullptr) {}
+  /** Create an instance. */
+  FsBaseFile() {}
+  /**  Create a file object and open it in the current working directory.
+   *
+   * \param[in] path A path for a file to be opened.
+   *
+   * \param[in] oflag Values for \a oflag are constructed by a bitwise-inclusive
+   * OR of open flags. see FatFile::open(FatFile*, const char*, uint8_t).
+   */
+  FsBaseFile(const char* path, oflag_t oflag) {
+    open(path, oflag);
+  }
 
   ~FsBaseFile() {close();}
   /** Copy constructor.
@@ -54,15 +65,21 @@ class FsBaseFile {
     *
     * \return true if a file is open.
     */
-  operator bool() {return isOpen();}
+  operator bool() const {return isOpen();}
   /** \return number of bytes available from the current position to EOF
    *   or INT_MAX if more than INT_MAX bytes are available.
    */
-  int available() {
+  int available() const {
     return m_fFile ? m_fFile->available() :
            m_xFile ? m_xFile->available() : 0;
   }
-
+  /** \return The number of bytes available from the current position
+   * to EOF for normal files.  Zero is returned for directory files.
+   */
+  uint64_t available64() const {
+    return m_fFile ? m_fFile->available32() :
+           m_xFile ? m_xFile->available64() : 0;
+  }
   /** Clear writeError. */
   void clearWriteError() {
     if (m_fFile) m_fFile->clearWriteError();
@@ -89,12 +106,12 @@ class FsBaseFile {
            m_xFile ? m_xFile->contiguousRange(bgnSector, endSector) : false;
   }
   /** \return The current position for a file or directory. */
-  uint64_t curPosition() {
+  uint64_t curPosition() const {
     return m_fFile ? m_fFile->curPosition() :
            m_xFile ? m_xFile->curPosition() : 0;
   }
   /** \return Directory entry index. */
-  uint32_t dirIndex() {
+  uint32_t dirIndex() const {
     return m_fFile ? m_fFile->dirIndex() :
            m_xFile ? m_xFile->dirIndex() : 0;
   }
@@ -116,7 +133,7 @@ class FsBaseFile {
   /** get position for streams
    * \param[out] pos struct to receive position
    */
-  void fgetpos(fspos_t* pos) {
+  void fgetpos(fspos_t* pos) const {
     if (m_fFile) m_fFile->fgetpos(pos);
     if (m_xFile) m_xFile->fgetpos(pos);
   }
@@ -145,12 +162,12 @@ class FsBaseFile {
            m_xFile ? m_xFile->fgets(str, num, delim) : -1;
   }
   /** \return The total number of bytes in a file. */
-  uint64_t fileSize() {
+  uint64_t fileSize() const {
     return m_fFile ? m_fFile->fileSize() :
            m_xFile ? m_xFile->fileSize() : 0;
   }
   /** \return Address of first sector or zero for empty file. */
-  uint32_t firstSector() {
+  uint32_t firstSector() const {
     return m_fFile ? m_fFile->firstSector() :
            m_xFile ? m_xFile->firstSector() : 0;
   }
@@ -186,7 +203,7 @@ class FsBaseFile {
            m_xFile ? m_xFile->getCreateDateTime(pdate, ptime) : false;
   }
   /** \return All error bits. */
-  uint8_t getError() {
+  uint8_t getError() const {
     return m_fFile ? m_fFile->getError() :
            m_xFile ? m_xFile->getError() : 0XFF;
   }
@@ -217,13 +234,22 @@ class FsBaseFile {
   }
 
   /** \return value of writeError */
-  bool getWriteError() {
+  bool getWriteError() const {
     return m_fFile ? m_fFile->getWriteError() :
            m_xFile ? m_xFile->getWriteError() : true;
   }
+  /**
+   * Check for BlockDevice busy.
+   *
+   * \return true if busy else false.
+   */
+  bool isBusy() {
+    return m_fFile ? m_fFile->isBusy() :
+           m_xFile ? m_xFile->isBusy() : true;
+  }
   /** \return True if the file is contiguous. */
-  bool isContiguous() {
-#if USE_FAT_FILE_FLAG_CONTIGUOUS    
+  bool isContiguous() const {
+#if USE_FAT_FILE_FLAG_CONTIGUOUS
     return m_fFile ? m_fFile->isContiguous() :
            m_xFile ? m_xFile->isContiguous() : false;
 #else  // USE_FAT_FILE_FLAG_CONTIGUOUS
@@ -231,25 +257,45 @@ class FsBaseFile {
 #endif  // USE_FAT_FILE_FLAG_CONTIGUOUS
   }
   /** \return True if this is a directory else false. */
-  bool isDir() {
+  bool isDir() const {
     return m_fFile ? m_fFile->isDir() :
            m_xFile ? m_xFile->isDir() : false;
   }
   /** This function reports if the current file is a directory or not.
    * \return true if the file is a directory.
    */
-  bool isDirectory() {return isDir();}
+  bool isDirectory() const {return isDir();}
+  /** \return True if this is a normal file. */
+  bool isFile() const {
+    return m_fFile ? m_fFile->isFile() :
+           m_xFile ? m_xFile->isFile() : false;
+  }
   /** \return True if this is a hidden file else false. */
-  bool isHidden() {
+  bool isHidden() const {
     return m_fFile ? m_fFile->isHidden() :
            m_xFile ? m_xFile->isHidden() : false;
   }
   /** \return True if this is an open file/directory else false. */
-  bool isOpen() {return m_fFile || m_xFile;}
+  bool isOpen() const {return m_fFile || m_xFile;}
+  /** \return True file is readable. */
+  bool isReadable() const {
+    return m_fFile ? m_fFile->isReadable() :
+           m_xFile ? m_xFile->isReadable() : false;
+    }
+  /** \return True if file is read-only */
+  bool isReadOnly() const {
+    return m_fFile ? m_fFile->isReadOnly() :
+           m_xFile ? m_xFile->isReadOnly() : false;
+  }
   /** \return True if this is a subdirectory file else false. */
-  bool isSubDir() {
+  bool isSubDir() const {
     return m_fFile ? m_fFile->isSubDir() :
            m_xFile ? m_xFile->isSubDir() : false;
+  }
+  /** \return True file is writable. */
+  bool isWritable() const {
+    return m_fFile ? m_fFile->isWritable() :
+           m_xFile ? m_xFile->isWritable() : false;
   }
 #if ENABLE_ARDUINO_SERIAL
   /** List directory contents.
@@ -403,6 +449,15 @@ class FsBaseFile {
    * \return a file object.
    */
   bool openNext(FsBaseFile* dir, oflag_t oflag = O_RDONLY);
+  /** Open a volume's root directory.
+   *
+   * \param[in] vol The SdFs volume containing the root directory to be opened.
+   *
+   * \return true for success or false for failure.
+   */
+  bool openRoot(FsVolume* vol);
+  /** \return the current file position. */
+  uint64_t position() const {return curPosition();}
   /** Return the next available byte without consuming it.
    *
    * \return The byte if no error and not at eof else -1;
@@ -410,6 +465,21 @@ class FsBaseFile {
   int peek() {
     return m_fFile ? m_fFile->peek() :
            m_xFile ? m_xFile->peek() : -1;
+  }
+  /** Allocate contiguous clusters to an empty file.
+   *
+   * The file must be empty with no clusters allocated.
+   *
+   * The file will contain uninitialized data for FAT16/FAT32 files.
+   * exFAT files will have zero validLength and dataLength will equal
+   * the requested length.
+   *
+   * \param[in] length size of the file in bytes.
+   * \return true for success or false for failure.
+   */
+  bool preAllocate(uint64_t length) {
+    return m_fFile ? length < (1ULL << 32) && m_fFile->preAllocate(length) :
+           m_xFile ? m_xFile->preAllocate(length) : false;
   }
   /** Print a file's access date and time
    *
@@ -431,55 +501,7 @@ class FsBaseFile {
     return m_fFile ? m_fFile->printCreateDateTime(pr) :
            m_xFile ? m_xFile->printCreateDateTime(pr) : 0;
   }
-  /** Print a file's modify date and time
-   *
-   * \param[in] pr Print stream for output.
-   *
-   * \return true for success or false for failure.
-   */
-  size_t printModifyDateTime(print_t* pr) {
-    return m_fFile ? m_fFile->printModifyDateTime(pr) :
-           m_xFile ? m_xFile->printModifyDateTime(pr) : 0;
-  }
-  /** Print a file's name
-   *
-   * \param[in] pr Print stream for output.
-   *
-   * \return true for success or false for failure.
-   */
-  size_t printName(print_t* pr) {
-    return m_fFile ? m_fFile->printName(pr) :
-           m_xFile ? m_xFile->printName(pr) : 0;
-  }
-  /** Print a file's size.
-   *
-   * \param[in] pr Print stream for output.
-   *
-   * \return The number of characters printed is returned
-   *         for success and zero is returned for failure.
-   */
-  size_t printFileSize(print_t* pr) {
-    return m_fFile ? m_fFile->printFileSize(pr) :
-           m_xFile ? m_xFile->printFileSize(pr) : 0;
-  }
-  /** Allocate contiguous clusters to an empty file.
-   *
-   * The file must be empty with no clusters allocated.
-   *
-   * The file will contain uninitialized data for FAT16/FAT32 files.
-   * exFAT files will have zero validLength and dataLength will equal
-   * the requested length.
-   *
-   * \param[in] length size of the file in bytes.
-   * \return true for success or false for failure.
-   */
-  bool preAllocate(uint64_t length) {
-    return m_fFile ? length < (1ULL << 32) && m_fFile->preAllocate(length) :
-           m_xFile ? m_xFile->preAllocate(length) : false;
-  }
-  /** \return the current file position. */
-  uint64_t position() {return curPosition();}
-   /** Print a number followed by a field terminator.
+  /** Print a number followed by a field terminator.
    * \param[in] value The number to be printed.
    * \param[in] term The field terminator.  Use '\\n' for CR LF.
    * \param[in] prec Number of digits after decimal point.
@@ -507,6 +529,37 @@ class FsBaseFile {
   size_t printField(Type value, char term) {
     return m_fFile ? m_fFile->printField(value, term) :
            m_xFile ? m_xFile->printField(value, term) : 0;
+  }
+  /** Print a file's size.
+   *
+   * \param[in] pr Print stream for output.
+   *
+   * \return The number of characters printed is returned
+   *         for success and zero is returned for failure.
+   */
+  size_t printFileSize(print_t* pr) {
+    return m_fFile ? m_fFile->printFileSize(pr) :
+           m_xFile ? m_xFile->printFileSize(pr) : 0;
+  }
+  /** Print a file's modify date and time
+   *
+   * \param[in] pr Print stream for output.
+   *
+   * \return true for success or false for failure.
+   */
+  size_t printModifyDateTime(print_t* pr) {
+    return m_fFile ? m_fFile->printModifyDateTime(pr) :
+           m_xFile ? m_xFile->printModifyDateTime(pr) : 0;
+  }
+  /** Print a file's name
+   *
+   * \param[in] pr Print stream for output.
+   *
+   * \return true for success or false for failure.
+   */
+  size_t printName(print_t* pr) {
+    return m_fFile ? m_fFile->printName(pr) :
+           m_xFile ? m_xFile->printName(pr) : 0;
   }
   /** Read the next byte from a file.
    *
@@ -639,7 +692,7 @@ class FsBaseFile {
            m_xFile ? m_xFile->seekSet(pos) : false;
   }
   /** \return the file's size. */
-  uint64_t size() {return fileSize();}
+  uint64_t size() const {return fileSize();}
   /** The sync() call causes all modified data and directory fields
    * to be written to the storage device.
    *
@@ -689,7 +742,6 @@ class FsBaseFile {
            m_xFile->timestamp(flags, year, month, day, hour, minute, second) :
            false;
   }
-
   /** Truncate a file to the current position.
    *
    * \return true for success or false for failure.
@@ -737,8 +789,8 @@ class FsBaseFile {
 
  private:
   newalign_t m_fileMem[FS_ALIGN_DIM(ExFatFile, FatFile)];
-  FatFile*   m_fFile;
-  ExFatFile* m_xFile;
+  FatFile*   m_fFile = nullptr;
+  ExFatFile* m_xFile = nullptr;
 };
 /**
  * \class FsFile

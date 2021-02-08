@@ -113,6 +113,13 @@
  * 3 - An external SPI driver derived from SdSpiBaseClass is always used.
  */
 #define SPI_DRIVER_SELECT 0
+/**
+ * If USE_SPI_ARRAY_TRANSFER is non-zero and the standard SPI library is
+ * use, the array transfer function, transfer(buf, size), will be used.
+ * This option will allocate up to a 512 byte temporary buffer for send.
+ * This may be faster for some boards.  Do not use this with AVR boards.
+ */
+#define USE_SPI_ARRAY_TRANSFER 0
 //------------------------------------------------------------------------------
 /**
  * SD_CHIP_SELECT_MODE defines how the functions

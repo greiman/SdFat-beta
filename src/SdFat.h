@@ -40,7 +40,7 @@
 /** SdFat version  for cpp use. */
 #define SD_FAT_VERSION 20005
 /** SdFat version as string. */
-#define SD_FAT_VERSION_STR "2.0.5-beta.1"
+#define SD_FAT_VERSION_STR "2.0.5-beta.2"
 //==============================================================================
 /**
  * \class SdBase

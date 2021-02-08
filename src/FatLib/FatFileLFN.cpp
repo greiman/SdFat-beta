@@ -76,12 +76,14 @@ static size_t lfnGetName(DirLfn_t* ldir, char* name, size_t n) {
   for (i = 0; i < 13; i++) {
     uint16_t c = lfnGetChar(ldir, i);
     if (c == 0 || k >= (n - 1)) {
-      k = n - 1;
       break;
     }
     name[k++] = c >= 0X7F ? '?' : c;
   }
   // Terminate with zero byte.
+  if (k >= n) {
+    k = n - 1;
+  }
   name[k] = '\0';
   return k;
 }
@@ -642,7 +644,7 @@ bool FatFile::remove() {
 //------------------------------------------------------------------------------
 bool FatFile::lfnUniqueSfn(fname_t* fname) {
   const uint8_t FIRST_HASH_SEQ = 2;  // min value is 2
-  uint8_t pos = fname->seqPos;;
+  uint8_t pos = fname->seqPos;
   DirFat_t* dir;
   uint16_t hex;
 

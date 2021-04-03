@@ -1,6 +1,16 @@
-### Warning: This version, 2.0.5-beta.1, has many internal changes so may be unstable.
+### Warning: This version, 2.1.0-beta.1, has major internal changes so may be unstable.
 
-### There are major changes to Teensy SDIO.  See examples TeensyDmaAdcLogger and TeensySdioLogger.
+### UTF-8 encoded filenames are supported.
+
+Try the UnicodeFilenames example.  Here is output from ls:
+<pre>
+Type any character to begin
+ls:
+         0 😀/
+          20 россиянин
+          17 très élégant
+           9 狗.txt
+</pre>
 
 The release version of SdFat Version 2 is here:
 
@@ -26,7 +36,7 @@ If the SD card is the only SPI device, use dedicated SPI mode. This can
 greatly improve performance. See the bench example.
 
 Here is write performance for an old, 2011, card on a Due board.
-```
+<pre>
 Shared SPI:
 write speed and latency
 speed,max,min,avg
@@ -38,7 +48,7 @@ write speed and latency
 speed,max,min,avg
 KB/Sec,usec,usec,usec
 3965.11,16733,110,127
-```
+</pre>
 The default version of SdFatConfig.h enables support for dedicated SPI and
 optimized access to contiguous files.  This makes SdFat Version 2 slightly
 larger than Version 1.  If these features are disabled, Version 2 is smaller
@@ -52,13 +62,13 @@ can use these basic classes in applications.
 Support for exFAT requires a substantial amount of flash.  Here are sizes on
 an UNO for a simple program that opens a file, prints one line, and closes
 the file.
-```
+<pre>
 FAT16/FAT32 only: 9780 bytes flash, 875 bytes SRAM.
 
 exFAT only: 13830 bytes flash, 938 bytes SRAM.
 
 FAT16/FAT32/exFAT: 19326 bytes flash, 928 bytes SRAM.
-```
+</pre>
 The section below of SdFatConfig.h has been edited to uses FAT16/FAT32 for
 small AVR boards and FAT16/FAT32/exFAT for all other boards.
 ```

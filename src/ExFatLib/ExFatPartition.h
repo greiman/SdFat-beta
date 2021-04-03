@@ -98,8 +98,7 @@ class ExFatPartition {
   /** \return the number of sectors in a cluster. */
   uint32_t sectorsPerCluster() const {return 1UL << m_sectorsPerClusterShift;}
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
-  // Use sectorsPerCluster(). blocksPerCluster() will be removed in the future.
-  uint32_t blocksPerCluster() __attribute__ ((deprecated)) {return sectorsPerCluster();} //NOLINT
+  uint32_t __attribute__((error("use sectorsPerCluster()"))) blocksPerCluster();
 #endif  // DOXYGEN_SHOULD_SKIP_THIS
   /** \return the power of two for sectors per cluster. */
   uint8_t  sectorsPerClusterShift() const {return m_sectorsPerClusterShift;}

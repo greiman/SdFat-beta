@@ -28,7 +28,7 @@
  * \file
  * \brief Ring buffer for data loggers.
  */
-#include "Arduino.h"
+#include "common/SysCall.h"
 #include "common/FmtNumber.h"
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS

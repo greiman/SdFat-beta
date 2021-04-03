@@ -24,6 +24,8 @@
  */
 #define DBG_FILE "ExFatFormatter.cpp"
 #include "../common/DebugMacros.h"
+#include "../common/upcase.h"
+#include "../common/FsStructs.h"
 #include "ExFatFormatter.h"
 //------------------------------------------------------------------------------
 // Formatter assumes 512 byte sectors.
@@ -201,7 +203,7 @@ bool ExFatFormatter::format(BlockDevice* dev, uint8_t* secBuf, print_t* pr) {
   memset(secBuf, 0, BYTES_PER_SECTOR);
   // Allocate two reserved clusters, bitmap, upcase, and root clusters.
   secBuf[0] = 0XF8;
-  for (size_t i = 0; i < 20; i++) {
+  for (size_t i = 1; i < 20; i++) {
     secBuf[i] = 0XFF;
   }
   for (uint32_t i = 0; i < ns; i++) {
@@ -257,7 +259,7 @@ bool ExFatFormatter::format(BlockDevice* dev, uint8_t* secBuf, print_t* pr) {
   label = reinterpret_cast<DirLabel_t*>(secBuf);
   label->type = EXFAT_TYPE_LABEL & 0X7F;
 
-  // bitmap directory  entry.
+  // bitmap directory entry.
   dbm = reinterpret_cast<DirBitmap_t*>(secBuf + 32);
   dbm->type = EXFAT_TYPE_BITMAP;
   setLe32(dbm->firstCluster, BITMAP_CLUSTER);

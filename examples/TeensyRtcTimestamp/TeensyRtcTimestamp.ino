@@ -9,7 +9,7 @@
 #define SD_FAT_TYPE 3
 /*
   Change the value of SD_CS_PIN if you are using SPI and
-  your hardware does not use the default value, SS.  
+  your hardware does not use the default value, SS.
   Common values are:
   Arduino Ethernet shield: pin 4
   Sparkfun SD shield: pin 8
@@ -24,13 +24,16 @@ const uint8_t SD_CS_PIN = SS;
 const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #endif  // SDCARD_SS_PIN
 
+// Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur.
+#define SPI_CLOCK SD_SCK_MHZ(50)
+
 // Try to select the best SD card configuration.
 #if HAS_SDIO_CLASS
 #define SD_CONFIG SdioConfig(FIFO_SDIO)
-#elif ENABLE_DEDICATED_SPI
-#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI)
+#elif  ENABLE_DEDICATED_SPI
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK)
 #else  // HAS_SDIO_CLASS
-#define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI)
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI, SPI_CLOCK)
 #endif  // HAS_SDIO_CLASS
 
 #if SD_FAT_TYPE == 0
@@ -52,13 +55,13 @@ FsFile file;
 //------------------------------------------------------------------------------
 // Call back for file timestamps.  Only called for file create and sync().
 void dateTime(uint16_t* date, uint16_t* time, uint8_t* ms10) {
-  
+
   // Return date using FS_DATE macro to format fields.
   *date = FS_DATE(year(), month(), day());
 
   // Return time using FS_TIME macro to format fields.
   *time = FS_TIME(hour(), minute(), second());
-  
+
   // Return low time bits in units of 10 ms.
   *ms10 = second() & 1 ? 100 : 0;
 }
@@ -71,17 +74,17 @@ time_t getTeensy3Time()
 void printField(Print* pr, char sep, uint8_t v) {
   if (sep) {
     pr->write(sep);
-  }  
+  }
   if (v < 10) {
     pr->write('0');
   }
   pr->print(v);
 }
-//------------------------------------------------------------------------------  
+//------------------------------------------------------------------------------
 void printNow(Print* pr) {
   pr->print(year());
   printField(pr, '-', month());
-  printField(pr, '-', day());  
+  printField(pr, '-', day());
   printField(pr, ' ', hour());
   printField(pr, ':', minute());
   printField(pr, ':', second());
@@ -90,7 +93,7 @@ void printNow(Print* pr) {
 void setup() {
   // set the Time library to use Teensy 3.0's RTC to keep time
   setSyncProvider(getTeensy3Time);
-  
+
   Serial.begin(9600);
   while (!Serial) {
     yield();
@@ -109,7 +112,7 @@ void setup() {
 
   // Set callback
   FsDateTime::setCallback(dateTime);
-  
+
   if (!sd.begin(SD_CONFIG)) {
     sd.initErrorHalt(&Serial);
   }
@@ -125,7 +128,7 @@ void setup() {
   file.print(F("Test file at: "));
   printNow(&file);
   file.println();
-  
+
   file.close();
   // List files in SD root.
   sd.ls(LS_DATE | LS_SIZE);

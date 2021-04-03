@@ -68,12 +68,17 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 // Preallocate 1GiB file.
 const uint32_t PREALLOCATE_SIZE_MiB = 1024UL;
 
-// Select the fastest interface. Assumes no other SPI devices.
-#if ENABLE_DEDICATED_SPI
-#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI)
-#else  // ENABLE_DEDICATED_SPI
-#define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI)
-#endif  // ENABLE_DEDICATED_SPI
+// Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur.
+#define SPI_CLOCK SD_SCK_MHZ(50)
+
+// Try to select the best SD card configuration.
+#if HAS_SDIO_CLASS
+#define SD_CONFIG SdioConfig(FIFO_SDIO)
+#elif  ENABLE_DEDICATED_SPI
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK)
+#else  // HAS_SDIO_CLASS
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI, SPI_CLOCK)
+#endif  // HAS_SDIO_CLASS
 
 // Save SRAM if 328.
 #ifdef __AVR_ATmega328P__

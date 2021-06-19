@@ -292,6 +292,15 @@ class RingBuf : public Print {
     return memcpyIn(buf, count);
   }
   /**
+   * Copy str to RingBuf.
+   *
+   * \param[in] str Location of data to be written.   
+   * \return Number of bytes actually written.
+   */
+   size_t write(const char* str) {
+     return Print::write(str);
+   }
+  /**
    * Override virtual function in Print for efficiency.
    *
    * \param[in] buf Location of data to be written.

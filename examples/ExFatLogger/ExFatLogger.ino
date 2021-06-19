@@ -1,9 +1,6 @@
 // Example to demonstrate write latency for preallocated exFAT files.
 // I suggest you write a PC program to convert very large bin files.
 //
-// If an exFAT SD is required, the ExFatFormatter example will format
-// smaller cards with an exFAT file system.
-//
 // The maximum data rate will depend on the quality of your SD,
 // the size of the FIFO, and using dedicated SPI.
 #include "SdFat.h"
@@ -194,7 +191,7 @@ void binaryToCsv() {
   data_t binData[FIFO_DIM];
 
   if (!binFile.seekSet(512)) {
-	  error("binFile.seek faile");
+	  error("binFile.seek failed");
   }
   uint32_t tPct = millis();
   printRecord(&csvFile, nullptr);

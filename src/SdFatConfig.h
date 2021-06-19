@@ -45,6 +45,21 @@
 // Options can be set in a makefile or an IDE like platformIO
 // if they are in a #ifndef/#endif block below.
 //------------------------------------------------------------------------------
+/** For Debug - must be one */
+#define ENABLE_ARDUINO_FEATURES 1
+/** For Debug - must be one */
+#define ENABLE_ARDUINO_SERIAL 1
+/** For Debug - must be one */
+#define ENABLE_ARDUINO_STRING 1
+//------------------------------------------------------------------------------
+#if ENABLE_ARDUINO_FEATURES
+#include "Arduino.h"
+#ifdef PLATFORM_ID
+// Only defined if a Particle device.
+#include "application.h"
+#endif  // PLATFORM_ID
+#endif  // ENABLE_ARDUINO_FEATURES
+//------------------------------------------------------------------------------
 /**
  * File types for SdFat, File, SdFile, SdBaseFile, fstream,
  * ifstream, and ofstream.
@@ -346,8 +361,8 @@ typedef uint8_t SdCsPin_t;
  * Set USE_SIMPLE_LITTLE_ENDIAN nonzero for little endian processors
  * with no memory alignment restrictions.
  */
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ && !defined(__SAMD21G18A__)\
-  && !defined(__MKL26Z64__) && !defined(ESP8266)
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__\
+  && (defined(__AVR__) || defined(__ARM_FEATURE_UNALIGNED))
 #define USE_SIMPLE_LITTLE_ENDIAN 1
 #else  // __BYTE_ORDER_
 #define USE_SIMPLE_LITTLE_ENDIAN 0
@@ -415,6 +430,7 @@ typedef uint8_t SdCsPin_t;
   || defined(ESP8266) || defined(ESP32)\
   || defined(PLATFORM_ID)\
   || defined(ARDUINO_SAM_DUE)\
+  || defined(STM32_CORE_VERSION)\
   || defined(__STM32F1__) || defined(__STM32F4__)\
   || (defined(CORE_TEENSY) && defined(__arm__))
 #define SD_HAS_CUSTOM_SPI 1
@@ -427,19 +443,5 @@ typedef uint8_t SdCsPin_t;
 /** Default is no SDIO. */
 #define HAS_SDIO_CLASS 0
 #endif  // HAS_SDIO_CLASS
-//------------------------------------------------------------------------------
-/** For Debug - must be one */
-#define ENABLE_ARDUINO_FEATURES 1
-/** For Debug - must be one */
-#define ENABLE_ARDUINO_SERIAL 1
-/** For Debug - must be one */
-#define ENABLE_ARDUINO_STRING 1
-//------------------------------------------------------------------------------
-#if ENABLE_ARDUINO_FEATURES
-#include "Arduino.h"
-#ifdef PLATFORM_ID
-// Only defined if a Particle device.
-#include "application.h"
-#endif  // PLATFORM_ID
-#endif  // ENABLE_ARDUINO_FEATURES
+
 #endif  // SdFatConfig_h

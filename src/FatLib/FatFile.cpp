@@ -1326,12 +1326,7 @@ bool FatFile::truncate() {
 
   // need to update directory entry
   m_flags |= FILE_FLAG_DIR_DIRTY;
-
-  if (!sync()) {
-    DBG_FAIL_MACRO;
-    goto fail;
-  }
-  return true;
+  return sync();
 
  fail:
   return false;

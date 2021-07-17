@@ -22,7 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
- // Driver for: https://github.com/rogerclarkmelbourne/Arduino_STM32
+// Driver for: https://github.com/rogerclarkmelbourne/Arduino_STM32
 #include "SdSpiDriver.h"
 #if defined(SD_USE_CUSTOM_SPI)\
   && (defined(__STM32F1__) || defined(__STM32F4__))

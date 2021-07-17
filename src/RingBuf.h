@@ -266,8 +266,7 @@ class RingBuf : public Print {
   }
   /**
    * Write all data in the RingBuf to the underlying file.
-   * \param[in] data Byte to be written.
-   * \return Number of bytes actually written.
+   * \return true for success.
    */
   bool sync() {
     size_t n = bytesUsed();
@@ -294,12 +293,12 @@ class RingBuf : public Print {
   /**
    * Copy str to RingBuf.
    *
-   * \param[in] str Location of data to be written.   
+   * \param[in] str Location of data to be written.
    * \return Number of bytes actually written.
    */
-   size_t write(const char* str) {
-     return Print::write(str);
-   }
+  size_t write(const char* str) {
+    return Print::write(str);
+  }
   /**
    * Override virtual function in Print for efficiency.
    *

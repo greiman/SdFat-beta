@@ -158,7 +158,7 @@ class ExFatPartition {
   }
   uint8_t* dirCache(DirPos_t* pos, uint8_t options);
   int8_t dirSeek(DirPos_t* pos, uint32_t offset);
-  uint8_t fatGet(uint32_t cluster, uint32_t* value);
+  int8_t fatGet(uint32_t cluster, uint32_t* value);
   bool fatPut(uint32_t cluster, uint32_t value);
   uint32_t chainSize(uint32_t cluster);
   bool freeChain(uint32_t cluster);

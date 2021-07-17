@@ -22,7 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
- // Driver for: https://github.com/stm32duino/Arduino_Core_STM32
+// Driver for: https://github.com/stm32duino/Arduino_Core_STM32
 #include "SdSpiDriver.h"
 #if defined(SD_USE_CUSTOM_SPI) && defined(STM32_CORE_VERSION)
 //------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ void SdSpiArduinoDriver::send(const uint8_t* buf, size_t count) {
     return;
   }
   // Not easy to avoid receive so use tmp RX buffer.
-  uint8_t rxBuf[count];
+  uint8_t rxBuf[512];
   // Discard const - STM32 not const correct.
   m_spi->transfer(const_cast<uint8_t*>(buf), rxBuf, count);
 }

@@ -1,6 +1,8 @@
-### Warning: This version, 2.1.0-beta.1, has major internal changes so may be unstable.
+### Warning: This version, 2.1.1-beta.1, has major internal changes so may be unstable.
 
-### UTF-8 encoded filenames are supported.
+Added openExistingSFN(path). See the MinimumSizeSdReader example.
+
+UTF-8 encoded filenames are supported.
 
 Try the UnicodeFilenames example.  Here is output from ls:
 <pre>

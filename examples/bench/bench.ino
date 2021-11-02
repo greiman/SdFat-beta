@@ -30,7 +30,7 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 // Try to select the best SD card configuration.
 #if HAS_SDIO_CLASS
 #define SD_CONFIG SdioConfig(FIFO_SDIO)
-#elif ENABLE_DEDICATED_SPI
+#elif  ENABLE_DEDICATED_SPI
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK)
 #else  // HAS_SDIO_CLASS
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI, SPI_CLOCK)
@@ -104,7 +104,7 @@ void cidDmp() {
   cout << F("Serial number: ") << hex << cid.psn << dec << endl;
   cout << F("Manufacturing date: ");
   cout << int(cid.mdt_month) << '/';
-  cout << (2000 + cid.mdt_year_low + 10 * cid.mdt_year_high) << endl;
+  cout << (2000 + 16*cid.mdt_year_high + cid.mdt_year_low) << endl;
   cout << endl;
 }
 //------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ void setup() {
 
   // Wait for USB Serial
   while (!Serial) {
-    SysCall::yield();
+    yield();
   }
   delay(1000);
   cout << F("\nUse a freshly formatted SD for best performance.\n");
@@ -149,7 +149,7 @@ void loop() {
   // F() stores strings in flash to save RAM
   cout << F("Type any character to start\n");
   while (!Serial.available()) {
-    SysCall::yield();
+    yield();
   }
 #if HAS_UNUSED_STACK
   cout << F("FreeStack: ") << FreeStack() << endl;
@@ -273,4 +273,5 @@ void loop() {
   }
   cout << endl << F("Done") << endl;
   file.close();
+  sd.end();
 }

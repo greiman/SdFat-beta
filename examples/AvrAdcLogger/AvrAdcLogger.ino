@@ -151,6 +151,7 @@ const uint32_t MAX_FILE_SIZE = MAX_FILE_SIZE_MiB << 20;
 
 // Max SPI rate for AVR is 10 MHz for F_CPU 20 MHz, 8 MHz for F_CPU 16 MHz.
 #define SPI_CLOCK SD_SCK_MHZ(10)
+
 // Select fastest interface.
 #if ENABLE_DEDICATED_SPI
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK)
@@ -865,7 +866,7 @@ void loop(void) {
   Serial.println(F("r - record ADC data"));
 
   while(!Serial.available()) {
-    SysCall::yield();
+    yield();
   }
   char c = tolower(Serial.read());
   Serial.println();

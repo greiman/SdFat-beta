@@ -26,7 +26,7 @@
 #include "../common/DebugMacros.h"
 #include "ExFatLib.h"
 //==============================================================================
-#if READ_ONLY
+#if EXFAT_READ_ONLY
 bool ExFatFile::mkdir(ExFatFile* parent, const char* path, bool pFlag) {
   (void) parent;
   (void)path;
@@ -58,7 +58,7 @@ size_t ExFatFile::write(const void* buf, size_t nbyte) {
   return false;
 }
 //==============================================================================
-#else  // READ_ONLY
+#else  // EXFAT_READ_ONLY
 //------------------------------------------------------------------------------
 static uint16_t exFatDirChecksum(const uint8_t* data, uint16_t checksum) {
   bool skip = data[0] == EXFAT_TYPE_FILE;
@@ -489,7 +489,7 @@ bool ExFatFile::timestamp(uint8_t flags, uint16_t year, uint8_t month,
   time = FS_TIME(hour, minute, second);
   ms10 = second & 1 ? 100 : 0;
 
-  for (uint8_t is = 0;; is++) {
+  for (uint8_t is = 0; is <= m_setCount; is++) {
     cache = dirCache(is, FsCache::CACHE_FOR_READ);
     if (!cache) {
       DBG_FAIL_MACRO;
@@ -753,4 +753,4 @@ size_t ExFatFile::write(const void* buf, size_t nbyte) {
   m_error |= WRITE_ERROR;
   return 0;
 }
-#endif  // READ_ONLY
+#endif  // EXFAT_READ_ONLY

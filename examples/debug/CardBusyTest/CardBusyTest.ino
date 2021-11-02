@@ -38,7 +38,7 @@ void setup() {
 
   // Wait for USB Serial
   while (!Serial) {
-    SysCall::yield();
+    yield();
   }
   delay(1000);
 //------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ void loop() {
   clearSerialInput();
   Serial.println(F("\nType any character to start\n"));
   while (!Serial.available()) {
-    SysCall::yield();
+    yield();
   }
   // Initialize the SD card.
   if (!sd.begin(SD_CONFIG)) {

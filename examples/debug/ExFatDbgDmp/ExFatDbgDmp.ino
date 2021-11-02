@@ -9,19 +9,23 @@ SdExFat sd;
 #define error(s) sd.errorHalt(&Serial, F(s))
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {yield();}
+  while (!Serial) {
+    yield();
+  }
   Serial.println(F("Type any character to begin"));
-  while (!Serial.available()) {yield();}
+  while (!Serial.available()) {
+    yield();
+  }
   if (!sd.begin(SD_CONFIG)){
     error("begin failed");
   }
 #if DUMP_RAW
-  sd.dmpSector(&Serial, 0);  
+  sd.dmpSector(&Serial, 0);
   for (uint8_t i = 0; i < 24; i++) {
-    sd.dmpSector(&Serial, 0X8000 + i); 
-    Serial.println();   
-  } 
-  return;  
+    sd.dmpSector(&Serial, 0X8000 + i);
+    Serial.println();
+  }
+  return;
  #endif  // DUMP_RAW
  ExFatFile root;
  if (!root.openRoot(&sd)) {
@@ -37,7 +41,7 @@ void setup() {
 #if DUMP_UPCASE
   sd.printUpcase(&Serial);
 #endif  // DUMP_UPCASE
- // sd.dmpCluster(&Serial, 8, 0, 4);   
+ // sd.dmpCluster(&Serial, 8, 0, 4);
   Serial.println("Done");
 }
 

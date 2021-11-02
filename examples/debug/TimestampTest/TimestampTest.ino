@@ -5,9 +5,9 @@
 #include <SPI.h>
 #include "SdFat.h"
 #include "sdios.h"
-SdFat sd;
+SdFs sd;
 
-SdFile file;
+FsFile file;
 
 // Default SD chip select is SS pin
 const uint8_t chipSelect = SS;
@@ -22,8 +22,8 @@ ArduinoOutStream cout(Serial);
  * date/time values for debug
  * normally supplied by a real-time clock or GPS
  */
-// date 1-Oct-14
-uint16_t year = 2014;
+// date 1-Oct-21
+uint16_t year = 2021;
 uint8_t month = 10;
 uint8_t day = 1;
 
@@ -50,7 +50,7 @@ void dateTime(uint16_t* date, uint16_t* time) {
 /*
  * Function to print all timestamps.
  */
-void printTimestamps(SdFile& f) {
+void printTimestamps(FsFile& f) {
   cout << F("Creation: ");
   f.printCreateDateTime(&Serial);
   cout << endl << F("Modify: ");
@@ -141,15 +141,15 @@ void setup(void) {
     error("open stamp.txt failed");
   }
   // set creation date time
-  if (!file.timestamp(T_CREATE, 2014, 11, 10, 1, 2, 3)) {
+  if (!file.timestamp(T_CREATE, 2021, 11, 10, 1, 2, 3)) {
     error("set create time failed");
   }
   // set write/modification date time
-  if (!file.timestamp(T_WRITE, 2014, 11, 11, 4, 5, 6)) {
+  if (!file.timestamp(T_WRITE, 2021, 11, 11, 4, 5, 6)) {
     error("set write time failed");
   }
   // set access date
-  if (!file.timestamp(T_ACCESS, 2014, 11, 12, 7, 8, 9)) {
+  if (!file.timestamp(T_ACCESS, 2021, 11, 12, 7, 8, 9)) {
     error("set access time failed");
   }
   cout << F("\nTimes after timestamp() calls\n");

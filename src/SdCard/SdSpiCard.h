@@ -178,7 +178,7 @@ class SharedSpiCard {
    * \param[out] status location for 64 status bytes.
    * \return true for success or false for failure.
    */
-  bool readStatus(uint8_t* status);
+  bool readStatus(SdStatus* status);
   /** End a read multiple sectors sequence.
    *
    * \return true for success or false for failure.

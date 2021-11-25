@@ -725,15 +725,13 @@ bool SdioCard::begin(SdioConfig sdioConfig) {
 }
 //------------------------------------------------------------------------------
 bool SdioCard::erase(uint32_t firstSector, uint32_t lastSector) {
-#if ENABLE_TEENSY_SDIO_MOD
   if (m_curState != IDLE_STATE && !syncDevice()) {
     return false;
   }
-#endif  // ENABLE_TEENSY_SDIO_MOD
   // check for single sector erase
-  if (!m_csd.v1.erase_blk_en) {
+  if (!m_csd.eraseSingleBlock()) {
     // erase size mask
-    uint8_t m = (m_csd.v1.sector_size_high << 1) | m_csd.v1.sector_size_low;
+    uint8_t m = m_csd.eraseSize() - 1;
     if ((firstSector & m) != 0 || ((lastSector + 1) & m) != 0) {
       // error card can't erase specified area
       return sdError(SD_CARD_ERROR_ERASE_SINGLE_SECTOR);
@@ -933,7 +931,7 @@ bool SdioCard::readStop() {
 }
 //------------------------------------------------------------------------------
 uint32_t SdioCard::sectorCount() {
-  return sdCardCapacity(&m_csd);
+  return m_csd.capacity();
 }
 //------------------------------------------------------------------------------
 uint32_t SdioCard::status() {

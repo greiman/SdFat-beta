@@ -136,6 +136,24 @@ bool FsBaseFile::open(FsBaseFile* dir, uint32_t index, oflag_t oflag) {
   return false;
 }
 //------------------------------------------------------------------------------
+bool FsBaseFile::openCwd() {
+  close();
+  if (FsVolume::m_cwv && FsVolume::m_cwv->m_fVol) {
+    m_fFile = new (m_fileMem) FatFile;
+    if (m_fFile->openCwd()) {
+      return true;
+    }
+    m_fFile = nullptr;
+  } else if (FsVolume::m_cwv && FsVolume::m_cwv->m_xVol) {
+    m_xFile = new (m_fileMem) ExFatFile;
+    if (m_xFile->openCwd()) {
+      return true;
+    }
+    m_xFile = nullptr;
+  }
+  return false;
+}
+//------------------------------------------------------------------------------
 bool FsBaseFile::openNext(FsBaseFile* dir, oflag_t oflag) {
   close();
   if (dir->m_fFile) {

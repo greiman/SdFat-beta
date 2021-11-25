@@ -280,9 +280,9 @@ bool SharedSpiCard::erase(uint32_t firstSector, uint32_t lastSector) {
     goto fail;
   }
   // check for single sector erase
-  if (!csd.v1.erase_blk_en) {
+  if (!csd.eraseSingleBlock()) {
     // erase size mask
-    uint8_t m = (csd.v1.sector_size_high << 1) | csd.v1.sector_size_low;
+    uint8_t m = csd.eraseSize() - 1;
     if ((firstSector & m) != 0 || ((lastSector + 1) & m) != 0) {
       // error card can't erase specified area
       error(SD_CARD_ERROR_ERASE_SINGLE_SECTOR);
@@ -313,7 +313,7 @@ bool SharedSpiCard::erase(uint32_t firstSector, uint32_t lastSector) {
 //------------------------------------------------------------------------------
 bool SharedSpiCard::eraseSingleSectorEnable() {
   csd_t csd;
-  return readCSD(&csd) ? csd.v1.erase_blk_en : false;
+  return readCSD(&csd) ? csd.eraseSingleBlock() : false;
 }
 //------------------------------------------------------------------------------
 bool SharedSpiCard::isBusy() {
@@ -384,7 +384,11 @@ bool SharedSpiCard::readOCR(uint32_t* ocr) {
     goto fail;
   }
   for (uint8_t i = 0; i < 4; i++) {
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
     p[3 - i] = spiReceive();
+#else  // __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    p[i] = spiReceive();
+#endif  // __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
   }
   spiStop();
   return true;
@@ -462,13 +466,14 @@ bool SharedSpiCard::readStart(uint32_t sector) {
   return false;
 }
 //------------------------------------------------------------------------------
-bool SharedSpiCard::readStatus(uint8_t* status) {
+bool SharedSpiCard::readStatus(SdStatus* status) {
+  uint8_t* dst = reinterpret_cast<uint8_t*>(status);
   // retrun is R2 so read extra status byte.
   if (cardAcmd(ACMD13, 0) || spiReceive()) {
     error(SD_CARD_ERROR_ACMD13);
     goto fail;
   }
-  if (!readData(status, 64)) {
+  if (!readData(dst, 64)) {
     goto fail;
   }
   spiStop();
@@ -495,7 +500,7 @@ bool SharedSpiCard::readStop() {
 //------------------------------------------------------------------------------
 uint32_t SharedSpiCard::sectorCount() {
   csd_t csd;
-  return readCSD(&csd) ? sdCardCapacity(&csd) : 0;
+  return readCSD(&csd) ? csd.capacity() : 0;
 }
 //------------------------------------------------------------------------------
 void SharedSpiCard::spiStart() {

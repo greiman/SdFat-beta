@@ -66,6 +66,25 @@ class FsBaseFile {
     * \return true if a file is open.
     */
   operator bool() const {return isOpen();}
+  /**
+   * \return user settable file attributes for success else -1.
+   */
+  int attrib() {
+     return m_fFile ? m_fFile->attrib() :
+           m_xFile ? m_xFile->attrib() : -1;
+  }
+  /** Set file attributes
+   *
+   * \param[in] bits bit-wise or of selected attributes: FS_ATTRIB_READ_ONLY,
+   *            FS_ATTRIB_HIDDEN, FS_ATTRIB_SYSTEM, FS_ATTRIB_ARCHIVE.
+   *
+   * \note attrib() will fail for set read-only if the file is open for write.
+   * \return true for success or false for failure.
+   */
+  bool attrib(uint8_t bits) {
+    return m_fFile ? m_fFile->attrib(bits) :
+           m_xFile ? m_xFile->attrib(bits) : false;
+  }
   /** \return number of bytes available from the current position to EOF
    *   or INT_MAX if more than INT_MAX bytes are available.
    */
@@ -270,6 +289,11 @@ class FsBaseFile {
     return m_fFile ? m_fFile->isFile() :
            m_xFile ? m_xFile->isFile() : false;
   }
+  /** \return True if this is a normal file or sub-directory. */
+  bool isFileOrSubDir() const {
+    return m_fFile ? m_fFile->isFileOrSubDir() :
+           m_xFile ? m_xFile->isFileOrSubDir() : false;
+  }
   /** \return True if this is a hidden file else false. */
   bool isHidden() const {
     return m_fFile ? m_fFile->isHidden() :
@@ -287,7 +311,7 @@ class FsBaseFile {
     return m_fFile ? m_fFile->isReadOnly() :
            m_xFile ? m_xFile->isReadOnly() : false;
   }
-  /** \return True if this is a subdirectory file else false. */
+  /** \return True if this is a sub-directory file else false. */
   bool isSubDir() const {
     return m_fFile ? m_fFile->isSubDir() :
            m_xFile ? m_xFile->isSubDir() : false;
@@ -410,7 +434,7 @@ class FsBaseFile {
    * See open() by path for definition of flags.
    * \return true for success or false for failure.
    */
-  bool open(FsBaseFile* dir, uint32_t index, oflag_t oflag);
+  bool open(FsBaseFile* dir, uint32_t index, oflag_t oflag = O_RDONLY);
   /** Open a file or directory by name.
    *
    * \param[in] vol Volume where the file is located.
@@ -422,7 +446,7 @@ class FsBaseFile {
    *
    * \return true for success or false for failure.
    */
-  bool open(FsVolume* vol, const char* path, oflag_t oflag);
+  bool open(FsVolume* vol, const char* path, oflag_t oflag = O_RDONLY);
   /** Open a file or directory by name.
    *
    * \param[in] path A path for a file to be opened.
@@ -435,6 +459,25 @@ class FsBaseFile {
   bool open(const char* path, oflag_t oflag = O_RDONLY) {
     return FsVolume::m_cwv && open(FsVolume::m_cwv, path, oflag);
   }
+   /** Open a file or directory by index in the current working directory.
+   *
+   * \param[in] index The \a index of the directory entry for the file to be
+   * opened.  The value for \a index is (directory file position)/32.
+   *
+   * \param[in] oflag Values for \a oflag are constructed by a
+   *                  bitwise-inclusive OR of open flags.
+   *
+   * \return true for success or false for failure.
+   */
+  bool open(uint32_t index, oflag_t oflag = O_RDONLY) {
+    FsBaseFile cwd;
+    return cwd.openCwd() && open(&cwd, index, oflag);
+  }
+  /** Open the current working directory.
+   *
+   * \return true for success or false for failure.
+   */
+  bool openCwd();
   /** Opens the next file or folder in a directory.
    * \param[in] dir directory containing files.
    * \param[in] oflag open flags.

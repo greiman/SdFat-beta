@@ -35,26 +35,24 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 
 //------------------------------------------------------------------------------
 SdFs sd;
-cid_t m_cid;
-csd_t m_csd;
-uint32_t m_eraseSize;
-uint32_t m_ocr;
+cid_t cid;
+csd_t csd;
+uint32_t eraseSize;
+uint32_t ocr;
 static ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 bool cidDmp() {
   cout << F("\nManufacturer ID: ");
-  cout << uppercase << showbase << hex << int(m_cid.mid) << dec << endl;
-  cout << F("OEM ID: ") << m_cid.oid[0] << m_cid.oid[1] << endl;
+  cout << uppercase << showbase << hex << int(cid.mid) << dec << endl;
+  cout << F("OEM ID: ") << cid.oid[0] << cid.oid[1] << endl;
   cout << F("Product: ");
   for (uint8_t i = 0; i < 5; i++) {
-    cout << m_cid.pnm[i];
+    cout << cid.pnm[i];
   }
-  cout << F("\nVersion: ");
-  cout << int(m_cid.prv_n) << '.' << int(m_cid.prv_m) << endl;
-  cout << F("Serial number: ") << hex << m_cid.psn << dec << endl;
+  cout << F("\nRevision: ") << cid.prvN() << '.' << cid.prvM() << endl;
+  cout << F("Serial number: ") << hex << cid.psn() << dec << endl;
   cout << F("Manufacturing date: ");
-  cout << int(m_cid.mdt_month) << '/';
-  cout << (2000  + 16*m_cid.mdt_year_high + m_cid.mdt_year_low) << endl;
+  cout << cid.mdtMonth() << '/' << cid.mdtYear() << endl;
   cout << endl;
   return true;
 }
@@ -69,24 +67,13 @@ void clearSerialInput() {
 }
 //------------------------------------------------------------------------------
 bool csdDmp() {
-  bool eraseSingleBlock;
-  if (m_csd.v1.csd_ver == 0) {
-    eraseSingleBlock = m_csd.v1.erase_blk_en;
-    m_eraseSize = (m_csd.v1.sector_size_high << 1) | m_csd.v1.sector_size_low;
-  } else if (m_csd.v2.csd_ver == 1) {
-    eraseSingleBlock = m_csd.v2.erase_blk_en;
-    m_eraseSize = (m_csd.v2.sector_size_high << 1) | m_csd.v2.sector_size_low;
-  } else {
-    cout << F("m_csd version error\n");
-    return false;
-  }
-  m_eraseSize++;
-  cout << F("cardSize: ") << 0.000512 * sdCardCapacity(&m_csd);
+  eraseSize = csd.eraseSize();
+  cout << F("cardSize: ") << 0.000512 * csd.capacity();
   cout << F(" MB (MB = 1,000,000 bytes)\n");
 
-  cout << F("flashEraseSize: ") << int(m_eraseSize) << F(" blocks\n");
+  cout << F("flashEraseSize: ") << int(eraseSize) << F(" blocks\n");
   cout << F("eraseSingleBlock: ");
-  if (eraseSingleBlock) {
+  if (csd.eraseSingleBlock()) {
     cout << F("true\n");
   } else {
     cout << F("false\n");
@@ -116,7 +103,7 @@ bool mbrDmp() {
   for (uint8_t ip = 1; ip < 5; ip++) {
     MbrPart_t *pt = &mbr.part[ip - 1];
     if ((pt->boot != 0 && pt->boot != 0X80) ||
-        getLe32(pt->relativeSectors) > sdCardCapacity(&m_csd)) {
+        getLe32(pt->relativeSectors) > csd.capacity()) {
       valid = false;
     }
     cout << int(ip) << ',' << uppercase << showbase << hex;
@@ -150,7 +137,7 @@ void dmpVol() {
   cout << F("freeClusterCount:  ") << freeClusterCount << endl;
   cout << F("fatStartSector:    ") << sd.fatStartSector() << endl;
   cout << F("dataStartSector:   ") << sd.dataStartSector() << endl;
-  if (sd.dataStartSector() % m_eraseSize) {
+  if (sd.dataStartSector() % eraseSize) {
     cout << F("Data area is not aligned on flash erase boundary!\n");
     cout << F("Download and use formatter from www.sdcard.org!\n");
   }
@@ -170,7 +157,7 @@ void printCardType() {
       break;
 
     case SD_CARD_TYPE_SDHC:
-      if (sdCardCapacity(&m_csd) < 70000000) {
+      if (csd.capacity() < 70000000) {
         cout << F("SDHC\n");
       } else {
         cout << F("SDXC\n");
@@ -241,9 +228,9 @@ void loop() {
   t = millis() - t;
   cout << F("init time: ") << t << " ms" << endl;
 
-  if (!sd.card()->readCID(&m_cid) ||
-      !sd.card()->readCSD(&m_csd) ||
-      !sd.card()->readOCR(&m_ocr)) {
+  if (!sd.card()->readCID(&cid) ||
+      !sd.card()->readCSD(&csd) ||
+      !sd.card()->readOCR(&ocr)) {
     cout << F("readInfo failed\n");
     errorPrint();
     return;
@@ -252,7 +239,7 @@ void loop() {
   cidDmp();
   csdDmp();
   cout << F("\nOCR: ") << uppercase << showbase;
-  cout << hex << m_ocr << dec << endl;
+  cout << hex << ocr << dec << endl;
   if (!mbrDmp()) {
     return;
   }

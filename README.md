@@ -1,4 +1,4 @@
-### Warning: This version, 2.1.1-beta.1, has major internal changes so may be unstable.
+### Warning: This version has major internal changes so may be unstable.
 
 Added openExistingSFN(path). See the MinimumSizeSdReader example.
 

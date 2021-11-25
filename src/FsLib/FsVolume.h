@@ -42,7 +42,25 @@ class FsVolume {
   FsVolume() {}
 
   ~FsVolume() {end();}
-
+  /** Get file's user settable attributes.
+   * \param[in] path path to file.
+   * \return user settable file attributes for success else -1.
+   */
+  int attrib(const char* path) {
+    return m_fVol ? m_fVol->attrib(path) :
+           m_xVol ? m_xVol->attrib(path) : -1;
+  }
+  /** Set file's user settable attributes.
+   * \param[in] path path to file.
+   * \param[in] bits bit-wise or of selected attributes: FS_ATTRIB_READ_ONLY,
+   *            FS_ATTRIB_HIDDEN, FS_ATTRIB_SYSTEM, FS_ATTRIB_ARCHIVE.
+   *
+   * \return true for success or false for failure.
+   */
+  bool attrib(const char* path, uint8_t bits) {
+    return m_fVol ? m_fVol->attrib(path, bits) :
+           m_xVol ? m_xVol->attrib(path, bits) : -1;
+  }
   /**
    * Initialize an FatVolume object.
    * \param[in] blockDev Device block driver.

@@ -40,7 +40,7 @@
 /** SdFat version for cpp use. */
 #define SD_FAT_VERSION 20104
 /** SdFat version as string. */
-#define SD_FAT_VERSION_STR "2.1.4-beta.1"
+#define SD_FAT_VERSION_STR "2.1.4-beta.2"
 //==============================================================================
 /**
  * \class SdBase
@@ -174,11 +174,11 @@ class SdBase : public Vol {
     }
     bool switchSpi = hasDedicatedSpi() && !isDedicatedSpi();
     if (switchSpi && !setDedicatedSpi(true)) {
-      return 0;
+      return false;
     }
     bool rtn = fmt.format(card(), mem, pr);
     if (switchSpi && !setDedicatedSpi(false)) {
-      return 0;
+      return false;
     }
     return rtn;
   }

@@ -37,7 +37,6 @@ bool FsVolume::begin(FsBlockDevice* blockDev, bool setCwv, uint8_t part) {
   if (m_fVol && m_fVol->begin(m_blockDev, false, part)) {
     goto done;
   }
-  m_cwv = nullptr;
   m_fVol = nullptr;
   return false;
 

@@ -132,6 +132,7 @@ static uint16_t CRC_CCITT(const uint8_t* data, size_t n) {
 bool SharedSpiCard::begin(SdSpiConfig spiConfig) {
   Timeout timeout;
   m_spiActive = false;
+  m_beginCalled = false;
   m_errorCode = SD_CARD_ERROR_NONE;
   m_type = 0;
   m_csPin = spiConfig.csPin;
@@ -146,6 +147,7 @@ bool SharedSpiCard::begin(SdSpiConfig spiConfig) {
   spiUnselect();
   spiSetSckSpeed(1000UL*SD_MAX_INIT_RATE_KHZ);
   spiBegin(spiConfig);
+  m_beginCalled = true;
   uint32_t arg;
   m_state = IDLE_STATE;
   spiStart();
@@ -220,6 +222,22 @@ bool SharedSpiCard::begin(SdSpiConfig spiConfig) {
   return false;
 }
 //------------------------------------------------------------------------------
+bool SharedSpiCard::cardCMD6(uint32_t arg, uint8_t* status) {
+  if (cardCommand(CMD6, arg)) {
+    error(SD_CARD_ERROR_CMD6);
+    goto fail;
+  }
+  if (!readData(status, 64)) {
+    goto fail;
+  }
+  spiStop();
+  return true;
+
+ fail:
+  spiStop();
+  return false;
+}
+//------------------------------------------------------------------------------
 // send command and return error code.  Return zero for OK
 uint8_t SharedSpiCard::cardCommand(uint8_t cmd, uint32_t arg) {
   if (!syncDevice()) {
@@ -272,6 +290,14 @@ uint8_t SharedSpiCard::cardCommand(uint8_t cmd, uint32_t arg) {
     m_status = spiReceive();
   } while (m_status & 0X80 && ++n < 10);
   return m_status;
+}
+//------------------------------------------------------------------------------
+void SharedSpiCard::end() {
+  if (m_beginCalled) {
+    spiStop();
+    spiEnd();
+    m_beginCalled = false;
+  }
 }
 //------------------------------------------------------------------------------
 bool SharedSpiCard::erase(uint32_t firstSector, uint32_t lastSector) {
@@ -416,6 +442,23 @@ bool SharedSpiCard::readRegister(uint8_t cmd, void* buf) {
   return false;
 }
 //------------------------------------------------------------------------------
+bool SharedSpiCard::readSCR(scr_t* scr) {
+  uint8_t* dst = reinterpret_cast<uint8_t*>(scr);
+  if (cardAcmd(ACMD51, 0)) {
+    error(SD_CARD_ERROR_ACMD51);
+    goto fail;
+  }
+  if (!readData(dst, sizeof(scr_t))) {
+    goto fail;
+  }
+  spiStop();
+  return true;
+
+ fail:
+  spiStop();
+  return false;
+}
+//------------------------------------------------------------------------------
 bool SharedSpiCard::readSector(uint32_t sector, uint8_t* dst) {
   // use address if not SDHC card
   if (type() != SD_CARD_TYPE_SDHC) {
@@ -506,10 +549,10 @@ uint32_t SharedSpiCard::sectorCount() {
 void SharedSpiCard::spiStart() {
   if (!m_spiActive) {
     spiActivate();
+    m_spiActive = true;
     spiSelect();
     // Dummy byte to drive MISO busy status.
     spiSend(0XFF);
-    m_spiActive = true;
   }
 }
 //------------------------------------------------------------------------------

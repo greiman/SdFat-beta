@@ -95,8 +95,8 @@ class ExFatPartition {
   uint32_t fatStartSector() const {return m_fatStartSector;}
   /** \return Type FAT_TYPE_EXFAT for exFAT partition or zero for error. */
   uint8_t fatType() const {return m_fatType;}
-  /** \return the free cluster count. */
-  uint32_t freeClusterCount();
+  /** \return free cluster count or -1 if an error occurs. */
+  int32_t freeClusterCount();
   /** Initialize a exFAT partition.
    * \param[in] dev The blockDevice for the partition.
    * \param[in] part The partition to be used.  Legal values for \a part are

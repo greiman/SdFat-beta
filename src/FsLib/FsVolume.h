@@ -59,7 +59,7 @@ class FsVolume {
    */
   bool attrib(const char* path, uint8_t bits) {
     return m_fVol ? m_fVol->attrib(path, bits) :
-           m_xVol ? m_xVol->attrib(path, bits) : -1;
+           m_xVol ? m_xVol->attrib(path, bits) : false;
   }
   /**
    * Initialize an FatVolume object.
@@ -137,10 +137,10 @@ class FsVolume {
     return m_fVol ? m_fVol->fatType() :
            m_xVol ? m_xVol->fatType() : 0;
   }
-  /** \return the free cluster count. */
-  uint32_t freeClusterCount() const {
+  /** \return free cluster count or -1 if an error occurs. */
+  int32_t freeClusterCount() const {
     return m_fVol ? m_fVol->freeClusterCount() :
-           m_xVol ? m_xVol->freeClusterCount() : 0;
+           m_xVol ? m_xVol->freeClusterCount() : -1;
   }
   /**
    * Check for device busy.

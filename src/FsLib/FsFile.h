@@ -71,7 +71,7 @@ class FsBaseFile {
    */
   int attrib() {
      return m_fFile ? m_fFile->attrib() :
-           m_xFile ? m_xFile->attrib() : -1;
+            m_xFile ? m_xFile->attrib() : -1;
   }
   /** Set file attributes
    *
@@ -663,14 +663,15 @@ class FsBaseFile {
   }
   /** Rename a file or subdirectory.
    *
-   * \param[in] dirFile Directory for the new path.
+   * \param[in] dir Directory for the new path.
    * \param[in] newPath New path name for the file/directory.
    *
    * \return true for success or false for failure.
    */
-  bool rename(FsBaseFile* dirFile, const char* newPath) {
-    return m_fFile ? m_fFile->rename(dirFile->m_fFile, newPath) :
-           m_xFile ? m_xFile->rename(dirFile->m_xFile, newPath) : false;
+  bool rename(FsBaseFile* dir, const char* newPath) {
+    return m_fFile && dir->m_fFile ? m_fFile->rename(dir->m_fFile, newPath) :
+           m_xFile && dir->m_xFile ? m_xFile->rename(dir->m_xFile, newPath) :
+           false;
   }
   /** Set the file's current position to zero. */
   void rewind() {

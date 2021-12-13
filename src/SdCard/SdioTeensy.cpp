@@ -130,6 +130,9 @@ const uint32_t ACMD6_XFERTYP = SDHC_XFERTYP_CMDINX(ACMD6) | CMD_RESP_R1;
 
 const uint32_t ACMD41_XFERTYP = SDHC_XFERTYP_CMDINX(ACMD41) | CMD_RESP_R3;
 
+const uint32_t ACMD51_XFERTYP = SDHC_XFERTYP_CMDINX(ACMD51) | CMD_RESP_R1 |
+                                DATA_READ_DMA;
+
 const uint32_t CMD0_XFERTYP = SDHC_XFERTYP_CMDINX(CMD0) | CMD_RESP_NONE;
 
 const uint32_t CMD2_XFERTYP = SDHC_XFERTYP_CMDINX(CMD2) | CMD_RESP_R2;
@@ -208,6 +211,7 @@ static uint32_t m_sdClkKhz = 0;
 static uint32_t m_ocr;
 static cid_t m_cid;
 static csd_t m_csd;
+static scr_t m_scr;
 //==============================================================================
 #define DBG_TRACE Serial.print("TRACE."); Serial.println(__LINE__); delay(200);
 #define USE_DEBUG_MODE 0
@@ -402,17 +406,17 @@ static bool cardCommand(uint32_t xfertyp, uint32_t arg) {
          !(m_irqstat & SDHC_IRQSTAT_CMD_ERROR);
 }
 //------------------------------------------------------------------------------
-static bool cardCMD6(uint32_t arg, uint8_t* status) {
-  // CMD6 returns 64 bytes.
+static bool cardACMD51(scr_t* scr) {
+  // ACMD51 returns 8 bytes.
   if (waitTimeout(isBusyCMD13)) {
     return sdError(SD_CARD_ERROR_CMD13);
   }
   enableDmaIrs();
-  SDHC_DSADDR  = (uint32_t)status;
-  SDHC_BLKATTR = SDHC_BLKATTR_BLKCNT(1) | SDHC_BLKATTR_BLKSIZE(64);
+  SDHC_DSADDR  = (uint32_t)scr;
+  SDHC_BLKATTR = SDHC_BLKATTR_BLKCNT(1) | SDHC_BLKATTR_BLKSIZE(8);
   SDHC_IRQSIGEN = SDHC_IRQSIGEN_MASK;
-  if (!cardCommand(CMD6_XFERTYP, arg)) {
-    return sdError(SD_CARD_ERROR_CMD6);
+  if (!cardAcmd(m_rca, ACMD51_XFERTYP, 0)) {
+    return sdError(SD_CARD_ERROR_ACMD51);
   }
   if (!waitDmaStatus()) {
     return sdError(SD_CARD_ERROR_DMA);
@@ -662,7 +666,10 @@ bool SdioCard::begin(SdioConfig sdioConfig) {
       m_version2 = true;
       break;
     }
+    SDHC_SYSCTL |= SDHC_SYSCTL_RSTA;
+    while (SDHC_SYSCTL & SDHC_SYSCTL_RSTA) {}
   }
+  // Must support 3.2-3.4 Volts
   arg = m_version2 ? 0X40300000 : 0x00300000;
   int m = micros();
   do {
@@ -703,10 +710,14 @@ bool SdioCard::begin(SdioConfig sdioConfig) {
 
   SDHC_WML = SDHC_WML_RDWML(FIFO_WML) | SDHC_WML_WRWML(FIFO_WML);
 
+  if (!cardACMD51(&m_scr)) {
+    return false;
+  }
   // Determine if High Speed mode is supported and set frequency.
   // Check status[16] for error 0XF or status[16] for new mode 0X1.
   uint8_t status[64];
-  if (cardCMD6(0X00FFFFFF, status) && (2 & status[13]) &&
+  if (m_scr.sdSpec() > 0 &&
+      cardCMD6(0X00FFFFFF, status) && (2 & status[13]) &&
       cardCMD6(0X80FFFFF1, status) && (status[16] & 0XF) == 1) {
     kHzSdClk = 50000;
   } else {
@@ -721,6 +732,24 @@ bool SdioCard::begin(SdioConfig sdioConfig) {
   // Enable GPIO.
   enableGPIO(true);
   m_initDone = true;
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SdioCard::cardCMD6(uint32_t arg, uint8_t* status) {
+  // CMD6 returns 64 bytes.
+  if (waitTimeout(isBusyCMD13)) {
+    return sdError(SD_CARD_ERROR_CMD13);
+  }
+  enableDmaIrs();
+  SDHC_DSADDR  = (uint32_t)status;
+  SDHC_BLKATTR = SDHC_BLKATTR_BLKCNT(1) | SDHC_BLKATTR_BLKSIZE(64);
+  SDHC_IRQSIGEN = SDHC_IRQSIGEN_MASK;
+  if (!cardCommand(CMD6_XFERTYP, arg)) {
+    return sdError(SD_CARD_ERROR_CMD6);
+  }
+  if (!waitDmaStatus()) {
+    return sdError(SD_CARD_ERROR_DMA);
+  }
   return true;
 }
 //------------------------------------------------------------------------------
@@ -838,6 +867,11 @@ bool SdioCard::readData(uint8_t* dst) {
 //------------------------------------------------------------------------------
 bool SdioCard::readOCR(uint32_t* ocr) {
   *ocr = m_ocr;
+  return true;
+}
+//------------------------------------------------------------------------------
+bool SdioCard::readSCR(scr_t* scr) {
+  memcpy(scr, &m_scr, 8);
   return true;
 }
 //------------------------------------------------------------------------------

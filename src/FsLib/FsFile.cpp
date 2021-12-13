@@ -37,7 +37,7 @@ FsBaseFile::FsBaseFile(const FsBaseFile& from) {
 }
 //------------------------------------------------------------------------------
 FsBaseFile& FsBaseFile::operator=(const FsBaseFile& from) {
-  if (this == &from) return *this;
+  if (this == &from) {return *this;}
   close();
   if (from.m_fFile) {
     m_fFile = new (m_fileMem) FatFile;
@@ -50,15 +50,10 @@ FsBaseFile& FsBaseFile::operator=(const FsBaseFile& from) {
 }
 //------------------------------------------------------------------------------
 bool FsBaseFile::close() {
-  if (m_fFile && m_fFile->close()) {
-    m_fFile = nullptr;
-    return true;
-  }
-  if (m_xFile && m_xFile->close()) {
-    m_xFile = nullptr;
-    return true;
-  }
-  return false;
+  bool rtn = m_fFile ? m_fFile->close() : m_xFile ? m_xFile->close() : true;
+  m_fFile = nullptr;
+  m_xFile = nullptr;
+  return rtn;
 }
 //------------------------------------------------------------------------------
 bool FsBaseFile::mkdir(FsBaseFile* dir, const char* path, bool pFlag) {

@@ -126,10 +126,7 @@ class FatPartition {
   uint8_t fatType() const {
     return m_fatType;
   }
-  /** Volume free space in clusters.
-   *
-   * \return Count of free clusters for success or -1 if an error occurs.
-   */
+  /** \return free cluster count or -1 if an error occurs. */
   int32_t freeClusterCount();
   /** Initialize a FAT partition.
    *

@@ -68,6 +68,7 @@
   SD_CARD_ERROR(ACMD13, "Read extended status")\
   SD_CARD_ERROR(ACMD23, "Set pre-erased count")\
   SD_CARD_ERROR(ACMD41, "Activate card initialization")\
+  SD_CARD_ERROR(ACMD51, "Read SCR data")\
   SD_CARD_ERROR(READ_TOKEN, "Bad read data token")\
   SD_CARD_ERROR(READ_CRC, "Read CRC error")\
   SD_CARD_ERROR(READ_FIFO, "SDIO fifo read timeout")\
@@ -174,6 +175,8 @@ const uint8_t ACMD23 = 0X17;
 /** SD_SEND_OP_COMD - Sends host capacity support information and
     activates the card's initialization process */
 const uint8_t ACMD41 = 0X29;
+/** Reads the SD Configuration Register (SCR). */
+const uint8_t ACMD51 = 0X33;
 //==============================================================================
 // CARD_STATUS
 /** The command's argument was out of the allowed range for this card. */
@@ -338,6 +341,47 @@ typedef struct CSD {
   /** \return true if the entire card is temporarily write protected. */
   bool tempWriteProtect() const {return  csd[14] & 0X10;}
 } csd_t;
+//==============================================================================
+/**
+ * \class SCR
+ * \brief SCR register.
+ */
+typedef struct SCR {
+  /** Bytes 0-3 SD Association, bytes 4-7 reserved for manufacturer. */
+  uint8_t scr[8];
+  /** \return SCR_STRUCTURE field  - must be zero.*/
+  uint8_t srcStructure() {return scr[0] >> 4;}
+  /** \return SD_SPEC field 0 - v1.0 or V1.01, 1 - 1.10, 2 - V2.00 or greater */
+  uint8_t sdSpec() {return scr[0] & 0XF;}
+  /** \return false if all zero, true if all one. */
+  bool dataAfterErase() {return 0X80 & scr[1];}
+  /** \return CPRM Security Version. */
+  uint8_t sdSecurity() {return (scr[1] >> 4) & 0X7;}
+  /** \return 0101b.  */
+  uint8_t sdBusWidths() {return scr[1] & 0XF;}
+  /** \return true if V3.0 or greater. */
+  bool sdSpec3() {return scr[2] & 0X80;}
+  /** \return if true and sdSpecX is zero V4.xx. */
+  bool sdSpec4() {return scr[2] & 0X4;}
+  /** \return nonzero for version 5 or greater if sdSpec == 2,
+              sdSpec3 == true. Version is return plus four.*/
+  uint8_t sdSpecX() {return (scr[2] & 0X3) << 2 | scr[3] >> 6;}
+  /** \return bit map for support CMD58/59, CMD48/49, CMD23, and CMD20 */
+  uint8_t cmdSupport() {return scr[3] &0XF;}
+  /** \return SD spec version */
+  int16_t sdSpecVer() {
+    if (sdSpec() > 2) {
+      return -1;
+    } else if (sdSpec() < 2) {
+      return sdSpec() ? 110 : 101;
+    } else if (!sdSpec3()) {
+      return 200;
+    } else if (!sdSpec4() && !sdSpecX()) {
+      return 300;
+    }
+    return 400 + 100*sdSpecX();
+  }
+} scr_t;
 //==============================================================================
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 // fields are big endian

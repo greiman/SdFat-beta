@@ -237,7 +237,7 @@ bool ExFatPartition::freeChain(uint32_t cluster) {
   return false;
 }
 //------------------------------------------------------------------------------
-uint32_t ExFatPartition::freeClusterCount() {
+int32_t ExFatPartition::freeClusterCount() {
   uint32_t nc = 0;
   uint32_t sector = m_clusterHeapStartSector;
   uint32_t usedCount = 0;
@@ -246,7 +246,7 @@ uint32_t ExFatPartition::freeClusterCount() {
   while (true) {
     cache = dataCachePrepare(sector++, FsCache::CACHE_FOR_READ);
     if (!cache) {
-      return 0;
+      return -1;
     }
     for (size_t i = 0; i < m_bytesPerSector; i++) {
       if (cache[i] == 0XFF) {

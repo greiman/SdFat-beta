@@ -37,11 +37,13 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 SdFs sd;
 cid_t cid;
 csd_t csd;
+scr_t scr;
+uint8_t cmd6Data[64];
 uint32_t eraseSize;
 uint32_t ocr;
 static ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
-bool cidDmp() {
+void cidDmp() {
   cout << F("\nManufacturer ID: ");
   cout << uppercase << showbase << hex << int(cid.mid) << dec << endl;
   cout << F("OEM ID: ") << cid.oid[0] << cid.oid[1] << endl;
@@ -54,7 +56,6 @@ bool cidDmp() {
   cout << F("Manufacturing date: ");
   cout << cid.mdtMonth() << '/' << cid.mdtYear() << endl;
   cout << endl;
-  return true;
 }
 //------------------------------------------------------------------------------
 void clearSerialInput() {
@@ -66,7 +67,7 @@ void clearSerialInput() {
   } while (micros() - m < 10000);
 }
 //------------------------------------------------------------------------------
-bool csdDmp() {
+void csdDmp() {
   eraseSize = csd.eraseSize();
   cout << F("cardSize: ") << 0.000512 * csd.capacity();
   cout << F(" MB (MB = 1,000,000 bytes)\n");
@@ -78,7 +79,12 @@ bool csdDmp() {
   } else {
     cout << F("false\n");
   }
-  return true;
+  cout << F("dataAfterErase: ");
+  if (scr.dataAfterErase()) {
+    cout << F("ones\n");
+  } else {
+    cout << F("zeros\n");
+  }
 }
 //------------------------------------------------------------------------------
 void errorPrint() {
@@ -86,7 +92,7 @@ void errorPrint() {
     cout << F("SD errorCode: ") << hex << showbase;
     printSdErrorSymbol(&Serial, sd.sdErrorCode());
     cout << F(" = ") << int(sd.sdErrorCode()) << endl;
-    cout << F("SD errorData = ") << int(sd.sdErrorData()) << endl;
+    cout << F("SD errorData = ") << int(sd.sdErrorData()) << dec << endl;
   }
 }
 //------------------------------------------------------------------------------
@@ -126,20 +132,22 @@ bool mbrDmp() {
 //------------------------------------------------------------------------------
 void dmpVol() {
   cout << F("\nScanning FAT, please wait.\n");
-  uint32_t freeClusterCount = sd.freeClusterCount();
+  int32_t freeClusterCount = sd.freeClusterCount();
   if (sd.fatType() <= 32) {
     cout << F("\nVolume is FAT") << int(sd.fatType()) << endl;
   } else {
     cout << F("\nVolume is exFAT\n");
   }
   cout << F("sectorsPerCluster: ") << sd.sectorsPerCluster() << endl;
-  cout << F("clusterCount:      ") << sd.clusterCount() << endl;
-  cout << F("freeClusterCount:  ") << freeClusterCount << endl;
   cout << F("fatStartSector:    ") << sd.fatStartSector() << endl;
   cout << F("dataStartSector:   ") << sd.dataStartSector() << endl;
-  if (sd.dataStartSector() % eraseSize) {
-    cout << F("Data area is not aligned on flash erase boundary!\n");
-    cout << F("Download and use formatter from www.sdcard.org!\n");
+  cout << F("clusterCount:      ") << sd.clusterCount() << endl;  
+  cout << F("freeClusterCount:  ");
+  if (freeClusterCount >= 0) {
+    cout << freeClusterCount << endl;
+  } else {
+    cout << F("failed\n");
+    errorPrint();    
   }
 }
 //------------------------------------------------------------------------------
@@ -226,16 +234,25 @@ void loop() {
     return;
   }
   t = millis() - t;
-  cout << F("init time: ") << t << " ms" << endl;
+  cout << F("init time: ") << dec << t << " ms" << endl;
 
   if (!sd.card()->readCID(&cid) ||
       !sd.card()->readCSD(&csd) ||
-      !sd.card()->readOCR(&ocr)) {
+      !sd.card()->readOCR(&ocr) ||
+      !sd.card()->readSCR(&scr)) {
     cout << F("readInfo failed\n");
     errorPrint();
     return;
   }
   printCardType();
+  cout << F("sdSpecVer: ") << 0.01*scr.sdSpecVer() << endl;
+  cout << F("HighSpeedMode: ");
+  if (scr.sdSpecVer() &&
+    sd.card()->cardCMD6(0X00FFFFFF, cmd6Data) && (2 & cmd6Data[13])) {
+    cout << F("true\n");
+  } else {
+    cout << F("false\n");
+  }      
   cidDmp();
   csdDmp();
   cout << F("\nOCR: ") << uppercase << showbase;

@@ -174,7 +174,6 @@ bool SharedSpiCard::begin(SdSpiConfig spiConfig) {
     goto fail;
   }
 #endif  // USE_SD_CRC
-
   // check SD version
   if (!(cardCommand(CMD8, 0x1AA) & R1_ILLEGAL_COMMAND)) {
     type(SD_CARD_TYPE_SD2);

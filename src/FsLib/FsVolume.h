@@ -66,9 +66,11 @@ class FsVolume {
    * \param[in] blockDev Device block driver.
    * \param[in] setCwv Set current working volume if true.
    * \param[in] part partition to initialize.
+   * \param[in] volStart Start sector of volume if part is zero.
    * \return true for success or false for failure.
    */
-  bool begin(FsBlockDevice* blockDev, bool setCwv = true, uint8_t part = 1);
+  bool begin(FsBlockDevice* blockDev, bool setCwv = true, uint8_t
+             part = 1, uint32_t volStart = 0);
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
   uint32_t __attribute__((error("use sectorsPerCluster()"))) blocksPerCluster();
 #endif  // DOXYGEN_SHOULD_SKIP_THIS

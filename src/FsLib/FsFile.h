@@ -124,6 +124,11 @@ class FsBaseFile {
     return m_fFile ? m_fFile->contiguousRange(bgnSector, endSector) :
            m_xFile ? m_xFile->contiguousRange(bgnSector, endSector) : false;
   }
+  /** \return The current cluster number for a file or directory. */
+  uint32_t curCluster() const {
+    return m_fFile ? m_fFile->curCluster() :
+           m_xFile ? m_xFile->curCluster() : 0;
+  }
   /** \return The current position for a file or directory. */
   uint64_t curPosition() const {
     return m_fFile ? m_fFile->curPosition() :

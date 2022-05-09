@@ -60,10 +60,12 @@ class FatVolume : public  FatPartition {
    * \param[in] dev Device block driver.
    * \param[in] setCwv Set current working volume if true.
    * \param[in] part partition to initialize.
+   * \param[in] volStart Start sector of volume if part is zero.
    * \return true for success or false for failure.
    */
-  bool begin(FsBlockDevice* dev, bool setCwv = true, uint8_t part = 1) {
-    if (!init(dev, part)) {
+  bool begin(FsBlockDevice* dev, bool setCwv = true,
+             uint8_t part = 1, uint32_t volStart = 0) {
+    if (!init(dev, part, volStart)) {
       return false;
     }
     if (!chdir()) {

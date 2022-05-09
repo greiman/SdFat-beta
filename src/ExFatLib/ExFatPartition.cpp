@@ -266,37 +266,39 @@ int32_t ExFatPartition::freeClusterCount() {
   }
 }
 //------------------------------------------------------------------------------
-bool ExFatPartition::init(FsBlockDevice* dev, uint8_t part) {
-  uint32_t volStart = 0;
-  uint8_t* cache;
+bool ExFatPartition::init(FsBlockDevice* dev, uint8_t part, uint32_t volStart) {
   pbs_t* pbs;
   BpbExFat_t* bpb;
   MbrSector_t* mbr;
-  MbrPart_t* mp;
-
   m_fatType = 0;
   m_blockDev = dev;
   cacheInit(m_blockDev);
-  cache = dataCachePrepare(0, FsCache::CACHE_FOR_READ);
-  if (part > 4 || !cache) {
-    DBG_FAIL_MACRO;
-    goto fail;
-  }
-  if (part >= 1) {
-    mbr = reinterpret_cast<MbrSector_t*>(cache);
-    mp = &mbr->part[part - 1];
-    if ((mp->boot != 0 && mp->boot != 0X80) || mp->type == 0) {
+  // if part == 0 assume super floppy with FAT boot sector in sector zero
+  // if part > 0 assume mbr volume with partition table
+  if (part) {
+    if (part > 4) {
+      DBG_FAIL_MACRO;
+      goto fail;
+    }
+    mbr = reinterpret_cast<MbrSector_t*>
+          (dataCachePrepare(0, FsCache::CACHE_FOR_READ));
+    if (!mbr) {
+      DBG_FAIL_MACRO;
+      goto fail;
+    }
+    MbrPart_t* mp = mbr->part + part - 1;
+    if (mp->type == 0 || (mp->boot != 0 && mp->boot != 0X80)) {
       DBG_FAIL_MACRO;
       goto fail;
     }
     volStart = getLe32(mp->relativeSectors);
-    cache = dataCachePrepare(volStart, FsCache::CACHE_FOR_READ);
-    if (!cache) {
-      DBG_FAIL_MACRO;
-      goto fail;
-    }
   }
-  pbs = reinterpret_cast<pbs_t*>(cache);
+  pbs = reinterpret_cast<pbs_t*>
+        (dataCachePrepare(volStart, FsCache::CACHE_FOR_READ));
+  if (!pbs) {
+    DBG_FAIL_MACRO;
+    goto fail;
+  }
   if (strncmp(pbs->oemName, "EXFAT", 5)) {
     DBG_FAIL_MACRO;
     goto fail;

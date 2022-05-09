@@ -144,9 +144,10 @@ class ExFatFile {
    * \return true for success or false for failure.
    */
   bool contiguousRange(uint32_t* bgnSector, uint32_t* endSector);
+  /** \return The current cluster number for a file or directory. */
+  uint32_t curCluster() const {return m_curCluster;}
   /** \return The current position for a file or directory. */
   uint64_t curPosition() const {return m_curPosition;}
-
   /** \return Total data length for file. */
   uint64_t dataLength() const {return m_dataLength;}
   /** \return Directory entry index. */
@@ -805,7 +806,6 @@ class ExFatFile {
   bool openPrivate(ExFatFile* dir, ExName_t* fname, oflag_t oflag);
   bool parsePathName(const char* path,
                             ExName_t* fname, const char** ptr);
-  uint32_t curCluster() const {return m_curCluster;}
   ExFatVolume* volume() const {return m_vol;}
   bool syncDir();
   //----------------------------------------------------------------------------

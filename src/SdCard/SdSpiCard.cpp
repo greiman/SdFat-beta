@@ -167,6 +167,10 @@ bool SharedSpiCard::begin(SdSpiConfig spiConfig) {
       error(SD_CARD_ERROR_CMD0);
       goto fail;
     }
+    // Force any active transfer to end for an already initialized card.
+    for (uint8_t j = 0; j < 0XFF; j++) {
+      spiSend(0XFF);
+    }
   }
 #if USE_SD_CRC
   if (cardCommand(CMD59, 1) != R1_IDLE_STATE) {
@@ -246,12 +250,9 @@ uint8_t SharedSpiCard::cardCommand(uint8_t cmd, uint32_t arg) {
   if (!m_spiActive) {
     spiStart();
   }
-  if (cmd != CMD12) {
-    if (!waitReady(SD_CMD_TIMEOUT) && cmd != CMD0) {
-      return 0XFF;
-    }
+  if (cmd != CMD0 && cmd != CMD12 && !waitReady(SD_CMD_TIMEOUT)) {
+    return 0XFF;
   }
-
 #if USE_SD_CRC
   // form message
   uint8_t buf[6];

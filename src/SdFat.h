@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2021 Bill Greiman
+ * Copyright (c) 2011-2022 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -38,9 +38,9 @@
 #endif  // INCLUDE_SDIOS
 //------------------------------------------------------------------------------
 /** SdFat version for cpp use. */
-#define SD_FAT_VERSION 20104
+#define SD_FAT_VERSION 20200
 /** SdFat version as string. */
-#define SD_FAT_VERSION_STR "2.1.4-beta.5"
+#define SD_FAT_VERSION_STR "2.2.0-beta.1"
 //==============================================================================
 /**
  * \class SdBase

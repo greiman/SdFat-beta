@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2021 Bill Greiman
+ * Copyright (c) 2011-2022 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -258,7 +258,7 @@ typedef uint8_t SdCsPin_t;
  * is non-zero.
  */
 #ifndef CHECK_FLASH_PROGRAMMING
-#define CHECK_FLASH_PROGRAMMING 0
+#define CHECK_FLASH_PROGRAMMING 1
 #endif  // CHECK_FLASH_PROGRAMMING
 //------------------------------------------------------------------------------
 /**

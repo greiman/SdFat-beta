@@ -1,18 +1,25 @@
 ### Warning: This version has major internal changes so may be unstable.
 
-Added openExistingSFN(path). See the MinimumSizeSdReader example.
+There are a huge number of changes in 2.2.1 since I decided to use clang-format
+to force Google style formatting.
 
-UTF-8 encoded filenames are supported.
+I did this to avoid warnings from the static analysis programs Cppcheck and
+cpplint.
 
-Try the UnicodeFilenames example.  Here is output from ls:
-<pre>
-Type any character to begin
-ls:
-         0 😀/
-          20 россиянин
-          17 très élégant
-           9 狗.txt
-</pre>
+clang-format is aggressive so it may actually cause code to fail.  For example
+clang-format rearranges the order of includes according to the selected style.
+
+Please post an issue if you find broken code. I have done a lot of testing but
+there are way too many Arduino type boards and packages to cover everything.
+
+I chose Google format since it is close to how I edit C++ and it works well
+with both Cppcheck and cpplint.
+
+There are a number of bug fixes and several new features.
+
+The main new features are in RingBuf to improve use in ISRs and in the SPI
+library driver to allow calls to DMA drivers of the form
+SPI.transfer(txBuf, rxBuf, count).
 
 The release version of SdFat Version 2 is here:
 

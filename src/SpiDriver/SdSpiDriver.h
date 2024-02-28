@@ -48,8 +48,6 @@ const uint8_t SHARED_SPI = 0;
 #if ENABLE_DEDICATED_SPI
 /** The SD is the only device on the SPI bus. */
 const uint8_t DEDICATED_SPI = 1;
-/** The user will call begin. Useful for custom SPI configurations*/
-const uint8_t USER_SPI_BEGIN = 2;
 /**
  * \param[in] opt option field of SdSpiConfig.
  * \return true for dedicated SPI.
@@ -65,6 +63,8 @@ inline bool spiOptionDedicated(uint8_t opt) {
   return false;
 }
 #endif  // ENABLE_DEDICATED_SPI
+/** The user will call begin. Useful for custom SPI configurations.       */
+const uint8_t USER_SPI_BEGIN = 2;
 //------------------------------------------------------------------------------
 /** SPISettings for SCK frequency in Hz. */
 #define SD_SCK_HZ(maxSpeed) (maxSpeed)

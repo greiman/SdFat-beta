@@ -752,7 +752,7 @@ class FsBaseFile {
    * \return true for success or false for failure.
    */
   bool seekSet(uint64_t pos) {
-    return m_fFile   ? pos < (1ULL << 32) && m_fFile->seekSet(pos)
+    return m_fFile   ? pos < (1ULL << 32) && m_fFile->seekSet((uint32_t)pos)
            : m_xFile ? m_xFile->seekSet(pos)
                      : false;
   }

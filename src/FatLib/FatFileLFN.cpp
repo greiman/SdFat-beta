@@ -268,15 +268,16 @@ done:
 bool FatFile::open(FatFile* dirFile, FatLfn_t* fname, oflag_t oflag) {
   bool fnameFound = false;
   uint8_t lfnOrd = 0;
-  uint8_t freeNeed;
   uint8_t freeFound = 0;
+  uint8_t freeNeed;
   uint8_t order = 0;
   uint8_t checksum = 0;
   uint8_t ms10;
   uint8_t nameOrd;
-  uint16_t freeIndex = 0;
   uint16_t curIndex;
   uint16_t date;
+  uint16_t freeIndex = 0;
+  uint16_t freeTotal;
   uint16_t time;
   DirFat_t* dir;
   DirLfn_t* ldir;
@@ -375,7 +376,6 @@ create:
   if (freeFound == 0) {
     freeIndex = curIndex;
   }
-
   while (freeFound < freeNeed) {
     dir = dirFile->readDirCache();
     if (!dir) {
@@ -388,13 +388,16 @@ create:
     }
     freeFound++;
   }
-  while (freeFound < freeNeed) {
+  // Loop handles the case of huge filename and cluster size one.
+  freeTotal = freeFound;
+  while (freeTotal < freeNeed) {
     // Will fail if FAT16 root.
     if (!dirFile->addDirCluster()) {
       DBG_FAIL_MACRO;
       goto fail;
     }
-    freeFound += vol->dirEntriesPerCluster();
+    // 16-bit freeTotal needed for large cluster size.
+    freeTotal += vol->dirEntriesPerCluster();
   }
   if (fnameFound) {
     if (!dirFile->makeUniqueSfn(fname)) {

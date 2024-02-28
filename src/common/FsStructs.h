@@ -243,7 +243,7 @@ const uint8_t FS_ATTRIB_COPY = FS_ATTRIB_USER_SETTABLE | FS_ATTRIB_DIRECTORY;
 const uint8_t FAT_NAME_FREE = 0X00;
 /** name[0] value for entry that is free after being "deleted" */
 const uint8_t FAT_NAME_DELETED = 0XE5;
-// Directiry attribute of volume label.
+// Directory attribute of volume label.
 const uint8_t FAT_ATTRIB_LABEL = 0x08;
 const uint8_t FAT_ATTRIB_LONG_NAME = 0X0F;
 /** Filename base-name is all lower case */

@@ -67,7 +67,7 @@ class FatPartition {
   uint16_t bytesPerSector() const { return m_bytesPerSector; }
   /** \return The shift count required to multiply by bytesPerCluster. */
   uint8_t bytesPerSectorShift() const { return m_bytesPerSectorShift; }
-  /** \return Number of directory entries per sector. */
+  /** \return Number of directory entries per cluster. */
   uint16_t dirEntriesPerCluster() const {
     return m_sectorsPerCluster * (m_bytesPerSector / FS_DIR_SIZE);
   }

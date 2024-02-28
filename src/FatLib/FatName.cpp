@@ -334,7 +334,7 @@ size_t FatFile::printName8(print_t* pr) {
         DBG_FAIL_MACRO;
         goto fail;
       }
-      n += pr->write(buf, str - buf);
+      n += pr->write(reinterpret_cast<uint8_t*>(buf), str - buf);
     }
   }
   return n;

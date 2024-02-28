@@ -176,21 +176,11 @@ class SdioCard : public SdCardInterface {
    * \param[in] sector Address of first sector in sequence.
    *
    * \note This function is used with readData() and readStop() for optimized
-   * multiple sector reads.  SPI chipSelect must be low for the entire sequence.
+   * multiple sector reads.
    *
    * \return true for success or false for failure.
    */
   bool readStart(uint32_t sector);
-  /** Start a read multiple sectors sequence.
-   *
-   * \param[in] sector Address of first sector in sequence.
-   * \param[in] count Maximum sector count.
-   * \note This function is used with readData() and readStop() for optimized
-   * multiple sector reads.  SPI chipSelect must be low for the entire sequence.
-   *
-   * \return true for success or false for failure.
-   */
-  bool readStart(uint32_t sector, uint32_t count);
   /** End a read multiple sectors sequence.
    *
    * \return true for success or false for failure.
@@ -251,16 +241,6 @@ class SdioCard : public SdCardInterface {
    * \return true for success or false for failure.
    */
   bool writeStart(uint32_t sector);
-  /** Start a write multiple sectors sequence.
-   *
-   * \param[in] sector Address of first sector in sequence.
-   * \param[in] count Maximum sector count.
-   * \note This function is used with writeData() and writeStop()
-   * for optimized multiple sector writes.
-   *
-   * \return true for success or false for failure.
-   */
-  bool writeStart(uint32_t sector, uint32_t count);
 
   /** End a write multiple sectors sequence.
    *

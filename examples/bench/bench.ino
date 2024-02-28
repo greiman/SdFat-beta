@@ -1,8 +1,8 @@
 /*
  * This program is a simple binary write/read benchmark.
  */
-#include "FreeStack.h"
 #include "SdFat.h"
+#include "FreeStack.h"
 #include "sdios.h"
 
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,

@@ -100,9 +100,6 @@ const uint8_t FNAME_FLAG_NEED_LFN =
 const uint8_t FNAME_FLAG_LC_BASE = FAT_CASE_LC_BASE;
 /** Filename extension is all lower case. */
 const uint8_t FNAME_FLAG_LC_EXT = FAT_CASE_LC_EXT;
-#if FNAME_FLAG_NEED_LFN & (FAT_CASE_LC_BASE || FAT_CASE_LC_EXT)
-#error FNAME_FLAG_NEED_LFN & (FAT_CASE_LC_BASE || FAT_CASE_LC_EXT)
-#endif  // FNAME_FLAG_NEED_LFN & (FAT_CASE_LC_BASE || FAT_CASE_LC_EXT)
 //==============================================================================
 /**
  * \class FatFile
@@ -326,8 +323,7 @@ class FatFile {
    *
    * \param[out] name An array of characters for the file's name.
    * \param[in] size The size of the array in bytes. The array
-   *             must be at least 13 bytes long.  The file's name will be
-   *             truncated if the file's name is too long.
+   *             must be at least 13 bytes long.
    * \return length for success or zero for failure.
    */
   size_t getName(char* name, size_t size);
@@ -336,7 +332,7 @@ class FatFile {
    *
    * \param[out] name An array of characters for the file's name.
    * \param[in] size The size of the array in characters.
-   * \return the name length.
+   * \return length for success or zero for failure.
    */
   size_t getName7(char* name, size_t size);
   /**
@@ -344,7 +340,7 @@ class FatFile {
    *
    * \param[out] name An array of characters for the file's name.
    * \param[in] size The size of the array in characters.
-   * \return the name length.
+   * \return length for success or zero for failure.
    */
   size_t getName8(char* name, size_t size);
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -787,7 +783,7 @@ class FatFile {
    */
   bool rename(FatFile* dirFile, const char* newPath);
   /** Set the file's current position to zero. */
-  void rewind() { seekSet(0); }
+  void rewind() { seekSet(0UL); }
   /** Remove a directory file.
    *
    * The directory file will be removed only if it is empty and is not the

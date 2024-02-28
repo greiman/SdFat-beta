@@ -59,6 +59,8 @@ class SdCardInterface : public FsBlockDeviceInterface {
   virtual bool hasDedicatedSpi() { return false; }
   /** \return false by default */
   bool virtual isDedicatedSpi() { return false; }
+  /** \return false by default */
+  bool virtual isSpi() { return false; }
   /** Set SPI sharing state
    * \param[in] value desired state.
    * \return false by default.

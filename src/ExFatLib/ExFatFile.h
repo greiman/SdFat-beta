@@ -223,7 +223,7 @@ class ExFatFile {
    *
    * \param[out] name An array of characters for the file's name.
    * \param[in] size The size of the array in characters.
-   * \return the name length.
+   * \return length for success or zero for failure.
    */
   size_t getName(char* name, size_t size) {
 #if USE_UTF8_LONG_NAMES

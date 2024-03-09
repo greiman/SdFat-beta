@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2024 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -156,7 +156,8 @@ bool FatFile::openExistingSFN(const char* path) {
   if (*path == 0) {
     return openRoot(vol);
   }
-  *this = *vol->vwd();
+  // *this = *vol->vwd();
+  this->copy(vol->vwd());
   do {
     if (!parsePathName(path, &fname, &path)) {
       DBG_FAIL_MACRO;

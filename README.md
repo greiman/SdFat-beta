@@ -1,4 +1,10 @@
-### Warning: This version has major internal changes so may be unstable.
+### Warning: This version has major internal changes.
+
+File copy constructors and file assignment operators have been made private by
+default in 2.2.3 to prevent call by value and multiple copies of file instances.
+
+SdFatConfig.h has options to make file constructors and assignment operators
+public.
 
 There are a huge number of changes in 2.2.1 since I decided to use clang-format
 to force Google style formatting.

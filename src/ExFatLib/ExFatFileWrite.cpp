@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2024 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -179,7 +179,8 @@ bool ExFatFile::mkdir(ExFatFile* parent, const char* path, bool pFlag) {
         goto fail;
       }
     }
-    tmpDir = *this;
+    // tmpDir = *this;
+    tmpDir.copy(this);
     parent = &tmpDir;
     close();
   }
@@ -312,7 +313,8 @@ bool ExFatFile::rename(ExFatFile* dirFile, const char* newPath) {
     DBG_FAIL_MACRO;
     goto fail;
   }
-  oldFile = *this;
+  // oldFile = *this;
+  oldFile.copy(this);
   m_dirPos = file.m_dirPos;
   m_setCount = file.m_setCount;
   m_flags |= FILE_FLAG_DIR_DIRTY;

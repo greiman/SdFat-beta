@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2024 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -117,14 +117,80 @@ class FatFile {
    * OR of open flags. see FatFile::open(FatFile*, const char*, uint8_t).
    */
   FatFile(const char* path, oflag_t oflag) { open(path, oflag); }
-#if DESTRUCTOR_CLOSES_FILE
+
+  /** Copy from to this.
+   * \param[in] from Source file.
+   */
+  void copy(const FatFile* from) {
+    if (from != this) {
+#if FILE_COPY_CONSTRUCTOR_SELECT
+      *this = *from;
+#else   // FILE_COPY_CONSTRUCTOR_SELECT
+      memcpy(this, from, sizeof(FatFile));
+#endif  // FILE_COPY_CONSTRUCTOR_SELECT
+    }
+  }
+  /** move from to this.
+   * \param[in] from Source file.
+   */
+  void move(FatFile* from) {
+    if (from != this) {
+      copy(from);
+      from->m_attributes = FILE_ATTR_CLOSED;
+    }
+  }
+
+#if FILE_COPY_CONSTRUCTOR_SELECT == FILE_COPY_CONSTRUCTOR_PUBLIC
+  /** Copy constructor.
+   * \param[in] from Move from file.
+   *
+   */
+  FatFile(const FatFile& from) = default;
+  /** Copy assignment operator.
+   * \param[in] from Move from file.
+   * \return Copied file.
+   */
+  FatFile& operator=(const FatFile& from) = default;
+#elif FILE_COPY_CONSTRUCTOR_SELECT == FILE_COPY_CONSTRUCTOR_PRIVATE
+
+ private:
+  FatFile(const FatFile& from) = default;
+  FatFile& operator=(const FatFile& from) = default;
+
+ public:
+#else   // FILE_COPY_CONSTRUCTOR_SELECT
+  FatFile(const FatFile& from) = delete;
+  FatFile& operator=(const FatFile& from) = delete;
+#endif  // FILE_COPY_CONSTRUCTOR_SELECT
+
+#if FILE_MOVE_CONSTRUCTOR_SELECT
+  /** Move constructor.
+   * \param[in] from Move from file.
+   */
+  FatFile(FatFile&& from) { move(&from); }
+  /** Move assignment operator.
+   * \param[in] from Move from file.
+   * \return Moved file.
+   */
+  FatFile& operator=(FatFile&& from) {
+    move(&from);
+    return *this;
+  }
+#else  // FILE_MOVE_CONSTRUCTOR_SELECT
+  FatFile(FatFile&& from) = delete;
+  FatFile& operator=(FatFile&& from) = delete;
+#endif
   /** Destructor */
+#if DESTRUCTOR_CLOSES_FILE
   ~FatFile() {
     if (isOpen()) {
       close();
     }
   }
+#else   // DESTRUCTOR_CLOSES_FILE
+  ~FatFile() = default;
 #endif  // DESTRUCTOR_CLOSES_FILE
+
   /** The parenthesis operator.
    *
    * \return true if a file is open.

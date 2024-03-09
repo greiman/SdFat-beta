@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2024 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -40,7 +40,7 @@
 /** SdFat version for cpp use. */
 #define SD_FAT_VERSION 20203
 /** SdFat version as string. */
-#define SD_FAT_VERSION_STR "2.2.3-beta.1"
+#define SD_FAT_VERSION_STR "2.2.3-beta.2"
 //==============================================================================
 /**
  * \class SdBase
@@ -89,7 +89,7 @@ class SdBase : public Vol {
    * \return true for success or false for failure.
    */
   bool begin(SdioConfig sdioConfig) {
-     return cardBegin(sdioConfig) && volumeBegin();
+    return cardBegin(sdioConfig) && volumeBegin();
   }
   //----------------------------------------------------------------------------
   /** \return Pointer to SD card object. */

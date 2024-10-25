@@ -26,8 +26,7 @@
  * \file
  * \brief Top level include for SPI and SDIO cards.
  */
-#ifndef SdCard_h
-#define SdCard_h
+#pragma once
 #include "SdSpiCard.h"
 #include "SdioCard.h"
 #if HAS_SDIO_CLASS
@@ -67,7 +66,8 @@ class SdCardFactory {
    * \return generic card pointer or nullptr if failure.
    */
   SdCard* newCard(SdSpiConfig config) {
-    return m_spiCard.begin(config) ? &m_spiCard : nullptr;
+    m_spiCard.begin(config);
+    return &m_spiCard;
   }
   /** Initialize SDIO card.
    *
@@ -76,7 +76,8 @@ class SdCardFactory {
    */
   SdCard* newCard(SdioConfig config) {
 #if HAS_SDIO_CLASS
-    return m_sdioCard.begin(config) ? &m_sdioCard : nullptr;
+    m_sdioCard.begin(config);
+    return &m_sdioCard;
 #else   // HAS_SDIO_CLASS
     (void)config;
     return nullptr;
@@ -89,4 +90,3 @@ class SdCardFactory {
 #endif  // HAS_SDIO_CLASS
   SdSpiCard m_spiCard;
 };
-#endif  // SdCard_h

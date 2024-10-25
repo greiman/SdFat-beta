@@ -1,31 +1,19 @@
 ### Warning: This version has major internal changes.
 
-File copy constructors and file assignment operators have been made private by
-default in 2.2.3 to prevent call by value and multiple copies of file instances.
+SdFat version 2.3.0 has major changes to implement RP2040/RP2350 SDIO.
 
-SdFatConfig.h has options to make file constructors and assignment operators
-public.
+In addition there a number of bug fixes.
 
-There are a huge number of changes in 2.2.1 since I decided to use clang-format
-to force Google style formatting.
+Begin by running the Rp2040SdioSetup example  to try RP2040/RP2350 SDIO.
 
-I did this to avoid warnings from the static analysis programs Cppcheck and
-cpplint.
+This example requires a SDIO Card socket with the following six lines.
 
-clang-format is aggressive so it may actually cause code to fail.  For example
-clang-format rearranges the order of includes according to the selected style.
+CLK - A clock signal sent to the card by the MCU.
+CMD - A bidirectional line for for commands and responses.
+DAT[0:3] - Four bidirectional lines for data transfer.
 
-Please post an issue if you find broken code. I have done a lot of testing but
-there are way too many Arduino type boards and packages to cover everything.
-
-I chose Google format since it is close to how I edit C++ and it works well
-with both Cppcheck and cpplint.
-
-There are a number of bug fixes and several new features.
-
-The main new features are in RingBuf to improve use in ISRs and in the SPI
-library driver to allow calls to DMA drivers of the form
-SPI.transfer(txBuf, rxBuf, count).
+CLK and CMD can be connected to any GPIO pins. DAT[0:3] can be connected
+to any four consecutive GPIO pins in the order DAT0, DAT1, DAT2, DAT3.
 
 The release version of SdFat Version 2 is here:
 

@@ -15,7 +15,13 @@ DAT[0:3] - Four bidirectional lines for data transfer.
 CLK and CMD can be connected to any GPIO pins. DAT[0:3] can be connected
 to any four consecutive GPIO pins in the order DAT0, DAT1, DAT2, DAT3.
 
-The release version of SdFat Version 2 is here:
+Here is an example of SDIO for Pico using an Adafruit socket, PiCowbell
+Proto and PiCowbell Proto Doubler.
+
+![picowbell](https://github.com/user-attachments/assets/40087621-54fa-419c-9ade-6adca53d1054)
+
+
+### The release version of SdFat Version 2 is here:
 
 https://github.com/greiman/SdFat
 

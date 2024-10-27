@@ -18,9 +18,24 @@ to any four consecutive GPIO pins in the order DAT0, DAT1, DAT2, DAT3.
 Here is an example of SDIO for Pico using an Adafruit socket, PiCowbell
 Proto and PiCowbell Proto Doubler.
 
-![picowbell](https://github.com/user-attachments/assets/40087621-54fa-419c-9ade-6adca53d1054)
+![SdioSpi](https://github.com/user-attachments/assets/95448c58-b41f-47d8-bcee-614d76dbfd45)
 
+This Socket supports SDIO with:
+```
+#define RP_CLK_GPIO 10
+#define RP_CMD_GPIO 11
+#define RP_DAT0_GPIO 12  // DAT1: GPIO13 DAT2: GPIO14, DAT3: GPIO15.
+```
+It also can be used on SPI1 with:
+```
+const uint8_t SD_CS_PIN = 15;
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK, &SPI1)
 
+  // In setup
+  SPI1.setSCK(10);
+  SPI1.setTX(11);
+  SPI1.setRX(12);
+```
 ### The release version of SdFat Version 2 is here:
 
 https://github.com/greiman/SdFat

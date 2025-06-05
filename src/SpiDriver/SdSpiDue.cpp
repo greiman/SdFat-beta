@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -22,6 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
+// cppcheck-suppress-file [redundantAssignment, constStatement]
 #include "SdSpiDriver.h"
 #if defined(SD_USE_CUSTOM_SPI) && defined(ARDUINO_SAM_DUE)
 /* Use SAM3X DMAC if nonzero */
@@ -61,8 +62,10 @@ static bool dmac_channel_transfer_done(uint32_t ul_num) {
 // start RX DMA
 static void spiDmaRX(uint8_t* dst, uint16_t count) {
   dmac_channel_disable(SPI_DMAC_RX_CH);
-  DMAC->DMAC_CH_NUM[SPI_DMAC_RX_CH].DMAC_SADDR = (uint32_t)&SPI0->SPI_RDR;
-  DMAC->DMAC_CH_NUM[SPI_DMAC_RX_CH].DMAC_DADDR = (uint32_t)dst;
+  DMAC->DMAC_CH_NUM[SPI_DMAC_RX_CH].DMAC_SADDR =
+      reinterpret_cast<uintptr_t>(&SPI0->SPI_RDR);
+  DMAC->DMAC_CH_NUM[SPI_DMAC_RX_CH].DMAC_DADDR =
+      reinterpret_cast<uintptr_t>(dst);
   DMAC->DMAC_CH_NUM[SPI_DMAC_RX_CH].DMAC_DSCR = 0;
   DMAC->DMAC_CH_NUM[SPI_DMAC_RX_CH].DMAC_CTRLA =
       count | DMAC_CTRLA_SRC_WIDTH_BYTE | DMAC_CTRLA_DST_WIDTH_BYTE;
@@ -84,8 +87,10 @@ static void spiDmaTX(const uint8_t* src, uint16_t count) {
     src_incr = DMAC_CTRLB_SRC_INCR_FIXED;
   }
   dmac_channel_disable(SPI_DMAC_TX_CH);
-  DMAC->DMAC_CH_NUM[SPI_DMAC_TX_CH].DMAC_SADDR = (uint32_t)src;
-  DMAC->DMAC_CH_NUM[SPI_DMAC_TX_CH].DMAC_DADDR = (uint32_t)&SPI0->SPI_TDR;
+  DMAC->DMAC_CH_NUM[SPI_DMAC_TX_CH].DMAC_SADDR =
+      reinterpret_cast<uintptr_t>(src);
+  DMAC->DMAC_CH_NUM[SPI_DMAC_TX_CH].DMAC_DADDR =
+      reinterpret_cast<uintptr_t>(&SPI0->SPI_TDR);
   DMAC->DMAC_CH_NUM[SPI_DMAC_TX_CH].DMAC_DSCR = 0;
   DMAC->DMAC_CH_NUM[SPI_DMAC_TX_CH].DMAC_CTRLA =
       count | DMAC_CTRLA_SRC_WIDTH_BYTE | DMAC_CTRLA_DST_WIDTH_BYTE;

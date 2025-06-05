@@ -17,8 +17,7 @@
  * along with the Arduino DigitalIO Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#ifndef GpioPinMap_h
-#define GpioPinMap_h
+#pragma once
 #if defined(__AVR_ATmega168__)\
 ||defined(__AVR_ATmega168P__)\
 ||defined(__AVR_ATmega328P__)
@@ -61,4 +60,3 @@
 #else  // 1284P, 1284, 644
 #error Unknown board type.
 #endif  // end all boards
-#endif  // GpioPinMap_h

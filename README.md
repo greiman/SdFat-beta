@@ -1,21 +1,48 @@
 ### Warning: This version has major internal changes.
 
-SdFat version 2.3.0 has major changes to implement RP2040/RP2350 SDIO.
+SdFat version 2.3.1 has major changes. In addition there a number of bug fixes.
 
-In addition there a number of bug fixes.
+Please post an issue if you find a bug.
 
-Begin by running the Rp2040SdioSetup example  to try RP2040/RP2350 SDIO.
+Support has been added for the SDIO on RP2350B QFN-80 with 48 GPIO pins.
+Each PIO block is still limited to 32 GPIOs at a time, but GPIOBASE
+selects which 32. 
+
+GPIOBASE can only have value of zero or 16 so all SDIO pins must be in the 
+range 0-31 or 16-47.
+
+Run the Rp2040SdioSetup example to try RP2040/RP2350 SDIO.
 
 This example requires a SDIO Card socket with the following six lines.
 
-CLK - A clock signal sent to the card by the MCU.
-CMD - A bidirectional line for for commands and responses.
-DAT[0:3] - Four bidirectional lines for data transfer.
-
+* CLK - A clock signal sent to the card by the MCU.
+* CMD - A bidirectional line for for commands and responses.
+* DAT[0:3] - Four bidirectional lines for data transfer.
 CLK and CMD can be connected to any GPIO pins. DAT[0:3] can be connected
 to any four consecutive GPIO pins in the order DAT0, DAT1, DAT2, DAT3.
 
-The release version of SdFat Version 2 is here:
+Here is an example of SDIO for Pico using an Adafruit socket, PiCowbell
+Proto and PiCowbell Proto Doubler.
+
+![Alt text](images/SdioSpi.jpg)
+
+This Socket supports SDIO with:
+```
+#define RP_CLK_GPIO 10
+#define RP_CMD_GPIO 11
+#define RP_DAT0_GPIO 12  // DAT1: GPIO13 DAT2: GPIO14, DAT3: GPIO15.
+```
+It also can be used on SPI1 with:
+```
+const uint8_t SD_CS_PIN = 15;
+#define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK, &SPI1)
+
+  // In setup
+  SPI1.setSCK(10);
+  SPI1.setTX(11);
+  SPI1.setRX(12);
+```
+### The release version of SdFat Version 2 is here:
 
 https://github.com/greiman/SdFat
 

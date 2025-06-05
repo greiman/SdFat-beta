@@ -1,0 +1,102 @@
+prvN
+prvM
+mdtYear
+mdtMonth
+psn
+capacity call:[return]
+eraseSingleBlock
+eraseSize call:[return]
+copy
+permWriteProtect
+tempWriteProtect
+srcStructure
+sdSpec
+dataAfterErase
+sdSecurity call:[return]
+sdBusWidths
+sdSpec3
+sdSpec4
+sdSpecX call:[return]
+cmdSupport
+sdSpecVer call:[sdSpec,sdSpec3,sdSpec4,sdSpecX] noreturn:[sdSpecX]
+appClass
+auSizeKB
+busWidth
+discard
+eraseSizeAU
+eraseTimeout
+eraseOffset
+fule
+secureMode
+speedClass
+uhsClass
+videoClass
+FsBlockDeviceInterface
+end
+hasDedicatedSpi
+isDedicatedSpi
+isSpi
+setDedicatedSpi
+status
+TeensySdioConfig
+TeensySdioConfig
+options
+useDma
+setSdErrorCode global:[m_errorCode,m_errorLine]
+sdIrs global:[m_dmaBusy,m_irqstat]
+gpioMux
+enableGPIO call:[gpioMux] noreturn:[gpioMux]
+initClock call:[CCM_CCGR6_USDHC1]
+baseClock call:[return]
+cardAcmd global:[CMD55_XFERTYP] call:[cardCommand] noreturn:[cardCommand]
+cardCommand global:[SDHC_IRQSTAT_CMD_ERROR,SDHC_MIX_CTRL_MASK,m_irqstat] call:[return,waitTimeout]
+cardACMD13 global:[ACMD13_XFERTYP,SDHC_IRQSIGEN_MASK,m_rca] call:[cardAcmd,enableDmaIrs,setSdErrorCode,waitDmaStatus,waitTimeout] noreturn:[setSdErrorCode]
+cardACMD51 global:[ACMD51_XFERTYP,SDHC_IRQSIGEN_MASK,m_rca] call:[cardAcmd,enableDmaIrs,setSdErrorCode,waitDmaStatus,waitTimeout] noreturn:[setSdErrorCode]
+enableDmaIrs global:[m_dmaBusy,m_irqstat]
+initSDHC global:[SDHC_IRQSTATEN_MASK] call:[NVIC_ENABLE_IRQ,NVIC_SET_PRIORITY,attachInterruptVector,enableGPIO,initClock,setSdclk]
+statusCMD13 global:[CMD13_XFERTYP,m_rca] call:[cardCommand]
+isBusyCMD13 global:[CARD_STATUS_READY_FOR_DATA] call:[statusCMD13]
+isBusyCommandComplete global:[SDHC_IRQSTAT_CMD_ERROR]
+isBusyCommandInhibit call:[return]
+isBusyDat call:[return]
+isBusyDMA global:[m_dmaBusy]
+isBusyFifoRead
+isBusyFifoWrite
+isBusyTransferComplete global:[SDHC_IRQSTAT_ERROR]
+rdWrSectors global:[SDHC_IRQSIGEN_MASK,m_highCapacity] call:[cardCommand,enableDmaIrs,setSdErrorCode,waitDmaStatus,yieldTimeout] noreturn:[setSdErrorCode,waitDmaStatus]
+readReg16 global:[m_rca] call:[cardCommand]
+setSdclk global:[m_sdClkKhz] call:[baseClock]
+transferStop global:[CMD12_XFERTYP] call:[cardCommand,setSdErrorCode,yieldTimeout] noreturn:[setSdErrorCode]
+yieldTimeout global:[BUSY_TIMEOUT_MICROS,m_busyFcn] call:[fcn,micros,yield] noreturn:[yield]
+waitDmaStatus global:[SDHC_IRQSTAT_ERROR,m_irqstat] call:[return,yieldTimeout]
+waitTimeout global:[BUSY_TIMEOUT_MICROS] call:[fcn,micros]
+waitTransferComplete global:[SDHC_IRQSTAT_ERROR,m_irqstat,m_transferActive] call:[setSdErrorCode,waitTimeout] noreturn:[setSdErrorCode]
+begin global:[ACMD41_XFERTYP,ACMD6_XFERTYP,BUSY_TIMEOUT_MICROS,CMD0_XFERTYP,CMD10_XFERTYP,CMD2_XFERTYP,CMD3_XFERTYP,CMD7_XFERTYP,CMD8_RETRIES,CMD8_XFERTYP,CMD9_XFERTYP,FIFO_WML,m_cid,m_csd,m_errorCode,m_highCapacity,m_initDone,m_ocr,m_rca,m_scr,m_sds,m_useDma,m_version2] call:[cardACMD13,cardACMD51,cardAcmd,cardCMD6,cardCommand,enableGPIO,initSDHC,micros,readReg16,sdSpec,setSdErrorCode,setSdclk,useDma,while] noreturn:[setSdErrorCode]
+cardCMD6 global:[CMD6_XFERTYP,SDHC_IRQSIGEN_MASK] call:[cardCommand,enableDmaIrs,setSdErrorCode,waitDmaStatus,waitTimeout] noreturn:[setSdErrorCode]
+end
+erase global:[CMD32_XFERTYP,CMD33_XFERTYP,CMD38_XFERTYP,m_csd,m_highCapacity] call:[cardCommand,eraseSingleBlock,eraseSize,setSdErrorCode,syncDevice,waitTimeout] noreturn:[setSdErrorCode]
+errorCode global:[m_errorCode]
+errorData global:[m_irqstat]
+errorLine global:[m_errorLine]
+isBusy global:[m_busyFcn,m_initDone,m_transferActive,m_useDma] call:[isBusyCMD13,isBusyTransferComplete,m_busyFcn,return] noreturn:[isBusyCMD13]
+kHzSdClk global:[m_sdClkKhz]
+readCID global:[m_cid] call:[memcpy,sizeof]
+readCSD global:[m_csd] call:[memcpy,sizeof]
+readData global:[FIFO_WML,SDHC_IRQSTAT_ERROR,m_irqstat] call:[interrupts,noInterrupts,return,setSdErrorCode,waitTimeout] noreturn:[interrupts,setSdErrorCode]
+readOCR global:[m_ocr]
+readSCR global:[m_scr] call:[memcpy,sizeof]
+readSDS global:[m_sds] call:[memcpy,sizeof]
+readSector global:[CMD17_DMA_XFERTYP,m_useDma] call:[memcpy,rdWrSectors,readData,readStart,setSdErrorCode,syncDevice,waitTransferComplete] noreturn:[memcpy,setSdErrorCode]
+readSectors global:[CMD18_DMA_XFERTYP,m_useDma] call:[rdWrSectors,readSector,setSdErrorCode] noreturn:[setSdErrorCode]
+readStart global:[CMD18_PGM_XFERTYP,m_highCapacity] call:[cardCommand,setSdErrorCode,yieldTimeout] noreturn:[setSdErrorCode]
+readStop call:[transferStop] noreturn:[transferStop]
+sectorCount global:[m_csd] call:[capacity] noreturn:[capacity]
+status call:[statusCMD13] noreturn:[statusCMD13]
+stopTransmission global:[CMD12_XFERTYP] call:[cardCommand,setSdErrorCode,yieldTimeout] noreturn:[setSdErrorCode]
+syncDevice call:[stopTransmission,waitTransferComplete] noreturn:[stopTransmission]
+type global:[SD_CARD_TYPE_SD1,SD_CARD_TYPE_SD2,SD_CARD_TYPE_SDHC,m_highCapacity,m_initDone,m_version2]
+writeData global:[FIFO_WML,m_transferActive] call:[setSdErrorCode,waitTimeout,waitTransferComplete] noreturn:[setSdErrorCode]
+writeSector global:[CMD24_DMA_XFERTYP,m_useDma] call:[memcpy,rdWrSectors,setSdErrorCode,syncDevice,waitTransferComplete,writeData,writeStart] noreturn:[memcpy,setSdErrorCode]
+writeSectors global:[CMD25_DMA_XFERTYP,m_useDma] call:[rdWrSectors,setSdErrorCode,writeSector] noreturn:[setSdErrorCode]
+writeStart global:[CMD25_PGM_XFERTYP,m_highCapacity] call:[cardCommand,setSdErrorCode,yieldTimeout] noreturn:[setSdErrorCode]
+writeStop call:[transferStop] noreturn:[transferStop]

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="6828131320886702489">
+  <FileInfo check="ctu">
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h:31:7" call-funcname="fmtBase10" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" line="378" col="20" call-argexpr="static_cast&lt;uint16_t&gt;(exponet)" call-argvaluetype="0" call-argvalue="0">
+  <path file="D:\Bill\ArduinoSdFat\libraries\SdFat\src\common\FmtNumber.cpp" line="338" col="22" info="Assignment &apos;exponet=0&apos;, assigned value is 0"/>
+  <path file="D:\Bill\ArduinoSdFat\libraries\SdFat\src\common\FmtNumber.cpp" line="340" col="9" info="Assuming condition is false"/>
+</function-call><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h:32:7" call-funcname="fmtBase10" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" line="236" col="26" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h:37:7" my-argnr="1"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h:35:7" my-argnr="1" my-argname="str" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" line="216" col="8" value="0"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h" functionName="isDigit" lineNumber="29"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h" functionName="isSpace" lineNumber="30"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="fmtBase10" lineNumber="164"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="fmtBase10" lineNumber="190"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="fmtHex" lineNumber="213"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="fmtSigned" lineNumber="222"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="fmtUnsigned" lineNumber="234"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="fmtDouble" lineNumber="251"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="fmtDouble" lineNumber="306"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="scale10" lineNumber="418"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.cpp" functionName="scanFloat" lineNumber="441"/>
+    <functioncall functionName="fail"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fmtBase10"/>
+    <functioncall functionName="fmtUnsigned"/>
+    <functioncall functionName="isDigit"/>
+    <functioncall functionName="isSpace"/>
+    <functioncall functionName="isinf"/>
+    <functioncall functionName="isnan"/>
+    <functioncall functionName="scale10"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="uint16_t"/>
+    <functioncall functionName="uint32_t"/>
+  </FileInfo>
+</analyzerinfo>

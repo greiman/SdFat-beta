@@ -1,0 +1,129 @@
+spiOptionDedicated global:[DEDICATED_SPI]
+SPIHelper
+SPIHelper
+cpol call:[getDataMode]
+cpha call:[getDataMode]
+reverseByte
+reverse16Bit call:[return,reverseByte]
+maskInterrupts call:[DEBUGSPI,empty,get_core_num,insert_or_assign,interrupts,noInterrupts] noreturn:[interrupts]
+unmaskInterrupts call:[DEBUGSPI,empty,get_core_num,gpio_set_irq_enabled,interrupts,noInterrupts] noreturn:[gpio_set_irq_enabled,interrupts]
+usingInterrupt call:[insert] noreturn:[insert]
+notUsingInterrupt call:[erase] noreturn:[erase]
+setMISO call:[setRX] noreturn:[setRX]
+setMOSI call:[setTX] noreturn:[setTX]
+begin call:[begin] noreturn:[begin]
+usingInterrupt call:[usingInterrupt] noreturn:[usingInterrupt]
+notUsingInterrupt call:[notUsingInterrupt] noreturn:[notUsingInterrupt]
+attachInterrupt
+detachInterrupt
+SdSpiConfig
+SdSpiConfig
+SdSpiConfig
+SdSpiConfig
+setSckSpeed call:[SPISettings] noreturn:[SPISettings]
+activate call:[beginTransaction] noreturn:[beginTransaction]
+begin global:[SPI,USER_SPI_BEGIN] call:[begin] noreturn:[begin]
+end call:[end] noreturn:[end]
+deactivate call:[endTransaction] noreturn:[endTransaction]
+receive call:[transfer] noreturn:[transfer]
+receive call:[transfer]
+send call:[transfer] noreturn:[transfer]
+send call:[transfer] noreturn:[transfer]
+prvN
+prvM
+mdtYear
+mdtMonth
+psn
+capacity call:[return]
+eraseSingleBlock
+eraseSize call:[return]
+copy
+permWriteProtect
+tempWriteProtect
+srcStructure
+sdSpec
+dataAfterErase
+sdSecurity call:[return]
+sdBusWidths
+sdSpec3
+sdSpec4
+sdSpecX call:[return]
+cmdSupport
+sdSpecVer call:[sdSpec,sdSpec3,sdSpec4,sdSpecX] noreturn:[sdSpecX]
+appClass
+auSizeKB
+busWidth
+discard
+eraseSizeAU
+eraseTimeout
+eraseOffset
+fule
+secureMode
+speedClass
+uhsClass
+videoClass
+FsBlockDeviceInterface
+end
+hasDedicatedSpi
+isDedicatedSpi
+isSpi
+setDedicatedSpi
+status
+SdSpiCard call:[initSharedSpiCard] noreturn:[initSharedSpiCard]
+sdError
+errorCode
+errorData
+hasDedicatedSpi
+isDedicatedSpi
+isSpi
+readCID global:[CMD10] call:[readRegister] noreturn:[readRegister]
+readCSD global:[CMD9] call:[readRegister] noreturn:[readRegister]
+sdState
+type
+cardAcmd global:[CMD55] call:[cardCommand] noreturn:[cardCommand]
+spiSelect call:[sdCsWrite] noreturn:[sdCsWrite]
+spiUnselect call:[sdCsWrite] noreturn:[sdCsWrite]
+spiActivate call:[activate] noreturn:[activate]
+spiBegin call:[begin] noreturn:[begin]
+spiDeactivate call:[deactivate] noreturn:[deactivate]
+spiEnd call:[end] noreturn:[end]
+spiReceive call:[receive] noreturn:[receive]
+spiReceive call:[receive] noreturn:[receive]
+spiSend call:[send] noreturn:[send]
+spiSend call:[send] noreturn:[send]
+spiSetSckSpeed call:[setSckSpeed] noreturn:[setSckSpeed]
+initSharedSpiCard
+Timeout
+Timeout call:[set] noreturn:[set]
+millis16 call:[millis] noreturn:[millis]
+set call:[millis16] noreturn:[millis16]
+timedOut call:[millis16]
+begin global:[ACMD41,CMD0,CMD58,CMD8,R1_IDLE_STATE,R1_ILLEGAL_COMMAND,R1_READY_STATE,SD_CARD_TYPE_SD1,SD_CARD_TYPE_SD2,SD_CARD_TYPE_SDHC,SD_INIT_TIMEOUT] call:[cardAcmd,cardCommand,initSharedSpiCard,sdCsInit,sdError,set,spiBegin,spiOptionDedicated,spiReceive,spiSelect,spiSetSckSpeed,spiStart,spiStop,spiUnselect,timedOut] noreturn:[spiReceive]
+cardCMD6 global:[CMD6] call:[cardCommand,readData,sdError,spiStop]
+cardCommand global:[CMD0,CMD12,SD_CMD_TIMEOUT] call:[spiReceive,spiSend,spiStart,syncDevice,waitReady,while] noreturn:[spiReceive,spiSend,spiStart]
+end call:[spiEnd,syncDevice]
+erase global:[CMD32,CMD33,CMD38,SD_CARD_TYPE_SDHC,SD_ERASE_TIMEOUT] call:[cardCommand,eraseSingleBlock,eraseSize,readCSD,sdError,spiStop,type,waitReady]
+eraseSingleSectorEnable call:[eraseSingleBlock,readCSD]
+isBusy call:[spiReceive,spiStart,spiStop] noreturn:[spiStart,spiStop]
+readData call:[readData] noreturn:[readData]
+readData global:[DATA_START_SECTOR,SD_READ_TIMEOUT] call:[sdError,spiReceive,spiStop,timedOut,timeout]
+readOCR global:[CMD58] call:[cardCommand,sdError,spiReceive,spiStop] noreturn:[spiReceive]
+readRegister call:[cardCommand,readData,sdError,spiStop]
+readSCR global:[ACMD51] call:[cardAcmd,readData,sdError,sizeof,spiStop]
+readSector call:[readSectors] noreturn:[readSectors]
+readSectors call:[readData,readStart,readStop,sdState]
+readStart global:[CMD18,SD_CARD_TYPE_SDHC] call:[cardCommand,sdError,spiStop,type]
+readSDS global:[ACMD13] call:[cardAcmd,readData,sdError,sizeof,spiReceive,spiStop]
+readStop global:[CMD12] call:[cardCommand,sdError,spiStop]
+sectorCount call:[capacity,readCSD]
+setDedicatedSpi call:[syncDevice]
+spiStart call:[spiActivate,spiSelect,spiSend] noreturn:[spiSend]
+spiStop call:[spiDeactivate,spiSend,spiUnselect]
+syncDevice call:[readStop,writeStop] noreturn:[readStop,writeStop]
+waitReady call:[spiReceive,timedOut,timeout]
+writeData global:[SD_WRITE_TIMEOUT,WRITE_MULTIPLE_TOKEN] call:[sdError,spiStop,waitReady,writeData]
+writeData global:[DATA_RES_ACCEPTED,DATA_RES_MASK] call:[sdError,spiReceive,spiSend,spiStop]
+writeSector global:[CMD13,CMD24,DATA_START_SECTOR,SD_CARD_TYPE_SDHC,SD_WRITE_TIMEOUT] call:[cardCommand,sdError,spiReceive,spiStop,type,waitReady,writeData,writeSectors] noreturn:[writeSectors]
+writeSectors call:[sdState,spiStop,writeData,writeStart,writeStop]
+writeStart global:[CMD25,SD_CARD_TYPE_SDHC] call:[cardCommand,sdError,spiStop,type]
+writeStop global:[SD_WRITE_TIMEOUT,STOP_TRAN_TOKEN] call:[sdError,spiSend,spiStop,waitReady]

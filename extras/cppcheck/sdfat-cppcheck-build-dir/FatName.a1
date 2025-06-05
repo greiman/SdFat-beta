@@ -1,0 +1,523 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="18028758686913469736">
+  <FileInfo check="ctu">
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPI.h:69:10" call-funcname="begin" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPI.h" line="67" col="14" call-argexpr="false" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h:295:11" call-funcname="cardCommand" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" line="292" col="16" call-argexpr="0" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiDriver.h:43:6" call-funcname="sdCsWrite" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" line="298" col="31" call-argexpr="false" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h:127:8" call-funcname="init" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" line="56" col="19" call-argexpr="nullptr" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:135:8" call-funcname="move" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="169" col="33" call-argexpr="&amp;from" call-argvaluetype="7" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:135:8" call-funcname="move" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="175" col="9" call-argexpr="&amp;from" call-argvaluetype="7" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h:33:7" call-funcname="fmtDouble" call-argnr="4" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="688" col="20" call-argexpr="false" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:795:7" call-funcname="read" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="782" col="16" call-argexpr="&amp;b" call-argvaluetype="7" call-argvalue="1"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1052:7" call-funcname="readPrivate" call-argnr="3" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="795" col="57" call-argexpr="nullptr" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:899:8" call-funcname="seekSet" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="851" col="26" call-argexpr="0UL" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:980:10" call-funcname="write" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="966" col="41" call-argexpr="&amp;b" call-argvaluetype="7" call-argvalue="1"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:480:8" call-funcname="ls" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="995" col="41" call-argexpr="flags" call-argvaluetype="0" call-argvalue="0" warning="true"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h:115:8" call-funcname="init" call-argnr="3" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="69" col="14" call-argexpr="startSector" call-argvaluetype="0" call-argvalue="0" warning="true"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:144:8" call-funcname="ls" call-argnr="3" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="260" col="14" call-argexpr="flags" call-argvaluetype="0" call-argvalue="0" warning="true"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1032:12" call-funcname="getLfnChar" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="79" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="D:\Bill\ArduinoSdFat\libraries\SdFat\src\FatLib\FatName.cpp" line="78" col="22" info="Assignment &apos;i=0&apos;, assigned value is 0"/>
+</function-call><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1032:12" call-funcname="getLfnChar" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="130" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="D:\Bill\ArduinoSdFat\libraries\SdFat\src\FatLib\FatName.cpp" line="129" col="22" info="Assignment &apos;i=0&apos;, assigned value is 0"/>
+</function-call><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1029:13" call-funcname="cacheDirEntry" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="188" col="22" call-argexpr="FsCache::CACHE_FOR_READ" call-argvaluetype="0" call-argvalue="0"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1032:12" call-funcname="getLfnChar" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="265" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="D:\Bill\ArduinoSdFat\libraries\SdFat\src\FatLib\FatName.cpp" line="264" col="14" info="Assignment &apos;i=0&apos;, assigned value is 0"/>
+</function-call><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1032:12" call-funcname="getLfnChar" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="312" col="30" call-argexpr="i" call-argvaluetype="0" call-argvalue="0">
+  <path file="D:\Bill\ArduinoSdFat\libraries\SdFat\src\FatLib\FatName.cpp" line="311" col="22" info="Assignment &apos;i=0&apos;, assigned value is 0"/>
+</function-call><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:422:10" call-funcname="getSFN" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="348" col="14" call-argexpr="name" call-argvaluetype="7" call-argvalue="13"/><function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h:297:8" call-funcname="readRegister" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" line="159" col="37" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h:159:8" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h:297:8" call-funcname="readRegister" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" line="168" col="37" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h:168:8" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h:233:10" call-funcname="fatGet" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" line="131" col="51" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h:131:10" my-argnr="2"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:586:8" call-funcname="open" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="118" col="46" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:118:3" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:351:8" call-funcname="getAccessDate" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="362" col="10" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:361:8" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:642:10" call-funcname="printAccessDate" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="649" col="52" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:649:10" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1052:7" call-funcname="readPrivate" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="795" col="46" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:795:7" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:980:10" call-funcname="write" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="961" col="42" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:961:10" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:586:8" call-funcname="open" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="1094" col="45" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:1094:3" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h:115:8" call-funcname="init" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="69" col="10" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:67:8" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:144:8" call-funcname="ls" call-argnr="2" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="260" col="12" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:259:8" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:402:10" call-funcname="getName7" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="48" col="10" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:394:10" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:422:10" call-funcname="getSFN" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="61" col="12" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:402:10" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:759:10" call-funcname="printName7" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="231" col="10" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:752:10" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:774:10" call-funcname="printSFN" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="247" col="12" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:759:10" my-argnr="1"/>
+<function-call call-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:774:10" call-funcname="printSFN" call-argnr="1" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="294" col="12" my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:766:10" my-argnr="1"/>
+  </FileInfo>
+  <FileInfo check="Bounds checking">
+    <array-index>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:63:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="64" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:67:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="68" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:73:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="74" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:82:13" my-argnr="1" my-argname="dst" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="83" col="3" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:86:13" my-argnr="1" my-argname="dst" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="87" col="3" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:92:13" my-argnr="1" my-argname="dst" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="93" col="3" value="0"/>
+    </array-index>
+  </FileInfo>
+  <FileInfo check="Class">
+<class name="SPIHelper" file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" line="31" col="1" hash="7215760375172328578"/>
+<class name="SdSpiConfig" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiDriver.h" line="108" col="1" hash="7601977684363107689"/>
+<class name="cid_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" line="279" col="1" hash="2283873850440355205"/>
+<class name="csd_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" line="322" col="1" hash="17687750124072632475"/>
+<class name="scr_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" line="361" col="1" hash="12594935102277384809"/>
+<class name="sds_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" line="403" col="1" hash="16566066308817207244"/>
+<class name="PioSdioConfig" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/PioSdio/PioSdioCard.h" line="43" col="1" hash="13384685766487685541"/>
+<class name="CmdRsp_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/PioSdio/PioSdioCard.h" line="78" col="1" hash="8297113536996445960"/>
+<class name="SdCardFactory" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCard.h" line="68" col="1" hash="8222810426436338202"/>
+<class name="FsName" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" line="37" col="1" hash="7824004301975722112"/>
+<class name="mbrPartition" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="134" col="9" hash="17199961650754827357"/>
+<class name="masterBootRecordSector" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="143" col="9" hash="13493515238348338531"/>
+<class name="GptHeader" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="150" col="9" hash="1398559037709823721"/>
+<class name="GptPart" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="175" col="9" hash="4762270492429859656"/>
+<class name="partitionBootSector" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="197" col="9" hash="8327421666119722023"/>
+<class name="DirGeneric_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="205" col="9" hash="691479170087958292"/>
+<class name="fspos_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="210" col="9" hash="3040029735578259665"/>
+<class name="biosParameterBlockFat16" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="216" col="9" hash="11331468532039586737"/>
+<class name="biosParameterBlockFat32" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="238" col="9" hash="15535758300780759203"/>
+<class name="partitionBootSectorFat" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="268" col="9" hash="8984234765158585896"/>
+<class name="FsInfoSector" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="283" col="9" hash="2036453413583801243"/>
+<class name="DirFat_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="317" col="9" hash="159492986440248657"/>
+<class name="DirLfn_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="355" col="9" hash="17151495254646623669"/>
+<class name="biosParameterBlockExFat" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="370" col="9" hash="9699589169666155551"/>
+<class name="ExFatBootSector" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="390" col="9" hash="1828079431040973142"/>
+<class name="DirBitmap_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="401" col="9" hash="13697809766479798883"/>
+<class name="DirUpcase_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="410" col="9" hash="7823471247507858121"/>
+<class name="DirLabel_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="420" col="9" hash="13247433632261107226"/>
+<class name="DirFile_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="435" col="9" hash="10949330961822602102"/>
+<class name="DirStream_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="458" col="9" hash="4045459036123471138"/>
+<class name="DirName_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="473" col="9" hash="7538087059679822758"/>
+<class name="FatPos_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="45" col="1" hash="4334533527343157076"/>
+<class name="FatLfn_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="60" col="1" hash="12967810946293731423"/>
+<class name="FatSfn_t" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="75" col="1" hash="275886609823729528"/>
+<class name="File32" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" line="1087" col="1" hash="2422170790237336748"/>
+  </FileInfo>
+  <FileInfo check="Null pointer">
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:63:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="64" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:67:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="68" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:73:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="74" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:82:13" my-argnr="1" my-argname="dst" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="83" col="3" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:86:13" my-argnr="1" my-argname="dst" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="87" col="3" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:92:13" my-argnr="1" my-argname="dst" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="93" col="3" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:338:23" my-argnr="1" my-argname="dir" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="339" col="10" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:774:10" my-argnr="1" my-argname="pr" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="352" col="10" value="0"/>
+  </FileInfo>
+  <FileInfo check="Uninitialized variables">
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h:42:23" my-argnr="1" my-argname="_spis" file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" line="43" col="17" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h:63:23" my-argnr="1" my-argname="_spis" file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" line="64" col="17" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:63:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="64" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:67:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="68" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:73:17" my-argnr="1" my-argname="src" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="74" col="32" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:332:20" my-argnr="1" my-argname="dir" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="333" col="11" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:335:20" my-argnr="1" my-argname="dir" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="336" col="11" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:338:23" my-argnr="1" my-argname="dir" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="339" col="10" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h:341:20" my-argnr="1" my-argname="dir" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" line="342" col="11" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:270:8" my-argnr="1" my-argname="path" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="270" col="49" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:279:8" my-argnr="1" my-argname="path" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="279" col="51" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:289:8" my-argnr="1" my-argname="path" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="290" col="18" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:299:10" my-argnr="1" my-argname="path" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="300" col="17" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:309:8" my-argnr="1" my-argname="path" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="309" col="51" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:325:8" my-argnr="1" my-argname="oldPath" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="326" col="19" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:325:8" my-argnr="2" my-argname="newPath" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="326" col="36" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:337:8" my-argnr="1" my-argname="path" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="337" col="49" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h:346:8" my-argnr="1" my-argname="path" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" line="347" col="21" value="0"/>
+    <unsafe-usage my-id="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h:774:10" my-argnr="1" my-argname="pr" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" line="352" col="10" value="0"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="highSurrogate" lineNumber="37"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="lowSurrogate" lineNumber="44"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isValidCp" lineNumber="49"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isSurrogate" lineNumber="56"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isHighSurrogate" lineNumber="61"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isLowSurrogate" lineNumber="66"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="u16ToCp" lineNumber="72"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiDriver.h" functionName="spiOptionDedicated" lineNumber="54"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="cpol" lineNumber="42"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="cpha" lineNumber="63"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="reverseByte" lineNumber="84"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="reverse16Bit" lineNumber="97"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="maskInterrupts" lineNumber="110"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="unmaskInterrupts" lineNumber="139"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="usingInterrupt" lineNumber="165"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPIHelper.h" functionName="notUsingInterrupt" lineNumber="174"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPI.h" functionName="setMISO" lineNumber="55"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/extras/cppcheck/rp2040_include/SPI.h" functionName="setMOSI" lineNumber="61"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiArduinoDriver.h" functionName="setSckSpeed" lineNumber="81"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="activate" lineNumber="31"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="begin" lineNumber="35"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="end" lineNumber="50"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="deactivate" lineNumber="52"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="receive" lineNumber="54"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="receive" lineNumber="56"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="send" lineNumber="81"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/SdSpiLibDriver.h" functionName="send" lineNumber="83"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="prvN" lineNumber="303"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="prvM" lineNumber="305"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="mdtYear" lineNumber="307"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="mdtMonth" lineNumber="309"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="psn" lineNumber="311"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="capacity" lineNumber="327"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="eraseSingleBlock" lineNumber="346"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="eraseSize" lineNumber="348"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="copy" lineNumber="350"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="permWriteProtect" lineNumber="352"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="tempWriteProtect" lineNumber="354"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="srcStructure" lineNumber="365"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="sdSpec" lineNumber="367"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="dataAfterErase" lineNumber="369"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="sdSecurity" lineNumber="371"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="sdBusWidths" lineNumber="373"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="sdSpec3" lineNumber="375"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="sdSpec4" lineNumber="377"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="sdSpecX" lineNumber="380"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="cmdSupport" lineNumber="382"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="sdSpecVer" lineNumber="384"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="appClass" lineNumber="440"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="auSizeKB" lineNumber="442"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="busWidth" lineNumber="451"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="discard" lineNumber="456"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="eraseSizeAU" lineNumber="458"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="eraseTimeout" lineNumber="463"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="eraseOffset" lineNumber="465"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="fule" lineNumber="467"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="secureMode" lineNumber="469"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="speedClass" lineNumber="471"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="uhsClass" lineNumber="475"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCardInfo.h" functionName="videoClass" lineNumber="477"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="sdError" lineNumber="122"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="hasDedicatedSpi" lineNumber="132"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="isDedicatedSpi" lineNumber="144"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="isSpi" lineNumber="149"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="sdState" lineNumber="226"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="cardAcmd" lineNumber="291"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiSelect" lineNumber="298"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiUnselect" lineNumber="301"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiActivate" lineNumber="305"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiBegin" lineNumber="306"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiDeactivate" lineNumber="307"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiEnd" lineNumber="308"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiReceive" lineNumber="309"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiReceive" lineNumber="313"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiSend" lineNumber="317"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiSend" lineNumber="321"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="spiSetSckSpeed" lineNumber="325"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SdSpiCard.h" functionName="initSharedSpiCard" lineNumber="352"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/PioSdio/PioSdioCard.h" functionName="clkPin" lineNumber="58"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/PioSdio/PioSdioCard.h" functionName="cmdPin" lineNumber="60"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/PioSdio/PioSdioCard.h" functionName="dat0Pin" lineNumber="62"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/PioSdio/PioSdioCard.h" functionName="clkDiv" lineNumber="64"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/PioSdio/PioSdioCard.h" functionName="setSdErrorCode" lineNumber="292"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCard.h" functionName="isSpi" lineNumber="51"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCard.h" functionName="isSpi" lineNumber="60"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCard.h" functionName="newCard" lineNumber="75"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdCard.h" functionName="newCard" lineNumber="84"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h" functionName="isDigit" lineNumber="29"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FmtNumber.h" functionName="isSpace" lineNumber="30"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsApiConstants.h" functionName="isWriteMode" lineNumber="62"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/CompileDateTime.h" functionName="compileYear" lineNumber="31"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/CompileDateTime.h" functionName="compileMonth" lineNumber="36"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/CompileDateTime.h" functionName="compileDay" lineNumber="52"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/CompileDateTime.h" functionName="compileHour" lineNumber="57"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/CompileDateTime.h" functionName="compileMinute" lineNumber="61"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/CompileDateTime.h" functionName="compileSecond" lineNumber="65"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_DATE" lineNumber="116"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_YEAR" lineNumber="126"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_MONTH" lineNumber="134"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_DAY" lineNumber="142"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_TIME" lineNumber="150"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_HOUR" lineNumber="160"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_MINUTE" lineNumber="166"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsDateTime.h" functionName="FS_SECOND" lineNumber="176"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="atEnd" lineNumber="47"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="reset" lineNumber="49"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="getch" lineNumber="51"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="get16" lineNumber="53"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="cacheBuffer" lineNumber="58"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="cacheSafeRead" lineNumber="66"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="cacheSafeRead" lineNumber="81"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="cacheSafeWrite" lineNumber="94"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="cacheSafeWrite" lineNumber="108"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="clear" lineNumber="115"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="dirty" lineNumber="123"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="init" lineNumber="127"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="invalidate" lineNumber="132"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="isCached" lineNumber="140"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="isCached" lineNumber="146"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="isDirty" lineNumber="150"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="sector" lineNumber="158"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsCache.h" functionName="setMirrorOffset" lineNumber="162"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="getLe16" lineNumber="63"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="getLe32" lineNumber="67"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="getLe64" lineNumber="73"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="setLe16" lineNumber="82"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="setLe32" lineNumber="86"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="setLe64" lineNumber="92"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="lfnReservedChar" lineNumber="108"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="sfnReservedChar" lineNumber="114"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="valid" lineNumber="167"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="used" lineNumber="183"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="isMsBasicPartition" lineNumber="192"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="isFatFile" lineNumber="332"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="isFatFileOrSubdir" lineNumber="335"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="isFatLongName" lineNumber="338"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="isFatSubdir" lineNumber="341"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsStructs.h" functionName="exFatChecksum" lineNumber="366"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="bytesPerClusterShift" lineNumber="58"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="bytesPerCluster" lineNumber="62"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="bytesPerSector" lineNumber="66"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="bytesPerSectorShift" lineNumber="68"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="dirEntriesPerCluster" lineNumber="70"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="sectorMask" lineNumber="74"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="sectorsPerCluster" lineNumber="76"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="sectorsPerFat" lineNumber="78"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheClear" lineNumber="82"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="clusterCount" lineNumber="84"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="sectorsPerClusterShift" lineNumber="86"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="dataStartSector" lineNumber="88"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="end" lineNumber="92"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="fatCount" lineNumber="97"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="fatStartSector" lineNumber="99"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="fatType" lineNumber="101"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="rootDirEntryCount" lineNumber="117"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="rootDirStart" lineNumber="120"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="volumeSectorCount" lineNumber="122"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="dbgFat" lineNumber="131"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="isBusy" lineNumber="137"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheSafeRead" lineNumber="169"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheSafeRead" lineNumber="172"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheSafeWrite" lineNumber="175"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheSafeWrite" lineNumber="178"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="syncDevice" lineNumber="181"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="setFreeClusterCount" lineNumber="191"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="updateFreeClusterCount" lineNumber="192"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="dataCache" lineNumber="196"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="fatCachePrepare" lineNumber="209"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheSync" lineNumber="215"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="dataCachePrepare" lineNumber="217"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheSyncData" lineNumber="220"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheAddress" lineNumber="221"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheSectorNumber" lineNumber="222"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="cacheDirty" lineNumber="223"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="sectorOfCluster" lineNumber="227"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="clusterStartSector" lineNumber="230"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="fatPutEOC" lineNumber="235"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatPartition.h" functionName="isEOC" lineNumber="237"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="copy" lineNumber="123"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="move" lineNumber="135"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="attrib" lineNumber="201"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="available" lineNumber="221"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="available32" lineNumber="228"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="clearError" lineNumber="232"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="clearWriteError" lineNumber="234"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="curCluster" lineNumber="269"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="curPosition" lineNumber="272"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="dirIndex" lineNumber="281"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="exists" lineNumber="303"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="fileSize" lineNumber="334"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="firstBlock" lineNumber="336"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="flush" lineNumber="340"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="getAccessDateTime" lineNumber="361"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="getError" lineNumber="377"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="getWriteError" lineNumber="424"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isContiguous" lineNumber="433"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isDir" lineNumber="436"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isFile" lineNumber="438"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isFileOrSubDir" lineNumber="440"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isHidden" lineNumber="442"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isLFN" lineNumber="444"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isOpen" lineNumber="446"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isReadable" lineNumber="448"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isReadOnly" lineNumber="450"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isRoot" lineNumber="452"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isRoot32" lineNumber="454"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isRootFixed" lineNumber="456"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isSubDir" lineNumber="458"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isSystem" lineNumber="460"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="isWritable" lineNumber="462"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="printAccessDateTime" lineNumber="649"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="printField" lineNumber="679"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="printField" lineNumber="697"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="printField" lineNumber="706"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="read" lineNumber="780"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="read" lineNumber="795"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="rewind" lineNumber="851"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="seekCur" lineNumber="884"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="seekEnd" lineNumber="890"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="truncate" lineNumber="955"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="write" lineNumber="961"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="write" lineNumber="966"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="ls" lineNumber="995"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="printName" lineNumber="1000"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="cacheDir" lineNumber="1026"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="lfnChecksum" lineNumber="1033"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/ArduinoFiles.h" functionName="flush" lineNumber="49"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatFile.h" functionName="openNextFile" lineNumber="1100"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="attrib" lineNumber="42"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="attrib" lineNumber="54"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="begin" lineNumber="67"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="chvol" lineNumber="82"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="chdir" lineNumber="88"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="exists" lineNumber="107"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="ls" lineNumber="126"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="ls" lineNumber="144"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="mkdir" lineNumber="157"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="open" lineNumber="168"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="remove" lineNumber="180"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="rename" lineNumber="199"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="rmdir" lineNumber="212"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="truncate" lineNumber="225"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="ls" lineNumber="243"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="ls" lineNumber="259"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="chdir" lineNumber="270"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="exists" lineNumber="279"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="mkdir" lineNumber="289"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="open" lineNumber="299"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="remove" lineNumber="309"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="rename" lineNumber="325"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="rmdir" lineNumber="337"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="truncate" lineNumber="346"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="cwv" lineNumber="353"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatVolume.h" functionName="vwd" lineNumber="354"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="getLfnChar" lineNumber="30"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="getName" lineNumber="42"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="getName7" lineNumber="52"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="getName8" lineNumber="99"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="getSFN" lineNumber="168"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="printName" lineNumber="225"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="printName7" lineNumber="235"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="printName8" lineNumber="281"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/FatName.cpp" functionName="printSFN" lineNumber="346"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/ArduinoFiles.h" functionName="isDirectory" lineNumber="88"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/ArduinoFiles.h" functionName="position" lineNumber="100"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/ArduinoFiles.h" functionName="rewindDirectory" lineNumber="110"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/ArduinoFiles.h" functionName="seek" lineNumber="122"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/ArduinoFiles.h" functionName="size" lineNumber="124"/>
+    <functioncall functionName="DEBUGSPI"/>
+    <functioncall functionName="FatFile"/>
+    <functioncall functionName="File32"/>
+    <functioncall functionName="FsCache"/>
+    <functioncall functionName="MSBFIRST"/>
+    <functioncall functionName="SPISettings"/>
+    <functioncall functionName="SPI_CPHA_0"/>
+    <functioncall functionName="SPI_CPHA_1"/>
+    <functioncall functionName="SPI_CPOL_0"/>
+    <functioncall functionName="SPI_CPOL_1"/>
+    <functioncall functionName="SPI_MODE0"/>
+    <functioncall functionName="SdSpiCard"/>
+    <functioncall functionName="SdSpiConfig"/>
+    <functioncall functionName="Serial"/>
+    <functioncall functionName="StreamFile"/>
+    <functioncall functionName="Type"/>
+    <functioncall functionName="activate"/>
+    <functioncall functionName="atEnd"/>
+    <functioncall functionName="attrib"/>
+    <functioncall functionName="available"/>
+    <functioncall functionName="available32"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="beginTransaction"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="cacheBuffer"/>
+    <functioncall functionName="cacheClear"/>
+    <functioncall functionName="cacheDir"/>
+    <functioncall functionName="cacheDirEntry"/>
+    <functioncall functionName="cacheSafeRead"/>
+    <functioncall functionName="cacheSafeWrite"/>
+    <functioncall functionName="cardCommand"/>
+    <functioncall functionName="chdir"/>
+    <functioncall functionName="clear"/>
+    <functioncall functionName="clearWriteError"/>
+    <functioncall functionName="close"/>
+    <functioncall functionName="clusterCount"/>
+    <functioncall functionName="copy"/>
+    <functioncall functionName="cpToMb"/>
+    <functioncall functionName="curPosition"/>
+    <functioncall functionName="dataCachePrepare"/>
+    <functioncall functionName="deactivate"/>
+    <functioncall functionName="dirty"/>
+    <functioncall functionName="done"/>
+    <functioncall functionName="empty"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="endTransaction"/>
+    <functioncall functionName="erase"/>
+    <functioncall functionName="exists"/>
+    <functioncall functionName="fail"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fatGet"/>
+    <functioncall functionName="fatPut"/>
+    <functioncall functionName="fileSize"/>
+    <functioncall functionName="final"/>
+    <functioncall functionName="firstSector"/>
+    <functioncall functionName="fmtBase10"/>
+    <functioncall functionName="fmtDouble"/>
+    <functioncall functionName="getAccessDate"/>
+    <functioncall functionName="getDataMode"/>
+    <functioncall functionName="getLe16"/>
+    <functioncall functionName="getLfnChar"/>
+    <functioncall functionName="getName7"/>
+    <functioncall functionName="getSFN"/>
+    <functioncall functionName="get_core_num"/>
+    <functioncall functionName="gpio_set_irq_enabled"/>
+    <functioncall functionName="init"/>
+    <functioncall functionName="initSharedSpiCard"/>
+    <functioncall functionName="insert"/>
+    <functioncall functionName="insert_or_assign"/>
+    <functioncall functionName="interrupts"/>
+    <functioncall functionName="invalidate"/>
+    <functioncall functionName="isBusy"/>
+    <functioncall functionName="isCached"/>
+    <functioncall functionName="isDir"/>
+    <functioncall functionName="isDirty"/>
+    <functioncall functionName="isFile"/>
+    <functioncall functionName="isFileOrSubDir"/>
+    <functioncall functionName="isHighSurrogate"/>
+    <functioncall functionName="isLFN"/>
+    <functioncall functionName="isLowSurrogate"/>
+    <functioncall functionName="isOpen"/>
+    <functioncall functionName="isRoot"/>
+    <functioncall functionName="isSubDir"/>
+    <functioncall functionName="isSurrogate"/>
+    <functioncall functionName="ls"/>
+    <functioncall functionName="memcmp"/>
+    <functioncall functionName="memcpy"/>
+    <functioncall functionName="mkdir"/>
+    <functioncall functionName="move"/>
+    <functioncall functionName="noInterrupts"/>
+    <functioncall functionName="notUsingInterrupt"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="openCluster"/>
+    <functioncall functionName="openNext"/>
+    <functioncall functionName="openRoot"/>
+    <functioncall functionName="operatorbool"/>
+    <functioncall functionName="override"/>
+    <functioncall functionName="peek"/>
+    <functioncall functionName="prepare"/>
+    <functioncall functionName="printAccessDate"/>
+    <functioncall functionName="printField"/>
+    <functioncall functionName="printName"/>
+    <functioncall functionName="printName7"/>
+    <functioncall functionName="printSFN"/>
+    <functioncall functionName="proc0_irq_ctrl"/>
+    <functioncall functionName="proc1_irq_ctrl"/>
+    <functioncall functionName="read"/>
+    <functioncall functionName="readDirCache"/>
+    <functioncall functionName="readPrivate"/>
+    <functioncall functionName="readRegister"/>
+    <functioncall functionName="readSector"/>
+    <functioncall functionName="readSectors"/>
+    <functioncall functionName="receive"/>
+    <functioncall functionName="remove"/>
+    <functioncall functionName="rename"/>
+    <functioncall functionName="reverseByte"/>
+    <functioncall functionName="rewind"/>
+    <functioncall functionName="rmdir"/>
+    <functioncall functionName="sdCsWrite"/>
+    <functioncall functionName="sdSpec"/>
+    <functioncall functionName="sdSpec3"/>
+    <functioncall functionName="sdSpec4"/>
+    <functioncall functionName="sdSpecX"/>
+    <functioncall functionName="sector"/>
+    <functioncall functionName="sectorsPerCluster"/>
+    <functioncall functionName="seekSet"/>
+    <functioncall functionName="send"/>
+    <functioncall functionName="setRX"/>
+    <functioncall functionName="setSckSpeed"/>
+    <functioncall functionName="setTX"/>
+    <functioncall functionName="strlen"/>
+    <functioncall functionName="sync"/>
+    <functioncall functionName="syncDevice"/>
+    <functioncall functionName="transfer"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="truncate"/>
+    <functioncall functionName="u16ToCp"/>
+    <functioncall functionName="uint16_t"/>
+    <functioncall functionName="uint32_t"/>
+    <functioncall functionName="uint64_t"/>
+    <functioncall functionName="uint8_t"/>
+    <functioncall functionName="usingInterrupt"/>
+    <functioncall functionName="vwd"/>
+    <functioncall functionName="write"/>
+    <functioncall functionName="writeSector"/>
+    <functioncall functionName="writeSectors"/>
+  </FileInfo>
+</analyzerinfo>

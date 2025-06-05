@@ -1,0 +1,10 @@
+highSurrogate call:[return]
+lowSurrogate call:[return]
+isValidCp
+isSurrogate
+isHighSurrogate
+isLowSurrogate
+u16ToCp
+cpToMb
+mbToCp call:[isValidCp]
+mbToU16 call:[highSurrogate,lowSurrogate,mbToCp] noreturn:[lowSurrogate]

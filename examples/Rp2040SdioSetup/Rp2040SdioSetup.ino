@@ -1,4 +1,4 @@
-// RP2040 PIO SDIO setup and test.
+// RP2040/RP2350 PIO SDIO setup and test.
 /*
 This example requires a SDIO Card socket with the following six lines.
 
@@ -20,7 +20,9 @@ https://learn.adafruit.com/adafruit-microsd-spi-sdio
 
 Wires should be short since signals can be as faster than 50 MHz.
 */
-#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined.
+#ifndef DISABLE_FS_H_WARNING
+#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined. 
+#endif  // DISABLE_FS_H_WARNING 
 #include "SdFat.h"
 //------------------------------------------------------------------------------
 // Example GPIO definitions I use for debug. Edit for your setup.
@@ -30,10 +32,14 @@ Wires should be short since signals can be as faster than 50 MHz.
 #define RP_CLK_GPIO 18
 #define RP_CMD_GPIO 19
 #define RP_DAT0_GPIO 20  // DAT1: GPIO21, DAT2: GPIO22, DAT3: GPIO23.
+#elif defined(ARDUINO_ADAFRUIT_METRO_RP2350)
+#define RP_CLK_GPIO 34
+#define RP_CMD_GPIO 35
+#define RP_DAT0_GPIO 36  // DAT1: GPIO37, DAT2: GPIO38, DAT3: GPIO39.
 #elif defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_2)
-#define RP_CLK_GPIO 16
-#define RP_CMD_GPIO 17
-#define RP_DAT0_GPIO 18  // DAT1: GPIO19, DAT2: GPIO20, DAT3: GPIO21.
+#define RP_CLK_GPIO 10
+#define RP_CMD_GPIO 11
+#define RP_DAT0_GPIO 12  // DAT1: GPIO13, DAT2: GPIO14, DAT3: GPIO15.
 #elif defined(ARDUINO_ADAFRUIT_FEATHER_RP2350_HSTX)
 #define RP_CLK_GPIO 11
 #define RP_CMD_GPIO 10

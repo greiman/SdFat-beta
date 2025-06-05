@@ -1,0 +1,195 @@
+prvN
+prvM
+mdtYear
+mdtMonth
+psn
+capacity call:[return]
+eraseSingleBlock
+eraseSize call:[return]
+copy
+permWriteProtect
+tempWriteProtect
+srcStructure
+sdSpec
+dataAfterErase
+sdSecurity call:[return]
+sdBusWidths
+sdSpec3
+sdSpec4
+sdSpecX call:[return]
+cmdSupport
+sdSpecVer call:[sdSpec,sdSpec3,sdSpec4,sdSpecX] noreturn:[sdSpecX]
+appClass
+auSizeKB
+busWidth
+discard
+eraseSizeAU
+eraseTimeout
+eraseOffset
+fule
+secureMode
+speedClass
+uhsClass
+videoClass
+Bin
+Bin
+Bin
+printTo call:[sizeof,while,write] noreturn:[write]
+Dbl
+printTo call:[print] noreturn:[print]
+Hex
+printTo call:[print] noreturn:[print]
+Num
+printTo call:[sizeof,while,write] noreturn:[write]
+logmsg call:[print] noreturn:[print]
+logmsg call:[logmsg] noreturn:[logmsg]
+logmsg
+logmsg call:[logmsg] noreturn:[logmsg]
+logmsgln call:[logmsg] noreturn:[logmsg]
+FsBlockDeviceInterface
+end
+hasDedicatedSpi
+isDedicatedSpi
+isSpi
+setDedicatedSpi
+status
+PioSdioConfig
+clkPin
+cmdPin
+dat0Pin
+clkDiv
+PioSdioConfig
+CmdRsp_t
+setSdErrorCode
+check_sm_param call:[valid_params_if] noreturn:[valid_params_if]
+check_sm_mask call:[valid_params_if] noreturn:[valid_params_if]
+check_pio_param
+check_pio_pin_param call:[invalid_params_if] noreturn:[invalid_params_if]
+sm_config_set_out_pin_base call:[check_pio_pin_param]
+sm_config_set_out_pin_count call:[valid_params_if]
+sm_config_set_out_pins call:[sm_config_set_out_pin_base,sm_config_set_out_pin_count] noreturn:[sm_config_set_out_pin_count]
+sm_config_set_set_pin_base call:[check_pio_pin_param]
+sm_config_set_set_pin_count call:[valid_params_if]
+sm_config_set_set_pins call:[sm_config_set_set_pin_base,sm_config_set_set_pin_count] noreturn:[sm_config_set_set_pin_count]
+sm_config_set_in_pin_base call:[check_pio_pin_param]
+sm_config_set_in_pins call:[sm_config_set_in_pin_base] noreturn:[sm_config_set_in_pin_base]
+sm_config_set_in_pin_count call:[valid_params_if] noreturn:[valid_params_if]
+sm_config_set_sideset_pin_base call:[check_pio_pin_param]
+sm_config_set_sideset_pins call:[sm_config_set_sideset_pin_base] noreturn:[sm_config_set_sideset_pin_base]
+sm_config_set_sideset call:[bool_to_bit,valid_params_if]
+sm_config_set_clkdiv_int_frac8 call:[REG_FIELD_WIDTH,invalid_params_if,static_assert]
+sm_config_set_clkdiv_int_frac call:[sm_config_set_clkdiv_int_frac8] noreturn:[sm_config_set_clkdiv_int_frac8]
+pio_calculate_clkdiv8_from_float call:[REG_FIELD_WIDTH,static_assert,valid_params_if]
+pio_calculate_clkdiv_from_float call:[pio_calculate_clkdiv8_from_float]
+sm_config_set_clkdiv call:[pio_calculate_clkdiv8_from_float,sm_config_set_clkdiv_int_frac8] noreturn:[sm_config_set_clkdiv_int_frac8]
+sm_config_set_wrap call:[valid_params_if]
+sm_config_set_jmp_pin call:[check_pio_pin_param]
+sm_config_set_in_shift call:[bool_to_bit,valid_params_if]
+sm_config_set_out_shift call:[bool_to_bit,valid_params_if]
+sm_config_set_fifo_join call:[valid_params_if]
+sm_config_set_out_special call:[bool_to_bit]
+sm_config_set_mov_status call:[valid_params_if]
+pio_get_default_sm_config call:[sm_config_set_clkdiv_int_frac8,sm_config_set_in_shift,sm_config_set_out_shift,sm_config_set_wrap]
+pio_get_gpio_base
+check_pio_pin_mask64 call:[valid_params_if] noreturn:[valid_params_if]
+pio_sm_set_config call:[check_pio_param,check_sm_param]
+pio_get_index call:[check_pio_param,return] noreturn:[return]
+pio_get_funcsel call:[check_pio_param,return] noreturn:[return]
+pio_get_instance call:[invalid_params_if]
+pio_gpio_init call:[check_pio_param,gpio_set_function,valid_params_if] noreturn:[gpio_set_function]
+pio_get_dreq call:[check_pio_param,check_sm_param,return] noreturn:[return]
+pio_sm_set_enabled call:[bool_to_bit,check_pio_param,check_sm_param]
+pio_set_sm_mask_enabled call:[check_pio_param,check_sm_mask]
+pio_sm_restart call:[check_pio_param,check_sm_param,hw_set_bits] noreturn:[hw_set_bits]
+pio_restart_sm_mask call:[check_pio_param,check_sm_mask,hw_set_bits] noreturn:[hw_set_bits]
+pio_sm_clkdiv_restart call:[check_pio_param,check_sm_param,hw_set_bits] noreturn:[hw_set_bits]
+pio_clkdiv_restart_sm_mask call:[check_pio_param,check_sm_mask,hw_set_bits] noreturn:[hw_set_bits]
+pio_enable_sm_mask_in_sync call:[check_pio_param,check_sm_mask,hw_set_bits] noreturn:[hw_set_bits]
+pio_set_irq0_source_enabled call:[check_pio_param,hw_clear_bits,hw_set_bits,invalid_params_if] noreturn:[hw_clear_bits,hw_set_bits]
+pio_set_irq1_source_enabled call:[check_pio_param,hw_clear_bits,hw_set_bits,invalid_params_if] noreturn:[hw_clear_bits,hw_set_bits]
+pio_set_irq0_source_mask_enabled call:[check_pio_param,hw_clear_bits,hw_set_bits,invalid_params_if] noreturn:[hw_clear_bits,hw_set_bits]
+pio_set_irq1_source_mask_enabled call:[check_pio_param,hw_clear_bits,hw_set_bits,invalid_params_if] noreturn:[hw_clear_bits,hw_set_bits]
+pio_set_irqn_source_enabled call:[hw_clear_bits,hw_set_bits,invalid_params_if] noreturn:[hw_clear_bits,hw_set_bits]
+pio_set_irqn_source_mask_enabled call:[hw_clear_bits,hw_set_bits,invalid_params_if,static_assert] noreturn:[hw_clear_bits,hw_set_bits]
+pio_interrupt_get call:[check_pio_param,invalid_params_if]
+pio_interrupt_clear call:[check_pio_param,invalid_params_if]
+pio_sm_get_pc call:[check_pio_param,check_sm_param,return]
+pio_sm_exec call:[check_pio_param,check_sm_param]
+pio_sm_is_exec_stalled call:[check_pio_param,check_sm_param]
+pio_sm_exec_wait_blocking call:[check_pio_param,check_sm_param,pio_sm_exec,pio_sm_is_exec_stalled,tight_loop_contents] noreturn:[tight_loop_contents]
+pio_sm_set_wrap call:[check_pio_param,check_sm_param,valid_params_if]
+pio_sm_set_out_pins call:[check_pio_param,check_sm_param,valid_params_if]
+pio_sm_set_set_pins call:[check_pio_param,check_sm_param,valid_params_if]
+pio_sm_set_in_pins call:[check_pio_param,check_sm_param,valid_params_if]
+pio_sm_set_sideset_pins call:[check_pio_param,check_sm_param,valid_params_if]
+pio_sm_set_jmp_pin call:[check_pio_param,check_sm_param,valid_params_if]
+pio_sm_put call:[check_pio_param,check_sm_param]
+pio_sm_get call:[check_pio_param,check_sm_param]
+pio_sm_is_rx_fifo_full call:[check_pio_param,check_sm_param,return]
+pio_sm_is_rx_fifo_empty call:[check_pio_param,check_sm_param,return]
+pio_sm_get_rx_fifo_level call:[check_pio_param,check_sm_param,return]
+pio_sm_is_tx_fifo_full call:[check_pio_param,check_sm_param,return]
+pio_sm_is_tx_fifo_empty call:[check_pio_param,check_sm_param,return]
+pio_sm_get_tx_fifo_level call:[check_pio_param,check_sm_param,return]
+pio_sm_put_blocking call:[check_pio_param,check_sm_param,pio_sm_is_tx_fifo_full,pio_sm_put,tight_loop_contents] noreturn:[pio_sm_put,tight_loop_contents]
+pio_sm_get_blocking call:[check_pio_param,check_sm_param,pio_sm_get,pio_sm_is_rx_fifo_empty,tight_loop_contents] noreturn:[pio_sm_get,tight_loop_contents]
+pio_sm_set_clkdiv_int_frac8 call:[REG_FIELD_WIDTH,check_pio_param,check_sm_param,invalid_params_if,static_assert]
+pio_sm_set_clkdiv_int_frac call:[pio_sm_set_clkdiv_int_frac8] noreturn:[pio_sm_set_clkdiv_int_frac8]
+pio_sm_set_clkdiv call:[check_pio_param,check_sm_param,pio_calculate_clkdiv8_from_float,pio_sm_set_clkdiv_int_frac8] noreturn:[pio_sm_set_clkdiv_int_frac8]
+pio_sm_clear_fifos call:[check_pio_param,check_sm_param,hw_xor_bits] noreturn:[hw_xor_bits]
+pio_get_irq_num call:[check_pio_param,return,valid_params_if] noreturn:[return]
+pio_get_tx_fifo_not_full_interrupt_source call:[check_sm_param,return] noreturn:[return]
+pio_get_rx_fifo_not_empty_interrupt_source call:[check_sm_param,return] noreturn:[return]
+cmd_rsp_program_get_default_config call:[pio_get_default_sm_config,sm_config_set_sideset,sm_config_set_wrap]
+pio_cmd_rsp_program_config call:[cmd_rsp_program_get_default_config,sm_config_set_clkdiv,sm_config_set_in_pins,sm_config_set_in_shift,sm_config_set_jmp_pin,sm_config_set_out_pins,sm_config_set_out_shift,sm_config_set_set_pins,sm_config_set_sideset_pins]
+rd_clk_program_get_default_config call:[pio_get_default_sm_config,sm_config_set_sideset,sm_config_set_wrap]
+pio_rd_clk_program_config call:[rd_clk_program_get_default_config,sm_config_set_clkdiv,sm_config_set_fifo_join,sm_config_set_in_pins,sm_config_set_jmp_pin,sm_config_set_out_shift,sm_config_set_sideset_pins]
+rd_data_program_get_default_config call:[pio_get_default_sm_config,sm_config_set_wrap]
+rd_data_patch_program global:[rd_data_program,rd_data_program_instructions] call:[memcpy,pio_encode_wait_gpio,sizeof] noreturn:[pio_encode_wait_gpio]
+pio_rd_data_program_config call:[rd_data_program_get_default_config,sm_config_set_clkdiv,sm_config_set_fifo_join,sm_config_set_in_pins,sm_config_set_in_shift]
+wr_data_program_get_default_config call:[pio_get_default_sm_config,sm_config_set_sideset,sm_config_set_wrap]
+pio_wr_data_program_config call:[sm_config_set_clkdiv,sm_config_set_fifo_join,sm_config_set_out_pins,sm_config_set_out_shift,sm_config_set_set_pins,sm_config_set_sideset_pins,wr_data_program_get_default_config]
+wr_resp_program_get_default_config call:[pio_get_default_sm_config,sm_config_set_sideset,sm_config_set_wrap]
+pio_wr_resp_program_config call:[sm_config_set_clkdiv,sm_config_set_in_pins,sm_config_set_in_shift,sm_config_set_set_pins,sm_config_set_sideset_pins,wr_resp_program_get_default_config]
+fill_pio_program_get_default_config call:[pio_get_default_sm_config,sm_config_set_wrap]
+Timeout
+timedOut call:[return,usSinceBoot]
+usSinceBoot call:[get_absolute_time,to_us_since_boot] noreturn:[to_us_since_boot]
+gpioStatus call:[gpio_get_drive_strength,gpio_get_slew_rate,gpio_is_input_hysteresis_enabled,gpio_is_pulled_up,logmsgln] noreturn:[logmsgln]
+pioRegs call:[Bin,Hex,logmsgln] noreturn:[logmsgln]
+pioSmRegs call:[Hex,logmsgln] noreturn:[logmsgln]
+CRC7 global:[crc7_table]
+crc16
+claimPio call:[logmsgln,pio_can_add_program,pio_claim_unused_sm,pio_sm_unclaim,while] noreturn:[logmsgln,pio_sm_unclaim]
+cardAcmd global:[CMD55_R1] call:[cardCommand] noreturn:[cardCommand]
+begin global:[ACMD13_R1,ACMD41_R3,ACMD51_R1,ACMD6_R1,CMD0_R0,CMD10_R2,CMD2_R2,CMD3_R6,CMD7_R1,CMD8_R7,CMD9_R2,SD_INIT_TIMEOUT] call:[cardAcmd,cardCommand,ceil,clkDiv,clkPin,clock_get_hz,cmdPin,dat0Pin,logmsgln,pioConfig,pioEnd,pioInit,powerUpClockCycles,readData,setSdErrorCode,sizeof,timedOut,timeout,while] noreturn:[logmsgln,while]
+cardCMD6 global:[CMD6_R1] call:[cardCommand,logmsgln,readData,setSdErrorCode,while] noreturn:[logmsgln,while]
+cardCommand global:[SD_CMD_TIMEOUT] call:[CRC7,logmsgln,memcpy,pio_encode_out,pio_encode_set,pio_sm_exec,pio_sm_init,pio_sm_is_rx_fifo_empty,pio_sm_is_tx_fifo_full,pio_sm_set_enabled,printf,println,setSdErrorCode,timedOut,timeout,while] noreturn:[CRC7,logmsgln,memcpy,printf,while]
+end call:[pioEnd] noreturn:[pioEnd]
+erase global:[CMD32_R1,CMD33_R1,CMD38_R1,SD_ERASE_TIMEOUT] call:[cardCommand,eraseSingleBlock,eraseSize,isBusy,logmsgln,setSdErrorCode,syncDevice,timedOut,timeout,while] noreturn:[logmsgln,while]
+errorCode
+errorData
+errorLine
+isBusy global:[CARD_STATUS_READY_FOR_DATA] call:[gpio_get,status]
+pioConfig call:[pio_cmd_rsp_program_config,pio_rd_clk_program_config,pio_rd_data_program_config,pio_wr_data_program_config,pio_wr_resp_program_config] noreturn:[pio_wr_resp_program_config]
+pioEnd global:[cmd_rsp_program,rd_clk_program,rd_data_program,wr_data_program,wr_resp_program] call:[pio_remove_program,pio_sm_unclaim] noreturn:[pio_sm_unclaim]
+pioInit global:[cmd_rsp_program,rd_clk_program,wr_data_program,wr_resp_program] call:[claimPio,gpio_pull_up,gpio_set_drive_strength,gpio_set_slew_rate,logmsgln,pioEnd,pio_add_program,pio_gpio_init,pio_sm_set_consecutive_pindirs,rd_data_patch_program,setSdErrorCode,while] noreturn:[gpio_pull_up,logmsgln,pio_gpio_init,while]
+powerUpClockCycles call:[busy_wait_at_least_cycles,ceil,clock_get_hz,gpio_init,gpio_put,gpio_set_dir,gpio_set_drive_strength] noreturn:[busy_wait_at_least_cycles]
+readCID call:[memcpy,sizeof]
+readCSD call:[memcpy,sizeof]
+readData call:[readData] noreturn:[readData]
+readOCR
+readSCR call:[memcpy,sizeof]
+readSDS call:[memcpy,sizeof]
+readSector call:[logmsgln,readData,readStart,setSdErrorCode,syncDevice,while] noreturn:[logmsgln,while]
+readSectors call:[logmsgln,readSector,while] noreturn:[logmsgln]
+readStart global:[CMD18_R1] call:[cardCommand,logmsgln,setSdErrorCode,while] noreturn:[logmsgln,while]
+readStop call:[logmsgln,syncDevice,while] noreturn:[logmsgln]
+status global:[CARD_STATUS_ERROR,CMD13_R1] call:[cardCommand]
+sectorCount call:[capacity] noreturn:[capacity]
+syncDevice global:[CMD12_R1,SD_INIT_TIMEOUT] call:[cardCommand,gpio_get,isBusy,logmsgln,setSdErrorCode,timedOut,timeout,while] noreturn:[logmsgln,while]
+type global:[SD_CARD_TYPE_SD1,SD_CARD_TYPE_SD2,SD_CARD_TYPE_SDHC]
+writeSector call:[writeSectors] noreturn:[writeSectors]
+writeSectors call:[logmsgln,setSdErrorCode,syncDevice,while,writeData,writeStart] noreturn:[logmsgln,while]
+writeStart global:[CMD25_R1] call:[cardCommand,logmsgln,setSdErrorCode,while] noreturn:[logmsgln,while]
+writeStop call:[logmsgln,syncDevice,while] noreturn:[logmsgln]

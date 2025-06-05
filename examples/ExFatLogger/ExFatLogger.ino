@@ -3,10 +3,12 @@
 //
 // The maximum data rate will depend on the quality of your SD,
 // the size of the FIFO, and using dedicated SPI.
-#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined.
+#ifndef DISABLE_FS_H_WARNING
+#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined. 
+#endif  // DISABLE_FS_H_WARNING 
 #include "SdFat.h"
-#include "ExFatLogger.h"
 #include "FreeStack.h"
+#include "ExFatLogger.h"
 //------------------------------------------------------------------------------
 // This example was designed for exFAT but will support FAT16/FAT32.
 // Note: Uno will not support SD_FAT_TYPE = 3.

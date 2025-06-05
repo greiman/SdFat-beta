@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -26,8 +26,7 @@
  * \file
  * \brief SpiDriver classes for Arduino compatible systems.
  */
-#ifndef SdSpiArduinoDriver_h
-#define SdSpiArduinoDriver_h
+#pragma once
 //==============================================================================
 #if SPI_DRIVER_SELECT == 0 && SD_HAS_CUSTOM_SPI
 #define SD_USE_CUSTOM_SPI
@@ -95,4 +94,3 @@ typedef SdSpiArduinoDriver SdSpiDriver;
 #elif defined(__AVR__)
 #include "SdSpiAvr.h"
 #endif  // __AVR__
-#endif  // SdSpiArduinoDriver_h

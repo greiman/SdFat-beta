@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -22,8 +22,6 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-#ifndef SdSpiAvr_h
-#define SdSpiAvr_h
 // Use of in-line for AVR to save flash.
 #define nop asm volatile("nop\n\t")
 //------------------------------------------------------------------------------
@@ -121,4 +119,3 @@ inline void SdSpiArduinoDriver::send(const uint8_t* buf, size_t count) {
 #error Unsupported AVR CPU - edit SdFatConfig.h to use standard SPI library.
 #endif  // SPSR
 }
-#endif  // SdSpiAvr_h

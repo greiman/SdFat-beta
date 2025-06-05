@@ -1,0 +1,3 @@
+searchPair16
+toUpcase global:[LOOKUP_DIM,MAP_DIM,lookupTable,mapTable] call:[return,searchPair16] noreturn:[return]
+upcaseChecksum

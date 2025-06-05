@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -22,8 +22,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-#ifndef SdSpiBareUnoDriver_h
-#define SdSpiBareUnoDriver_h
+#pragma once
 /**
  * \file
  * \brief Driver to test with no Arduino includes.
@@ -195,4 +194,3 @@ class SdSpiDriverBareUno {
  private:
   SdCsPin_t m_csPin;
 };
-#endif  // SdSpiBareUnoDriver_h

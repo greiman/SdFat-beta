@@ -1,0 +1,35 @@
+prvN
+prvM
+mdtYear
+mdtMonth
+psn
+capacity call:[return]
+eraseSingleBlock
+eraseSize call:[return]
+copy
+permWriteProtect
+tempWriteProtect
+srcStructure
+sdSpec
+dataAfterErase
+sdSecurity call:[return]
+sdBusWidths
+sdSpec3
+sdSpec4
+sdSpecX call:[return]
+cmdSupport
+sdSpecVer call:[sdSpec,sdSpec3,sdSpec4,sdSpecX] noreturn:[sdSpecX]
+appClass
+auSizeKB
+busWidth
+discard
+eraseSizeAU
+eraseTimeout
+eraseOffset
+fule
+secureMode
+speedClass
+uhsClass
+videoClass
+printSdErrorSymbol call:[print] noreturn:[print]
+printSdErrorText call:[print] noreturn:[print]

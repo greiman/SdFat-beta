@@ -25,8 +25,7 @@
  * @details  Fast Digital I/O functions and template class.
  * @{
  */
-#ifndef DigitalPin_h
-#define DigitalPin_h
+#pragma once
 #if defined(__AVR__) || defined(DOXYGEN)
 #include <avr/io.h>
 /** GpioPinMap type */
@@ -377,5 +376,4 @@ class DigitalPin {
     fastDigitalWrite(PinNumber, value);
   }
 };
-#endif  // DigitalPin_h
 /** @} */

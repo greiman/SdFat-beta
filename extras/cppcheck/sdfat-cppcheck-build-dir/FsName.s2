@@ -1,0 +1,11 @@
+atEnd
+reset
+getch call:[atEnd]
+get16 call:[atEnd]
+highSurrogate call:[return]
+lowSurrogate call:[return]
+isValidCp
+isSurrogate
+isHighSurrogate
+isLowSurrogate
+u16ToCp

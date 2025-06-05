@@ -6,7 +6,9 @@
  * https://gurumeditation.org/1342/sd-memory-card-register-decoder/
  * https://archive.goughlui.com/static/multicid.htm
  */
-#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined.
+#ifndef DISABLE_FS_H_WARNING
+#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined. 
+#endif  // DISABLE_FS_H_WARNING 
 #include "SdFat.h"
 #include "sdios.h"
 /*
@@ -130,7 +132,7 @@ bool mbrDmp() {
   for (uint8_t ip = 1; ip < 5; ip++) {
     MbrPart_t* pt = &mbr.part[ip - 1];
     if ((pt->boot != 0 && pt->boot != 0X80) ||
-        getLe32(pt->relativeSectors) > csd.capacity()) {
+        getLe32(pt->startSector) > csd.capacity()) {
       valid = false;
     }
     cout << int(ip) << ',' << uppercase << showbase << hex;
@@ -142,7 +144,7 @@ bool mbrDmp() {
     for (int i = 0; i < 3; i++) {
       cout << int(pt->endCHS[i]) << ',';
     }
-    cout << dec << getLe32(pt->relativeSectors) << ',';
+    cout << dec << getLe32(pt->startSector) << ',';
     cout << getLe32(pt->totalSectors) << endl;
   }
   if (!valid) {
@@ -159,6 +161,7 @@ void dmpVol() {
   } else {
     cout << F("\nVolume is exFAT\n");
   }
+  cout << F("fatCount:          ") << int(sd.fatCount()) << endl;
   cout << F("sectorsPerCluster: ") << sd.sectorsPerCluster() << endl;
   cout << F("fatStartSector:    ") << sd.fatStartSector() << endl;
   cout << F("dataStartSector:   ") << sd.dataStartSector() << endl;

@@ -1,0 +1,8 @@
+PluggableUSBModule
+getShortName
+getInterface call:[getInterface]
+getDescriptor call:[getDescriptor]
+getShortName call:[getShortName] noreturn:[getShortName]
+setup call:[setup]
+plug call:[epBuffer]
+PluggableUSB

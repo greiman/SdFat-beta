@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="7017404424062937782">
+  <FileInfo check="Class">
+<class name="FsName" file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" line="37" col="1" hash="7824004301975722112"/>
+  </FileInfo>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="atEnd" lineNumber="47"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="reset" lineNumber="49"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="getch" lineNumber="51"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsName.h" functionName="get16" lineNumber="53"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="highSurrogate" lineNumber="37"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="lowSurrogate" lineNumber="44"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isValidCp" lineNumber="49"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isSurrogate" lineNumber="56"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isHighSurrogate" lineNumber="61"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="isLowSurrogate" lineNumber="66"/>
+    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/common/FsUtf.h" functionName="u16ToCp" lineNumber="72"/>
+    <functioncall functionName="atEnd"/>
+  </FileInfo>
+</analyzerinfo>

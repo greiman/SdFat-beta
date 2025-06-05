@@ -1,7 +1,9 @@
 /*
  * This program is a simple binary write/read benchmark.
  */
+#ifndef DISABLE_FS_H_WARNING
 #define DISABLE_FS_H_WARNING  // Disable warning for type File not defined.
+#endif                        // DISABLE_FS_H_WARNING
 #include "SdFat.h"
 #include "FreeStack.h"
 #include "sdios.h"
@@ -11,12 +13,12 @@
 #if defined __has_include
 #if __has_include(<FS.h>)
 #define SD_FAT_TYPE 3  // Can't use SdFat/File
-#endif  // __has_include(<FS.h>)
-#endif  // defined __has_include
+#endif                 // __has_include(<FS.h>)
+#endif                 // defined __has_include
 
 #ifndef SD_FAT_TYPE
 #define SD_FAT_TYPE 0  // Use SdFat/File
-#endif  // SD_FAT_TYPE
+#endif                 // SD_FAT_TYPE
 /*
   Change the value of SD_CS_PIN if you are using SPI and
   your hardware does not use the default value, SS.
@@ -41,7 +43,15 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #define RP_CLK_GPIO 18
 #define RP_CMD_GPIO 19
 #define RP_DAT0_GPIO 20  // DAT1: GPIO21, DAT2: GPIO22, DAT3: GPIO23.
-#endif  // defined(ARDUINO_ADAFRUIT_METRO_RP2040)
+#elif defined(ARDUINO_ADAFRUIT_METRO_RP2350)
+#define RP_CLK_GPIO 34
+#define RP_CMD_GPIO 35
+#define RP_DAT0_GPIO 36  // DAT1: GPIO37, DAT2: GPIO38, DAT3: GPIO39.
+#elif 0 // defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_2)
+#define RP_CLK_GPIO 10
+#define RP_CMD_GPIO 11
+#define RP_DAT0_GPIO 12  // DAT1: GPIO13, DAT2: GPIO14, DAT3: GPIO15.
+#endif                   // defined(ARDUINO_ADAFRUIT_METRO_RP2040)
 
 // Try to select the best SD card configuration.
 #if defined(HAS_TEENSY_SDIO)
@@ -149,8 +159,8 @@ void setup() {
   }
   if (!SD_HAS_CUSTOM_SPI && !USE_SPI_ARRAY_TRANSFER && isSpi(SD_CONFIG)) {
     cout << F(
-          "\nSetting USE_SPI_ARRAY_TRANSFER nonzero in\n"
-          "SdFatConfig.h may improve SPI performance.\n");
+        "\nSetting USE_SPI_ARRAY_TRANSFER nonzero in\n"
+        "SdFatConfig.h may improve SPI performance.\n");
   }
   // use uppercase in hex and use 0X base prefix
   cout << uppercase << showbase << endl;

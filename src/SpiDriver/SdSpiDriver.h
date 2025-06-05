@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -26,8 +26,7 @@
  * \file
  * \brief SpiDriver classes
  */
-#ifndef SdSpiDriver_h
-#define SdSpiDriver_h
+#pragma once
 #include "../common/SysCall.h"
 /**
  * Initialize SD chip select pin.
@@ -87,7 +86,7 @@ const uint8_t USER_SPI_BEGIN = 2;
 #define SPI_SIXTEENTH_SPEED SD_SCK_HZ(500000)
 //------------------------------------------------------------------------------
 #if SPI_DRIVER_SELECT < 2
-#include "SPI.h"
+#include <SPI.h>
 /** Port type for Arduino SPI hardware driver. */
 typedef SPIClass SpiPort_t;
 #elif SPI_DRIVER_SELECT == 2
@@ -96,7 +95,7 @@ class SdSpiSoftDriver;
 typedef SdSpiSoftDriver SpiPort_t;
 #elif SPI_DRIVER_SELECT == 3
 class SdSpiBaseClass;
-/** Port type for extrernal SPI driver. */
+/** Port type for external SPI driver. */
 typedef SdSpiBaseClass SpiPort_t;
 #else   // SPI_DRIVER_SELECT
 typedef void* SpiPort_t;
@@ -157,4 +156,3 @@ typedef SdSpiBaseClass SdSpiDriver;
 #else  // SPI_DRIVER_SELECT
 #error Invalid SPI_DRIVER_SELECT
 #endif  // SPI_DRIVER_SELECT
-#endif  // SdSpiDriver_h

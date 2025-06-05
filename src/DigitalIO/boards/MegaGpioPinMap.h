@@ -1,5 +1,4 @@
-#ifndef MegaGpioPinMap_h
-#define MegaGpioPinMap_h
+#pragma once
 static const GpioPinMap_t GpioPinMap[] = {
   GPIO_PIN(E, 0),  // D0
   GPIO_PIN(E, 1),  // D1
@@ -72,4 +71,3 @@ static const GpioPinMap_t GpioPinMap[] = {
   GPIO_PIN(K, 6),  // D68
   GPIO_PIN(K, 7)   // D69
 };
-#endif  // MegaGpioPinMap_h

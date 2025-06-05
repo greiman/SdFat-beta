@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -26,8 +26,7 @@
  * \file
  * \brief Class for software SPI.
  */
-#ifndef SdSpiSoftDriver_h
-#define SdSpiSoftDriver_h
+#pragma once
 #include "../DigitalIO/SoftSPI.h"
 /**
  * \class SdSpiSoftDriver
@@ -117,4 +116,3 @@ class SoftSpiDriver : public SdSpiSoftDriver {
 
 /** Typedef for use of SdSoftSpiDriver */
 typedef SdSpiSoftDriver SdSpiDriver;
-#endif  // SdSpiSoftDriver_h

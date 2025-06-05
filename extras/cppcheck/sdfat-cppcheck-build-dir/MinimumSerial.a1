@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<analyzerinfo hash="3734329431866612520">
+  <FileInfo check="CheckUnusedFunctions">
+    <functioncall functionName="override"/>
+    <functioncall functionName="true"/>
+  </FileInfo>
+</analyzerinfo>

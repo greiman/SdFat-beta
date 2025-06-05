@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2024 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -79,7 +79,7 @@ bool ExFatFile::close() {
   return rtn;
 }
 //------------------------------------------------------------------------------
-bool ExFatFile::contiguousRange(uint32_t* bgnSector, uint32_t* endSector) {
+bool ExFatFile::contiguousRange(Sector_t* bgnSector, Sector_t* endSector) {
   if (!isContiguous()) {
     return false;
   }
@@ -126,7 +126,7 @@ int ExFatFile::fgets(char* str, int num, const char* delim) {
   return n;
 }
 //------------------------------------------------------------------------------
-uint32_t ExFatFile::firstSector() const {
+Sector_t ExFatFile::firstSector() const {
   return m_firstCluster ? m_vol->clusterStartSector(m_firstCluster) : 0;
 }
 //------------------------------------------------------------------------------
@@ -306,7 +306,7 @@ bool ExFatFile::openPrivate(ExFatFile* dir, ExName_t* fname, oflag_t oflag) {
       DBG_FAIL_MACRO;
       goto fail;
   }
-  modeFlags |= oflag & O_APPEND ? FILE_FLAG_APPEND : 0;
+  modeFlags |= (oflag & O_APPEND) ? FILE_FLAG_APPEND : 0;
 
   if (fname) {
     freeNeed = 2 + (fname->nameLength + 14) / 15;
@@ -437,7 +437,7 @@ create:
   while (freeCount < freeNeed) {
     n = dir->read(buf, FS_DIR_SIZE);
     if (n == 0) {
-      uint32_t saveCurCluster = dir->m_curCluster;
+      Cluster_t saveCurCluster = dir->m_curCluster;
       if (!dir->addDirCluster()) {
         DBG_FAIL_MACRO;
         goto fail;
@@ -566,7 +566,7 @@ fail:
 //------------------------------------------------------------------------------
 int ExFatFile::peek() {
   uint64_t saveCurPosition = m_curPosition;
-  uint32_t saveCurCluster = m_curCluster;
+  Cluster_t saveCurCluster = m_curCluster;
   int c = read();
   m_curPosition = saveCurPosition;
   m_curCluster = saveCurCluster;
@@ -580,7 +580,7 @@ int ExFatFile::read(void* buf, size_t count) {
   size_t n;
   uint8_t* cache;
   uint16_t sectorOffset;
-  uint32_t sector;
+  Sector_t sector;
   uint32_t clusterOffset;
 
   if (!isReadable()) {
@@ -682,7 +682,7 @@ fail:
 bool ExFatFile::seekSet(uint64_t pos) {
   uint32_t nCur;
   uint32_t nNew;
-  uint32_t tmp = m_curCluster;
+  Cluster_t tmp = m_curCluster;
   // error if file not open
   if (!isOpen()) {
     DBG_FAIL_MACRO;

@@ -1,0 +1,11 @@
+isDigit
+isSpace call:[return]
+fmtBase10
+fmtBase10 call:[fmtBase10] noreturn:[fmtBase10]
+fmtHex call:[while]
+fmtSigned call:[fmtUnsigned]
+fmtUnsigned call:[fmtBase10,while] noreturn:[fmtBase10]
+fmtDouble global:[MAX_PREC,powTen,rnd] call:[fmtBase10,isinf,isnan]
+fmtDouble global:[powTen,rnd] call:[fmtBase10,isinf,isnan]
+scale10 global:[m,p]
+scanFloat call:[isDigit,isSpace,scale10]

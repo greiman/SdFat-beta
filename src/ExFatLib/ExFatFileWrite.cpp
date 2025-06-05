@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2024 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -65,7 +65,7 @@ static uint16_t exFatDirChecksum(const uint8_t* data, uint16_t checksum) {
 }
 //------------------------------------------------------------------------------
 bool ExFatFile::addCluster() {
-  uint32_t find = m_vol->bitmapFind(m_curCluster ? m_curCluster + 1 : 0, 1);
+  Cluster_t find = m_vol->bitmapFind(m_curCluster ? m_curCluster + 1 : 0, 1);
   if (find < 2) {
     DBG_FAIL_MACRO;
     goto fail;
@@ -85,7 +85,7 @@ bool ExFatFile::addCluster() {
     // No longer contiguous so make FAT chain.
     m_flags &= ~FILE_FLAG_CONTIGUOUS;
 
-    for (uint32_t c = m_firstCluster; c < m_curCluster; c++) {
+    for (Cluster_t c = m_firstCluster; c < m_curCluster; c++) {
       if (!m_vol->fatPut(c, c + 1)) {
         DBG_FAIL_MACRO;
         goto fail;
@@ -114,7 +114,7 @@ fail:
 }
 //------------------------------------------------------------------------------
 bool ExFatFile::addDirCluster() {
-  uint32_t sector;
+  Sector_t sector;
   uint32_t dl = isRoot() ? m_vol->rootLength() : m_dataLength;
   uint8_t* cache;
   dl += m_vol->bytesPerCluster();
@@ -601,7 +601,7 @@ size_t ExFatFile::write(const void* buf, size_t nbyte) {
   uint8_t* cache;
   uint8_t cacheOption;
   uint16_t sectorOffset;
-  uint32_t sector;
+  Sector_t sector;
   uint32_t clusterOffset;
 
   // number of bytes left to write  -  must be before goto statements
@@ -628,7 +628,7 @@ size_t ExFatFile::write(const void* buf, size_t nbyte) {
         int fg;
 
         if (isContiguous()) {
-          uint32_t lc = m_firstCluster;
+          Cluster_t lc = m_firstCluster;
           lc += (m_dataLength - 1) >> m_vol->bytesPerClusterShift();
           if (m_curCluster < lc) {
             m_curCluster++;

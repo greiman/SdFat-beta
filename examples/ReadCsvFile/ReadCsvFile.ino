@@ -1,4 +1,6 @@
-#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined.
+#ifndef DISABLE_FS_H_WARNING
+#define DISABLE_FS_H_WARNING  // Disable warning for type File not defined. 
+#endif  // DISABLE_FS_H_WARNING 
 #include "SdFat.h"
 
 // SD_FAT_TYPE = 0 for SdFat/File as defined in SdFatConfig.h,

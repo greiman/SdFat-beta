@@ -25,8 +25,7 @@
  * @details  Software SPI Template Class.
  * @{
  */
-#ifndef SoftSPI_h
-#define SoftSPI_h
+#pragma once
 #include "DigitalPin.h"
 //------------------------------------------------------------------------------
 /** Nop for timing. */
@@ -157,5 +156,4 @@ class SoftSPI {
   }
   //----------------------------------------------------------------------------
 };
-#endif  // SoftSPI_h
 /** @} */

@@ -10,7 +10,9 @@
  * For very small cards this program uses FAT16
  * and the above SDFormatter uses FAT12.
  */
+#ifndef DISABLE_FS_H_WARNING
 #define DISABLE_FS_H_WARNING  // Disable warning for type File not defined. 
+#endif  // DISABLE_FS_H_WARNING 
 #include "SdFat.h"
 #include "sdios.h"
 
@@ -56,7 +58,7 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 uint32_t cardSectorCount = 0;
-uint8_t sectorBuffer[512];
+uint8_t sectorBuffer[512] __attribute__((aligned(4)));
 //------------------------------------------------------------------------------
 // SdCardFactory constructs and initializes the appropriate card.
 SdCardFactory cardFactory;

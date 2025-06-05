@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -26,8 +26,7 @@
  * \file
  * \brief Base class for external SPI driver.
  */
-#ifndef SdSpiBaseClass_h
-#define SdSpiBaseClass_h
+#pragma once
 /**
  * \class SdSpiBaseClass
  * \brief Base class for external SPI drivers
@@ -75,4 +74,3 @@ class SdSpiBaseClass {
    */
   virtual void setSckSpeed(uint32_t maxSck) { (void)maxSck; }
 };
-#endif  // SdSpiBaseClass_h

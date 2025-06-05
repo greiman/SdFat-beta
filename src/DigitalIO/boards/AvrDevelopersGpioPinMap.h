@@ -1,5 +1,4 @@
-#ifndef AvrDevelopersGpioPinMap_h
-#define AvrDevelopersGpioPinMap_h
+#pragma once
 static const GpioPinMap_t GpioPinMap[] = {
   GPIO_PIN(B, 0),  // D0
   GPIO_PIN(B, 1),  // D1
@@ -34,4 +33,3 @@ static const GpioPinMap_t GpioPinMap[] = {
   GPIO_PIN(A, 1),  // D30
   GPIO_PIN(A, 0)   // D31
 };
-#endif  // AvrDevelopersGpioPinMap_h

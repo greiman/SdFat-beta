@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -66,8 +66,8 @@ void SdSpiArduinoDriver::send(uint8_t data) { m_spi->transfer(data); }
 //------------------------------------------------------------------------------
 void SdSpiArduinoDriver::send(const uint8_t* buf, size_t count) {
 #if USE_BLOCK_TRANSFER
-  uint32_t tmp[128];
   if (0 < count && count <= 512) {
+    uint32_t tmp[128];
     memcpy(tmp, buf, count);
     m_spi->transfer(tmp, count);
     return;

@@ -1,5 +1,3 @@
-#ifndef Teensypp2GpioPinMap_h
-#define Teensypp2GpioPinMap_h
 static const GpioPinMap_t GpioPinMap[] = {
   GPIO_PIN(D, 0),  // D0
   GPIO_PIN(D, 1),  // D1
@@ -48,4 +46,3 @@ static const GpioPinMap_t GpioPinMap[] = {
   GPIO_PIN(F, 6),  // D44
   GPIO_PIN(F, 7),  // D45
 };
-#endif  // Teensypp2GpioPinMap_h

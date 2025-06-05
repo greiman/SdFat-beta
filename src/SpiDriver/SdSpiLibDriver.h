@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2022 Bill Greiman
+ * Copyright (c) 2011-2025 Bill Greiman
  * This file is part of the SdFat library for SD memory cards.
  *
  * MIT License
@@ -26,8 +26,7 @@
  * \file
  * \brief Class using only simple SPI library functions.
  */
-#ifndef SdSpiLibDriver_h
-#define SdSpiLibDriver_h
+#pragma once
 //------------------------------------------------------------------------------
 inline void SdSpiArduinoDriver::activate() {
   m_spi->beginTransaction(m_spiSettings);
@@ -111,4 +110,3 @@ inline void SdSpiArduinoDriver::send(const uint8_t* buf, size_t count) {
 #error invalid USE_SPI_ARRAY_TRANSFER
 #endif  // USE_SPI_ARRAY_TRANSFER == 0
 }
-#endif  // SdSpiLibDriver_h

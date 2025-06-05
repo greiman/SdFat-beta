@@ -58,7 +58,7 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 ArduinoOutStream cout(Serial);
 //------------------------------------------------------------------------------
 uint32_t cardSectorCount = 0;
-uint8_t sectorBuffer[512] __attribute__((aligned(4)));
+uint8_t sectorBuffer[512] __attribute__ ((aligned (4)));
 //------------------------------------------------------------------------------
 // SdCardFactory constructs and initializes the appropriate card.
 SdCardFactory cardFactory;

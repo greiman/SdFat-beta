@@ -24,11 +24,8 @@ to any four consecutive GPIO pins in the order DAT0, DAT1, DAT2, DAT3.
 Here is an example of SDIO for Pico using an Adafruit socket, PiCowbell
 Proto and PiCowbell Proto Doubler.
 
-<<<<<<< HEAD
 ![Alt text](images/SdioSpi.jpg)
 
-=======
->>>>>>> c53d6c1a5f1367721a9b19ff7d5545baaa4093dc
 This Socket supports SDIO with:
 ```
 #define RP_CLK_GPIO 10

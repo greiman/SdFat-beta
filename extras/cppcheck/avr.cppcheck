@@ -14,7 +14,8 @@
         <dir name="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FatLib/"/>
         <dir name="D:/Bill/ArduinoSdFat/libraries/SdFat/src/iostream/"/>
         <dir name="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/"/>
-        <dir name="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SpiDriver/"/>
+        <dir name="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/"/>
+        <dir name="D:/Bill/ArduinoSdFat/libraries/SdFat/src/SdCard/SdSpiCard/SpiDriver/"/>
         <dir name="api/"/>
         <dir name="avr_include/"/>
     </includedir>

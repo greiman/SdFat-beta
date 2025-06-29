@@ -29,7 +29,7 @@
 #pragma once
 //==============================================================================
 #if SPI_DRIVER_SELECT == 0 && SD_HAS_CUSTOM_SPI
-#define SD_USE_CUSTOM_SPI
+#define SD_USE_CUSTOM_SPI 1
 #endif  // SPI_DRIVER_SELECT == 0 && SD_HAS_CUSTOM_SPI
 /**
  * \class SdSpiArduinoDriver
@@ -92,5 +92,6 @@ typedef SdSpiArduinoDriver SdSpiDriver;
 #ifndef SD_USE_CUSTOM_SPI
 #include "SdSpiLibDriver.h"
 #elif defined(__AVR__)
+// Use custom AVR SPI driver.  Other custom SPI drivers are in .cpp files.
 #include "SdSpiAvr.h"
-#endif  // __AVR__
+#endif  // SD_USE_CUSTOM_SPI

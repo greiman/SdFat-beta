@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<analyzerinfo hash="17060823485239671534">
-  <FileInfo check="CheckUnusedFunctions">
-    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FreeStack.h" functionName="FreeStack" lineNumber="69"/>
-    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FreeStack.h" functionName="FillStack" lineNumber="86"/>
-    <functiondecl file="D:/Bill/ArduinoSdFat/libraries/SdFat/src/FreeStack.h" functionName="UnusedStack" lineNumber="87"/>
-  </FileInfo>
-</analyzerinfo>

@@ -27,7 +27,7 @@
  * \brief Class for software SPI.
  */
 #pragma once
-#include "../DigitalIO/SoftSPI.h"
+#include "DigitalIO/SoftSPI.h"
 /**
  * \class SdSpiSoftDriver
  * \brief Base class for external soft SPI.

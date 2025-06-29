@@ -914,7 +914,7 @@ class FatFile {
    *
    * T_WRITE - Set the file's last write/modification date and time.
    *
-   * \param[in] year Valid range 1980 - 2107 inclusive.
+   * \param[in] year Valid range 1980 - 2099 inclusive.
    *
    * \param[in] month Valid range 1 - 12 inclusive.
    *

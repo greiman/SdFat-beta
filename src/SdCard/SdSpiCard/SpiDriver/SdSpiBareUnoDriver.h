@@ -30,7 +30,7 @@
 
 #include <avr/interrupt.h>
 
-#include "../common/SysCall.h"
+#include "../../../common/SysCall.h"
 #define nop asm volatile("nop\n\t")
 #ifndef HIGH
 #define HIGH 1

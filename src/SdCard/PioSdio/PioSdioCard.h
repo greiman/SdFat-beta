@@ -24,11 +24,16 @@
  */
 /**
  * \file
- * \brief Classes for SDIO cards.
+ * \brief Classes for PIO SDIO cards.
  */
 #pragma once
 #include "../../common/SysCall.h"
 #include "../SdCardInterface.h"
+#if defined(ARDUINO_ARCH_RP2040) && defined(PIN_SD_CLK) &&   \
+    defined(PIN_SD_CMD_MOSI) && defined(PIN_SD_DAT0_MISO) && \
+    defined(PIN_SD_DAT1) && defined(PIN_SD_DAT2) && defined(PIN_SD_DAT3_CS)
+#define HAS_BUILTIN_PIO_SDIO
+#endif
 class PioSdioConfig;
 /** SdioConfig type for PIO SDIO */
 typedef PioSdioConfig SdioConfig;

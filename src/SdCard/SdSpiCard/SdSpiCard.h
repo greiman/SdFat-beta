@@ -29,10 +29,11 @@
 // cppcheck-suppress-file missingOverride
 #pragma once
 #include <stddef.h>
-#include "../../SpiDriver/SdSpiDriver.h"
+
 #include "../../common/SysCall.h"
 #include "../SdCardInfo.h"
 #include "../SdCardInterface.h"
+#include "SpiDriver/SdSpiDriver.h"
 /** Verify correct SPI active if non-zero. */
 #define CHECK_SPI_ACTIVE 0
 #if CHECK_SPI_ACTIVE

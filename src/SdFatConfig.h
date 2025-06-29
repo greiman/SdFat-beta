@@ -32,7 +32,7 @@
 #include <avr/io.h>
 #endif  // __AVR__
 // To try UTF-8 encoded filenames.
-// #define USE_UTF8_LONG_NAMES 1
+//  #define USE_UTF8_LONG_NAMES 1
 //
 // For minimum flash size use these settings:
 // #define USE_FAT_FILE_FLAG_CONTIGUOUS 0
@@ -100,10 +100,6 @@
 //------------------------------------------------------------------------------
 #if ENABLE_ARDUINO_FEATURES
 #include <Arduino.h>
-#ifdef PLATFORM_ID
-// Only defined if a Particle device.
-#include "application.h"
-#endif  // PLATFORM_ID
 #endif  // ENABLE_ARDUINO_FEATURES
 //------------------------------------------------------------------------------
 /**
@@ -349,9 +345,6 @@ typedef uint8_t SdCsPin_t;
 #if defined(__AVR__)
 // AVR fcntl.h does not define open flags.
 #define USE_FCNTL_H 0
-#elif defined(PLATFORM_ID)
-// Particle boards - use fcntl.h.
-#define USE_FCNTL_H 1
 #elif defined(__arm__)
 // ARM gcc defines open flags.
 #define USE_FCNTL_H 1
@@ -474,7 +467,6 @@ typedef uint8_t SdCsPin_t;
 #if (defined(__AVR__) && defined(SPDR) && defined(SPSR) && defined(SPIF)) || \
     (defined(__AVR__) && defined(SPI0) && defined(SPI_RXCIF_bm)) ||          \
     defined(ARDUINO_SAM_DUE) || defined(STM32_CORE_VERSION) ||               \
-    defined(__STM32F1__) || defined(__STM32F4__) || defined(PLATFORM_ID) ||  \
     (defined(CORE_TEENSY) && defined(__arm__))
 #define SD_HAS_CUSTOM_SPI 1
 #else  // SD_HAS_CUSTOM_SPI

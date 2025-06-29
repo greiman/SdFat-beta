@@ -5,37 +5,19 @@
 // space for at least one 512 byte transfer.
 //
 // This example uses a ring buffer to store data until the SD is not busy.
-// The maximum sample rate is determined by the time to read the sensor,
-// and write 512 bytes to the SD.  Also the ring buffer must be large enough
+// The maximum sample rate is determined by the time to read the sensor
+// and write 512 bytes to the SD.  Also the ring buffer must be large enough.
+//
+// Note: The RingBuf class can be use to log from a ISR - see the 
+// TeensyDmaAdcLogger example.
+//
 #ifndef DISABLE_FS_H_WARNING
 #define DISABLE_FS_H_WARNING  // Disable warning for type File not defined.
 #endif                        // DISABLE_FS_H_WARNING
 #include "RingBuf.h"
 #include "SdFat.h"
 
-// to store data for the maximum SD busy time.
-
-// Example SDIO definition for RP2040/RP2350. See the Rp2040SdioSetup example.
-#if defined(ARDUINO_ADAFRUIT_METRO_RP2040)
-#define RP_CLK_GPIO 18
-#define RP_CMD_GPIO 19
-#define RP_DAT0_GPIO 20  // DAT1: GPIO21, DAT2: GPIO22, DAT3: GPIO23.
-#elif defined(ARDUINO_ADAFRUIT_METRO_RP2350)
-#define RP_CLK_GPIO 34
-#define RP_CMD_GPIO 35
-#define RP_DAT0_GPIO 36  // DAT1: GPIO37, DAT2: GPIO38, DAT3: GPIO39.
-#elif 0 // defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_2)
-#define RP_CLK_GPIO 10
-#define RP_CMD_GPIO 11
-#define RP_DAT0_GPIO 12  // DAT1: GPIO13, DAT2: GPIO14, DAT3: GPIO15.
-#endif                   // defined(ARDUINO_ADAFRUIT_METRO_RP2040)
-
-#if defined(RP_CLK_GPIO) && defined(RP_CMD_GPIO) && defined(RP_DAT0_GPIO)
-#define SD_CONFIG SdioConfig(RP_CLK_GPIO, RP_CMD_GPIO, RP_DAT0_GPIO)
-#define LOG_INTERVAL_USEC 200
-#endif  // RP2040/Rp2350 SDIO
-
-// Try Teensy
+// Try to select the best SD card configuration.
 #if defined(HAS_TEENSY_SDIO)
 // The driver writes to the uSDHC controller's FIFO then returns
 // while the controller writes the data to the SD.  The first sector
@@ -43,29 +25,25 @@
 // Teensy 4.1. About 5 usec is required to write a sector when the
 // controller is in write mode.
 // Read ADC0 - about 17 usec on Teensy 4, Teensy 3.6 is faster.
-#define SD_CONFIG SdioConfig(FIFO_SDIO)
 #define LOG_INTERVAL_USEC 50
-#endif  // defined(HAS_TEENSY_SDIO)
-
-// Try SPI if SD_CONFIG is not defined. Reduce SPI_CLOCK if errors occur.
-#ifndef SD_CONFIG
+#define SD_CONFIG SdioConfig(FIFO_SDIO)
+#elif defined(HAS_BUILTIN_PIO_SDIO)
+// Try 5,000 Samples Per Second - adjust for your setup.
+#define LOG_INTERVAL_USEC 200
+// See the Rp2040SdioSetup example for boards without a builtin SDIO socket.
+#define SD_CONFIG SdioConfig(PIN_SD_CLK, PIN_SD_CMD_MOSI, PIN_SD_DAT0_MISO)
+#elif ENABLE_DEDICATED_SPI
+// Use Dedicated SPI. Edit settings for your setup.
 #define SPI_CLOCK SD_SCK_MHZ(50)
-#if ENABLE_DEDICATED_SPI
-// SDCARD_SS_PIN is defined for the built-in SD on some boards.
-#ifndef SDCARD_SS_PIN
-const uint8_t SD_CS_PIN = SS;
-#else   // SDCARD_SS_PIN
-// Assume built-in SD is used.
-const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
-#endif  // SDCARD_SS_PIN
+#define SD_CS_PIN SS
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK)
 // If 1000 usec is too fast, increase LOG_INTERVAL_USEC or edit SdfatCongig.h
 // and set USE_SPI_ARRAY_TRANSFER non-zero to improve SPI data rate.
 #define LOG_INTERVAL_USEC 1000
-#else  // ENABLE_DEDICATED_SPI
+#else  // defined(HAS_TEENSY_SDIO)
 #error "Shared SPI is not supported"
-#endif  // ENABLE_DEDICATED_SPI
-#endif  // SD_CONFIG
+#endif  //defined(HAS_TEENSY_SDIO)
+
 
 // Sample rate.
 #define SAMPLES_PER_SECOND (1000000 / LOG_INTERVAL_USEC)
@@ -198,7 +176,7 @@ void setup() {
   }
   uint32_t m = 0;
   while (!Serial.available()) {
-    if (millis() - m > 2000) {
+    if (m == 0 || millis() - m > 4000) {
       Serial.println("Type any character to begin");
       m = millis();
     }

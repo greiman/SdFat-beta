@@ -38,27 +38,17 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 // Try max SPI clock for an SD. Reduce SPI_CLOCK if errors occur.
 #define SPI_CLOCK SD_SCK_MHZ(50)
 
-// Example SDIO definition for RP2040/RP2350. See the Rp2040SdioSetup example.
-#if defined(ARDUINO_ADAFRUIT_METRO_RP2040) && !defined(RP_CLK_GPIO)
-#define RP_CLK_GPIO 18
-#define RP_CMD_GPIO 19
-#define RP_DAT0_GPIO 20  // DAT1: GPIO21, DAT2: GPIO22, DAT3: GPIO23.
-#elif defined(ARDUINO_ADAFRUIT_METRO_RP2350)
-#define RP_CLK_GPIO 34
-#define RP_CMD_GPIO 35
-#define RP_DAT0_GPIO 36  // DAT1: GPIO37, DAT2: GPIO38, DAT3: GPIO39.
-#elif 0 // defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_2)
-#define RP_CLK_GPIO 10
-#define RP_CMD_GPIO 11
-#define RP_DAT0_GPIO 12  // DAT1: GPIO13, DAT2: GPIO14, DAT3: GPIO15.
-#endif                   // defined(ARDUINO_ADAFRUIT_METRO_RP2040)
 
 // Try to select the best SD card configuration.
 #if defined(HAS_TEENSY_SDIO)
 #define SD_CONFIG SdioConfig(FIFO_SDIO)
-#elif defined(RP_CLK_GPIO) && defined(RP_CMD_GPIO) && defined(RP_DAT0_GPIO)
-// See the Rp2040SdioSetup example for RP2040/RP2350 boards.
-#define SD_CONFIG SdioConfig(RP_CLK_GPIO, RP_CMD_GPIO, RP_DAT0_GPIO)
+#elif defined(HAS_BUILTIN_PIO_SDIO)
+// See the Rp2040SdioSetup example for boards without a builtin SDIO socket.
+#define SD_CONFIG SdioConfig(PIN_SD_CLK, PIN_SD_CMD_MOSI, PIN_SD_DAT0_MISO)
+// Definitions for my Pico debug tests when zero and // are removed.
+#elif 0  // defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_2)
+// CLK: GPIO10, CMD: GPIO11, DAT[0,3]: GPIO[12, 15].
+#define SD_CONFIG SdioConfig(10u, 11u, 12u)
 #elif ENABLE_DEDICATED_SPI
 #define SD_CONFIG SdSpiConfig(SD_CS_PIN, DEDICATED_SPI, SPI_CLOCK)
 #else  // HAS_TEENSY_SDIO

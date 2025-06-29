@@ -23,6 +23,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 #define DBG_FILE "ExFatFileWrite.cpp"
+#include "../common/DateLib.h"
 #include "../common/DebugMacros.h"
 #include "ExFatLib.h"
 //==============================================================================
@@ -463,9 +464,9 @@ bool ExFatFile::timestamp(uint8_t flags, uint16_t year, uint8_t month,
   uint16_t time;
   uint8_t ms10;
 
-  if (!isFileOrSubDir() || year < 1980 || year > 2107 || month < 1 ||
-      month > 12 || day < 1 || day > 31 || hour > 23 || minute > 59 ||
-      second > 59) {
+  if (!isFileOrSubDir() || year < 1980 || year > 2099 || month < 1 ||
+      month > 12 || day < 1 || day > daysInMonth(year, month) || hour > 23 ||
+      minute > 59 || second > 59) {
     DBG_FAIL_MACRO;
     goto fail;
   }

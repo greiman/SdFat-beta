@@ -1,8 +1,25 @@
 ### Warning: This version has major internal changes.
-
-SdFat version 2.3.1 has major changes. In addition there a number of bug fixes.
-
 Please post an issue if you find a bug.
+
+SdFat version 2.3.1-beta.2 corrects handling of the exFAT fields validLength
+and dataLength.
+
+In exFAT, validLength represents how far user data has been written and
+dataLength represents the total space allocated to the file.
+
+These two fields are equal unless space has been preallocated. In the past, I
+returned EOF when a read hit validLength and didn't allow seek beyond 
+validLength.  This does not conform to the exFat specification here:
+
+https://learn.microsoft.com/en-us/windows/win32/fileio/exfat-specification
+
+Now read will return zeroes beyond validLength and EOF at dataLength.  If a
+file is positioned beyond validLength, write will fill the area between
+validLength and the current position with zeroes and then write user data.
+
+If you are preallocating space with the preAllocate() call, you should remove
+unused space with the truncate() call so applications do not read zeroes
+beyond validLength.
 
 Support has been added for the SDIO on RP2350B QFN-80 with 48 GPIO pins.
 Each PIO block is still limited to 32 GPIOs at a time, but GPIOBASE

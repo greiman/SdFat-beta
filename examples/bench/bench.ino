@@ -246,10 +246,13 @@ void loop() {
     }
     file.sync();
     t = millis() - t;
+    // Remove any unused space in the file.
+    file.truncate();
     s = file.fileSize();
     cout << s / t << ',' << maxLatency << ',' << minLatency;
     cout << ',' << totalLatency / n << endl;
   }
+
   cout << endl << F("Starting read test, please wait.") << endl;
   cout << endl << F("read speed and latency") << endl;
   cout << F("speed,max,min,avg") << endl;

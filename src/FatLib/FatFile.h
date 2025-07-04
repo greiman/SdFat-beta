@@ -330,6 +330,8 @@ class FatFile {
    * occurred.
    */
   int fgets(char* str, int num, const char* delim = nullptr);
+  /** \return The first cluster number for a file or directory. */
+  Cluster_t firstCluster() const { return m_firstCluster; }
   /** \return The total number of bytes in a file. */
   uint32_t fileSize() const { return m_fileSize; }
   /** \return first sector of file or zero for empty file. */

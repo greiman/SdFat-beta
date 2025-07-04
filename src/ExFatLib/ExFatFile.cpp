@@ -88,7 +88,7 @@ bool ExFatFile::contiguousRange(Sector_t* bgnSector, Sector_t* endSector) {
   }
   if (endSector) {
     *endSector =
-        firstSector() + ((m_validLength - 1) >> m_vol->bytesPerSectorShift());
+        firstSector() + ((m_dataLength - 1) >> m_vol->bytesPerSectorShift());
   }
   return true;
 }
@@ -576,7 +576,10 @@ int ExFatFile::peek() {
 int ExFatFile::read(void* buf, size_t count) {
   uint8_t* dst = reinterpret_cast<uint8_t*>(buf);
   int8_t fg;
-  size_t toRead = count;
+  size_t maxRead;
+  size_t toRead;
+  size_t toFill;
+  size_t rtn = 0;
   size_t n;
   uint8_t* cache;
   uint16_t sectorOffset;
@@ -588,9 +591,15 @@ int ExFatFile::read(void* buf, size_t count) {
     goto fail;
   }
   if (isContiguous() || isFile()) {
-    if ((m_curPosition + count) > m_validLength) {
-      count = toRead = m_validLength - m_curPosition;
+    if (count > (m_dataLength - m_curPosition)) {
+      count = m_dataLength - m_curPosition;
     }
+    maxRead = m_curPosition < m_validLength ? m_validLength - m_curPosition : 0;
+    toRead = count < maxRead ? count : maxRead;
+    toFill = count > toRead ? count - toRead : 0;
+  } else {
+    toRead = count;
+    toFill = 0;
   }
   while (toRead) {
     clusterOffset = m_curPosition & m_vol->clusterMask();
@@ -657,10 +666,16 @@ int ExFatFile::read(void* buf, size_t count) {
       }
     }
     dst += n;
+    rtn += n;
     m_curPosition += n;
     toRead -= n;
   }
-  return count - toRead;
+  if (toFill) {
+    memset(dst, 0, toFill);
+    seekCur(toFill);
+    rtn += toFill;
+  }
+  return rtn;
 
 fail:
   m_error |= READ_ERROR;
@@ -698,7 +713,7 @@ bool ExFatFile::seekSet(uint64_t pos) {
     goto done;
   }
   if (isFile()) {
-    if (pos > m_validLength) {
+    if (pos > m_dataLength) {
       DBG_FAIL_MACRO;
       goto fail;
     }

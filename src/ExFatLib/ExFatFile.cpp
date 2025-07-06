@@ -576,7 +576,7 @@ int ExFatFile::peek() {
 int ExFatFile::read(void* buf, size_t count) {
   uint8_t* dst = reinterpret_cast<uint8_t*>(buf);
   int8_t fg;
-  size_t maxRead;
+  uint64_t maxRead;
   size_t toRead;
   size_t toFill;
   size_t rtn = 0;

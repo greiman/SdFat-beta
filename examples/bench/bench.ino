@@ -73,11 +73,14 @@ const uint8_t WRITE_COUNT = 2;
 
 // Read pass count.
 const uint8_t READ_COUNT = 2;
+
+//  Full read verify - will require twice as much buffer memory.
+#define FULL_READ_VERIFY false
 //==============================================================================
 // End of configuration constants.
 //------------------------------------------------------------------------------
 // File size in bytes.
-const uint32_t FILE_SIZE = 1000000UL * FILE_SIZE_MB;
+const uint64_t FILE_SIZE = 1000000ULL * FILE_SIZE_MB;
 
 // Insure 4-byte alignment.
 uint32_t buf32[(BUF_SIZE + 3) / 4];
@@ -259,6 +262,10 @@ void loop() {
   cout << F("KB/Sec,usec,usec,usec") << endl;
 
   // do read test
+#if FULL_READ_VERIFY
+  uint8_t cmp[BUF_SIZE];
+  memcpy(cmp, buf, BUF_SIZE);
+#endif  // FULL_READ_VERIFY
   for (uint8_t nTest = 0; nTest < READ_COUNT; nTest++) {
     file.rewind();
     maxLatency = 0;
@@ -275,7 +282,11 @@ void loop() {
       }
       m = micros() - m;
       totalLatency += m;
+#if FULL_READ_VERIFY
+      if (memcmp(buf, cmp, BUF_SIZE)) {
+#else  // FULL_READ_VERIFY
       if (buf[BUF_SIZE - 1] != '\n') {
+ #endif  // FULL_READ_VERIFY
         error("data check error");
       }
       if (skipLatency) {

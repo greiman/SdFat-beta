@@ -142,6 +142,7 @@ void logData() {
   }
   // Write any RingBuf data to file.
   rb.sync();
+  // Remove any pre-allocated space after current file position.
   file.truncate();
   file.rewind();
   // Print first hundred lines of file.

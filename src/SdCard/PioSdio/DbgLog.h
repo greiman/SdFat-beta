@@ -33,7 +33,7 @@
 #define NUM64_HEX_A 'a'
 
 /** Enable or disable debug messages */
-#define ENABLE_DBG_MSG 1
+#define ENABLE_DBG_MSG 0
 
 /** Port for debug messages */
 #define DBG_LOG_PORT Serial

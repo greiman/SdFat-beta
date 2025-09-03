@@ -28,14 +28,12 @@
 //------------------------------------------------------------------------------
 // return 0 if error, 1 if no space, else start cluster.
 Cluster_t ExFatPartition::bitmapFind(Cluster_t cluster, uint32_t count) {
-  Cluster_t start = cluster ? cluster - 2 : m_bitmapStart;
-  if (start >= m_clusterCount) {
-    start = 0;
-  }
+  Cluster_t start = cluster > 1 ? cluster - 2 : m_bitmapStart;
+  start = start >= m_clusterCount ? 0 : start;
+  Cluster_t n = 0;
   Cluster_t endAlloc = start;
   Cluster_t bgnAlloc = start;
-  uint16_t sectorSize = 1 << m_bytesPerSectorShift;
-  size_t i = (start >> 3) & (sectorSize - 1);
+  size_t i = (start >> 3) & m_sectorMask;
   const uint8_t* cache;
   uint8_t mask = 1 << (start & 7);
   while (true) {
@@ -45,9 +43,17 @@ Cluster_t ExFatPartition::bitmapFind(Cluster_t cluster, uint32_t count) {
     if (!cache) {
       return 0;
     }
-    for (; i < sectorSize; i++) {
+    for (; i < m_bytesPerSector; i++) {
       for (; mask; mask <<= 1) {
+        if (n++ >= m_clusterCount) {
+          return 1;
+        }
         endAlloc++;
+        if (endAlloc > m_clusterCount) {
+          endAlloc = bgnAlloc = 0;
+          i = m_bytesPerSector;
+          break;
+        }
         if (!(mask & cache[i])) {
           if ((endAlloc - bgnAlloc) == count) {
             if (cluster == 0 && count == 1) {
@@ -58,14 +64,6 @@ Cluster_t ExFatPartition::bitmapFind(Cluster_t cluster, uint32_t count) {
           }
         } else {
           bgnAlloc = endAlloc;
-        }
-        if (endAlloc == start) {
-          return 1;
-        }
-        if (endAlloc >= m_clusterCount) {
-          endAlloc = bgnAlloc = 0;
-          i = sectorSize;
-          break;
         }
       }
       mask = 1;
